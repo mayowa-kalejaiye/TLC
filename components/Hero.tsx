@@ -93,7 +93,7 @@ export default function Hero() {
               <span>Watch Live</span>
             </Link>
             <Link
-              href="/about"
+              href="/quick-links"
               className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
             >
               <span>Quick Links</span>
