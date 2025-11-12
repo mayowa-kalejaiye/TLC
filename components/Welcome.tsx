@@ -24,7 +24,7 @@ export default function Welcome() {
           <div className="flex items-center gap-1 mb-3">
             <span>🏠</span>
             <p className="text-sm text-gray-500 uppercase tracking-wider">
-              Welcome to CCI
+              Welcome to TLC
             </p>
           </div>
 
