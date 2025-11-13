@@ -49,17 +49,22 @@ export default function Navbar() {
       // Set scrolled state for background change
       setIsScrolled(currentScrollY > 20)
 
-      // Desktop: Show on scroll up, hide on scroll down
-      // Mobile: Show after inactivity
       const isMobile = window.innerWidth < 1024
 
       if (isMobile) {
-        // Mobile behavior: hide when scrolling, show after stopping
-        setVisible(false)
-        clearTimeout(scrollTimeout)
-        scrollTimeout = setTimeout(() => {
+        // Mobile behavior: show on scroll up OR after stopping, hide on scroll down
+        if (currentScrollY < lastScrollY || currentScrollY < 100) {
+          // Scrolling up or near top - show immediately
           setVisible(true)
-        }, 200)
+          clearTimeout(scrollTimeout)
+        } else {
+          // Scrolling down - hide immediately, but show after stopping
+          setVisible(false)
+          clearTimeout(scrollTimeout)
+          scrollTimeout = setTimeout(() => {
+            setVisible(true)
+          }, 200)
+        }
       } else {
         // Desktop behavior: show on scroll up, hide on scroll down
         if (currentScrollY < lastScrollY || currentScrollY < 100) {
