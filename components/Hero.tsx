@@ -59,7 +59,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-custom text-center px-4">
+      <div className="relative z-10 container-custom px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,11 +77,17 @@ export default function Hero() {
             <span className="text-white font-semibold text-sm tracking-wider uppercase">Our Vision</span>
           </motion.div>
 
-          {/* Main Heading - Bold Statement */}
-          <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase">
-            Souls <span className="text-tlc-orange">saved</span>.<br />
-            Men <span className="text-tlc-orange">Trained</span>.<br />
-            Nations <span className="text-tlc-orange">taken</span>.
+          {/* Main Heading - Bold Statement with opacity on desktop */}
+          <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase text-center">
+            <span className="block lg:opacity-90">
+              Souls <span className="text-tlc-orange">saved</span>.
+            </span>
+            <span className="block lg:opacity-85">
+              Men <span className="text-tlc-orange">Trained</span>.
+            </span>
+            <span className="block lg:opacity-90">
+              Nations <span className="text-tlc-orange">taken</span>.
+            </span>
           </h1>
 
           {/* CTA Buttons - Outlined Style */}

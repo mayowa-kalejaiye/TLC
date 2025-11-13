@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ChevronDown } from 'lucide-react'
@@ -36,6 +37,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const pathname = usePathname()
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout
@@ -46,16 +49,29 @@ export default function Navbar() {
       // Set scrolled state for background change
       setIsScrolled(currentScrollY > 20)
 
-      // Hide navbar when scrolling
-      setVisible(false)
+      // Desktop: Show on scroll up, hide on scroll down
+      // Mobile: Show after inactivity
+      const isMobile = window.innerWidth < 1024
 
-      // Clear existing timeout
-      clearTimeout(scrollTimeout)
+      if (isMobile) {
+        // Mobile behavior: hide when scrolling, show after stopping
+        setVisible(false)
+        clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(() => {
+          setVisible(true)
+        }, 200)
+      } else {
+        // Desktop behavior: show on scroll up, hide on scroll down
+        if (currentScrollY < lastScrollY || currentScrollY < 100) {
+          // Scrolling up or near top
+          setVisible(true)
+        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // Scrolling down and not near top
+          setVisible(false)
+        }
+      }
 
-      // Show navbar after user stops scrolling (200ms delay)
-      scrollTimeout = setTimeout(() => {
-        setVisible(true)
-      }, 200)
+      setLastScrollY(currentScrollY)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -63,7 +79,7 @@ export default function Navbar() {
       window.removeEventListener('scroll', handleScroll)
       clearTimeout(scrollTimeout)
     }
-  }, [])
+  }, [lastScrollY])
 
   return (
     <>
@@ -94,7 +110,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-3 py-1 text-tlc-navy hover:text-tlc-gold transition-colors duration-200 font-medium uppercase text-xs tracking-wider"
+                className="px-3 py-1 text-tlc-navy hover:text-tlc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
               >
                 {item.name}
               </Link>
@@ -151,49 +167,63 @@ export default function Navbar() {
                   <Link
                     href="/"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-tlc-gold hover:text-tlc-gold-light transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Home
                   </Link>
                   <Link
                     href="/about"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/about' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     About
                   </Link>
                   <Link
                     href="/quick-links"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/quick-links' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Quick-Links
                   </Link>
                   <Link
                     href="/ministries"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/ministries' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Ministries
                   </Link>
                   <Link
                     href="/sermons"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/sermons' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Sermons
                   </Link>
                   <Link
                     href="/map"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/map' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Map
                   </Link>
                   <Link
                     href="/give"
                     onClick={() => setIsOpen(false)}
-                    className="font-anton text-5xl md:text-6xl lg:text-7xl text-white hover:text-tlc-gold transition-colors duration-200 leading-none uppercase"
+                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                      pathname === '/give' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                    } transition-colors duration-200 leading-none uppercase`}
                   >
                     Give
                   </Link>
