@@ -70,13 +70,13 @@ export const metadata: Metadata = {
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
     images: [
       {
-        url: '/images/hero-fallback.jpg',
+        url: 'https://thelightcommunity.netlify.app/images/hero-fallback.jpg',
         width: 1200,
         height: 630,
         alt: 'The Light Community - Souls Saved. Men Trained. Nations Taken.',
       },
       {
-        url: '/images/tlc-logo.png',
+        url: 'https://thelightcommunity.netlify.app/images/tlc-logo.png',
         width: 800,
         height: 600,
         alt: 'The Light Community Logo',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
-    images: ['/images/hero-fallback.jpg'],
+    images: ['https://thelightcommunity.netlify.app/images/hero-fallback.jpg'],
     creator: '@thelight_community',
   },
   robots: {
