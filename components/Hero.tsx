@@ -5,11 +5,28 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Play, BookOpen, Circle } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { getLatestYouTubeVideo } from '@/lib/youtube'
 
 export default function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const [videoId, setVideoId] = useState('3MWdPbaBLxg') // Default fallback video
 
   useEffect(() => {
+    // Fetch latest video ID
+    async function fetchLatestVideoId() {
+      const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
+      const channelId = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID
+
+      if (apiKey && channelId) {
+        const latestVideo = await getLatestYouTubeVideo(channelId, apiKey)
+        if (latestVideo) {
+          setVideoId(latestVideo.id)
+        }
+      }
+    }
+
+    fetchLatestVideoId()
+
     // Preload video after component mounts
     const timer = setTimeout(() => {
       setVideoLoaded(true)
@@ -32,12 +49,12 @@ export default function Hero() {
           />
         </div>
 
-        {/* YouTube Video Background - Loads after page */}
+        {/* YouTube Video Background - Loads after page with latest video */}
         {videoLoaded && (
           <div className="absolute inset-0 overflow-hidden">
             <iframe
               className="absolute pointer-events-none"
-              src="https://www.youtube.com/embed/3MWdPbaBLxg?autoplay=1&mute=1&loop=1&playlist=3MWdPbaBLxg&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
               title="Hero Background Video"
               allow="autoplay; encrypted-media"
               loading="lazy"
