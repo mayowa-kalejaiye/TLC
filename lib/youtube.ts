@@ -70,11 +70,18 @@ export async function getLatestYouTubeVideo(
     const videoData = await videoResponse.json()
     const detailedVideos = videoData.items || []
 
-    // Find the first video that's not a short (>= 2 minutes)
+    // Find the first video that's not a short (>= 2 minutes) and not a live stream
     for (const video of detailedVideos) {
-      const durationInSeconds = parseDurationToSeconds(video.contentDetails.duration)
+      const duration = video.contentDetails?.duration
       
-      // Skip shorts (videos less than 2 minutes)
+      // Skip live streams (duration is 'P0D' or missing) and invalid durations
+      if (!duration || duration === 'P0D' || duration === 'PT0S') {
+        continue
+      }
+
+      const durationInSeconds = parseDurationToSeconds(duration)
+      
+      // Skip shorts (videos less than 2 minutes) and invalid durations
       if (durationInSeconds < 120) {
         continue
       }
@@ -86,7 +93,7 @@ export async function getLatestYouTubeVideo(
         description: video.snippet.description,
         thumbnail: video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url,
         publishedAt: video.snippet.publishedAt,
-        duration: parseDuration(video.contentDetails.duration),
+        duration: parseDuration(duration),
         url: `https://www.youtube.com/watch?v=${video.id}`,
       }
     }
@@ -104,7 +111,9 @@ export async function getLatestYouTubeVideo(
  * Parse ISO 8601 duration format to seconds
  * Example: PT1H2M10S -> 3730 seconds
  */
-function parseDurationToSeconds(duration: string): number {
+function parseDurationToSeconds(duration: string | undefined): number {
+  if (!duration || duration === 'P0D' || duration === 'PT0S') return 0
+  
   const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
   
   if (!match) return 0
@@ -120,7 +129,9 @@ function parseDurationToSeconds(duration: string): number {
  * Parse ISO 8601 duration format to readable string
  * Example: PT1H2M10S -> "1h 2m"
  */
-function parseDuration(duration: string): string {
+function parseDuration(duration: string | undefined): string {
+  if (!duration || duration === 'P0D' || duration === 'PT0S') return 'Live stream'
+  
   const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
   
   if (!match) return ''

@@ -67,15 +67,17 @@ export default function Hero() {
           className="max-w-5xl mx-auto"
         >
           {/* Vision Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-tlc-gold/30"
-          >
-            <Circle className="h-2 w-2 fill-tlc-gold text-tlc-gold" />
-            <span className="text-white font-semibold text-sm tracking-wider uppercase">Our Vision</span>
-          </motion.div>
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-tlc-gold/30"
+            >
+              <Circle className="h-2 w-2 fill-tlc-gold text-tlc-gold" />
+              <span className="text-white font-semibold text-sm tracking-wider uppercase">Our Vision</span>
+            </motion.div>
+          </div>
 
           {/* Main Heading - Bold Statement with opacity on desktop */}
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase text-center">
