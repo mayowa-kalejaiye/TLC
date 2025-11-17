@@ -3,7 +3,7 @@ import { MapPin, Clock, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Map - Rooted Monthly Meeting | The Light Community',
-  description: 'Find us at our monthly Rooted gathering - every first Friday at The Light House, Mangoro, Ikeja, Lagos.',
+  description: 'Find us at our monthly Rooted gathering - every first Saturday at The Light House, Mangoro, Ikeja, Lagos.',
 }
 
 export default function MapPage() {
@@ -16,7 +16,7 @@ export default function MapPage() {
             Find Us at Rooted
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Join us for our monthly physical gathering - every first Friday of the month at The Light House
+            Join us for our monthly physical gathering - every first Saturday of the month at The Light House
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export default function MapPage() {
               <div>
                 <h3 className="text-lg font-bold text-tlc-navy mb-2">Meeting Time</h3>
                 <p className="text-gray-700">
-                  Every First Friday<br />
+                  Every First Saturday<br />
                   10:00 AM Prompt
                 </p>
                 <p className="text-sm text-gray-600 mt-2 italic">
@@ -85,7 +85,7 @@ export default function MapPage() {
         <div className="bg-tlc-navy text-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-2xl md:text-3xl font-anton mb-4 uppercase">What is Rooted?</h2>
           <p className="text-lg leading-relaxed">
-            Rooted is our monthly physical gathering that brings The Light Community together every first Friday 
+            Rooted is our monthly physical gathering that brings The Light Community together every first Saturday 
             of the month at The Light House. It&apos;s a time of fellowship, worship, and deep connection as we 
             grow together in faith and community. Come experience the warmth of gathering in person!
           </p>

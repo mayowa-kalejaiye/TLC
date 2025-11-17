@@ -39,7 +39,7 @@ export default function EventsPage() {
       title: 'Rooted',
       tagline: 'Great Sermons, Deep Connections',
       description: 'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
-      date: 'First Friday of Every Month',
+      date: 'First Saturday of Every Month',
       time: '10:00 AM',
       location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
       type: 'Monthly Gathering',

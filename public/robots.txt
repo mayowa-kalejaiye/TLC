@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thelightcommunity.netlify.app/sitemap.xml
+Sitemap: https://thelightcommunity.vercel.app/sitemap.xml

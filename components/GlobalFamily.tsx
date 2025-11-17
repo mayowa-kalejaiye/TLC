@@ -117,7 +117,7 @@ export default function GlobalFamily() {
                 <p className="text-xs text-white/70 uppercase tracking-wider">Live Online Services</p>
               </div>
               <div className="text-center p-4 bg-white/5 rounded-xl">
-                <p className="text-2xl font-anton text-tlc-orange mb-1">First Friday</p>
+                <p className="text-2xl font-anton text-tlc-orange mb-1">First Saturday</p>
                 <p className="text-xs text-white/70 uppercase tracking-wider">Rooted (Physical)</p>
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function GlobalFamily() {
                 </div>
                 <h4 className="font-anton text-2xl text-white mb-4 uppercase">Rooted Gatherings</h4>
                 <p className="text-white/80 leading-relaxed mb-4">
-                  Experience the warmth of in-person fellowship every first Friday at The Light House, Mangoro. Where digital meets physical.
+                  Experience the warmth of in-person fellowship every first Saturday at The Light House, Mangoro. Where digital meets physical.
                 </p>
                 <Link 
                   href="/map"

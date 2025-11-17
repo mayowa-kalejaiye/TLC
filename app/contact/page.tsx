@@ -68,7 +68,7 @@ const contactReasons = [
     placeholder: 'Any questions about the meeting?',
     template: (name: string, message: string) => 
       `Hi, my name is ${name}. I would like to attend the Rooted meeting. ${message}`,
-    description: 'Join us for our monthly physical gathering every first Friday at The Light House.'
+    description: 'Join us for our monthly physical gathering every first Saturday at The Light House.'
   },
   {
     id: 'partnership',
@@ -293,7 +293,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="font-semibold text-tlc-gold">Rooted (Physical Gathering)</p>
-                <p>First Friday of the Month | 10:00 AM</p>
+                <p>First Saturday of the Month | 10:00 AM</p>
               </div>
               <div>
                 <p className="font-semibold text-tlc-gold">Prayer Meetings</p>
