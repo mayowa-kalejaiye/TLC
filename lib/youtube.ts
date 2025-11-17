@@ -70,7 +70,7 @@ export async function getLatestYouTubeVideo(
     const videoData = await videoResponse.json()
     const detailedVideos = videoData.items || []
 
-    // Find the first video that's not a short (>= 2 minutes) and not a live stream
+    // Find the first video that's not a short (>= 15 minutes) and not a live stream
     for (const video of detailedVideos) {
       const duration = video.contentDetails?.duration
       
@@ -81,8 +81,8 @@ export async function getLatestYouTubeVideo(
 
       const durationInSeconds = parseDurationToSeconds(duration)
       
-      // Skip shorts (videos less than 2 minutes) and invalid durations
-      if (durationInSeconds < 120) {
+      // Skip shorts (videos less than 15 minutes) and invalid durations
+      if (durationInSeconds < 900) {
         continue
       }
 
@@ -222,7 +222,7 @@ export async function getChannelVideos(
     const videoData = await videoResponse.json()
     const detailedVideos = videoData.items || []
 
-    // Step 5: Map to YouTubeVideo interface and filter out shorts (< 2 minutes)
+    // Step 5: Map to YouTubeVideo interface and filter out shorts (< 15 minutes)
     const allVideos = detailedVideos.map((video: any) => ({
       id: video.id,
       title: video.snippet.title,
@@ -234,8 +234,8 @@ export async function getChannelVideos(
       durationInSeconds: parseDurationToSeconds(video.contentDetails.duration),
     }))
 
-    // Filter out YouTube Shorts (videos less than 2 minutes / 120 seconds)
-    return allVideos.filter((video: any) => video.durationInSeconds >= 120)
+    // Filter out short videos (less than 15 minutes / 900 seconds)
+    return allVideos.filter((video: any) => video.durationInSeconds >= 900)
   } catch (error) {
     console.error('Error fetching YouTube videos:', error)
     return []
@@ -332,8 +332,8 @@ export async function searchChannelVideos(
       durationInSeconds: parseDurationToSeconds(video.contentDetails.duration),
     }))
 
-    // Filter out YouTube Shorts (videos less than 2 minutes / 120 seconds)
-    return allVideos.filter((video: any) => video.durationInSeconds >= 120)
+    // Filter out short videos (less than 15 minutes / 900 seconds)
+    return allVideos.filter((video: any) => video.durationInSeconds >= 900)
   } catch (error) {
     console.error('Error searching videos:', error)
     return []
