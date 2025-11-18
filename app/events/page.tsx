@@ -1,5 +1,6 @@
-'use client'
+ 'use client'
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock, MapPin, Users, Flame, Heart, ChevronRight, ArrowRight } from 'lucide-react'
@@ -269,4 +270,25 @@ export default function EventsPage() {
       </section>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Events | The Light Community',
+  description: 'Join our events — conferences, prayer meetings, and monthly Rooted gatherings. See upcoming dates and how to participate.',
+  openGraph: {
+    title: 'Events - The Light Community',
+    description: 'Join our events — conferences, prayer meetings, and monthly Rooted gatherings.',
+    images: [
+      {
+        url: 'https://thelightcommunity.vercel.app/images/event-hero.jpg',
+        alt: 'The Light Community Events',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://thelightcommunity.vercel.app/images/event-hero.jpg'],
+  },
 }

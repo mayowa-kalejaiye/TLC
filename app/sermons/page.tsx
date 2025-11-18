@@ -1,5 +1,6 @@
-'use client'
+ 'use client'
 
+import type { Metadata } from 'next'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -672,4 +673,25 @@ export default function SermonsPage() {
       )}
     </div>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Sermons | The Light Community',
+  description: 'Explore sermons from The Light Community — watch or listen to messages that help you grow in faith.',
+  openGraph: {
+    title: 'Sermons - The Light Community',
+    description: 'Explore sermons from The Light Community — watch or listen to messages that help you grow in faith.',
+    images: [
+      {
+        url: 'https://thelightcommunity.vercel.app/images/preach.jpg',
+        alt: 'Preaching at The Light Community',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://thelightcommunity.vercel.app/images/preach.jpg'],
+  },
 }

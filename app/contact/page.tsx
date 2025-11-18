@@ -336,3 +336,24 @@ export default function ContactPage() {
     </div>
   )
 }
+
+export const metadata: Metadata = {
+  title: 'Contact | The Light Community',
+  description: 'Get in touch with The Light Community — submit prayer requests, testimonies, or general inquiries via WhatsApp.',
+  openGraph: {
+    title: 'Contact - The Light Community',
+    description: 'Get in touch with The Light Community for prayer requests, testimonies, or to visit.',
+    images: [
+      {
+        url: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
+        alt: 'Contact The Light Community',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://thelightcommunity.vercel.app/images/hero-fallback.jpg'],
+  },
+}

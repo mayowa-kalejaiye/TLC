@@ -19,7 +19,7 @@ const anton = Anton({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://thelightcommunity.netlify.app'),
+  metadataBase: new URL('https://thelightcommunity.vercel.app'),
   title: {
     default: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     template: '%s | The Light Community'
@@ -64,19 +64,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_NG',
-    url: 'https://thelightcommunity.netlify.app',
+    url: 'https://thelightcommunity.vercel.app',
     siteName: 'The Light Community',
     title: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
     images: [
       {
-        url: 'https://thelightcommunity.netlify.app/images/hero-fallback.jpg',
+        url: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
         width: 1200,
         height: 630,
         alt: 'The Light Community - Souls Saved. Men Trained. Nations Taken.',
       },
       {
-        url: 'https://thelightcommunity.netlify.app/images/tlc-logo.png',
+        url: 'https://thelightcommunity.vercel.app/images/tlc-logo.png',
         width: 800,
         height: 600,
         alt: 'The Light Community Logo',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
-    images: ['https://thelightcommunity.netlify.app/images/hero-fallback.jpg'],
+    images: ['https://thelightcommunity.vercel.app/images/hero-fallback.jpg'],
     creator: '@thelight_community',
   },
   robots: {
@@ -123,17 +123,17 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Church',
-    '@id': 'https://thelightcommunity.netlify.app/#church',
+    '@id': 'https://thelightcommunity.vercel.app/#church',
     name: 'The Light Community',
     alternateName: ['TLC', 'Christ Community International', 'CCI'],
-    url: 'https://thelightcommunity.netlify.app',
+    url: 'https://thelightcommunity.vercel.app',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://thelightcommunity.netlify.app/images/tlc-logo.png',
+      url: 'https://thelightcommunity.vercel.app/images/tlc-logo.png',
       width: 800,
       height: 600,
     },
-    image: 'https://thelightcommunity.netlify.app/images/hero-fallback.jpg',
+    image: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
     slogan: 'Souls Saved. Men Trained. Nations Taken.',
     founder: {

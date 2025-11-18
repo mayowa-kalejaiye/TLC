@@ -1,5 +1,6 @@
-'use client'
+ 'use client'
 
+import type { Metadata } from 'next'
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -276,4 +277,25 @@ export default function GivePage() {
       </section>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Give | The Light Community',
+  description: 'Partner with The Light Community — give online or learn other ways to support our mission to reach the nations.',
+  openGraph: {
+    title: 'Give - The Light Community',
+    description: 'Partner with The Light Community — give online or learn other ways to support our mission.',
+    images: [
+      {
+        url: 'https://thelightcommunity.vercel.app/images/give.jpg',
+        alt: 'Give to The Light Community',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://thelightcommunity.vercel.app/images/give.jpg'],
+  },
 }
