@@ -1,6 +1,5 @@
  'use client'
 
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { UserPlus, Users, Heart, BookOpen, Handshake, MessageCircle, Video, Globe } from 'lucide-react'
@@ -274,23 +273,5 @@ export default function QuickLinksPage() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Quick Links | The Light Community',
-  description: 'Quick access to resources: first-timers, ministries, sermons, giving, and contact info for The Light Community.',
-  openGraph: {
-    title: 'Quick Links - The Light Community',
-    description: 'Quick access to resources for The Light Community.',
-    images: [
-      {
-        url: 'https://thelightcommunity.vercel.app/images/quick.JPG',
-        alt: 'Quick Links - The Light Community',
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['https://thelightcommunity.vercel.app/images/quick.JPG'],
-  },
-}
+// Page-level metadata removed: client component cannot export `metadata`.
+// Defaults are provided in `app/layout.tsx`.

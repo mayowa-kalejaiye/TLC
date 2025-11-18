@@ -1,7 +1,6 @@
-'use client'
+ 'use client'
 
 import { useState, useEffect } from 'react'
-import { Metadata } from 'next'
 import { MessageCircle, Send, ChevronDown } from 'lucide-react'
 
 // Contact reasons with their corresponding WhatsApp templates
@@ -337,23 +336,5 @@ export default function ContactPage() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Contact | The Light Community',
-  description: 'Get in touch with The Light Community — submit prayer requests, testimonies, or general inquiries via WhatsApp.',
-  openGraph: {
-    title: 'Contact - The Light Community',
-    description: 'Get in touch with The Light Community for prayer requests, testimonies, or to visit.',
-    images: [
-      {
-        url: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
-        alt: 'Contact The Light Community',
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['https://thelightcommunity.vercel.app/images/hero-fallback.jpg'],
-  },
-}
+// Page-level metadata removed: this page is a client component ('use client')
+// and exporting `metadata` is not allowed. Use site-level metadata in `app/layout.tsx`.

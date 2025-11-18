@@ -1,6 +1,5 @@
  'use client'
 
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -453,23 +452,6 @@ export default function AboutPage() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'About | The Light Community',
-  description: 'Learn about The Light Community—our story, mission, beliefs, and leadership.',
-  openGraph: {
-    title: 'About - The Light Community',
-    description: 'Learn about The Light Community—our story, mission, beliefs, and leadership.',
-    images: [
-      {
-        url: 'https://thelightcommunity.vercel.app/images/about.JPG',
-        alt: 'About The Light Community',
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['https://thelightcommunity.vercel.app/images/about.JPG'],
-  },
-}
+// Page-level metadata removed: this page is a client component ('use client')
+// and exporting `metadata` is not allowed. Server-level or layout metadata
+// in `app/layout.tsx` will provide site-wide defaults.
