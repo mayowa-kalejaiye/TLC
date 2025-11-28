@@ -288,7 +288,7 @@ export default function ContactPage() {
             <div className="space-y-3 text-gray-700">
               <div>
                 <p className="font-semibold text-tlc-gold">Online Services</p>
-                <p>Thursday & Saturday | 8:00 PM</p>
+                <p>Tuesday & Saturday | 9:00 PM</p>
               </div>
               <div>
                 <p className="font-semibold text-tlc-gold">Rooted (Physical Gathering)</p>

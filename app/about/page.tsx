@@ -396,7 +396,7 @@ export default function AboutPage() {
           <div className="space-y-4">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
               <p className="text-tlc-gold font-semibold mb-2">Weekly Services</p>
-              <p className="text-lg">Thursday & Saturday | 8:00 PM</p>
+              <p className="text-lg">Tuesday & Saturday | 9:00 PM</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
               <p className="text-tlc-gold font-semibold mb-2">Prayer Meetings</p>
