@@ -297,7 +297,7 @@ export default function ContactPage() {
               <div>
                 <p className="font-semibold text-tlc-gold">Prayer Meetings</p>
                 <p>Mon-Wed: Rooted Prayers (9:00 PM)</p>
-                <p>Friday: Watch Hour Prayers (9:00 PM)</p>
+                <p>Watch Hour Prayers: 9:00 PM (fortnightly — every two weeks)</p>
               </div>
             </div>
           </div>

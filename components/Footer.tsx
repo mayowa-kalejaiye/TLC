@@ -163,7 +163,7 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold mb-2 text-tlc-gold">Service Times</h4>
               <p className="text-gray-300 text-sm">Mon-Wed: Rooted Prayers (9:00 PM)</p>
-              <p className="text-gray-300 text-sm">Thu & Sat: Sermons (8:00 PM)</p>
+              <p className="text-gray-300 text-sm">Tues & Sat: Sermons (9:00 PM)</p>
               <p className="text-gray-300 text-sm">Friday: Watch Hour Prayers (9:00 PM)</p>
             </div>
           </div>
