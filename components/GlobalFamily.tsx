@@ -113,7 +113,7 @@ export default function GlobalFamily() {
             {/* Impact Highlights */}
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="text-center p-4 bg-white/5 rounded-xl">
-                <p className="text-2xl font-anton text-tlc-gold mb-1">Thursday & Saturday</p>
+                <p className="text-2xl font-anton text-tlc-gold mb-1">Tuesday & Saturday</p>
                 <p className="text-xs text-white/70 uppercase tracking-wider">Live Online Services</p>
               </div>
               <div className="text-center p-4 bg-white/5 rounded-xl">
