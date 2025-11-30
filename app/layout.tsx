@@ -142,10 +142,10 @@ export default function RootLayout({
       '@type': 'Person',
       name: 'Apostle Nelson',
     },
-    sameAs: [
+      sameAs: [
       'https://youtube.com/@TheLightCommunity',
       'https://instagram.com/thelight_community',
-      'https://tiktok.com/@thelightcommunity',
+      'https://www.tiktok.com/@the.lightcommunity?_r=1&_t=ZS-917gOMTaYuC',
       'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
     ],
     contactPoint: {

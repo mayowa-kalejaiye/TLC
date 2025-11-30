@@ -17,11 +17,12 @@ const footerLinks = {
     { name: 'Become a Member', href: '/contact#become-member' },
   ],
   ministries: [
-    { name: 'Event Department', href: '/ministries#event' },
-    { name: 'Assimilation', href: '/ministries#assimilation' },
-    { name: 'Pastoral Care', href: '/ministries#pastoral-care' },
-    { name: 'Evangelism', href: '/ministries#evangelism' },
-    { name: 'Administration', href: '/ministries#administration' },
+    { name: 'TLC Online ministry', href: '/ministries#tlc-online' },
+    { name: 'TLC Firestorm', href: '/ministries#firestorm' },
+    { name: 'TLC Follow up', href: '/ministries#follow-up' },
+    { name: 'TLC Prayer team', href: '/ministries#prayer-team' },
+    { name: 'TLC Media & visibility', href: '/ministries#media-visibility' },
+    { name: 'Growth initiatives', href: '/ministries#growth-initiatives' },
   ],
   resources: [
     { name: 'Daily Devotionals', href: '/sermons#featured' },
@@ -41,7 +42,7 @@ const socialLinks = [
   { name: 'YouTube', href: 'https://youtube.com/@TheLightCommunity', icon: Youtube },
   { name: 'Instagram', href: 'https://instagram.com/thelight_community', icon: Instagram },
   { name: 'WhatsApp', href: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI', icon: MessageCircle },
-  { name: 'TikTok', href: 'https://tiktok.com/@thelightcommunity', icon: TikTokIcon },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@the.lightcommunity?_r=1&_t=ZS-917gOMTaYuC', icon: TikTokIcon },
 ]
 
 export default function Footer() {
@@ -161,10 +162,10 @@ export default function Footer() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-2 text-tlc-gold">Service Times</h4>
-              <p className="text-gray-300 text-sm">Mon-Wed: Rooted Prayers (9:00 PM)</p>
-              <p className="text-gray-300 text-sm">Tues & Sat: Sermons (9:00 PM)</p>
-              <p className="text-gray-300 text-sm">Friday: Watch Hour Prayers (9:00 PM)</p>
+                <h4 className="font-semibold mb-2 text-tlc-gold">Service Times</h4>
+                <p className="text-gray-300 text-sm">Mon-Wed: Rooted Prayers (9:00 PM)</p>
+                <p className="text-gray-300 text-sm">Tues & Sat: Sermons (9:00 PM)</p>
+                <p className="text-gray-300 text-sm">Watch Hour Prayers: 9:00 PM (fortnightly — every two weeks)</p>
             </div>
           </div>
         </div>

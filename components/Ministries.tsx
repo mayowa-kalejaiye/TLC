@@ -1,35 +1,41 @@
 import Link from 'next/link'
-import { Users, Heart, BookHeart, Megaphone, Briefcase, ArrowRight } from 'lucide-react'
+import { Users, Heart, Music, Briefcase, Camera, BookHeart, ArrowRight } from 'lucide-react'
 
 const ministries = [
   {
-    name: 'Event Department',
+    name: 'TLC Online ministry',
     icon: Users,
-    description: 'Hosting impactful gatherings that bring our community together',
+    description: 'Connecting people worldwide through live services, digital discipleship and online community.',
     color: 'bg-blue-500',
   },
   {
-    name: 'Assimilation',
-    icon: Heart,
-    description: 'Discipling new believers and helping them grow in faith',
+    name: 'TLC Firestorm',
+    icon: Music,
+    description: 'Choir department — leading worship and choral ministry for services and events.',
     color: 'bg-red-500',
   },
   {
-    name: 'Pastoral Care',
+    name: 'TLC Follow up',
     icon: BookHeart,
-    description: 'Teaching, spiritual guidance, and caring for the flock',
+    description: 'Leading follow-up processes for new contacts and helping people take next steps in faith.',
     color: 'bg-green-500',
   },
   {
-    name: 'Evangelism',
-    icon: Megaphone,
-    description: 'Reaching the lost and spreading the gospel everywhere',
+    name: 'TLC Prayer team',
+    icon: Heart,
+    description: 'Intercession, watch groups and coordinated prayer support across the church.',
+    color: 'bg-indigo-500',
+  },
+  {
+    name: 'TLC Media & visibility',
+    icon: Camera,
+    description: 'Media production, social channels and visibility strategy for the church.',
     color: 'bg-orange-500',
   },
   {
-    name: 'Administration',
+    name: 'Growth initiatives',
     icon: Briefcase,
-    description: 'Supporting the mission through excellent organization',
+    description: 'Discipleship programs, leadership development and community growth projects.',
     color: 'bg-purple-500',
   },
 ]

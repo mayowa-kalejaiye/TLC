@@ -40,34 +40,39 @@ export default function QuickLinksPage() {
       ]
     },
     {
-      title: 'Ministries & Departments',
-      description: 'Discover our five key departments and find where you can serve.',
+      title: 'Service Units',
+      description: 'Discover our service units and find where you can serve.',
       icon: Users,
       links: [
         {
-          title: 'Event Department',
-          description: 'Plan and execute church events, conferences, and special programs.',
-          url: '/ministries#event'
+          title: 'TLC Online ministry',
+          description: 'Lead and support our online services, community, and virtual care.',
+          url: '/ministries#tlc-online'
         },
         {
-          title: 'Assimilation',
-          description: 'Welcome and integrate new members into the TLC family.',
-          url: '/ministries#assimilation'
+          title: 'TLC Firestorm',
+          description: "Choir department — lead worship and choral ministry for services and events.",
+          url: '/ministries#firestorm'
         },
         {
-          title: 'Pastoral Care',
-          description: 'Provide spiritual support, counselling, and care to our community.',
-          url: '/ministries#pastoral-care'
+          title: 'TLC Follow up',
+          description: 'Care for new converts and provide follow-up support and discipleship.',
+          url: '/ministries#follow-up'
         },
         {
-          title: 'Evangelism',
-          description: 'Spread the gospel, reach souls, and plant churches globally.',
-          url: '/ministries#evangelism'
+          title: 'TLC Prayer team',
+          description: 'Intercede and stand in prayer for the needs of our community.',
+          url: '/ministries#prayer-team'
         },
         {
-          title: 'Administration',
-          description: 'Support church operations, management, and organizational excellence.',
-          url: '/ministries#administration'
+          title: 'TLC Media & visibility',
+          description: 'Handle media production, live stream, and public visibility efforts.',
+          url: '/ministries#media-visibility'
+        },
+        {
+          title: 'Growth initiatives',
+          description: 'Drive strategic growth projects and organisational development.',
+          url: '/ministries#growth-initiatives'
         }
       ]
     },

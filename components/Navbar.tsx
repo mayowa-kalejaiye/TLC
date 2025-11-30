@@ -17,9 +17,12 @@ const navigation = [
 ]
 
 const ministriesLinks = [
-  { name: 'Evangelism', href: '/ministries/evangelism' },
-  { name: 'Pastoral', href: '/ministries/pastoral' },
-  { name: 'Event', href: '/ministries/event' },
+  { name: 'TLC Online ministry', href: '/ministries#tlc-online' },
+  { name: 'TLC Firestorm', href: '/ministries#firestorm' },
+  { name: 'TLC Follow up', href: '/ministries#follow-up' },
+  { name: 'TLC Prayer team', href: '/ministries#prayer-team' },
+  { name: 'TLC Media & visibility', href: '/ministries#media-visibility' },
+  { name: 'Growth initiatives', href: '/ministries#growth-initiatives' },
 ]
 
 const resourcesLinks = [
@@ -244,39 +247,46 @@ export default function Navbar() {
                     <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">Ministries</h3>
                   <nav className="flex flex-col space-y-3">
                     <Link
-                      href="/ministries#evangelism"
+                      href="/ministries#tlc-online"
                       onClick={() => setIsOpen(false)}
                       className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
                     >
-                      Evangelism Department
+                      TLC Online ministry
                     </Link>
                     <Link
-                      href="/ministries#pastoral-care"
+                      href="/ministries#firestorm"
                       onClick={() => setIsOpen(false)}
                       className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
                     >
-                      Pastoral Department
+                      TLC Firestorm
                     </Link>
                     <Link
-                      href="/ministries#event"
+                      href="/ministries#follow-up"
                       onClick={() => setIsOpen(false)}
                       className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
                     >
-                      Event Department
+                      TLC Follow up
                     </Link>
                     <Link
-                      href="/ministries#assimilation"
+                      href="/ministries#prayer-team"
                       onClick={() => setIsOpen(false)}
                       className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
                     >
-                      Assimilation Department
+                      TLC Prayer team
                     </Link>
                     <Link
-                      href="/ministries#administration"
+                      href="/ministries#media-visibility"
                       onClick={() => setIsOpen(false)}
                       className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
                     >
-                      Administration Department
+                      TLC Media & visibility
+                    </Link>
+                    <Link
+                      href="/ministries#growth-initiatives"
+                      onClick={() => setIsOpen(false)}
+                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                    >
+                      Growth initiatives
                     </Link>
                   </nav>
                 </div>
