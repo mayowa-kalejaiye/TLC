@@ -12,7 +12,7 @@ export default function EventsPage() {
       tagline: 'An Encounter with the Holy Spirit',
       description: 'Our annual youth and teenage conference designed to ignite your passion for God. Experience days of powerful worship, life-changing messages, and supernatural encounters that will transform your walk with Christ.',
       date: 'Annually in August',
-      time: 'Multi-Day Conference',
+      time: 'One-Day Conference',
       location: 'The Light House',
       type: 'Youth Conference',
       image: '/images/fire-conference.jpg',

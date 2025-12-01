@@ -1,10 +1,17 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Heart, CreditCard, Building2, Sparkles } from 'lucide-react'
 
 export default function Give() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-tlc-green via-tlc-green to-tlc-green-dark text-white relative overflow-hidden z-20">
-      {/* Animated Background Elements */}
+    <section className="relative py-16 md:py-24 text-white overflow-hidden z-20">
+      {/* Background Image with overlay to match the Give page */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/images/give.jpg" alt="Give" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      {/* Decorative animated elements (subtle, above the image) */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-64 h-64 bg-tlc-gold rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>

@@ -164,9 +164,21 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-tlc-orange to-tlc-gold text-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
+          <section className="relative py-20 px-4 text-white">
+            {/* Background image for 'What We Do' (hero-fallback) */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                  src="/images/hero-fallback.jpg"
+                  alt="What we do background"
+                  fill
+                  className="object-cover object-center md:object-top"
+                  priority
+                />
+              <div className="absolute inset-0 bg-black/55" />
+            </div>
+
+            <div className="relative z-10 max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12">
             {/* Mission */}
             <div className="text-center md:text-left">
               <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
