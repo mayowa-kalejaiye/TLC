@@ -34,7 +34,7 @@ export default function QuickLinksPage() {
         },
         {
           title: 'Watch Online',
-          description: 'Join our live services every Thursday and Saturday at 8:00 PM.',
+          description: 'Join our live services every Tuesday and Saturday at 8:30 PM.',
           url: 'https://youtube.com/@TheLightCommunity'
         }
       ]

@@ -287,7 +287,7 @@ export default function SermonsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            Streaming live Tuesday & Saturday by 8:00 PM & available on-demand after.
+            Streaming live Tuesday & Saturday by 8:30 PM & available on-demand after.
           </motion.p>
           </div>
         </div>

@@ -139,7 +139,7 @@ export default function GlobalFamily() {
                 </div>
                 <h4 className="font-anton text-2xl text-white mb-4 uppercase">Online Services</h4>
                 <p className="text-white/80 leading-relaxed mb-4">
-                  Join our community every Thursday & Saturday at 8:00 PM. Experience worship, teaching, and fellowship from wherever you are.
+                  Join our community every Tuesday & Saturday at 8:30 PM. Experience worship, teaching, and fellowship from wherever you are.
                 </p>
                 <Link 
                   href="https://youtube.com/@TheLightCommunity"
