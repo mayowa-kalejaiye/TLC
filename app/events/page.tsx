@@ -18,7 +18,7 @@ export default function EventsPage() {
       type: 'Prayer Watch',
       image: '/images/watch_hour.jpg',
       icon: Clock,
-      color: 'from-tlc-navy to-black',
+      color: 'from-tlc-navy to-green-700',
       // whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
       featured: true,
     },
