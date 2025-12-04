@@ -7,6 +7,22 @@ import { Calendar, Clock, MapPin, Users, Flame, Heart, ChevronRight, ArrowRight 
 export default function EventsPage() {
   const upcomingEvents = [
     {
+      id: 'watch-hour',
+      title: 'Watch Hour Prayers',
+      tagline: 'Friday Night Intercession',
+      description:
+        'Watch Hour Prayers is this Friday! Join us at 9:00 PM as we stand in the gap, pray for the Body of Christ, strengthen one another, and lift the church of Christ in passionate intercession.',
+      date: 'This Friday · 9:00 PM WAT',
+      time: 'One Night of Prayer',
+      location: 'The Light House & Online',
+      type: 'Prayer Watch',
+      image: '/images/watch_hour.jpg',
+      icon: Clock,
+      color: 'from-emerald-900 via-green-700 to-yellow-400',
+      whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
+      featured: true,
+    },
+    {
       id: 'fire-conference',
       title: 'Fire Conference',
       tagline: 'An Encounter with the Holy Spirit',
@@ -174,13 +190,26 @@ export default function EventsPage() {
                     </div>
 
                     {/* CTA Button */}
-                    <Link
-                      href="/contact#event-inquiry"
-                      className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Link
+                        href="/contact#event-inquiry"
+                        className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
+                      >
+                        <span>Learn More</span>
+                        <ArrowRight className="h-5 w-5" />
+                      </Link>
+                      {event.whatsappLink && (
+                        <a
+                          href={event.whatsappLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-tlc-navy font-bold rounded-full border-2 border-tlc-navy hover:bg-tlc-navy hover:text-white transition-all duration-300 shadow-lg"
+                        >
+                          <span>Join WhatsApp Group</span>
+                          <ArrowRight className="h-5 w-5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               )
