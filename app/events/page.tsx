@@ -19,7 +19,7 @@ export default function EventsPage() {
       image: '/images/watch_hour.jpg',
       icon: Clock,
       color: 'from-emerald-900 via-green-700 to-yellow-400',
-      whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
+      // whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
       featured: true,
     },
     {
@@ -198,7 +198,7 @@ export default function EventsPage() {
                         <span>Learn More</span>
                         <ArrowRight className="h-5 w-5" />
                       </Link>
-                      {event.whatsappLink && (
+                      {/* {event.whatsappLink && (
                         <a
                           href={event.whatsappLink}
                           target="_blank"
@@ -208,7 +208,7 @@ export default function EventsPage() {
                           <span>Join WhatsApp Group</span>
                           <ArrowRight className="h-5 w-5" />
                         </a>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>
