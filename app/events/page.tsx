@@ -23,6 +23,20 @@ export default function EventsPage() {
       featured: true,
     },
     {
+      id: 'rooted',
+      title: 'Rooted',
+      tagline: 'Great Sermons, Deep Connections',
+      description: 'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
+      date: 'First Saturday of Every Month',
+      time: '10:00 AM',
+      location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
+      type: 'Monthly Gathering',
+      image: '/images/rooted2.jpg',
+      icon: Users,
+      color: 'from-tlc-green to-tlc-navy',
+      featured: true
+    },
+    {
       id: 'fire-conference',
       title: 'Fire Conference',
       tagline: 'An Encounter with the Holy Spirit',
@@ -48,20 +62,6 @@ export default function EventsPage() {
       image: '/images/tarry.jpg',
       icon: Heart,
       color: 'from-tlc-gold to-tlc-orange',
-      featured: true
-    },
-    {
-      id: 'rooted',
-      title: 'Rooted',
-      tagline: 'Great Sermons, Deep Connections',
-      description: 'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
-      date: 'First Saturday of Every Month',
-      time: '10:00 AM',
-      location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
-      type: 'Monthly Gathering',
-      image: '/images/rooted2.jpg',
-      icon: Users,
-      color: 'from-tlc-green to-tlc-navy',
       featured: true
     }
   ]
