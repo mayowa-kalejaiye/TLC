@@ -1,8 +1,13 @@
- 'use client'
+'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ChevronRight, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function EventsPage() {
   const upcomingEvents = [
@@ -66,6 +71,50 @@ export default function EventsPage() {
     }
   ]
 
+  const heroRef = useRef<HTMLDivElement | null>(null)
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (heroRef.current) {
+        const heroElements = heroRef.current.querySelectorAll('[data-hero-animate]')
+        gsap.from(heroElements, {
+          opacity: 0,
+          y: 120,
+          scale: 0.92,
+          duration: 1.1,
+          ease: 'expo.out',
+          stagger: 0.15,
+        })
+      }
+
+      cardsRef.current.forEach((card, idx) => {
+        if (!card) return
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 140, scale: 0.94, rotateX: -8 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            duration: 1.2,
+            ease: 'expo.out',
+            delay: idx * 0.05,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              end: 'bottom 60%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        )
+      })
+    })
+
+    return () => ctx.revert()
+  }, [])
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -81,23 +130,23 @@ export default function EventsPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlc-gold/30">
+        <div ref={heroRef} className="relative z-10 container mx-auto px-4 text-center">
+          <div data-hero-animate className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlc-gold/30">
             <Calendar className="h-4 w-4 text-tlc-gold" />
             <span className="text-white font-semibold text-sm tracking-wider uppercase">Events</span>
           </div>
 
-          <h1 className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight uppercase">
+          <h1 data-hero-animate className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight uppercase">
             Experience
             <br />
             <span className="text-tlc-orange">God Together</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p data-hero-animate className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
             From powerful conferences to intimate prayer meetings, join us for life-changing encounters with God
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div data-hero-animate className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="#upcoming-events"
               className="px-10 py-4 bg-tlc-gold hover:bg-tlc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
@@ -133,6 +182,9 @@ export default function EventsPage() {
                 <div
                   key={event.id}
                   id={event.id}
+                  ref={(el) => {
+                    cardsRef.current[index] = el
+                  }}
                   className={`bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ${
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   } flex flex-col md:flex`}

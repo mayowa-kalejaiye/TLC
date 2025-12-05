@@ -1,21 +1,38 @@
 {
   "name": "The Light Community",
   "short_name": "TLC",
-  "description": "Souls Saved. Men Trained. Nations Taken.",
+  "description": "Souls Saved. Men Trained. Nations Taken. Join us for worship, prayer, and discipleship.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "background_color": "#030712",
   "theme_color": "#F5B82E",
   "icons": [
     {
       "src": "/images/tlc-logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/images/tlc-logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["religion", "education", "community"],
+  "shortcuts": [
+    {
+      "name": "Watch Hour Prayers",
+      "description": "Jump straight to Watch Hour details",
+      "url": "/events#watch-hour"
+    },
+    {
+      "name": "Give to TLC",
+      "description": "Partner with the mission",
+      "url": "/give"
     }
   ]
 }

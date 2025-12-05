@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Heart, BookOpen, Users, Globe, Lightbulb, TrendingUp, Video, ArrowRight } from 'lucide-react'
+import { Heart, BookOpen, Users, Globe, Lightbulb, TrendingUp } from 'lucide-react'
 
 export default function AboutPage() {
   const beliefs = [

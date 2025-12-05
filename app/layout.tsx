@@ -193,6 +193,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${anton.variable}`}>
       <head>
+        <meta name="application-name" content="The Light Community" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="The Light Community" />
+        <meta name="theme-color" content="#F5B82E" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
