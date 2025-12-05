@@ -21,7 +21,7 @@ const anton = Anton({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://thelightcommunity.vercel.app'),
+  metadataBase: new URL('https://tlc.ng'),
   title: {
     default: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     template: '%s | The Light Community'
@@ -66,19 +66,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_NG',
-    url: 'https://thelightcommunity.vercel.app',
+    url: 'https://tlc.ng',
     siteName: 'The Light Community',
     title: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
     images: [
       {
-        url: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
+        url: 'https://tlc.ng/images/hero-fallback.jpg',
         width: 1200,
         height: 630,
         alt: 'The Light Community - Souls Saved. Men Trained. Nations Taken.',
       },
       {
-        url: 'https://thelightcommunity.vercel.app/images/tlc-logo.png',
+        url: 'https://tlc.ng/images/tlc-logo.png',
         width: 800,
         height: 600,
         alt: 'The Light Community Logo',
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Light Community | Souls Saved. Men Trained. Nations Taken.',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
-    images: ['https://thelightcommunity.vercel.app/images/hero-fallback.jpg'],
+    images: ['https://tlc.ng/images/hero-fallback.jpg'],
     creator: '@thelight_community',
   },
   robots: {
@@ -125,17 +125,17 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Church',
-    '@id': 'https://thelightcommunity.vercel.app/#church',
+    '@id': 'https://tlc.ng/#church',
     name: 'The Light Community',
     alternateName: ['TLC', 'Christ Community International', 'CCI'],
-    url: 'https://thelightcommunity.vercel.app',
+    url: 'https://tlc.ng',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://thelightcommunity.vercel.app/images/tlc-logo.png',
+      url: 'https://tlc.ng/images/tlc-logo.png',
       width: 800,
       height: 600,
     },
-    image: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
+    image: 'https://tlc.ng/images/hero-fallback.jpg',
     description: 'We are a group of believers set to take the nations — spreading the gospel to the ears and hearts of men, raising men and women to be arsenals for Christ.',
     slogan: 'Souls Saved. Men Trained. Nations Taken.',
     founder: {
