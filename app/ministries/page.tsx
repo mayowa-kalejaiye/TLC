@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Users, Heart, BookHeart, Megaphone, Briefcase, Calendar, Music, Camera, Coffee, Smartphone, Baby, GraduationCap, ArrowRight, CheckCircle, Sparkles } from 'lucide-react'
+import { Heart, BookHeart, Briefcase, Music, Camera, Coffee, Smartphone, GraduationCap, ArrowRight, CheckCircle, Sparkles } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -148,7 +148,7 @@ export default function MinistriesPage() {
           </div>
 
           <h1 className="font-anton text-5xl md:text-7xl lg:text-8xl mb-8 uppercase leading-tight">
-            There's A Place<br />
+            There&apos;s A Place<br />
             <span className="text-tlc-gold">For Everyone</span>
           </h1>
 
@@ -183,7 +183,7 @@ export default function MinistriesPage() {
               Why <span className="text-tlc-orange">Serve?</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Serving isn't just about what you do—it's about who you become. 
+              Serving isn&apos;t just about what you do—it&apos;s about who you become. 
               When you serve, you grow spiritually, develop your gifts, build meaningful relationships, 
               and make an eternal impact.
             </p>
@@ -239,7 +239,7 @@ export default function MinistriesPage() {
           </div>
 
           <div className="space-y-16">
-            {departments.map((dept, index) => (
+            {departments.map((dept) => (
               <div
                 key={dept.id}
                 id={dept.id}
@@ -299,7 +299,7 @@ export default function MinistriesPage() {
                     <div>
                       <h4 className="font-bold text-xl text-tlc-navy mb-4 flex items-center">
                         <span className="text-2xl mr-2">📋</span>
-                        What We're Looking For
+                        What We&apos;re Looking For
                       </h4>
                       <div className="space-y-2">
                         {dept.requirements.map((req) => (
@@ -373,7 +373,7 @@ export default function MinistriesPage() {
               Ready to <span className="text-tlc-gold">Get Started?</span>
             </h2>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              Joining a ministry is simple. Follow these steps and we'll help you find your perfect fit.
+              Joining a ministry is simple. Follow these steps and we&apos;ll help you find your perfect fit.
             </p>
           </div>
 
@@ -447,7 +447,7 @@ export default function MinistriesPage() {
               </h3>
               <p className="text-gray-600">
                 It varies by department. Some require weekly commitment, others are event-based. 
-                We'll work with your schedule to find the best fit for you.
+                We&apos;ll work with your schedule to find the best fit for you.
               </p>
             </div>
 
@@ -457,16 +457,16 @@ export default function MinistriesPage() {
               </h3>
               <p className="text-gray-600">
                 Yes! However, we recommend starting with one ministry to avoid burnout. 
-                Once you're settled, you can explore serving in additional areas.
+                Once you&apos;re settled, you can explore serving in additional areas.
               </p>
             </div>
 
             <div className="bg-tlc-cream rounded-2xl p-6 md:p-8 border-2 border-transparent hover:border-tlc-gold transition-all">
               <h3 className="font-bold text-xl text-tlc-navy mb-3">
-                What if I'm not sure where I fit?
+                What if I&apos;m not sure where I fit?
               </h3>
               <p className="text-gray-600">
-                No problem! Contact our assimilation team and they'll help you discover your gifts 
+                No problem! Contact our assimilation team and they&apos;ll help you discover your gifts 
                 and find the perfect place for you to serve.
               </p>
             </div>

@@ -109,7 +109,7 @@ export default function Newsletter() {
               {status === 'success' && (
                 <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-center gap-2 text-green-700 font-semibold animate-fade-in">
                   <CheckCircle className="h-5 w-5" />
-                  <span>Thank you! You've been subscribed successfully.</span>
+                  <span>Thank you! You&apos;ve been subscribed successfully.</span>
                 </div>
               )}
               {status === 'error' && (

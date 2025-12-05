@@ -130,7 +130,7 @@ export default function AboutPage() {
               The Light Community began with a small group of believers united by a simple yet powerful vision: to build a church that reflects the joy and life-changing power of the Gospel. From those humble beginnings, God has faithfully grown us into a multi-generational family passionate about His Kingdom.
             </p>
             <p className="text-lg md:text-xl">
-              Our story is one of God's relentless grace—a story we are still writing together as we serve our communities, disciple believers, and celebrate every life changed by Jesus. We are committed to raising men and women who will be arsenals for Christ, taking nations and transforming cultures with the message of the Gospel.
+              Our story is one of God&apos;s relentless grace—a story we are still writing together as we serve our communities, disciple believers, and celebrate every life changed by Jesus. We are committed to raising men and women who will be arsenals for Christ, taking nations and transforming cultures with the message of the Gospel.
             </p>
           </div>
         </div>
@@ -201,13 +201,13 @@ export default function AboutPage() {
                 <span className="font-semibold uppercase text-sm tracking-wider">Our Vision</span>
               </div>
               <h3 className="font-anton text-3xl md:text-4xl mb-6 uppercase">
-                Where We're Going
+                Where We&apos;re Going
               </h3>
               <p className="text-xl font-semibold mb-4">
                 To see our city and our world transformed by the hope of the Gospel.
               </p>
               <p className="text-white/90 text-lg">
-                We envision thriving communities, restored families, and countless lives redeemed by God's love—souls saved, men trained, nations taken.
+                We envision thriving communities, restored families, and countless lives redeemed by God&apos;s love—souls saved, men trained, nations taken.
               </p>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function AboutPage() {
                   Lead Pastor & Founder
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  With a passion for God's Word and a deep love for people, Apostle Nelson has led The Light Community with visionary leadership grounded in practical Bible teaching. His ministry has been instrumental in fostering a culture of grace, growth, and generosity.
+                  With a passion for God&apos;s Word and a deep love for people, Apostle Nelson has led The Light Community with visionary leadership grounded in practical Bible teaching. His ministry has been instrumental in fostering a culture of grace, growth, and generosity.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   He is dedicated to raising up disciples and leaders who will impact every sphere of society, training men and women to be arsenals for Christ who will take nations with the Gospel.
@@ -402,7 +402,7 @@ export default function AboutPage() {
             Join Us This Week
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-8">
-            Experience a warm welcome, engaging atmosphere, and a relevant message from the Bible. We can't wait to meet you!
+            Experience a warm welcome, engaging atmosphere, and a relevant message from the Bible. We can&apos;t wait to meet you!
           </p>
 
           <div className="space-y-4">

@@ -1,9 +1,44 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { Play, Pause, X, SkipBack, SkipForward } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+
+type YouTubePlayer = {
+  playVideo: () => void
+  pauseVideo: () => void
+  seekTo: (seconds: number, allowSeekAhead: boolean) => void
+  getCurrentTime: () => number
+  getDuration: () => number
+  destroy: () => void
+}
+
+type YouTubePlayerEvent = {
+  target: YouTubePlayer
+  data: number
+}
+
+type YTNamespace = {
+  Player: new (
+    elementId: string,
+    options: {
+      height: string
+      width: string
+      videoId: string
+      playerVars?: Record<string, string | number>
+      events?: {
+        onReady?: (event: YouTubePlayerEvent) => void
+        onStateChange?: (event: YouTubePlayerEvent) => void
+      }
+    }
+  ) => YouTubePlayer
+  PlayerState: {
+    PLAYING: number
+    PAUSED: number
+    ENDED: number
+  }
+}
 
 interface AudioPlayerProps {
   videoUrl: string
@@ -16,8 +51,8 @@ interface AudioPlayerProps {
 // Declare YouTube IFrame API types
 declare global {
   interface Window {
-    YT: any
-    onYouTubeIframeAPIReady: () => void
+    YT?: YTNamespace
+    onYouTubeIframeAPIReady?: () => void
   }
 }
 
@@ -25,8 +60,24 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
-  const playerRef = useRef<any>(null)
+  const playerRef = useRef<YouTubePlayer | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  const stopTimeTracking = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }, [])
+
+  const startTimeTracking = useCallback(() => {
+    stopTimeTracking()
+    intervalRef.current = setInterval(() => {
+      if (playerRef.current?.getCurrentTime) {
+        setCurrentTime(playerRef.current.getCurrentTime())
+      }
+    }, 100)
+  }, [stopTimeTracking])
 
   // Extract video ID from YouTube URL
   const getVideoId = (url: string) => {
@@ -70,20 +121,22 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
             modestbranding: 1,
           },
           events: {
-            onReady: (event: any) => {
+            onReady: (event: YouTubePlayerEvent) => {
               setDuration(event.target.getDuration())
               event.target.playVideo()
               setIsPlaying(true)
               startTimeTracking()
             },
-            onStateChange: (event: any) => {
-              if (event.data === window.YT.PlayerState.PLAYING) {
+            onStateChange: (event: YouTubePlayerEvent) => {
+              const playerState = window.YT?.PlayerState
+              if (!playerState) return
+              if (event.data === playerState.PLAYING) {
                 setIsPlaying(true)
                 startTimeTracking()
-              } else if (event.data === window.YT.PlayerState.PAUSED) {
+              } else if (event.data === playerState.PAUSED) {
                 setIsPlaying(false)
                 stopTimeTracking()
-              } else if (event.data === window.YT.PlayerState.ENDED) {
+              } else if (event.data === playerState.ENDED) {
                 setIsPlaying(false)
                 stopTimeTracking()
               }
@@ -105,23 +158,7 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
       }
       stopTimeTracking()
     }
-  }, [videoId])
-
-  const startTimeTracking = () => {
-    stopTimeTracking()
-    intervalRef.current = setInterval(() => {
-      if (playerRef.current && playerRef.current.getCurrentTime) {
-        setCurrentTime(playerRef.current.getCurrentTime())
-      }
-    }, 100)
-  }
-
-  const stopTimeTracking = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-  }
+  }, [videoId, startTimeTracking, stopTimeTracking])
 
   const togglePlay = () => {
     if (!playerRef.current) return

@@ -2,13 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { UserPlus, Users, Heart, BookOpen, Handshake, MessageCircle, Video, Globe } from 'lucide-react'
-
-interface QuickLink {
-  title: string
-  description: string
-  url: string
-}
+import { UserPlus, Users, Heart, BookOpen, MessageCircle, Video, Globe } from 'lucide-react'
 
 export default function QuickLinksPage() {
   const sections = [
@@ -264,7 +258,7 @@ export default function QuickLinksPage() {
             Need Help Finding Something?
           </h2>
           <p className="text-lg mb-8 text-white/90">
-            Can't find what you're looking for? Our team is here to help.
+            Can&apos;t find what you&apos;re looking for? Our team is here to help.
           </p>
           <Link
             href="/contact"

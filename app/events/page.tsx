@@ -171,7 +171,7 @@ export default function EventsPage() {
               Upcoming Events
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mark your calendars! Here's what's happening at The Light Community
+              Mark your calendars! Here&apos;s what&apos;s happening at The Light Community
             </p>
           </div>
 
@@ -326,7 +326,7 @@ export default function EventsPage() {
       <section className="py-20 bg-gradient-to-br from-tlc-navy to-tlc-green text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-anton text-4xl md:text-5xl mb-6 uppercase">
-            Don't Miss Out!
+            Don&apos;t Miss Out!
           </h2>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
             Get updates on upcoming events and be the first to know when registration opens

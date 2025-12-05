@@ -32,7 +32,7 @@ export default function NotFound() {
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
               But the Shepherd never stops searching.<br />
-              Let's bring you home.
+              Let&apos;s bring you home.
             </p>
           </div>
 

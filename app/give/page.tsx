@@ -267,7 +267,7 @@ export default function GivePage() {
 
             <div className="mt-12 p-8 bg-gradient-to-br from-tlc-green to-tlc-green-dark rounded-2xl text-white">
               <p className="text-lg md:text-xl mb-4">
-                "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
+                &quot;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&quot;
               </p>
               <p className="font-bold">— 2 Corinthians 9:7</p>
             </div>

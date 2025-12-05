@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Play, Download, FileText, Search, Share2, Clock } from 'lucide-react'
+import { Play, Download, Search, Share2, Clock } from 'lucide-react'
 import { 
   getChannelVideos, 
   getChannelStats, 
@@ -13,11 +13,6 @@ import {
   type YouTubeVideo 
 } from '@/lib/youtube'
 import AudioPlayer from '@/components/AudioPlayer'
-
-const topics = [
-  'Faith', 'Grace', 'Forgiveness', 'Hope', 'The Cross', 'New Life', 
-  'Prayer', 'Leadership', 'Money', 'Relationships', 'The Holy Spirit'
-]
 
 export default function SermonsPage() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
@@ -397,7 +392,7 @@ export default function SermonsPage() {
             <>
               {/* Sermon Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                {displayedVideos.slice(0, videosToShow).map((sermon, index) => (
+                {displayedVideos.slice(0, videosToShow).map((sermon) => (
                   <div
                     key={sermon.id}
                     className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -16,29 +16,8 @@ const navigation = [
   { name: 'Give', href: '/give' },
 ]
 
-const ministriesLinks = [
-  { name: 'TLC Online ministry', href: '/ministries#tlc-online' },
-  { name: 'TLC Firestorm', href: '/ministries#firestorm' },
-  { name: 'TLC Follow up', href: '/ministries#follow-up' },
-  { name: 'TLC Prayer team', href: '/ministries#prayer-team' },
-  { name: 'TLC Media & visibility', href: '/ministries#media-visibility' },
-  { name: 'Growth initiatives', href: '/ministries#growth-initiatives' },
-]
-
-const resourcesLinks = [
-  { name: 'Devotionals', href: '/sermons#featured' },
-  { name: 'Testimonies', href: '/about#testimonies' },
-  { name: 'Events', href: '/events' },
-]
-
-const connectLinks = [
-  { name: 'Contact', href: '/contact' },
-  { name: 'Visit Us', href: '/visit' },
-]
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
@@ -48,9 +27,6 @@ export default function Navbar() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-
-      // Set scrolled state for background change
-      setIsScrolled(currentScrollY > 20)
 
       const isMobile = window.innerWidth < 1024
 

@@ -39,7 +39,7 @@ export default function FeaturedSermon() {
               LATEST MESSAGE
             </p>
             <h2 className="font-anton text-3xl md:text-5xl text-tlc-navy leading-none uppercase">
-              This Week's Word
+              This Week&apos;s Word
             </h2>
           </div>
           <div className="max-w-4xl mx-auto">
@@ -61,7 +61,7 @@ export default function FeaturedSermon() {
             LATEST MESSAGE
           </p>
           <h2 className="font-anton text-3xl md:text-5xl text-tlc-navy leading-none uppercase">
-            This Week's Word
+            This Week&apos;s Word
           </h2>
         </div>
 

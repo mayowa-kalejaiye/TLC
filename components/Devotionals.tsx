@@ -23,7 +23,7 @@ export default function Devotionals() {
                   <BookOpen className="h-6 w-6 text-tlc-gold" />
                 </div>
                 <div>
-                  <p className="text-xs text-tlc-navy-light uppercase tracking-wide">Today's Devotional</p>
+                  <p className="text-xs text-tlc-navy-light uppercase tracking-wide">Today&apos;s Devotional</p>
                   <div className="flex items-center text-sm text-tlc-navy-light">
                     <Calendar className="h-3 w-3 mr-1" />
                     <span>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
@@ -36,8 +36,8 @@ export default function Devotionals() {
               </h3>
 
               <p className="text-sm text-tlc-navy-light italic mb-4">
-                "But if we walk in the light, as he is in the light, we have fellowship 
-                one with another..." — 1 John 1:7
+                &quot;But if we walk in the light, as he is in the light, we have fellowship 
+                one with another...&quot; — 1 John 1:7
               </p>
 
               <p className="text-tlc-navy-light leading-relaxed mb-6">
@@ -59,13 +59,13 @@ export default function Devotionals() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-tlc-navy mb-4">
-                  Start Your Day with God's Word
+                  Start Your Day with God&apos;s Word
                 </h3>
-                <p className="text-tlc-navy-light leading-relaxed mb-6">
-                  Receive daily inspiration, biblical insights, and practical teachings 
-                  to strengthen your walk with Christ. Our devotionals are designed to 
-                  help you grow spiritually and apply God's Word to your everyday life.
-                </p>
+                  <p className="text-tlc-navy-light leading-relaxed mb-6">
+                    Receive daily inspiration, biblical insights, and practical teachings 
+                    to strengthen your walk with Christ. Our devotionals are designed to 
+                    help you grow spiritually and apply God&apos;s Word to your everyday life.
+                  </p>
               </div>
 
               <div className="space-y-4">

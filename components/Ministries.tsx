@@ -50,7 +50,7 @@ export default function Ministries() {
             <span className="text-tlc-gold font-bold text-sm tracking-wider uppercase">Join A Ministry</span>
           </div>
           <h2 className="font-anton text-4xl md:text-5xl lg:text-6xl text-tlc-navy mb-6 uppercase">
-            There's a Place<br />
+            There&apos;s a Place<br />
             <span className="text-tlc-orange">For Everyone</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">

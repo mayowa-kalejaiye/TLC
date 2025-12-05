@@ -10,6 +10,69 @@ export interface YouTubeVideo {
   url: string
 }
 
+type ApiListResponse<T> = {
+  items?: T[]
+}
+
+type ChannelContentDetails = {
+  contentDetails?: {
+    relatedPlaylists?: {
+      uploads?: string
+    }
+  }
+}
+
+type PlaylistItem = {
+  snippet?: {
+    resourceId?: {
+      videoId?: string
+    }
+  }
+}
+
+type VideoItem = {
+  id: string
+  snippet: {
+    title: string
+    description: string
+    publishedAt: string
+    thumbnails: {
+      maxres?: { url: string }
+      high: { url: string }
+    }
+  }
+  contentDetails: {
+    duration: string
+  }
+}
+
+type SearchItem = {
+  id?: {
+    videoId?: string
+  }
+}
+
+type ChannelStatsItem = {
+  statistics?: {
+    videoCount: string
+    subscriberCount: string
+    viewCount: string
+  }
+}
+
+const pickThumbnail = (thumbnails: VideoItem['snippet']['thumbnails']): string =>
+  thumbnails.maxres?.url || thumbnails.high.url
+
+const mapVideoToDto = (video: VideoItem): YouTubeVideo => ({
+  id: video.id,
+  title: video.snippet.title,
+  description: video.snippet.description,
+  thumbnail: pickThumbnail(video.snippet.thumbnails),
+  publishedAt: video.snippet.publishedAt,
+  duration: parseDuration(video.contentDetails?.duration),
+  url: `https://www.youtube.com/watch?v=${video.id}`,
+})
+
 /**
  * Fetch the latest video from a YouTube channel
  */
@@ -28,7 +91,7 @@ export async function getLatestYouTubeVideo(
       return null
     }
 
-    const channelData = await channelResponse.json()
+    const channelData = await channelResponse.json() as ApiListResponse<ChannelContentDetails>
     const uploadsPlaylistId = channelData.items?.[0]?.contentDetails?.relatedPlaylists?.uploads
 
     if (!uploadsPlaylistId) {
@@ -46,7 +109,7 @@ export async function getLatestYouTubeVideo(
       return null
     }
 
-    const playlistData = await playlistResponse.json()
+    const playlistData = await playlistResponse.json() as ApiListResponse<PlaylistItem>
     const videos = playlistData.items || []
 
     if (videos.length === 0) {
@@ -55,11 +118,20 @@ export async function getLatestYouTubeVideo(
     }
 
     // Step 3: Get video IDs
-    const videoIds = videos.map((item: any) => item.snippet.resourceId.videoId).join(',')
+    const videoIds = videos
+      .map((item) => item.snippet?.resourceId?.videoId)
+      .filter((id): id is string => typeof id === 'string' && id.length > 0)
+
+    if (videoIds.length === 0) {
+      console.error('Playlist items missing video IDs')
+      return null
+    }
 
     // Step 4: Get detailed video information including duration
+    const idParam = videoIds.join(',')
+
     const videoResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${idParam}&key=${apiKey}`
     )
 
     if (!videoResponse.ok) {
@@ -67,7 +139,7 @@ export async function getLatestYouTubeVideo(
       return null
     }
 
-    const videoData = await videoResponse.json()
+    const videoData = await videoResponse.json() as ApiListResponse<VideoItem>
     const detailedVideos = videoData.items || []
 
     // Find the first video that's not a short (>= 15 minutes) and not a live stream
@@ -87,15 +159,7 @@ export async function getLatestYouTubeVideo(
       }
 
       // Return the first non-short video
-      return {
-        id: video.id,
-        title: video.snippet.title,
-        description: video.snippet.description,
-        thumbnail: video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url,
-        publishedAt: video.snippet.publishedAt,
-        duration: parseDuration(duration),
-        url: `https://www.youtube.com/watch?v=${video.id}`,
-      }
+      return mapVideoToDto(video)
     }
 
     // If all videos are shorts, return null
@@ -180,7 +244,7 @@ export async function getChannelVideos(
       return []
     }
 
-    const channelData = await channelResponse.json()
+    const channelData = await channelResponse.json() as ApiListResponse<ChannelContentDetails>
     const uploadsPlaylistId = channelData.items?.[0]?.contentDetails?.relatedPlaylists?.uploads
 
     if (!uploadsPlaylistId) {
@@ -198,7 +262,7 @@ export async function getChannelVideos(
       return []
     }
 
-    const playlistData = await playlistResponse.json()
+    const playlistData = await playlistResponse.json() as ApiListResponse<PlaylistItem>
     const videos = playlistData.items || []
 
     if (videos.length === 0) {
@@ -207,11 +271,20 @@ export async function getChannelVideos(
     }
 
     // Step 3: Get video IDs
-    const videoIds = videos.map((item: any) => item.snippet.resourceId.videoId).join(',')
+    const videoIds = videos
+      .map((item) => item.snippet?.resourceId?.videoId)
+      .filter((id): id is string => typeof id === 'string' && id.length > 0)
+
+    if (videoIds.length === 0) {
+      console.error('Playlist items missing video IDs')
+      return []
+    }
+
+    const idParam = videoIds.join(',')
 
     // Step 4: Get detailed video information including duration
     const videoResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${idParam}&key=${apiKey}`
     )
 
     if (!videoResponse.ok) {
@@ -219,23 +292,12 @@ export async function getChannelVideos(
       return []
     }
 
-    const videoData = await videoResponse.json()
+    const videoData = await videoResponse.json() as ApiListResponse<VideoItem>
     const detailedVideos = videoData.items || []
 
-    // Step 5: Map to YouTubeVideo interface and filter out shorts (< 15 minutes)
-    const allVideos = detailedVideos.map((video: any) => ({
-      id: video.id,
-      title: video.snippet.title,
-      description: video.snippet.description,
-      thumbnail: video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url,
-      publishedAt: video.snippet.publishedAt,
-      duration: parseDuration(video.contentDetails.duration),
-      url: `https://www.youtube.com/watch?v=${video.id}`,
-      durationInSeconds: parseDurationToSeconds(video.contentDetails.duration),
-    }))
-
-    // Filter out short videos (less than 15 minutes / 900 seconds)
-    return allVideos.filter((video: any) => video.durationInSeconds >= 900)
+    return detailedVideos
+      .filter((video) => parseDurationToSeconds(video.contentDetails?.duration) >= 900)
+      .map(mapVideoToDto)
   } catch (error) {
     console.error('Error fetching YouTube videos:', error)
     return []
@@ -259,7 +321,7 @@ export async function getChannelStats(
       return null
     }
 
-    const data = await response.json()
+    const data = await response.json() as ApiListResponse<ChannelStatsItem>
     const stats = data.items?.[0]?.statistics
 
     if (!stats) {
@@ -298,7 +360,7 @@ export async function searchChannelVideos(
       return []
     }
 
-    const searchData = await searchResponse.json()
+    const searchData = await searchResponse.json() as ApiListResponse<SearchItem>
     const videos = searchData.items || []
 
     if (videos.length === 0) {
@@ -306,11 +368,20 @@ export async function searchChannelVideos(
     }
 
     // Step 2: Get video IDs
-    const videoIds = videos.map((item: any) => item.id.videoId).join(',')
+    const videoIds = videos
+      .map((item) => item.id?.videoId)
+      .filter((id): id is string => typeof id === 'string' && id.length > 0)
+
+    if (videoIds.length === 0) {
+      console.error('Search results missing video IDs')
+      return []
+    }
+
+    const idParam = videoIds.join(',')
 
     // Step 3: Get detailed video information
     const videoResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${idParam}&key=${apiKey}`
     )
 
     if (!videoResponse.ok) {
@@ -318,22 +389,12 @@ export async function searchChannelVideos(
       return []
     }
 
-    const videoData = await videoResponse.json()
+    const videoData = await videoResponse.json() as ApiListResponse<VideoItem>
     const detailedVideos = videoData.items || []
 
-    const allVideos = detailedVideos.map((video: any) => ({
-      id: video.id,
-      title: video.snippet.title,
-      description: video.snippet.description,
-      thumbnail: video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url,
-      publishedAt: video.snippet.publishedAt,
-      duration: parseDuration(video.contentDetails.duration),
-      url: `https://www.youtube.com/watch?v=${video.id}`,
-      durationInSeconds: parseDurationToSeconds(video.contentDetails.duration),
-    }))
-
-    // Filter out short videos (less than 15 minutes / 900 seconds)
-    return allVideos.filter((video: any) => video.durationInSeconds >= 900)
+    return detailedVideos
+      .filter((video) => parseDurationToSeconds(video.contentDetails?.duration) >= 900)
+      .map(mapVideoToDto)
   } catch (error) {
     console.error('Error searching videos:', error)
     return []
