@@ -36,7 +36,7 @@ export default function EventsPage() {
       time: '10:00 AM',
       location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
       type: 'Monthly Gathering',
-      image: '/images/rooted2.jpg',
+      image: '/images/rooted2.JPG',
       icon: Users,
       color: 'from-tlc-green to-tlc-navy',
       featured: true
