@@ -2,6 +2,12 @@
   "redirects": [
     {
       "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "tlcc.ng"
+        }
+      ],
       "destination": "https://www.tlcc.ng/$1",
       "permanent": true
     }
