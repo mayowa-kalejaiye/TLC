@@ -1,4 +1,4 @@
-# The Light Community - Brand Colors
+﻿# The Light Community Church - Brand Colors
 
 Based on "The Rooted Clan" logo design.
 
@@ -66,21 +66,21 @@ All color combinations meet WCAG AA standards:
 
 ```css
 /* Backgrounds */
-.bg-tlc-green        /* #0D3B3B */
-.bg-tlc-green-dark   /* #082828 */
-.bg-tlc-green-light  /* #1A5555 */
-.bg-tlc-gold         /* #F5B82E */
-.bg-tlc-cream        /* #FFF9F0 */
-.bg-tlc-navy         /* #1A202C */
+.bg-tlcc-green        /* #0D3B3B */
+.bg-tlcc-green-dark   /* #082828 */
+.bg-tlcc-green-light  /* #1A5555 */
+.bg-tlcc-gold         /* #F5B82E */
+.bg-tlcc-cream        /* #FFF9F0 */
+.bg-tlcc-navy         /* #1A202C */
 
 /* Text */
-.text-tlc-green
-.text-tlc-gold
-.text-tlc-navy
+.text-tlcc-green
+.text-tlcc-gold
+.text-tlcc-navy
 
 /* Borders */
-.border-tlc-green
-.border-tlc-gold
+.border-tlcc-green
+.border-tlcc-gold
 ```
 
 ## Where Each Color is Used
@@ -115,3 +115,4 @@ All color combinations meet WCAG AA standards:
 - **Trust:** Dark Green (footer, giving)
 - **Welcome:** Cream (warm sections)
 - **Authority:** Navy (text, headings)
+

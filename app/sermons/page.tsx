@@ -1,4 +1,4 @@
- 'use client'
+﻿ 'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -205,12 +205,12 @@ export default function SermonsPage() {
       <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden">
         <Image
           src="/images/preach.jpg"
-          alt="Preaching at The Light Community"
+          alt="Preaching at The Light Community Church"
           fill
           className="object-cover object-top"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-tlc-navy"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-tlcc-navy"></div>
         
         {/* Centered Badge on Image */}
         
@@ -235,7 +235,7 @@ export default function SermonsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Over <span className="text-tlc-gold">{totalVideoCount || '200'}+</span> sermons curated<br />
+              Over <span className="text-tlcc-gold">{totalVideoCount || '200'}+</span> sermons curated<br />
               for your progress and joy<br />
               in the faith
             </motion.h1>
@@ -268,7 +268,7 @@ export default function SermonsPage() {
           >
             <Link
               href="#latest"
-              className="w-full sm:w-auto px-8 py-4 bg-tlc-gold hover:bg-tlc-gold-dark text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto px-8 py-4 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm shadow-lg hover:shadow-xl"
             >
               <Play className="h-5 w-5" />
               <span>Watch The Latest Sermon</span>
@@ -296,11 +296,11 @@ export default function SermonsPage() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <div className="inline-block mb-4">
-              <span className="bg-tlc-gold/10 text-tlc-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+              <span className="bg-tlcc-gold/10 text-tlcc-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                 📺 WATCH
               </span>
             </div>
-            <h2 className="font-anton text-3xl md:text-4xl text-tlc-navy mb-4 leading-none uppercase">
+            <h2 className="font-anton text-3xl md:text-4xl text-tlcc-navy mb-4 leading-none uppercase">
               Find a Message That Speaks to You
             </h2>
             <p className="text-gray-600">
@@ -316,9 +316,9 @@ export default function SermonsPage() {
                 placeholder="Search by title, speaker, or scripture..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pr-14 rounded-full border-2 border-gray-200 focus:border-tlc-gold focus:outline-none focus:ring-4 focus:ring-tlc-gold/20 text-lg transition-all duration-300 hover:border-gray-300 hover:shadow-md placeholder:text-gray-400"
+                className="w-full px-6 py-4 pr-14 rounded-full border-2 border-gray-200 focus:border-tlcc-gold focus:outline-none focus:ring-4 focus:ring-tlcc-gold/20 text-lg transition-all duration-300 hover:border-gray-300 hover:shadow-md placeholder:text-gray-400"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 bg-tlc-gold hover:bg-tlc-gold-dark rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group-focus-within:scale-110 group-focus-within:shadow-lg">
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 bg-tlcc-gold hover:bg-tlcc-gold-dark rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group-focus-within:scale-110 group-focus-within:shadow-lg">
                 <Search className="h-5 w-5 text-white" />
               </button>
               {searchQuery && (
@@ -357,7 +357,7 @@ export default function SermonsPage() {
                     onClick={() => setSelectedTopic(selectedTopic === topic ? null : topic)}
                     className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                       selectedTopic === topic
-                        ? 'bg-tlc-gold text-white shadow-lg'
+                        ? 'bg-tlcc-gold text-white shadow-lg'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -411,14 +411,14 @@ export default function SermonsPage() {
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                          <Play className="h-8 w-8 text-tlc-gold ml-1" fill="currentColor" />
+                          <Play className="h-8 w-8 text-tlcc-gold ml-1" fill="currentColor" />
                         </div>
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="p-4">
-                      <h3 className="font-bold text-lg text-tlc-navy mb-1 line-clamp-2">
+                      <h3 className="font-bold text-lg text-tlcc-navy mb-1 line-clamp-2">
                         {sermon.title}
                       </h3>
                       <p className="text-xs text-gray-500 mb-3">{formatDate(sermon.publishedAt)}</p>
@@ -427,7 +427,7 @@ export default function SermonsPage() {
                       <div className="flex gap-2">
                         <button 
                           onClick={() => setCurrentAudio(sermon)}
-                          className="flex-1 px-3 py-2 bg-tlc-gold hover:bg-tlc-gold-dark text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1"
+                          className="flex-1 px-3 py-2 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1"
                         >
                           <Play className="h-3 w-3" />
                           Listen
@@ -436,7 +436,7 @@ export default function SermonsPage() {
                           href={sermon.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-2 bg-tlc-navy hover:bg-tlc-navy-light text-white text-xs font-semibold rounded-lg transition-colors"
+                          className="px-3 py-2 bg-tlcc-navy hover:bg-tlcc-navy-light text-white text-xs font-semibold rounded-lg transition-colors"
                         >
                           YouTube
                         </Link>
@@ -469,7 +469,7 @@ export default function SermonsPage() {
               <button 
                 onClick={loadMoreVideos}
                 disabled={loadingMore}
-                className="px-8 py-3 bg-tlc-navy hover:bg-tlc-navy-light text-white font-semibold rounded-full transition-all duration-200 hover:scale-105 transform disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 bg-tlcc-navy hover:bg-tlcc-navy-light text-white font-semibold rounded-full transition-all duration-200 hover:scale-105 transform disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 See More
               </button>
@@ -481,7 +481,7 @@ export default function SermonsPage() {
       {/* Featured Series Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="font-anton text-3xl md:text-4xl text-tlc-navy mb-12 leading-none uppercase text-center">
+          <h2 className="font-anton text-3xl md:text-4xl text-tlcc-navy mb-12 leading-none uppercase text-center">
             Dive Into a Series
           </h2>
 
@@ -506,7 +506,7 @@ export default function SermonsPage() {
                 <div key={seriesIndex} className="border-b border-gray-200 pb-12 last:border-b-0">
                   {/* Series Header */}
                   <div className="mb-6">
-                    <h3 className="font-anton text-2xl md:text-3xl text-tlc-navy mb-2 uppercase">
+                    <h3 className="font-anton text-2xl md:text-3xl text-tlcc-navy mb-2 uppercase">
                       {series.title}
                     </h3>
                     <p className="text-gray-600 italic text-lg">{series.tagline}</p>
@@ -520,7 +520,7 @@ export default function SermonsPage() {
                         className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                       >
                         <div className="flex-1 mb-3 md:mb-0">
-                          <h4 className="font-bold text-tlc-navy mb-1 line-clamp-1">{sermon.title}</h4>
+                          <h4 className="font-bold text-tlcc-navy mb-1 line-clamp-1">{sermon.title}</h4>
                           <div className="flex items-center gap-4 text-sm text-gray-600">
                             <span>{formatDate(sermon.publishedAt)}</span>
                             <span className="flex items-center gap-1">
@@ -536,7 +536,7 @@ export default function SermonsPage() {
                             href={sermon.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2 bg-tlc-gold hover:bg-tlc-gold-dark text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1"
+                            className="px-4 py-2 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1"
                           >
                             <Play className="h-3 w-3" />
                             WATCH
@@ -558,13 +558,13 @@ export default function SermonsPage() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             {/* Breadcrumb */}
             <div className="text-sm text-gray-500 mb-6">
-              <Link href="/sermons" className="hover:text-tlc-gold">Sermons</Link>
+              <Link href="/sermons" className="hover:text-tlcc-gold">Sermons</Link>
               {' > '}
               <span className="text-gray-700">Featured Message</span>
             </div>
 
             {/* Sermon Title */}
-            <h1 className="font-anton text-4xl md:text-5xl lg:text-6xl text-tlc-navy mb-6 leading-none">
+            <h1 className="font-anton text-4xl md:text-5xl lg:text-6xl text-tlcc-navy mb-6 leading-none">
               {featuredSermon.title}
             </h1>
 
@@ -572,21 +572,21 @@ export default function SermonsPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               <div>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Date</p>
-                <p className="font-semibold text-tlc-navy">{formatDate(featuredSermon.publishedAt)}</p>
+                <p className="font-semibold text-tlcc-navy">{formatDate(featuredSermon.publishedAt)}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Duration</p>
-                <p className="font-semibold text-tlc-navy">{featuredSermon.duration}</p>
+                <p className="font-semibold text-tlcc-navy">{featuredSermon.duration}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Channel</p>
-                <p className="font-semibold text-tlc-navy">The Light Community</p>
+                <p className="font-semibold text-tlcc-navy">The Light Community Church</p>
               </div>
             </div>
 
             {/* Video Embed Section */}
             <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-              <h3 className="font-bold text-lg text-tlc-navy mb-4">Watch the Sermon</h3>
+              <h3 className="font-bold text-lg text-tlcc-navy mb-4">Watch the Sermon</h3>
               
               {/* Video Thumbnail with Play Button */}
               <Link
@@ -603,7 +603,7 @@ export default function SermonsPage() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                    <div className="w-20 h-20 bg-tlc-gold hover:bg-tlc-gold-dark rounded-full flex items-center justify-center transition-all transform group-hover:scale-110">
+                    <div className="w-20 h-20 bg-tlcc-gold hover:bg-tlcc-gold-dark rounded-full flex items-center justify-center transition-all transform group-hover:scale-110">
                       <Play className="h-10 w-10 text-white ml-1" fill="white" />
                     </div>
                   </div>
@@ -616,7 +616,7 @@ export default function SermonsPage() {
                   href={featuredSermon.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 bg-tlc-gold hover:bg-tlc-gold-dark text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="px-4 py-3 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Play className="h-4 w-4" />
                   Watch on YouTube
@@ -635,7 +635,7 @@ export default function SermonsPage() {
                   href={featuredSermon.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 bg-tlc-navy hover:bg-tlc-navy-light text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="px-4 py-3 bg-tlcc-navy hover:bg-tlcc-navy-light text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Download className="h-4 w-4" />
                   View on YouTube
@@ -645,7 +645,7 @@ export default function SermonsPage() {
 
             {/* Sermon Description */}
             <div className="prose prose-lg max-w-none">
-              <h3 className="font-bold text-xl text-tlc-navy mb-4">About This Message</h3>
+              <h3 className="font-bold text-xl text-tlcc-navy mb-4">About This Message</h3>
               <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                 {featuredSermon.description.slice(0, 500)}
                 {featuredSermon.description.length > 500 ? '...' : ''}
@@ -671,3 +671,4 @@ export default function SermonsPage() {
 
 // Page-level metadata removed: this page is a client component and cannot export `metadata`.
 // Rely on `app/layout.tsx` for site-wide metadata or convert this page to a server component.
+

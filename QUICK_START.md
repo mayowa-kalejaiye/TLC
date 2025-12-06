@@ -1,4 +1,4 @@
-# TLC Website - Quick Start Guide
+﻿# TLCC Website - Quick Start Guide
 
 ## 🎉 Development Server is Running!
 
@@ -22,8 +22,8 @@ The website is now live at: **http://localhost:3000**
 ## 📋 Next Steps
 
 ### Immediate (To See Full Homepage):
-1. **Add the TLC logo:**
-   - Save the logo image as `public/images/tlc-logo.png`
+1. **Add the TLCC logo:**
+   - Save the logo image as `public/images/tlcc-logo.png`
    - Size: 180x60px minimum
 
 2. **Add hero background image:**
@@ -95,3 +95,4 @@ Review the main README.md or check component files for inline comments.
 
 **Last Updated:** November 8, 2025  
 **Status:** Homepage foundation complete ✅
+

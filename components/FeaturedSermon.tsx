@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -35,10 +35,10 @@ export default function FeaturedSermon() {
         <div className="absolute inset-0 bg-white/95 backdrop-blur-sm"></div>
         <div className="container-custom">
           <div className="text-center mb-12">
-            <p className="text-tlc-gold font-bold text-sm tracking-wider uppercase mb-3">
+            <p className="text-tlcc-gold font-bold text-sm tracking-wider uppercase mb-3">
               LATEST MESSAGE
             </p>
-            <h2 className="font-anton text-3xl md:text-5xl text-tlc-navy leading-none uppercase">
+            <h2 className="font-anton text-3xl md:text-5xl text-tlcc-navy leading-none uppercase">
               This Week&apos;s Word
             </h2>
           </div>
@@ -57,10 +57,10 @@ export default function FeaturedSermon() {
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-12">
-          <p className="text-tlc-gold font-bold text-sm tracking-wider uppercase mb-3">
+          <p className="text-tlcc-gold font-bold text-sm tracking-wider uppercase mb-3">
             LATEST MESSAGE
           </p>
-          <h2 className="font-anton text-3xl md:text-5xl text-tlc-navy leading-none uppercase">
+          <h2 className="font-anton text-3xl md:text-5xl text-tlcc-navy leading-none uppercase">
             This Week&apos;s Word
           </h2>
         </div>
@@ -72,7 +72,7 @@ export default function FeaturedSermon() {
               href={video?.url || "https://youtube.com/@TheLightCommunity"}
               target="_blank"
               rel="noopener noreferrer"
-              className="block relative h-64 md:h-96 bg-tlc-cream overflow-hidden"
+              className="block relative h-64 md:h-96 bg-tlcc-cream overflow-hidden"
             >
               <Image
                 src={video?.thumbnail || "/images/sermon-placeholder.jpg"}
@@ -84,7 +84,7 @@ export default function FeaturedSermon() {
               
               {/* Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-tlc-gold hover:bg-tlc-gold-dark rounded-full flex items-center justify-center shadow-lg cursor-pointer transform group-hover:scale-110 transition-all duration-300">
+                <div className="w-20 h-20 bg-tlcc-gold hover:bg-tlcc-gold-dark rounded-full flex items-center justify-center shadow-lg cursor-pointer transform group-hover:scale-110 transition-all duration-300">
                   <Play className="h-8 w-8 text-white ml-1" fill="white" />
                 </div>
               </div>
@@ -92,11 +92,11 @@ export default function FeaturedSermon() {
 
             {/* Content */}
             <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-bold text-tlc-navy mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-tlcc-navy mb-4">
                 {video?.title || "Living by Faith in a Broken World"}
               </h3>
               
-              <div className="flex flex-wrap gap-4 text-tlc-navy-light mb-4">
+              <div className="flex flex-wrap gap-4 text-tlcc-navy-light mb-4">
                 <div className="flex items-center space-x-2">
                   <Calendar className="h-4 w-4" />
                   <span className="text-sm">{video ? formatDate(video.publishedAt) : "November 4, 2025"}</span>
@@ -107,7 +107,7 @@ export default function FeaturedSermon() {
                 </div>
               </div>
 
-              <p className="text-tlc-navy-light mb-4 line-clamp-3">
+              <p className="text-tlcc-navy-light mb-4 line-clamp-3">
                 {video?.description || "Apostle Nelson teaches on how to maintain unwavering faith even in challenging times, drawing from biblical examples and practical applications for modern believers."}
               </p>
 
@@ -115,7 +115,7 @@ export default function FeaturedSermon() {
                 href={video?.url || "https://youtube.com/@TheLightCommunity"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-tlc-gold hover:bg-tlc-gold-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                className="inline-flex items-center px-6 py-3 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 <Play className="h-5 w-5 mr-2" />
                 Watch on YouTube
@@ -127,7 +127,7 @@ export default function FeaturedSermon() {
           <div className="text-center mt-8">
             <Link
               href="/sermons"
-              className="inline-flex items-center text-tlc-gold hover:text-tlc-gold-dark font-semibold transition-colors"
+              className="inline-flex items-center text-tlcc-gold hover:text-tlcc-gold-dark font-semibold transition-colors"
             >
               <span>View All Sermons</span>
               <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -138,3 +138,4 @@ export default function FeaturedSermon() {
     </section>
   )
 }
+

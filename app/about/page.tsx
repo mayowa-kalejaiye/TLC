@@ -1,4 +1,4 @@
- 'use client'
+﻿ 'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -96,14 +96,14 @@ export default function AboutPage() {
             className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 uppercase leading-tight"
           >
             We Are<br />
-            <span className="text-tlc-orange">The Light Community</span>
+            <span className="text-tlcc-orange">The Light Community Church</span>
           </motion.h1>
 
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-2xl md:text-3xl text-tlc-gold font-semibold mb-8"
+            className="text-2xl md:text-3xl text-tlcc-gold font-semibold mb-8"
           >
             A House of Grace, A Home of Love, A Beacon of Hope
           </motion.h2>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed"
           >
-            Welcome to The Light Community, a vibrant and diverse family where everyone is valued, nobody is perfect, and anything is possible through Christ. We are more than just a Sunday gathering; we are a community on a mission to know God and make Him known in our city and to the ends of the earth.
+            Welcome to The Light Community Church, a vibrant and diverse family where everyone is valued, nobody is perfect, and anything is possible through Christ. We are more than just a Sunday gathering; we are a community on a mission to know God and make Him known in our city and to the ends of the earth.
           </motion.p>
         </div>
       </section>
@@ -122,12 +122,12 @@ export default function AboutPage() {
       {/* Our Story Section */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-8 text-center uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-8 text-center uppercase">
             Our Story
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
             <p className="text-lg md:text-xl mb-6">
-              The Light Community began with a small group of believers united by a simple yet powerful vision: to build a church that reflects the joy and life-changing power of the Gospel. From those humble beginnings, God has faithfully grown us into a multi-generational family passionate about His Kingdom.
+              The Light Community Church began with a small group of believers united by a simple yet powerful vision: to build a church that reflects the joy and life-changing power of the Gospel. From those humble beginnings, God has faithfully grown us into a multi-generational family passionate about His Kingdom.
             </p>
             <p className="text-lg md:text-xl">
               Our story is one of God&apos;s relentless grace—a story we are still writing together as we serve our communities, disciple believers, and celebrate every life changed by Jesus. We are committed to raising men and women who will be arsenals for Christ, taking nations and transforming cultures with the message of the Gospel.
@@ -139,21 +139,21 @@ export default function AboutPage() {
       {/* What We Believe Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-12 text-center uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
             What We Believe
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
             {beliefs.map((belief, index) => (
-              <div key={index} className="bg-gray-50 rounded-2xl p-8 border-2 border-gray-100 hover:border-tlc-gold transition-colors">
-                <h3 className="font-bold text-2xl text-tlc-navy mb-4">
+              <div key={index} className="bg-gray-50 rounded-2xl p-8 border-2 border-gray-100 hover:border-tlcc-gold transition-colors">
+                <h3 className="font-bold text-2xl text-tlcc-navy mb-4">
                   {belief.title}
                 </h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   {belief.content}
                 </p>
                 {belief.verse && (
-                  <p className="text-tlc-orange font-semibold text-sm italic">
+                  <p className="text-tlcc-orange font-semibold text-sm italic">
                     {belief.verse}
                   </p>
                 )}
@@ -217,7 +217,7 @@ export default function AboutPage() {
       {/* Core Values Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-12 text-center uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
             Our Core Values
           </h2>
 
@@ -226,10 +226,10 @@ export default function AboutPage() {
               const IconComponent = value.icon
               return (
                 <div key={index} className="text-center p-6">
-                  <div className="w-16 h-16 bg-tlc-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-tlcc-gold rounded-full flex items-center justify-center mx-auto mb-4">
                     <IconComponent className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="font-bold text-xl text-tlc-navy mb-3">
+                  <h3 className="font-bold text-xl text-tlcc-navy mb-3">
                     {value.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -245,7 +245,7 @@ export default function AboutPage() {
       {/* Leadership Section */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-12 text-center uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
             Meet Our Lead Pastor
           </h2>
 
@@ -263,14 +263,14 @@ export default function AboutPage() {
 
               {/* Bio */}
               <div className="p-8 md:p-12 flex flex-col justify-center">
-                <h3 className="font-anton text-3xl text-tlc-navy mb-2 uppercase">
+                <h3 className="font-anton text-3xl text-tlcc-navy mb-2 uppercase">
                   Apostle Nelson Isaiah
                 </h3>
-                <p className="text-tlc-orange font-semibold mb-6 text-lg">
+                <p className="text-tlcc-orange font-semibold mb-6 text-lg">
                   Lead Pastor & Founder
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  With a passion for God&apos;s Word and a deep love for people, Apostle Nelson has led The Light Community with visionary leadership grounded in practical Bible teaching. His ministry has been instrumental in fostering a culture of grace, growth, and generosity.
+                  With a passion for God&apos;s Word and a deep love for people, Apostle Nelson has led The Light Community Church with visionary leadership grounded in practical Bible teaching. His ministry has been instrumental in fostering a culture of grace, growth, and generosity.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   He is dedicated to raising up disciples and leaders who will impact every sphere of society, training men and women to be arsenals for Christ who will take nations with the Gospel.
@@ -284,7 +284,7 @@ export default function AboutPage() {
       {/* Testimonies Section */}
       <section id="testimonies" className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-6 text-center uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 text-center uppercase">
             Stories of Transformation
           </h2>
           <p className="text-lg md:text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
@@ -293,60 +293,60 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* Testimony Card 1 - Oghale */}
-            <div className="bg-tlc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
-              <div className="text-tlc-gold text-4xl mb-4">&quot;</div>
+            <div className="bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
+              <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
               <p className="text-gray-700 leading-relaxed mb-6 italic">
-                &quot;The Light Community is what I call a &apos;family.&apos; It&apos;s a place where you grow and you never get tired of growing. Before I joined in August 2022, I was comfortable in my own shell, not used to expressing myself fully. But when I came to this family, I met with the Senior Pastor and other members, and I&apos;ve been able to express myself fully. I&apos;ve connected with people I never thought I would meet and realized my full potential in Christ. TLC has given me a new lens of seeing life—a new definition of life.&quot;
+                &quot;The Light Community Church is what I call a &apos;family.&apos; It&apos;s a place where you grow and you never get tired of growing. Before I joined in August 2022, I was comfortable in my own shell, not used to expressing myself fully. But when I came to this family, I met with the Senior Pastor and other members, and I&apos;ve been able to express myself fully. I&apos;ve connected with people I never thought I would meet and realized my full potential in Christ. TLCC has given me a new lens of seeing life—a new definition of life.&quot;
               </p>
-              <div className="border-t-2 border-tlc-gold pt-4">
-                <p className="font-bold text-tlc-navy">Oghale</p>
+              <div className="border-t-2 border-tlcc-gold pt-4">
+                <p className="font-bold text-tlcc-navy">Oghale</p>
                 <p className="text-sm text-gray-600">Member since August 2022</p>
               </div>
             </div>
 
             {/* Testimony Card 2 - Isaac */}
-            <div className="bg-tlc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
-              <div className="text-tlc-gold text-4xl mb-4">&quot;</div>
+            <div className="bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
+              <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
               <p className="text-gray-700 leading-relaxed mb-6 italic">
-                &quot;I joined The Light Community on October 1st, 2022. The first day Papa called me, we spent about two hours talking, and I was free enough to tell someone about my past without feeling judged. I got four prophetic words in one week! I&apos;d never knew God was this intentional about me. I&apos;ve grown so much. A few years from now, I can see myself in a crusade, changing lives just like mine was changed. I haven&apos;t found a better family than The Light Community.&quot;
+                &quot;I joined The Light Community Church on October 1st, 2022. The first day Papa called me, we spent about two hours talking, and I was free enough to tell someone about my past without feeling judged. I got four prophetic words in one week! I&apos;d never knew God was this intentional about me. I&apos;ve grown so much. A few years from now, I can see myself in a crusade, changing lives just like mine was changed. I haven&apos;t found a better family than The Light Community Church.&quot;
               </p>
-              <div className="border-t-2 border-tlc-gold pt-4">
-                <p className="font-bold text-tlc-navy">Isaac</p>
+              <div className="border-t-2 border-tlcc-gold pt-4">
+                <p className="font-bold text-tlcc-navy">Isaac</p>
                 <p className="text-sm text-gray-600">Member since October 2022</p>
               </div>
             </div>
 
             {/* Testimony Card 3 - Susan */}
-            <div className="bg-tlc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
-              <div className="text-tlc-gold text-4xl mb-4">&quot;</div>
+            <div className="bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow">
+              <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
               <p className="text-gray-700 leading-relaxed mb-6 italic">
                 &quot;In February, while praying with Apostle Nelson, he prophesied over my life and confirmed the ministry God has placed in my hands. From then till now, God has been opening doors—leading me to orphanages, providing resources, and showing His faithfulness step by step. I thank God for fulfilling His word and for Apostle&apos;s covering over my life, which has been a key part of this journey. His testimony is a reminder that when God sends you, He also provides and brings the vision to pass.&quot;
               </p>
-              <div className="border-t-2 border-tlc-gold pt-4">
-                <p className="font-bold text-tlc-navy">Susan</p>
+              <div className="border-t-2 border-tlcc-gold pt-4">
+                <p className="font-bold text-tlcc-navy">Susan</p>
                 <p className="text-sm text-gray-600">Member</p>
               </div>
             </div>
 
             {/* Testimony Card 4 - Apostle Nelson (Spans full width on larger screens) */}
-            <div className="bg-tlc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-3">
-              <div className="text-tlc-gold text-4xl mb-4">&quot;</div>
+            <div className="bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-3">
+              <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
               <p className="text-gray-700 leading-relaxed mb-6 italic max-w-4xl mx-auto">
-                &quot;I would have never thought God was going to use us to where He was going to use us. In May 2022, the Lord told me to hold a meeting. I obeyed immediately, and I saw people pray with fervor for six hours. I&apos;ve seen people who knew nothing about the gospel turn into vocal evangelists. People who didn&apos;t know they could hear God have become prophets. People who never knew they could teach have become eloquent teachers. God has turned mere kids into His ministers. That&apos;s the story of The Light Community. That&apos;s the story of my family.&quot;
+                &quot;I would have never thought God was going to use us to where He was going to use us. In May 2022, the Lord told me to hold a meeting. I obeyed immediately, and I saw people pray with fervor for six hours. I&apos;ve seen people who knew nothing about the gospel turn into vocal evangelists. People who didn&apos;t know they could hear God have become prophets. People who never knew they could teach have become eloquent teachers. God has turned mere kids into His ministers. That&apos;s the story of The Light Community Church. That&apos;s the story of my family.&quot;
               </p>
-              <div className="border-t-2 border-tlc-gold pt-4 max-w-4xl mx-auto">
-                <p className="font-bold text-tlc-navy">Apostle Nelson Isaiah</p>
+              <div className="border-t-2 border-tlcc-gold pt-4 max-w-4xl mx-auto">
+                <p className="font-bold text-tlcc-navy">Apostle Nelson Isaiah</p>
                 <p className="text-sm text-gray-600">Lead Pastor & Founder</p>
               </div>
             </div>
 
             {/* Testimony Card 5 - Joy (Full Documentary - Spans wider on desktop) */}
-            <div className="bg-tlc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-3">
-              <div className="text-tlc-gold text-4xl mb-4">&quot;</div>
-              <h4 className="text-lg font-bold text-tlc-navy mb-4">A Short Documentary</h4>
+            <div className="bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-3">
+              <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
+              <h4 className="text-lg font-bold text-tlcc-navy mb-4">A Short Documentary</h4>
               <div className="text-gray-700 leading-relaxed mb-6 italic space-y-3 max-w-4xl mx-auto">
                 <p>&quot;Hello there, my name is Joy.</p>
-                <p>Before I joined The Light Community, I honestly didn&apos;t know who I was. I was a woman carrying so much baggage but never knowing when to stop or let go — only piling more. I didn&apos;t really know God, and because of that, I didn&apos;t know myself or what I truly wanted.</p>
+                <p>Before I joined The Light Community Church, I honestly didn&apos;t know who I was. I was a woman carrying so much baggage but never knowing when to stop or let go — only piling more. I didn&apos;t really know God, and because of that, I didn&apos;t know myself or what I truly wanted.</p>
                 <p>Then came Tarry Zeo in April 2024 — thank God for using Susan to invite me. I had never prayed for one hour, not to mention eight hours straight! My body was weak, but my spirit was alive and awakened.</p>
                 <p>But after some time, I drifted until my ex broke up with me, Apostle Nelson called that day. The first words he said were, &apos;God loves you.&apos; And that was exactly what I needed to hear. I broke down in tears.</p>
                 <p>That call marked the beginning of my transformation. God started using Apostle Nelson to water my heart — he sent me sermons daily, and I sent back my reviews and notes. For the first time, I was consistent and determined to know God.</p>
@@ -357,17 +357,17 @@ export default function AboutPage() {
                 <p>I&apos;m lighter, happier, and stronger. I handle situations better — all glory to God. I used to think I couldn&apos;t be used by Him, but this truth set me free: &apos;God doesn&apos;t call the qualified; He qualifies the unqualified who he has called.&apos;</p>
                 <p>He called me, and I answered. He healed me from the pain I carried, lifted my burdens, and gave me peace — the kind that surpasses all understanding. God loves me deeply and is very intentional with me.</p>
                 <p>Thank you, Apostle Nelson, for not giving up on me — for nurturing, disciplining, and helping me grow. You saw me through the lens of God — who He says I am — and that made all the difference. God bless you, sir.</p>
-                <p>Thank you to The Light Community — filled with powerful, beautiful souls. An army God is raising, and I&apos;m honored to be among you. I can&apos;t just watch when God needs men to go forth. And it&apos;s amazing here.&quot;</p>
+                <p>Thank you to The Light Community Church — filled with powerful, beautiful souls. An army God is raising, and I&apos;m honored to be among you. I can&apos;t just watch when God needs men to go forth. And it&apos;s amazing here.&quot;</p>
               </div>
-              <div className="border-t-2 border-tlc-gold pt-4">
-                <p className="font-bold text-tlc-navy">Joy</p>
+              <div className="border-t-2 border-tlcc-gold pt-4">
+                <p className="font-bold text-tlcc-navy">Joy</p>
                 <p className="text-sm text-gray-600">Member</p>
               </div>
             </div>
           </div>
 
           {/* Share Your Testimony CTA */}
-          <div className="bg-gradient-to-r from-tlc-navy to-tlc-gold text-white rounded-2xl p-8 md:p-12 text-center">
+          <div className="bg-gradient-to-r from-tlcc-navy to-tlcc-gold text-white rounded-2xl p-8 md:p-12 text-center">
             <h3 className="font-anton text-3xl md:text-4xl mb-4 uppercase">
               Share Your Testimony
             </h3>
@@ -376,7 +376,7 @@ export default function AboutPage() {
             </p>
             <Link
               href="/contact#testimony"
-              className="inline-block px-10 py-4 bg-white text-tlc-navy hover:bg-tlc-cream font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="inline-block px-10 py-4 bg-white text-tlcc-navy hover:bg-tlcc-cream font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Share Your Story
             </Link>
@@ -407,11 +407,11 @@ export default function AboutPage() {
 
           <div className="space-y-4">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <p className="text-tlc-gold font-semibold mb-2">Weekly Services</p>
+              <p className="text-tlcc-gold font-semibold mb-2">Weekly Services</p>
               <p className="text-lg">Tuesday & Saturday | 9:00 PM</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <p className="text-tlc-gold font-semibold mb-2">Prayer Meetings</p>
+              <p className="text-tlcc-gold font-semibold mb-2">Prayer Meetings</p>
               <p className="text-lg">Monday-Wednesday | 9:00 PM (Rooted Prayers)</p>
               <p className="text-lg">Friday | 9:00 PM (Watch Hour Prayers)</p>
             </div>
@@ -421,7 +421,7 @@ export default function AboutPage() {
             href="https://youtube.com/@TheLightCommunity"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-8 px-10 py-4 bg-tlc-gold hover:bg-tlc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+            className="inline-block mt-8 px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
           >
             Watch Live on YouTube
           </Link>
@@ -431,7 +431,7 @@ export default function AboutPage() {
       {/* Final CTA Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-6 uppercase">
+          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase">
             Your Story Is Next
           </h2>
           <p className="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed">
@@ -441,19 +441,19 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/map"
-              className="px-10 py-4 bg-tlc-navy hover:bg-tlc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-tlcc-navy hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Plan Your Visit
             </Link>
             <Link
               href="/sermons"
-              className="px-10 py-4 bg-transparent border-2 border-tlc-navy hover:bg-tlc-navy hover:text-white text-tlc-navy font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-transparent border-2 border-tlcc-navy hover:bg-tlcc-navy hover:text-white text-tlcc-navy font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Watch A Sermon
             </Link>
             <Link
               href="/contact"
-              className="px-10 py-4 bg-transparent border-2 border-tlc-navy hover:bg-tlc-navy hover:text-white text-tlc-navy font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-transparent border-2 border-tlcc-navy hover:bg-tlcc-navy hover:text-white text-tlcc-navy font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Contact Us
             </Link>
@@ -467,3 +467,4 @@ export default function AboutPage() {
 // Page-level metadata removed: this page is a client component ('use client')
 // and exporting `metadata` is not allowed. Server-level or layout metadata
 // in `app/layout.tsx` will provide site-wide defaults.
+

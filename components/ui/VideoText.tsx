@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React, { ElementType, ReactNode, useEffect, useState, useRef, useMemo, useCallback } from "react";
 
 // Improved type-safe class name utility
@@ -129,7 +129,7 @@ export function VideoText({
       {/* Gold gradient fallback - shows while loading or on error */}
       {!isVideoLoaded && (
         <div
-          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlc-gold via-yellow-500 to-tlc-gold animate-gradient-x"
+          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlcc-gold via-yellow-500 to-tlcc-gold animate-gradient-x"
           style={{
             maskImage: svgMask,
             WebkitMaskImage: svgMask,
@@ -192,7 +192,7 @@ export function VideoText({
       {/* Error fallback - shows gradient if video fails */}
       {hasError && (
         <div
-          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlc-gold via-yellow-500 to-tlc-gold animate-gradient-x"
+          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlcc-gold via-yellow-500 to-tlcc-gold animate-gradient-x"
           style={{
             maskImage: svgMask,
             WebkitMaskImage: svgMask,
@@ -211,3 +211,4 @@ export function VideoText({
     </Component>
   );
 }
+

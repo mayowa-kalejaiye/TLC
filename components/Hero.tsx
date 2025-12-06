@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -89,9 +89,9 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-tlc-gold/30"
+              className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-tlcc-gold/30"
             >
-              <Circle className="h-2 w-2 fill-tlc-gold text-tlc-gold" />
+              <Circle className="h-2 w-2 fill-tlcc-gold text-tlcc-gold" />
               <span className="text-white font-semibold text-sm tracking-wider uppercase">Our Vision</span>
             </motion.div>
           </div>
@@ -99,13 +99,13 @@ export default function Hero() {
           {/* Main Heading - Bold Statement with opacity on desktop */}
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase text-center">
             <span className="block lg:opacity-90">
-              Souls <span className="text-tlc-orange">saved</span>.
+              Souls <span className="text-tlcc-orange">saved</span>.
             </span>
             <span className="block lg:opacity-85">
-              Men <span className="text-tlc-orange">Trained</span>.
+              Men <span className="text-tlcc-orange">Trained</span>.
             </span>
             <span className="block lg:opacity-90">
-              Nations <span className="text-tlc-orange">taken</span>.
+              Nations <span className="text-tlcc-orange">taken</span>.
             </span>
           </h1>
 
@@ -113,13 +113,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
             <Link
               href="/sermons"
-              className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
+              className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
             >
               <span>Watch Live</span>
             </Link>
             <Link
               href="/quick-links"
-              className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
+              className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
             >
               <span>Quick Links</span>
             </Link>
@@ -129,3 +129,4 @@ export default function Hero() {
     </section>
   )
 }
+

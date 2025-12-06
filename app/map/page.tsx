@@ -1,16 +1,16 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import { MapPin, Clock, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Map - Rooted Monthly Meeting | The Light Community',
+  title: 'Map - Rooted Monthly Meeting | The Light Community Church',
   description: 'Find us at our monthly Rooted gathering - every first Saturday at The Light House, Mangoro, Ikeja, Lagos.',
   openGraph: {
-    title: 'Rooted - The Light Community',
+    title: 'Rooted - The Light Community Church',
     description: 'Find us at our monthly Rooted gathering - every first Saturday at The Light House.',
     images: [
       {
-        url: 'https://thelightcommunity.vercel.app/images/hero-fallback.jpg',
-        alt: 'The Light Community - Rooted Location',
+        url: 'https://tlcc.ng/images/hero-fallback.jpg',
+        alt: 'The Light Community Church - Rooted Location',
         width: 1200,
         height: 630,
       },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://thelightcommunity.vercel.app/images/hero-fallback.jpg'],
+    images: ['https://tlcc.ng/images/hero-fallback.jpg'],
   },
 }
 
@@ -28,7 +28,7 @@ export default function MapPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-anton text-tlc-navy mb-4 uppercase">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-anton text-tlcc-navy mb-4 uppercase">
             Find Us at Rooted
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -39,13 +39,13 @@ export default function MapPage() {
         {/* Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Location Card */}
-          <div className="bg-tlc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <MapPin className="h-8 w-8 text-tlc-navy" />
+                <MapPin className="h-8 w-8 text-tlcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlc-navy mb-2">Location</h3>
+                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Location</h3>
                 <p className="text-gray-700">
                   43b Babaponmile Street<br />
                   After Winners Chapel<br />
@@ -57,13 +57,13 @@ export default function MapPage() {
           </div>
 
           {/* Time Card */}
-          <div className="bg-tlc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <Clock className="h-8 w-8 text-tlc-navy" />
+                <Clock className="h-8 w-8 text-tlcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlc-navy mb-2">Meeting Time</h3>
+                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Meeting Time</h3>
                 <p className="text-gray-700">
                   Every First Saturday<br />
                   10:00 AM Prompt
@@ -76,19 +76,19 @@ export default function MapPage() {
           </div>
 
           {/* Contact Card */}
-          <div className="bg-tlc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <Phone className="h-8 w-8 text-tlc-navy" />
+                <Phone className="h-8 w-8 text-tlcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlc-navy mb-2">Directions</h3>
+                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Directions</h3>
                 <p className="text-gray-700">
                   For directions, please contact:
                 </p>
-                <p className="text-tlc-navy font-semibold mt-2">
+                <p className="text-tlcc-navy font-semibold mt-2">
                   Isaac<br />
-                  <a href="tel:+2349058885465" className="hover:text-tlc-gold transition-colors">
+                  <a href="tel:+2349058885465" className="hover:text-tlcc-gold transition-colors">
                     0905 888 5465
                   </a>
                 </p>
@@ -98,10 +98,10 @@ export default function MapPage() {
         </div>
 
         {/* About Rooted */}
-        <div className="bg-tlc-navy text-white p-8 rounded-lg shadow-lg mb-12">
+        <div className="bg-tlcc-navy text-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-2xl md:text-3xl font-anton mb-4 uppercase">What is Rooted?</h2>
           <p className="text-lg leading-relaxed">
-            Rooted is our monthly physical gathering that brings The Light Community together every first Saturday 
+            Rooted is our monthly physical gathering that brings The Light Community Church together every first Saturday 
             of the month at The Light House. It&apos;s a time of fellowship, worship, and deep connection as we 
             grow together in faith and community. Come experience the warmth of gathering in person!
           </p>
@@ -132,7 +132,7 @@ export default function MapPage() {
             href="https://www.google.com/maps/search/?api=1&query=43b+Babaponmile+Street,+Mangoro,+Ikeja,+Lagos"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-tlc-navy text-white px-8 py-3 rounded-lg hover:bg-tlc-gold transition-colors duration-200 font-semibold"
+            className="inline-block bg-tlcc-navy text-white px-8 py-3 rounded-lg hover:bg-tlcc-gold transition-colors duration-200 font-semibold"
           >
             Open in Google Maps
           </a>
@@ -141,3 +141,4 @@ export default function MapPage() {
     </div>
   )
 }
+

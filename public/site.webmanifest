@@ -1,6 +1,6 @@
-{
-  "name": "The Light Community",
-  "short_name": "TLC",
+﻿{
+  "name": "The Light Community Church",
+  "short_name": "TLCC",
   "description": "Souls Saved. Men Trained. Nations Taken. Join us for worship, prayer, and discipleship.",
   "start_url": "/",
   "scope": "/",
@@ -10,13 +10,13 @@
   "theme_color": "#F5B82E",
   "icons": [
     {
-      "src": "/images/tlc-logo.png",
+      "src": "/images/tlcc-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/images/tlc-logo.png",
+      "src": "/images/tlcc-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -30,9 +30,10 @@
       "url": "/events#watch-hour"
     },
     {
-      "name": "Give to TLC",
+      "name": "Give to TLCC",
       "description": "Partner with the mission",
       "url": "/give"
     }
   ]
 }
+

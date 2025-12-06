@@ -1,4 +1,4 @@
- 'use client'
+﻿ 'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -33,14 +33,14 @@ export default function GivePage() {
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlc-gold/30">
-            <Heart className="h-4 w-4 text-tlc-gold fill-tlc-gold" />
+          <div className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
+            <Heart className="h-4 w-4 text-tlcc-gold fill-tlcc-gold" />
             <span className="text-white font-semibold text-sm tracking-wider uppercase">Give</span>
           </div>
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight uppercase">
             Your <span className="text-white">Generosity</span><br />
-            Our <span className="text-tlc-orange">Mission</span>
+            Our <span className="text-tlcc-orange">Mission</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8">
@@ -50,13 +50,13 @@ export default function GivePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="#give-now"
-              className="w-full sm:w-auto px-10 py-4 bg-white text-tlc-green font-bold rounded-full transition-all duration-300 hover:bg-tlc-gold hover:text-white uppercase tracking-wide text-sm"
+              className="w-full sm:w-auto px-10 py-4 bg-white text-tlcc-green font-bold rounded-full transition-all duration-300 hover:bg-tlcc-gold hover:text-white uppercase tracking-wide text-sm"
             >
               Give Now
             </a>
             <a
               href="#other-ways"
-              className="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-green text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-green text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Other Ways to Give
             </a>
@@ -70,11 +70,11 @@ export default function GivePage() {
           <div className="max-w-4xl mx-auto">
             {/* Section Header */}
             <div className="text-center mb-12">
-              <div className="inline-flex items-center space-x-2 bg-tlc-green/10 px-6 py-2 rounded-full mb-4">
-                <CreditCard className="h-4 w-4 text-tlc-green" />
-                <span className="text-tlc-green font-semibold text-sm tracking-wider uppercase">Give to TLC</span>
+              <div className="inline-flex items-center space-x-2 bg-tlcc-green/10 px-6 py-2 rounded-full mb-4">
+                <CreditCard className="h-4 w-4 text-tlcc-green" />
+                <span className="text-tlcc-green font-semibold text-sm tracking-wider uppercase">Give to TLCC</span>
               </div>
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlc-navy mb-4 uppercase">
+              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlcc-navy mb-4 uppercase">
                 Ways to Give
               </h2>
               <p className="text-gray-600 text-lg">
@@ -88,7 +88,7 @@ export default function GivePage() {
                 onClick={() => setActiveTab('naira')}
                 className={`px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 ${
                   activeTab === 'naira'
-                    ? 'bg-tlc-orange text-white'
+                    ? 'bg-tlcc-orange text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -98,7 +98,7 @@ export default function GivePage() {
                 onClick={() => setActiveTab('domiciliary')}
                 className={`px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 ${
                   activeTab === 'domiciliary'
-                    ? 'bg-tlc-orange text-white'
+                    ? 'bg-tlcc-orange text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -110,14 +110,14 @@ export default function GivePage() {
             {activeTab === 'naira' && (
               <div className="space-y-6">
                 {/* Moniepoint Bank */}
-                <div className="bg-gradient-to-br from-tlc-cream to-white border-2 border-tlc-gold/20 rounded-2xl p-8 shadow-lg">
+                <div className="bg-gradient-to-br from-tlcc-cream to-white border-2 border-tlcc-gold/20 rounded-2xl p-8 shadow-lg">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-tlc-gold rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-tlcc-gold rounded-full flex items-center justify-center">
                         <Building2 className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-xl text-tlc-navy">Moniepoint MFB</h3>
+                        <h3 className="font-bold text-xl text-tlcc-navy">Moniepoint MFB</h3>
                         <p className="text-gray-600 text-sm">Nigeria</p>
                       </div>
                     </div>
@@ -128,11 +128,11 @@ export default function GivePage() {
 
                   <div className="bg-white rounded-xl p-8 border border-gray-200">
                     <p className="text-sm text-gray-500 font-semibold mb-2 uppercase tracking-wider">Account Name</p>
-                    <p className="text-lg font-medium text-tlc-navy mb-4">Nelson Concept Studios - The Light Community Projects</p>
+                    <p className="text-lg font-medium text-tlcc-navy mb-4">Nelson Concept Studios - The Light Community Church Projects</p>
                     
                     <p className="text-sm text-gray-500 font-semibold mb-2 uppercase tracking-wider">Account Number</p>
                     <div className="flex items-center justify-between">
-                      <p className="text-3xl font-bold text-tlc-navy">4583629271</p>
+                      <p className="text-3xl font-bold text-tlcc-navy">4583629271</p>
                       <button
                         onClick={() => copyToClipboard('4583629271', 'moniepoint')}
                         className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -156,7 +156,7 @@ export default function GivePage() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Building2 className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="font-bold text-2xl text-tlc-navy mb-4">Domiciliary Account Details</h3>
+                <h3 className="font-bold text-2xl text-tlcc-navy mb-4">Domiciliary Account Details</h3>
                 <p className="text-gray-600 mb-6">
                   For international donations and foreign currency transfers
                 </p>
@@ -166,7 +166,7 @@ export default function GivePage() {
                 <div className="mt-6">
                   <Link
                     href="/contact#partnership"
-                    className="inline-block px-8 py-3 bg-tlc-green text-white font-bold rounded-full hover:bg-tlc-green-dark transition-all duration-300"
+                    className="inline-block px-8 py-3 bg-tlcc-green text-white font-bold rounded-full hover:bg-tlcc-green-dark transition-all duration-300"
                   >
                     Contact Us
                   </Link>
@@ -182,7 +182,7 @@ export default function GivePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlc-navy mb-4 uppercase">
+              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlcc-navy mb-4 uppercase">
                 Other Ways to Give
               </h2>
               <p className="text-gray-600 text-lg">
@@ -191,27 +191,27 @@ export default function GivePage() {
             </div>
 
             {/* Mobile Transfer */}
-            <div className="bg-gradient-to-br from-tlc-gold/10 to-tlc-orange/10 rounded-2xl p-8 border-2 border-tlc-gold/20">
+            <div className="bg-gradient-to-br from-tlcc-gold/10 to-tlcc-orange/10 rounded-2xl p-8 border-2 border-tlcc-gold/20">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-tlc-gold rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-tlcc-gold rounded-xl flex items-center justify-center flex-shrink-0">
                   <Smartphone className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl text-tlc-navy mb-2">Give via Mobile Transfer</h3>
+                  <h3 className="font-bold text-xl text-tlcc-navy mb-2">Give via Mobile Transfer</h3>
                   <p className="text-gray-700 mb-4">
                     Use your mobile banking app to transfer to the account number above. Quick, easy, and secure.
                   </p>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlc-gold" />
+                      <Check className="h-5 w-5 text-tlcc-gold" />
                       <span>Instant transfer from your mobile app</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlc-gold" />
+                      <Check className="h-5 w-5 text-tlcc-gold" />
                       <span>No additional fees</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlc-gold" />
+                      <Check className="h-5 w-5 text-tlcc-gold" />
                       <span>Available 24/7</span>
                     </li>
                   </ul>
@@ -226,7 +226,7 @@ export default function GivePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-tlc-navy mb-6">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-tlcc-navy mb-6">
               Why Your Giving Matters
             </h2>
             <p className="text-lg text-gray-600 mb-12">
@@ -235,37 +235,37 @@ export default function GivePage() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-tlc-green" />
+                <div className="w-16 h-16 bg-tlcc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="h-8 w-8 text-tlcc-green" />
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">Souls Saved</h3>
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Souls Saved</h3>
                 <p className="text-gray-600">
                   Supporting evangelism and outreach to unreached communities
                 </p>
               </div>
 
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="h-8 w-8 text-tlc-orange" />
+                <div className="w-16 h-16 bg-tlcc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building2 className="h-8 w-8 text-tlcc-orange" />
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">Men Trained</h3>
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Men Trained</h3>
                 <p className="text-gray-600">
                   Equipping leaders and ministers for kingdom work
                 </p>
               </div>
 
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-tlcc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl">🌍</span>
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">Nations Taken</h3>
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Nations Taken</h3>
                 <p className="text-gray-600">
                   Planting churches and transforming cities globally
                 </p>
               </div>
             </div>
 
-            <div className="mt-12 p-8 bg-gradient-to-br from-tlc-green to-tlc-green-dark rounded-2xl text-white">
+            <div className="mt-12 p-8 bg-gradient-to-br from-tlcc-green to-tlcc-green-dark rounded-2xl text-white">
               <p className="text-lg md:text-xl mb-4">
                 &quot;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&quot;
               </p>
@@ -280,3 +280,4 @@ export default function GivePage() {
 
 // Page-level metadata removed: this is a client component and cannot export `metadata`.
 // Use the shared `app/layout.tsx` metadata for site-wide values.
+

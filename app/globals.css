@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -13,7 +13,7 @@
   }
   
   body {
-    @apply bg-white text-tlc-navy antialiased;
+    @apply bg-white text-tlcc-navy antialiased;
   }
 }
 
@@ -57,3 +57,4 @@
     }
   }
 }
+

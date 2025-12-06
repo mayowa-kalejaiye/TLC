@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
@@ -216,7 +216,7 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
 
             {/* Title */}
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-semibold text-tlc-navy truncate">
+              <h4 className="text-sm font-semibold text-tlcc-navy truncate">
                 {title}
               </h4>
               <p className="text-xs text-gray-500">{formatPublishedDate(date)}</p>
@@ -229,12 +229,12 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
                 className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
                 title="Skip back 15s"
               >
-                <SkipBack className="w-4 h-4 text-tlc-navy" />
+                <SkipBack className="w-4 h-4 text-tlcc-navy" />
               </button>
 
               <button
                 onClick={togglePlay}
-                className="w-10 h-10 rounded-full bg-tlc-navy hover:bg-tlc-navy-light flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-tlcc-navy hover:bg-tlcc-navy-light flex items-center justify-center transition-colors"
               >
                 {isPlaying ? (
                   <Pause className="w-5 h-5 text-white" fill="white" />
@@ -248,7 +248,7 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
                 className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
                 title="Skip forward 15s"
               >
-                <SkipForward className="w-4 h-4 text-tlc-navy" />
+                <SkipForward className="w-4 h-4 text-tlcc-navy" />
               </button>
 
               <button
@@ -271,7 +271,7 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
               className="flex-1 h-1.5 bg-gray-200 rounded-full cursor-pointer overflow-hidden"
             >
               <div
-                className="h-full bg-tlc-gold transition-all duration-100"
+                className="h-full bg-tlcc-gold transition-all duration-100"
                 style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
               />
             </div>
@@ -287,3 +287,4 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
     </AnimatePresence>
   )
 }
+

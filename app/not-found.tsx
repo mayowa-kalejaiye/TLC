@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { VideoText } from '@/components/ui/VideoText'
@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <>
       {/* 404 Section */}
-      <div className="min-h-screen bg-gradient-to-br from-black via-tlc-navy to-black flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-black via-tlcc-navy to-black flex items-center justify-center px-4">
         <div className="max-w-4xl w-full text-center space-y-8">
           {/* 404 Video Text */}
           <div className="relative w-full h-[300px] md:h-[400px] z-10">
@@ -40,7 +40,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
             <Link
               href="/"
-              className="group flex items-center gap-2 px-8 py-4 bg-tlc-gold text-tlc-navy font-semibold rounded-lg hover:bg-tlc-gold-light transition-all duration-300 transform hover:scale-105"
+              className="group flex items-center gap-2 px-8 py-4 bg-tlcc-gold text-tlcc-navy font-semibold rounded-lg hover:bg-tlcc-gold-light transition-all duration-300 transform hover:scale-105"
             >
               <Home className="w-5 h-5" />
               Go Home
@@ -59,23 +59,23 @@ export default function NotFound() {
           <div className="pt-12 border-t border-white/10">
             <p className="text-sm text-gray-400 mb-4">Quick Links</p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-              <Link href="/about" className="text-gray-300 hover:text-tlc-gold transition-colors">
+              <Link href="/about" className="text-gray-300 hover:text-tlcc-gold transition-colors">
                 About Us
               </Link>
               <span className="text-gray-600">•</span>
-              <Link href="/sermons" className="text-gray-300 hover:text-tlc-gold transition-colors">
+              <Link href="/sermons" className="text-gray-300 hover:text-tlcc-gold transition-colors">
                 Sermons
               </Link>
               <span className="text-gray-600">•</span>
-              <Link href="/ministries" className="text-gray-300 hover:text-tlc-gold transition-colors">
+              <Link href="/ministries" className="text-gray-300 hover:text-tlcc-gold transition-colors">
                 Ministries
               </Link>
               <span className="text-gray-600">•</span>
-              <Link href="/give" className="text-gray-300 hover:text-tlc-gold transition-colors">
+              <Link href="/give" className="text-gray-300 hover:text-tlcc-gold transition-colors">
                 Give
               </Link>
               <span className="text-gray-600">•</span>
-              <Link href="/contact" className="text-gray-300 hover:text-tlc-gold transition-colors">
+              <Link href="/contact" className="text-gray-300 hover:text-tlcc-gold transition-colors">
                 Contact
               </Link>
             </div>
@@ -83,8 +83,8 @@ export default function NotFound() {
         </div>
       </div>
 
-      {/* Give to The Light Community Section */}
-      <section className="relative py-20 bg-gradient-to-br from-tlc-navy via-tlc-navy to-black overflow-hidden">
+      {/* Give to The Light Community Church Section */}
+      <section className="relative py-20 bg-gradient-to-br from-tlcc-navy via-tlcc-navy to-black overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -99,7 +99,7 @@ export default function NotFound() {
               {/* Left Content */}
               <div className="p-8 md:p-12 lg:p-16">
                 <h2 className="font-anton text-4xl md:text-5xl lg:text-6xl text-black mb-6 leading-none uppercase">
-                  Give to The Light Community
+                  Give to The Light Community Church
                 </h2>
                 <p className="text-lg text-gray-700 mb-8">
                   Your generosity keeps blessing lives, thank you for giving.
@@ -108,13 +108,13 @@ export default function NotFound() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/give"
-                    className="px-8 py-4 bg-white border-2 border-tlc-navy text-tlc-navy font-bold rounded-full hover:bg-tlc-navy hover:text-white transition-all duration-300 text-center uppercase tracking-wide"
+                    className="px-8 py-4 bg-white border-2 border-tlcc-navy text-tlcc-navy font-bold rounded-full hover:bg-tlcc-navy hover:text-white transition-all duration-300 text-center uppercase tracking-wide"
                   >
                     Give Now
                   </Link>
                   <Link
                     href="/give#building-project"
-                    className="px-8 py-4 bg-tlc-gold text-white font-bold rounded-full hover:bg-tlc-gold-dark transition-all duration-300 text-center uppercase tracking-wide shadow-lg"
+                    className="px-8 py-4 bg-tlcc-gold text-white font-bold rounded-full hover:bg-tlcc-gold-dark transition-all duration-300 text-center uppercase tracking-wide shadow-lg"
                   >
                     Building Project
                   </Link>
@@ -160,9 +160,9 @@ export default function NotFound() {
             </div>
 
             {/* Bottom Message */}
-            <div className="bg-tlc-gold text-center py-6 px-6">
-              <p className="text-sm text-tlc-navy font-medium">
-                We promise not to spam you, but send you edifying and amazing content regularly from The Light Community International.
+            <div className="bg-tlcc-gold text-center py-6 px-6">
+              <p className="text-sm text-tlcc-navy font-medium">
+                We promise not to spam you, but send you edifying and amazing content regularly from The Light Community Church International.
               </p>
             </div>
           </div>
@@ -171,3 +171,4 @@ export default function NotFound() {
     </>
   )
 }
+

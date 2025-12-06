@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import Image from 'next/image'
 import { Youtube, Instagram, MessageCircle } from 'lucide-react'
 
@@ -17,11 +17,11 @@ const footerLinks = {
     { name: 'Become a Member', href: '/contact#become-member' },
   ],
   ministries: [
-    { name: 'TLC Online ministry', href: '/ministries#tlc-online' },
-    { name: 'TLC Firestorm', href: '/ministries#firestorm' },
-    { name: 'TLC Follow up', href: '/ministries#follow-up' },
-    { name: 'TLC Prayer team', href: '/ministries#prayer-team' },
-    { name: 'TLC Media & visibility', href: '/ministries#media-visibility' },
+    { name: 'TLCC Online ministry', href: '/ministries#tlcc-online' },
+    { name: 'TLCC Firestorm', href: '/ministries#firestorm' },
+    { name: 'TLCC Follow up', href: '/ministries#follow-up' },
+    { name: 'TLCC Prayer team', href: '/ministries#prayer-team' },
+    { name: 'TLCC Media & visibility', href: '/ministries#media-visibility' },
     { name: 'Growth initiatives', href: '/ministries#growth-initiatives' },
   ],
   resources: [
@@ -47,15 +47,15 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-20 bg-tlc-green text-white">
+    <footer className="relative z-20 bg-tlcc-green text-white">
       <div className="container-custom py-12 md:py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <Image
-              src="/images/tlc-logo.png"
-              alt="The Light Community"
+              src="/images/tlcc-logo.png"
+              alt="The Light Community Church"
               width={160}
               height={60}
               className="h-12 w-auto mb-4 brightness-0 invert"
@@ -70,7 +70,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-tlc-green-light hover:bg-tlc-gold rounded-lg transition-colors duration-200"
+                  className="p-2 bg-tlcc-green-light hover:bg-tlcc-gold rounded-lg transition-colors duration-200"
                   aria-label={social.name}
                 >
                   <social.icon className="h-5 w-5" />
@@ -81,13 +81,13 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlc-gold">CONNECT</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">CONNECT</h3>
             <ul className="space-y-2">
               {footerLinks.connect.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.name}
                   </Link>
@@ -98,13 +98,13 @@ export default function Footer() {
 
           {/* Ministries */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlc-gold">MINISTRIES</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">MINISTRIES</h3>
             <ul className="space-y-2">
               {footerLinks.ministries.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.name}
                   </Link>
@@ -115,13 +115,13 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlc-gold">RESOURCES</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">RESOURCES</h3>
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.name}
                   </Link>
@@ -132,13 +132,13 @@ export default function Footer() {
 
           {/* Media */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlc-gold">MEDIA</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">MEDIA</h3>
             <ul className="space-y-2">
               {footerLinks.media.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                     {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
                   >
                     {link.name}
@@ -150,19 +150,19 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="border-t border-tlc-green-light pt-8 mb-8">
+        <div className="border-t border-tlcc-green-light pt-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold mb-2 text-tlc-gold">Contact Us</h4>
+              <h4 className="font-semibold mb-2 text-tlcc-gold">Contact Us</h4>
               <p className="text-gray-300 text-sm">
-                Joy: <a href="tel:09035004764" className="hover:text-tlc-gold">09035004764</a>
+                Joy: <a href="tel:09035004764" className="hover:text-tlcc-gold">09035004764</a>
               </p>
               <p className="text-gray-300 text-sm">
-                Naomi: <a href="tel:08087207044" className="hover:text-tlc-gold">08087207044</a>
+                Naomi: <a href="tel:08087207044" className="hover:text-tlcc-gold">08087207044</a>
               </p>
             </div>
             <div>
-                <h4 className="font-semibold mb-2 text-tlc-gold">Service Times</h4>
+                <h4 className="font-semibold mb-2 text-tlcc-gold">Service Times</h4>
                 <p className="text-gray-300 text-sm">Mon-Wed: Rooted Prayers (9:00 PM)</p>
                 <p className="text-gray-300 text-sm">Tues & Sat: Sermons (9:00 PM)</p>
                 <p className="text-gray-300 text-sm">Watch Hour Prayers: 9:00 PM (fortnightly — every two weeks)</p>
@@ -171,12 +171,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-tlc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className="border-t border-tlcc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} The Light Community. All Rights Reserved.
+            © {new Date().getFullYear()} The Light Community Church. All Rights Reserved.
           </p>
         </div>
       </div>
     </footer>
   )
 }
+

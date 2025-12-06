@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -24,7 +24,7 @@ export default function Welcome() {
           <div className="flex items-center gap-1 mb-3">
             <span>🏠</span>
             <p className="text-sm text-gray-500 uppercase tracking-wider">
-              Welcome to TLC
+              Welcome to TLCC
             </p>
           </div>
 
@@ -119,3 +119,4 @@ export default function Welcome() {
     </section>
   )
 }
+

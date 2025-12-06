@@ -1,7 +1,7 @@
-{
-  "name": "tlc-website",
+﻿{
+  "name": "tlcc-website",
   "version": "1.0.0",
-  "description": "The Light Community - Official Church Website",
+  "description": "The Light Community Church - Official Church Website",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -39,3 +39,4 @@
     "node": ">=18.0.0"
   }
 }
+

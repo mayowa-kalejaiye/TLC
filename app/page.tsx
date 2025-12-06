@@ -1,4 +1,4 @@
-import Hero from '@/components/Hero'
+﻿import Hero from '@/components/Hero'
 import Welcome from '@/components/Welcome'
 import GlobalFamily from '@/components/GlobalFamily'
 import FeaturedSermon from '@/components/FeaturedSermon'
@@ -9,15 +9,15 @@ import Newsletter from '@/components/Newsletter'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Home | The Light Community',
-  description: 'The Light Community — Souls Saved. Men Trained. Nations Taken. Join us for powerful teaching, worship, and community.',
+  title: 'Home | The Light Community Church',
+  description: 'The Light Community Church — Souls Saved. Men Trained. Nations Taken. Join us for powerful teaching, worship, and community.',
   openGraph: {
-    title: 'The Light Community',
-    description: 'The Light Community — Souls Saved. Men Trained. Nations Taken.',
+    title: 'The Light Community Church',
+    description: 'The Light Community Church — Souls Saved. Men Trained. Nations Taken.',
     images: [
       {
-        url: 'https://thelightcommunity.vercel.app/images/tlc-logo.png',
-        alt: 'The Light Community Logo',
+        url: 'https://tlcc.ng/images/tlcc-logo.png',
+        alt: 'The Light Community Church Logo',
         width: 800,
         height: 600,
       },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://thelightcommunity.vercel.app/images/tlc-logo.png'],
+    images: ['https://tlcc.ng/images/tlcc-logo.png'],
   },
 }
 
@@ -43,3 +43,4 @@ export default function Home() {
     </>
   )
 }
+

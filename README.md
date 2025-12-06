@@ -1,4 +1,4 @@
-# The Light Community - Official Website
+﻿# The Light Community Church - Official Website
 
 **Souls saved. Men Trained. Nations taken.**
 
@@ -50,7 +50,7 @@ npm start
 ## 📂 Project Structure
 
 ```
-tlc-website/
+tlcc-website/
 ├── app/
 │   ├── (routes)/          # Page routes
 │   ├── globals.css        # Global styles
@@ -78,4 +78,5 @@ vercel
 
 ## 📄 License
 
-© 2025 The Light Community. All Rights Reserved.
+© 2025 The Light Community Church. All Rights Reserved.
+

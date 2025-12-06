@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+﻿import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        tlc: {
+        tlcc: {
           gold: '#F5B82E',
           'gold-dark': '#D9A325',
           'gold-light': '#FFCA5A',
@@ -57,3 +57,4 @@ const config: Config = {
   plugins: [],
 }
 export default config
+

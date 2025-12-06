@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
@@ -79,8 +79,8 @@ export default function Navbar() {
           {/* Logo - Far Left */}
           <Link href="/" className="flex items-center relative z-10">
             <Image
-              src="/images/tlc-logo.png"
-              alt="The Light Community Logo"
+              src="/images/tlcc-logo.png"
+              alt="The Light Community Church Logo"
               width={420}
               height={150}
               className="h-20 w-auto md:h-24 lg:h-28"
@@ -94,7 +94,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-3 py-1 text-tlc-navy hover:text-tlc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
+                className="px-3 py-1 text-tlcc-navy hover:text-tlcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
               >
                 {item.name}
               </Link>
@@ -104,10 +104,10 @@ export default function Navbar() {
           {/* Hamburger menu button - Far Right */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1 rounded-lg hover:bg-tlc-cream transition-colors ml-auto"
+            className="p-1 rounded-lg hover:bg-tlcc-cream transition-colors ml-auto"
             aria-label="Toggle menu"
           >
-            <Menu className="h-6 w-6 text-tlc-navy" />
+            <Menu className="h-6 w-6 text-tlcc-navy" />
           </button>
         </div>
 
@@ -123,8 +123,8 @@ export default function Navbar() {
               {/* Logo - Far Left */}
               <Link href="/" className="flex items-center relative z-10">
                 <Image
-                  src="/images/tlc-logo.png"
-                  alt="The Light Community Logo"
+                  src="/images/tlcc-logo.png"
+                  alt="The Light Community Church Logo"
                   width={420}
                   height={150}
                   className="h-20 w-auto md:h-24 lg:h-28 brightness-0 invert"
@@ -152,7 +152,7 @@ export default function Navbar() {
                     href="/"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Home
@@ -161,7 +161,7 @@ export default function Navbar() {
                     href="/about"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/about' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/about' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     About
@@ -170,7 +170,7 @@ export default function Navbar() {
                     href="/quick-links"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/quick-links' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/quick-links' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Quick-Links
@@ -179,7 +179,7 @@ export default function Navbar() {
                     href="/ministries"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/ministries' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/ministries' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Ministries
@@ -188,7 +188,7 @@ export default function Navbar() {
                     href="/sermons"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/sermons' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/sermons' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Sermons
@@ -197,7 +197,7 @@ export default function Navbar() {
                     href="/map"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/map' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/map' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Map
@@ -206,7 +206,7 @@ export default function Navbar() {
                     href="/give"
                     onClick={() => setIsOpen(false)}
                     className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/give' ? 'text-tlc-gold' : 'text-white hover:text-tlc-gold'
+                      pathname === '/give' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                     } transition-colors duration-200 leading-none uppercase`}
                   >
                     Give
@@ -223,44 +223,44 @@ export default function Navbar() {
                     <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">Ministries</h3>
                   <nav className="flex flex-col space-y-3">
                     <Link
-                      href="/ministries#tlc-online"
+                      href="/ministries#tlcc-online"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      TLC Online ministry
+                      TLCC Online ministry
                     </Link>
                     <Link
                       href="/ministries#firestorm"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      TLC Firestorm
+                      TLCC Firestorm
                     </Link>
                     <Link
                       href="/ministries#follow-up"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      TLC Follow up
+                      TLCC Follow up
                     </Link>
                     <Link
                       href="/ministries#prayer-team"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      TLC Prayer team
+                      TLCC Prayer team
                     </Link>
                     <Link
                       href="/ministries#media-visibility"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      TLC Media & visibility
+                      TLCC Media & visibility
                     </Link>
                     <Link
                       href="/ministries#growth-initiatives"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Growth initiatives
                     </Link>
@@ -274,28 +274,28 @@ export default function Navbar() {
                     <Link
                       href="/sermons#featured"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Daily Devotionals
                     </Link>
                     <Link
                       href="/about#testimonies"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Testimonies
                     </Link>
                     <Link
                       href="/events"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Events & Programs
                     </Link>
                     <Link
                       href="/sermons"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Sermon Archive
                     </Link>
@@ -309,21 +309,21 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Contact Us
                     </Link>
                     <Link
                       href="/map"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
-                      Visit TLC
+                      Visit TLCC
                     </Link>
                     <Link
                       href="/contact#become-member"
                       onClick={() => setIsOpen(false)}
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Become a member
                     </Link>
@@ -339,7 +339,7 @@ export default function Navbar() {
                       href="https://youtube.com/@TheLightCommunity"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-white hover:text-tlc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
                     >
                       Watch online
                     </a>
@@ -351,7 +351,7 @@ export default function Navbar() {
                   <div className="flex items-center justify-between">
                     {/* Copyright - Left */}
                     <p className="text-sm text-gray-600">
-                      © Copyright {new Date().getFullYear()} The Light Community. All Rights Reserved.
+                      © Copyright {new Date().getFullYear()} The Light Community Church. All Rights Reserved.
                     </p>
                     
                     {/* Social Icons - Right */}
@@ -412,3 +412,4 @@ export default function Navbar() {
     </>
   )
 }
+

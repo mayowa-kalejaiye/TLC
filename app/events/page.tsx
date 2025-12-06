@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -23,7 +23,7 @@ export default function EventsPage() {
       type: 'Prayer Watch',
       image: '/images/watch_hour.jpg',
       icon: Clock,
-      color: 'from-tlc-navy to-green-700',
+      color: 'from-tlcc-navy to-green-700',
       // whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
       featured: true,
     },
@@ -36,9 +36,9 @@ export default function EventsPage() {
       time: '10:00 AM',
       location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
       type: 'Monthly Gathering',
-      image: '/images/rooted2.JPG',
+      image: '/images/rooted2.JPGs to tlcc',
       icon: Users,
-      color: 'from-tlc-green to-tlc-navy',
+      color: 'from-tlcc-green to-tlcc-navy',
       featured: true
     },
     {
@@ -66,7 +66,7 @@ export default function EventsPage() {
       type: 'Prayer Meeting',
       image: '/images/tarry.jpg',
       icon: Heart,
-      color: 'from-tlc-gold to-tlc-orange',
+      color: 'from-tlcc-gold to-tlcc-orange',
       featured: true
     }
   ]
@@ -131,15 +131,15 @@ export default function EventsPage() {
         </div>
 
         <div ref={heroRef} className="relative z-10 container mx-auto px-4 text-center">
-          <div data-hero-animate className="inline-flex items-center space-x-2 bg-tlc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlc-gold/30">
-            <Calendar className="h-4 w-4 text-tlc-gold" />
+          <div data-hero-animate className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
+            <Calendar className="h-4 w-4 text-tlcc-gold" />
             <span className="text-white font-semibold text-sm tracking-wider uppercase">Events</span>
           </div>
 
           <h1 data-hero-animate className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight uppercase">
             Experience
             <br />
-            <span className="text-tlc-orange">God Together</span>
+            <span className="text-tlcc-orange">God Together</span>
           </h1>
 
           <p data-hero-animate className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
@@ -149,13 +149,13 @@ export default function EventsPage() {
           <div data-hero-animate className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="#upcoming-events"
-              className="px-10 py-4 bg-tlc-gold hover:bg-tlc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               View Events
             </Link>
             <Link
               href="/contact#event-inquiry"
-              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Get Information
             </Link>
@@ -167,11 +167,11 @@ export default function EventsPage() {
       <section id="upcoming-events" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-4 uppercase">
+            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-4 uppercase">
               Upcoming Events
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mark your calendars! Here&apos;s what&apos;s happening at The Light Community
+              Mark your calendars! Here&apos;s what&apos;s happening at The Light Community Church
             </p>
           </div>
 
@@ -212,10 +212,10 @@ export default function EventsPage() {
                         <IconComponent className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-anton text-3xl text-tlc-navy uppercase">
+                        <h3 className="font-anton text-3xl text-tlcc-navy uppercase">
                           {event.title}
                         </h3>
-                        <p className="text-tlc-orange font-semibold">
+                        <p className="text-tlcc-orange font-semibold">
                           {event.tagline}
                         </p>
                       </div>
@@ -228,15 +228,15 @@ export default function EventsPage() {
                     {/* Event Info */}
                     <div className="space-y-3 mb-6">
                       <div className="flex items-center gap-3 text-gray-600">
-                        <Calendar className="h-5 w-5 text-tlc-gold" />
+                        <Calendar className="h-5 w-5 text-tlcc-gold" />
                         <span className="font-semibold">{event.date}</span>
                       </div>
                       <div className="flex items-center gap-3 text-gray-600">
-                        <Clock className="h-5 w-5 text-tlc-gold" />
+                        <Clock className="h-5 w-5 text-tlcc-gold" />
                         <span>{event.time}</span>
                       </div>
                       <div className="flex items-center gap-3 text-gray-600">
-                        <MapPin className="h-5 w-5 text-tlc-gold" />
+                        <MapPin className="h-5 w-5 text-tlcc-gold" />
                         <span>{event.location}</span>
                       </div>
                     </div>
@@ -255,7 +255,7 @@ export default function EventsPage() {
                           href={event.whatsappLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-tlc-navy font-bold rounded-full border-2 border-tlc-navy hover:bg-tlc-navy hover:text-white transition-all duration-300 shadow-lg"
+                          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-tlcc-navy font-bold rounded-full border-2 border-tlcc-navy hover:bg-tlcc-navy hover:text-white transition-all duration-300 shadow-lg"
                         >
                           <span>Join WhatsApp Group</span>
                           <ArrowRight className="h-5 w-5" />
@@ -274,7 +274,7 @@ export default function EventsPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlc-navy mb-6 uppercase">
+            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase">
               Why Attend Our Events?
             </h2>
             <p className="text-lg text-gray-600 mb-12">
@@ -283,10 +283,10 @@ export default function EventsPage() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Flame className="h-8 w-8 text-tlc-gold" />
+                <div className="w-16 h-16 bg-tlcc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Flame className="h-8 w-8 text-tlcc-gold" />
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
                   Encounter God
                 </h3>
                 <p className="text-gray-600">
@@ -295,10 +295,10 @@ export default function EventsPage() {
               </div>
 
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-tlc-orange" />
+                <div className="w-16 h-16 bg-tlcc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-tlcc-orange" />
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
                   Build Community
                 </h3>
                 <p className="text-gray-600">
@@ -307,10 +307,10 @@ export default function EventsPage() {
               </div>
 
               <div className="p-6">
-                <div className="w-16 h-16 bg-tlc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-tlc-green" />
+                <div className="w-16 h-16 bg-tlcc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="h-8 w-8 text-tlcc-green" />
                 </div>
-                <h3 className="font-bold text-xl text-tlc-navy mb-3">
+                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
                   Grow Deeper
                 </h3>
                 <p className="text-gray-600">
@@ -323,7 +323,7 @@ export default function EventsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-tlc-navy to-tlc-green text-white">
+      <section className="py-20 bg-gradient-to-br from-tlcc-navy to-tlcc-green text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-anton text-4xl md:text-5xl mb-6 uppercase">
             Don&apos;t Miss Out!
@@ -335,13 +335,13 @@ export default function EventsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/#stay-connected"
-              className="px-10 py-4 bg-tlc-gold hover:bg-tlc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Subscribe for Updates
             </Link>
             <Link
               href="/contact#event-inquiry"
-              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
             >
               Contact Us
             </Link>
@@ -356,3 +356,4 @@ export default function EventsPage() {
 // Exporting `metadata` from a client component is invalid in Next.js App Router.
 // Keep site-wide metadata in `app/layout.tsx` or convert this page to a server
 // component if page-specific metadata is required.
+
