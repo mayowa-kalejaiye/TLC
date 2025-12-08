@@ -103,7 +103,7 @@ export default function CountdownTimer({ targetDate, className, variant = 'dark'
       className={`rounded-3xl px-6 py-4 backdrop-blur flex flex-col gap-3 border ${styles.container} ${className ?? ''}`}
     >
       <div className={`text-xs uppercase tracking-[0.3em] ${styles.label}`}>Countdown to Rooted</div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-3 sm:gap-4">
         {segments.map(({ label, value }) => (
           <div key={label} className="text-center">
             <div className={`text-3xl md:text-4xl font-bold font-anton ${styles.value}`}>{value}</div>
