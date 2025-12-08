@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Circle, Sparkles } from 'lucide-react'
+import CountdownTimer from './events/CountdownTimer'
 import { motion } from 'framer-motion'
 import { getLatestYouTubeVideo } from '@/lib/youtube'
 
@@ -114,21 +115,24 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="bg-white/10 border border-white/20 rounded-2xl px-6 py-4 backdrop-blur flex flex-col sm:flex-row items-center justify-between gap-3 max-w-3xl mx-auto text-white"
+            className="bg-white/10 border border-white/20 rounded-2xl px-6 py-6 backdrop-blur flex flex-col gap-4 max-w-4xl mx-auto text-white"
           >
-            <div className="flex items-center gap-3 text-sm sm:text-base">
-              <Sparkles className="h-5 w-5 text-tlcc-gold" />
-              <div>
-                <p className="font-semibold uppercase tracking-wide text-xs">Rooted December · Living in Abundance</p>
-                <p className="text-white/80">Saturday 20 December · The Light House · Apostle Nelson Isaiah</p>
+            <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+              <div className="flex items-center gap-3 text-sm sm:text-base">
+                <Sparkles className="h-5 w-5 text-tlcc-gold" />
+                <div>
+                  <p className="font-semibold uppercase tracking-wide text-xs">Rooted December · Living in Abundance</p>
+                  <p className="text-white/80">Saturday 20 December · The Light House · Apostle Nelson Isaiah</p>
+                </div>
               </div>
+              <Link
+                href="/events/rooted-december"
+                className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow text-center"
+              >
+                Register Free
+              </Link>
             </div>
-            <Link
-              href="/events/rooted-december"
-              className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow"
-            >
-              Register Free
-            </Link>
+            <CountdownTimer targetDate="2025-12-20T09:30:00+01:00" />
           </motion.div>
 
           {/* CTA Buttons - Outlined Style */}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Calendar, Clock, MapPin, Sparkles, Utensils, Users, Heart } from 'lucide-react'
 import type { Metadata } from 'next'
 import RootedRegistrationForm from '@/components/events/RootedRegistrationForm'
+import CountdownTimer from '@/components/events/CountdownTimer'
 
 export const metadata: Metadata = {
   title: 'Rooted December | The Light Community Church',
@@ -87,6 +88,7 @@ export default function RootedDecemberPage() {
             Worship, the Word, impartation, prayer circles and The Light Hangout all in one sweep. We are ending 2025 in
             family, in fire, and in laughter. Don&apos;t come alone.
           </p>
+          <CountdownTimer targetDate="2025-12-20T09:30:00+01:00" className="max-w-xl" />
           <div className="flex flex-wrap gap-4">
             <Link
               href="#register"
