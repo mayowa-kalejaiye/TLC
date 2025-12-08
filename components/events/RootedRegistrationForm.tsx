@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { CheckCircle, Loader2, AlertCircle, Users } from 'lucide-react'
 
 interface FormState {
@@ -22,6 +23,8 @@ export default function RootedRegistrationForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
+  const emailPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'yWKH6btB5bEwVcFHU'
+
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
   }
@@ -38,13 +41,14 @@ export default function RootedRegistrationForm() {
     setMessage('')
 
     try {
+      const submission = { ...form }
       const response = await fetch('/api/rooted-registration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...form,
+          ...submission,
           attendingRooted: true,
           attendingHangout: true,
           guests: 1,
@@ -56,6 +60,31 @@ export default function RootedRegistrationForm() {
 
       if (!response.ok) {
         throw new Error(payload.error || 'Unable to save your registration right now.')
+      }
+
+      try {
+        await emailjs.send(
+          'service_neo34an',
+          'template_ibwm048',
+          {
+            full_name: submission.fullName,
+            name: submission.fullName,
+            email: submission.email,
+            time: new Date().toLocaleString('en-NG', {
+              timeZone: 'Africa/Lagos',
+              weekday: 'short',
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            }),
+            message: `Phone: ${submission.phone}\nEmail: ${submission.email}\nFood notes: ${submission.foodNotes || 'None noted'}`,
+          },
+          emailPublicKey
+        )
+      } catch (emailError) {
+        console.error('Rooted registration email error:', emailError)
       }
 
       setStatus('success')
