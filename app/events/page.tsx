@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, Sparkles, Utensils } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -11,6 +11,40 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function EventsPage() {
   const upcomingEvents = [
+    {
+      id: 'rooted-december',
+      title: 'Rooted December',
+      tagline: 'Living in Abundance Weekend',
+      description:
+        'Worship, prophetic teaching by Apostle Nelson Isaiah, impartation circles and overflow moments that mark the last Rooted of the year. The Light Hangout closes the day with laughter and real conversations.',
+      date: 'Saturday · 20 December 2025',
+      time: '10:00 AM – Hangout Begins 3:00 PM',
+      location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
+      type: 'Featured Gathering',
+      image: '/images/rooted_december.jpg',
+      icon: Sparkles,
+      color: 'from-tlcc-orange to-tlcc-gold',
+      featured: true,
+      ctaLink: '/events/rooted-december',
+      ctaLabel: 'Register Free',
+    },
+    {
+      id: 'light-hangout',
+      title: 'The Light Hangout',
+      tagline: 'Food · Games · Family Vibes',
+      description:
+        'Right after Rooted we switch into full-on family mode: games, squad photos, testimonies, jollof, small chops, pizza slices and a long table that proves church is home.',
+      date: 'Saturday · 20 December 2025',
+      time: '3:00 PM till evening',
+      location: 'Courtyard @ The Light House',
+      type: 'Community Hangout',
+      image: '/images/rooted_hangout.jpg',
+      icon: Utensils,
+      color: 'from-tlcc-green to-tlcc-navy',
+      featured: true,
+      ctaLink: '/events/rooted-december#register',
+      ctaLabel: 'Save a Seat',
+    },
     {
       id: 'watch-hour',
       title: 'Watch Hour Prayers',
@@ -24,22 +58,22 @@ export default function EventsPage() {
       image: '/images/watch_hour.jpg',
       icon: Clock,
       color: 'from-tlcc-navy to-green-700',
-      // whatsappLink: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI',
       featured: true,
     },
     {
       id: 'rooted',
-      title: 'Rooted',
+      title: 'Rooted (Monthly)',
       tagline: 'Great Sermons, Deep Connections',
-      description: 'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
+      description:
+        'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
       date: 'First Saturday of Every Month',
       time: '10:00 AM',
       location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
       type: 'Monthly Gathering',
-      image: '/images/rooted2.JPGs to tlcc',
+      image: '/images/rooted2.JPG',
       icon: Users,
       color: 'from-tlcc-green to-tlcc-navy',
-      featured: true
+      featured: true,
     },
     {
       id: 'fire-conference',
@@ -70,6 +104,14 @@ export default function EventsPage() {
       featured: true
     }
   ]
+
+  const rootedHighlights = [
+    'Prophetic teaching + Living in Abundance impartation with Apostle Nelson Isaiah.',
+    'Prayer rooms, creative panels, testimonies and family moments that keep you anchored.',
+    'The Light Hangout immediately after service with games, honest conversations and laughter.',
+  ]
+
+  const rootedMenu = ['Jollof rice', 'Small chops', 'Pizza slices', 'Refreshing drinks']
 
   const heroRef = useRef<HTMLDivElement | null>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -163,6 +205,70 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Rooted Feature Section */}
+      <section className="bg-gradient-to-br from-tlcc-navy to-tlcc-green text-white py-20">
+        <div className="container mx-auto px-4 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+          <div>
+            <p className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-2 rounded-full uppercase text-xs tracking-wide mb-4">
+              <Sparkles className="h-4 w-4 text-tlcc-gold" /> Rooted December Spotlight
+            </p>
+            <h2 className="font-anton text-3xl md:text-4xl mb-6">
+              Living in Abundance · Saturday 20 December
+            </h2>
+            <p className="text-white/80 mb-6 text-lg">
+              The final Rooted of the year is a full-day experience. Morning worship, impartation, prophetic teaching,
+              prayer circles, then a long Light Hangout where we eat, play and enjoy genuine family moments.
+            </p>
+            <ul className="space-y-3 mb-6 text-white/80">
+              {rootedHighlights.map((line) => (
+                <li key={line} className="flex items-start gap-3">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-tlcc-gold" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="bg-white/10 border border-white/20 rounded-3xl p-5 mb-6">
+              <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-3">Hangout Menu</p>
+              <div className="flex flex-wrap gap-2">
+                {rootedMenu.map((item) => (
+                  <span key={item} className="px-3 py-1 rounded-full bg-white/20 text-xs font-semibold">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/events/rooted-december"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-tlcc-navy font-bold rounded-full uppercase tracking-wide shadow-lg"
+              >
+                Register Free
+              </Link>
+              <Link
+                href="/events/rooted-december#register"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white rounded-full uppercase tracking-wide font-bold text-white hover:bg-white hover:text-tlcc-navy transition"
+              >
+                Save a Spot for Friends
+              </Link>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="rounded-[30px] overflow-hidden shadow-2xl border-4 border-white/40">
+              <Image src="/images/rooted_december.jpg" alt="Rooted December" width={900} height={1100} className="object-cover" />
+            </div>
+            <div className="absolute -bottom-8 -left-6 w-64">
+              <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white rotate-3">
+                <Image src="/images/rooted_hangout.jpg" alt="Light Hangout" width={600} height={400} className="object-cover" />
+              </div>
+              <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 text-tlcc-navy">
+                <p className="text-sm font-semibold">Hangout starts 3:00 PM</p>
+                <p className="text-xs text-gray-500">Games · Photos · Real conversations · Food</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Upcoming Events Section */}
       <section id="upcoming-events" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -244,10 +350,10 @@ export default function EventsPage() {
                     {/* CTA Button */}
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href="/contact#event-inquiry"
+                        href={event.ctaLink ?? '/contact#event-inquiry'}
                         className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
                       >
-                        <span>Learn More</span>
+                        <span>{event.ctaLabel ?? 'Learn More'}</span>
                         <ArrowRight className="h-5 w-5" />
                       </Link>
                       {/* {event.whatsappLink && (

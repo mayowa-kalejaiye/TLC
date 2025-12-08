@@ -6,6 +6,7 @@ import FeaturedSermon from '@/components/FeaturedSermon'
 import Ministries from '@/components/Ministries'
 import Give from '@/components/Give'
 import Newsletter from '@/components/Newsletter'
+import RootedSpotlight from '@/components/RootedSpotlight'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <RootedSpotlight />
       <Welcome />
       <GlobalFamily />
       <FeaturedSermon />
