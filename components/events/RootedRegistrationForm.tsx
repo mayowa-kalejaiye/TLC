@@ -88,7 +88,7 @@ export default function RootedRegistrationForm() {
       }
 
       setStatus('success')
-      setMessage('You are booked in! Check your inbox for next steps and share the link with a friend.')
+      setMessage('You are booked in! Watch your inbox (and spam) for a note from Inthelightcommunity@gmail.com and share the link with a friend.')
       setForm(initialState)
     } catch (error) {
       console.error('Rooted registration error:', error)
