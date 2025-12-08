@@ -2,9 +2,12 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
+type CountdownVariant = 'light' | 'dark'
+
 interface CountdownTimerProps {
   targetDate: string
   className?: string
+  variant?: CountdownVariant
 }
 
 interface TimeLeft {
@@ -44,9 +47,26 @@ const calculateTimeLeft = (target: Date): TimeLeft => {
 
 const pad = (value: number) => value.toString().padStart(2, '0')
 
-export default function CountdownTimer({ targetDate, className }: CountdownTimerProps) {
+const getVariantClasses = (variant: CountdownVariant) => {
+  if (variant === 'light') {
+    return {
+      container: 'bg-white border-tlcc-cream text-tlcc-navy',
+      label: 'text-tlcc-navy/60',
+      value: 'text-tlcc-navy',
+    }
+  }
+
+  return {
+    container: 'bg-black/60 border-white/25 text-white',
+    label: 'text-white/70',
+    value: 'text-white',
+  }
+}
+
+export default function CountdownTimer({ targetDate, className, variant = 'dark' }: CountdownTimerProps) {
   const target = useMemo(() => new Date(targetDate), [targetDate])
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(target))
+  const styles = getVariantClasses(variant)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,9 +82,11 @@ export default function CountdownTimer({ targetDate, className }: CountdownTimer
 
   if (timeLeft.completed) {
     return (
-      <div className={`inline-flex flex-col gap-2 bg-white/15 border border-white/25 rounded-3xl px-6 py-4 backdrop-blur ${className ?? ''}`}>
-        <p className="text-xs uppercase tracking-wide text-white/70">Countdown</p>
-        <p className="text-white font-semibold">It&apos;s Rooted day — doors are open.</p>
+      <div
+        className={`inline-flex flex-col gap-2 rounded-3xl px-6 py-4 backdrop-blur border ${styles.container} ${className ?? ''}`}
+      >
+        <p className={`text-xs uppercase tracking-wide ${styles.label}`}>Countdown</p>
+        <p className="font-semibold">It&apos;s Rooted day — doors are open.</p>
       </div>
     )
   }
@@ -77,13 +99,15 @@ export default function CountdownTimer({ targetDate, className }: CountdownTimer
   ]
 
   return (
-    <div className={`bg-white/10 border border-white/30 rounded-3xl px-6 py-4 backdrop-blur flex flex-col gap-3 ${className ?? ''}`}>
-      <div className="text-xs uppercase tracking-[0.3em] text-white/70">Countdown to Rooted</div>
-      <div className="grid grid-cols-4 gap-4">
+    <div
+      className={`rounded-3xl px-6 py-4 backdrop-blur flex flex-col gap-3 border ${styles.container} ${className ?? ''}`}
+    >
+      <div className={`text-xs uppercase tracking-[0.3em] ${styles.label}`}>Countdown to Rooted</div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {segments.map(({ label, value }) => (
           <div key={label} className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-white font-anton">{value}</div>
-            <p className="text-xs uppercase tracking-wide text-white/70">{label}</p>
+            <div className={`text-3xl md:text-4xl font-bold font-anton ${styles.value}`}>{value}</div>
+            <p className={`text-xs uppercase tracking-wide ${styles.label}`}>{label}</p>
           </div>
         ))}
       </div>
