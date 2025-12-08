@@ -166,7 +166,6 @@ export default function RootedDecemberPage() {
               <li>• Confirmation email/WhatsApp will arrive within minutes of registering.</li>
               <li>• Every submission equals one seat. Register again for each friend or family member.</li>
               <li>• Need to edit your registration? Reply to the confirmation email and our team will update the sheet.</li>
-              <li>• Data syncs to a Google Sheet via webhook so the admin team can plan logistics in real-time.</li>
             </ul>
           </div>
           <RootedRegistrationForm />
