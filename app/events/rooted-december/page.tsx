@@ -130,7 +130,7 @@ export default function RootedDecemberPage() {
             <div className="absolute -bottom-6 -left-4 bg-white rounded-3xl shadow-xl p-5 w-72">
               <p className="text-sm font-semibold text-tlcc-orange uppercase tracking-wide mb-1">Hangout Highlights</p>
               <p className="text-xs text-gray-600">
-                Early registration helps us prep meals, gift packs and breakout zones for you & your guests.
+                Early registration helps us prep meals, gift packs and breakout zones for every person attending.
               </p>
             </div>
           </div>
@@ -157,11 +157,12 @@ export default function RootedDecemberPage() {
             </p>
             <h2 className="font-anton text-3xl md:text-4xl text-tlcc-navy mb-4">Save Your Seat</h2>
             <p className="text-gray-700 mb-8">
-              Registration helps us plan food portions, seating and resource packs. Please fill this for yourself and for
-              anyone coming with you. We will send reminders and directions as the day approaches.
+              Registration helps us plan food portions, seating and resource packs. Please fill this once for yourself. If
+              you are bringing someone, submit another form in their name so they receive directions and reminders.
             </p>
             <ul className="space-y-3 text-sm text-gray-600">
               <li>• Confirmation email/WhatsApp will arrive within minutes of registering.</li>
+              <li>• Every submission equals one seat. Register again for each friend or family member.</li>
               <li>• Need to edit your registration? Reply to the confirmation email and our team will update the sheet.</li>
               <li>• Data syncs to a Google Sheet via webhook so the admin team can plan logistics in real-time.</li>
             </ul>

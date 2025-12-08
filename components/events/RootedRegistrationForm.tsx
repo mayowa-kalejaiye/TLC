@@ -7,10 +7,6 @@ interface FormState {
   fullName: string
   email: string
   phone: string
-  attendingRooted: boolean
-  attendingHangout: boolean
-  guests: number
-  expectations: string
   foodNotes: string
 }
 
@@ -18,10 +14,6 @@ const initialState: FormState = {
   fullName: '',
   email: '',
   phone: '',
-  attendingRooted: true,
-  attendingHangout: true,
-  guests: 0,
-  expectations: '',
   foodNotes: '',
 }
 
@@ -51,7 +43,13 @@ export default function RootedRegistrationForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          attendingRooted: true,
+          attendingHangout: true,
+          guests: 1,
+          expectations: '',
+        }),
       })
 
       const payload = await response.json()
@@ -99,57 +97,17 @@ export default function RootedRegistrationForm() {
             />
           </div>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
-          <div>
-            <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Phone Number</label>
-            <input
-              type="tel"
-              value={form.phone}
-              onChange={(event) => updateField('phone', event.target.value)}
-              required
-              placeholder="WhatsApp-enabled phone"
-              className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy"
-            />
-          </div>
-          <div>
-            <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">How many guests?</label>
-            <select
-              value={form.guests}
-              onChange={(event) => updateField('guests', Number(event.target.value))}
-              className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 bg-white text-tlcc-navy focus:outline-none focus:border-tlcc-orange"
-            >
-              {[0, 1, 2, 3, 4, 5].map((num) => (
-                <option key={num} value={num}>{`${num} ${num === 1 ? 'Guest' : 'Guests'}`}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-5">
-          <label className="flex items-center gap-3 bg-tlcc-cream/70 border border-tlcc-cream rounded-2xl p-4 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.attendingRooted}
-              onChange={(event) => updateField('attendingRooted', event.target.checked)}
-              className="h-5 w-5 text-tlcc-orange"
-            />
-            <div>
-              <p className="font-semibold text-tlcc-navy">I&apos;m in for Rooted</p>
-              <p className="text-sm text-gray-600">Service · Worship · Impartation</p>
-            </div>
-          </label>
-          <label className="flex items-center gap-3 bg-tlcc-cream/70 border border-tlcc-cream rounded-2xl p-4 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.attendingHangout}
-              onChange={(event) => updateField('attendingHangout', event.target.checked)}
-              className="h-5 w-5 text-tlcc-orange"
-            />
-            <div>
-              <p className="font-semibold text-tlcc-navy">Count me in for The Light Hangout</p>
-              <p className="text-sm text-gray-600">Games · Food · Community</p>
-            </div>
-          </label>
+        <div>
+          <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Phone Number</label>
+          <input
+            type="tel"
+            value={form.phone}
+            onChange={(event) => updateField('phone', event.target.value)}
+            required
+            placeholder="WhatsApp-enabled phone"
+            className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy"
+          />
+          <p className="text-xs text-gray-500 mt-2">One form = one seat. Register again if you&apos;re bringing someone.</p>
         </div>
 
         {/* <div>
@@ -176,6 +134,10 @@ export default function RootedRegistrationForm() {
             placeholder="Example: I&apos;m gluten-free, or I&apos;m bringing juice."
             className="w-full border-2 border-tlcc-cream rounded-2xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy"
           />
+        </div>
+
+        <div className="bg-tlcc-cream/80 border border-tlcc-cream rounded-2xl px-4 py-3 text-sm text-tlcc-navy">
+          Save your details, hit submit, then repeat the form if you&apos;re registering friends or family.
         </div>
 
         {status === 'success' && (
