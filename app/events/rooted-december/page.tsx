@@ -15,12 +15,19 @@ export const metadata: Metadata = {
       'Worship, impartation, prayer circles and The Light Hangout happening on Saturday 20 December. Save your seat today.',
     images: [
       {
-        url: 'https://tlcc.ng/images/rooted_december.jpg',
+        url: 'https://tlcc.ng/images/rooted_hangout.jpg',
         width: 1200,
         height: 630,
-        alt: 'Rooted December — Living in Abundance',
+        alt: 'Rooted December — Light Hangout vibes',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rooted December — Living in Abundance',
+    description:
+      'Register for Rooted December and The Light Hangout happening Saturday 20 December at The Light House.',
+    images: ['https://tlcc.ng/images/rooted_hangout.jpg'],
   },
 }
 
