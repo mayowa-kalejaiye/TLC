@@ -1,6 +1,9 @@
-﻿import Link from 'next/link'
+﻿ 'use client'
+
+import Link from 'next/link'
 import Image from 'next/image'
 import { Youtube, Instagram, MessageCircle } from 'lucide-react'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 // TikTok SVG Icon Component
 const TikTokIcon = () => (
@@ -9,43 +12,17 @@ const TikTokIcon = () => (
   </svg>
 )
 
-const footerLinks = {
-  connect: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Join a Ministry', href: '/ministries' },
-    { name: 'Contact Us', href: '/contact' },
-    { name: 'Become a Member', href: '/contact#become-member' },
-  ],
-  ministries: [
-    { name: 'TLCC Online ministry', href: '/ministries#tlcc-online' },
-    { name: 'TLCC Firestorm', href: '/ministries#firestorm' },
-    { name: 'TLCC Follow up', href: '/ministries#follow-up' },
-    { name: 'TLCC Prayer team', href: '/ministries#prayer-team' },
-    { name: 'TLCC Media & visibility', href: '/ministries#media-visibility' },
-    { name: 'Growth initiatives', href: '/ministries#growth-initiatives' },
-  ],
-  resources: [
-    { name: 'Daily Devotionals', href: '/sermons#featured' },
-    { name: 'Rooted Program', href: '/map' },
-    { name: 'Prayer Requests', href: '/contact#prayer-request' },
-    { name: 'Testimonies', href: '/about#testimonies' },
-    { name: 'Service Times', href: '/about#services' },
-  ],
-  media: [
-    { name: 'Sermons', href: '/sermons' },
-    { name: 'YouTube Channel', href: 'https://youtube.com/@TheLightCommunity', external: true },
-    { name: 'Worship Sessions', href: '/sermons' },
-  ],
-}
-
-const socialLinks = [
-  { name: 'YouTube', href: 'https://youtube.com/@TheLightCommunity', icon: Youtube },
-  { name: 'Instagram', href: 'https://instagram.com/thelight_community', icon: Instagram },
-  { name: 'WhatsApp', href: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI', icon: MessageCircle },
-  { name: 'TikTok', href: 'https://www.tiktok.com/@the.lightcommunity?_r=1&_t=ZS-917gOMTaYuC', icon: TikTokIcon },
-]
-
 export default function Footer() {
+  const { messages } = useLanguage()
+  const footer = messages.footer
+  const sections = footer.sections
+  const socialLinks = [
+    { label: footer.social.youtube, href: 'https://youtube.com/@TheLightCommunity', icon: Youtube },
+    { label: footer.social.instagram, href: 'https://instagram.com/thelight_community', icon: Instagram },
+    { label: footer.social.whatsapp, href: 'https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI', icon: MessageCircle },
+    { label: footer.social.tiktok, href: 'https://www.tiktok.com/@the.lightcommunity?_r=1&_t=ZS-917gOMTaYuC', icon: TikTokIcon },
+  ]
+
   return (
     <footer className="relative z-20 bg-tlcc-green text-white">
       <div className="container-custom py-12 md:py-16">
@@ -61,17 +38,17 @@ export default function Footer() {
               className="h-12 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
-              Souls saved. Men Trained. Nations taken.
+              {footer.tagline}
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((social) => (
                 <a
-                  key={social.name}
+                  key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-tlcc-green-light hover:bg-tlcc-gold rounded-lg transition-colors duration-200"
-                  aria-label={social.name}
+                  aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
                 </a>
@@ -81,15 +58,15 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">CONNECT</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">{sections.connect.heading}</h3>
             <ul className="space-y-2">
-              {footerLinks.connect.map((link) => (
-                <li key={link.name}>
+              {sections.connect.links.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -98,15 +75,15 @@ export default function Footer() {
 
           {/* Ministries */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">MINISTRIES</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">{sections.ministries.heading}</h3>
             <ul className="space-y-2">
-              {footerLinks.ministries.map((link) => (
-                <li key={link.name}>
+              {sections.ministries.links.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -115,15 +92,15 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">RESOURCES</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">{sections.resources.heading}</h3>
             <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
+              {sections.resources.links.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -132,16 +109,16 @@ export default function Footer() {
 
           {/* Media */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold">MEDIA</h3>
+            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">{sections.media.heading}</h3>
             <ul className="space-y-2">
-              {footerLinks.media.map((link) => (
-                <li key={link.name}>
+              {sections.media.links.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
                     {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -153,19 +130,23 @@ export default function Footer() {
         <div className="border-t border-tlcc-green-light pt-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold mb-2 text-tlcc-gold">Contact Us</h4>
-              <p className="text-gray-300 text-sm">
-                Joy: <a href="tel:09035004764" className="hover:text-tlcc-gold">09035004764</a>
-              </p>
-              <p className="text-gray-300 text-sm">
-                Naomi: <a href="tel:08087207044" className="hover:text-tlcc-gold">08087207044</a>
-              </p>
+              <h4 className="font-semibold mb-2 text-tlcc-gold">{footer.contact.heading}</h4>
+              {footer.contact.people.map((person) => (
+                <p key={person.phone} className="text-gray-300 text-sm">
+                  {person.name}:{' '}
+                  <a href={`tel:${person.phone}`} className="hover:text-tlcc-gold">
+                    {person.phone}
+                  </a>
+                </p>
+              ))}
             </div>
             <div>
-                <h4 className="font-semibold mb-2 text-tlcc-gold">Service Times</h4>
-                <p className="text-gray-300 text-sm">Mon-Wed: Rooted Prayers (9:00 PM)</p>
-                <p className="text-gray-300 text-sm">Tues & Sat: Sermons (9:00 PM)</p>
-                <p className="text-gray-300 text-sm">Watch Hour Prayers: 9:00 PM (fortnightly — every two weeks)</p>
+              <h4 className="font-semibold mb-2 text-tlcc-gold">{footer.services.heading}</h4>
+              {footer.services.lines.map((line) => (
+                <p key={line} className="text-gray-300 text-sm">
+                  {line}
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -173,7 +154,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-tlcc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} The Light Community Church. All Rights Reserved.
+            © {new Date().getFullYear()} {footer.copyright}
           </p>
         </div>
       </div>

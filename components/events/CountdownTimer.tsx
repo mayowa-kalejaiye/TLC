@@ -65,10 +65,16 @@ const getVariantClasses = (variant: CountdownVariant) => {
 
 export default function CountdownTimer({ targetDate, className, variant = 'dark' }: CountdownTimerProps) {
   const target = useMemo(() => new Date(targetDate), [targetDate])
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(target))
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
   const styles = getVariantClasses(variant)
 
   useEffect(() => {
+    if (Number.isNaN(target.getTime())) {
+      return undefined
+    }
+
+    setTimeLeft(calculateTimeLeft(target))
+
     const interval = setInterval(() => {
       setTimeLeft(calculateTimeLeft(target))
     }, 1000)
@@ -80,7 +86,7 @@ export default function CountdownTimer({ targetDate, className, variant = 'dark'
     return null
   }
 
-  if (timeLeft.completed) {
+  if (timeLeft?.completed) {
     return (
       <div
         className={`inline-flex flex-col gap-2 rounded-3xl px-6 py-4 backdrop-blur border ${styles.container} ${className ?? ''}`}
@@ -91,12 +97,19 @@ export default function CountdownTimer({ targetDate, className, variant = 'dark'
     )
   }
 
-  const segments = [
-    { label: 'Days', value: pad(timeLeft.days) },
-    { label: 'Hours', value: pad(timeLeft.hours) },
-    { label: 'Minutes', value: pad(timeLeft.minutes) },
-    { label: 'Seconds', value: pad(timeLeft.seconds) },
-  ]
+  const segments = timeLeft
+    ? [
+        { label: 'Days', value: pad(timeLeft.days) },
+        { label: 'Hours', value: pad(timeLeft.hours) },
+        { label: 'Minutes', value: pad(timeLeft.minutes) },
+        { label: 'Seconds', value: pad(timeLeft.seconds) },
+      ]
+    : [
+        { label: 'Days', value: '--' },
+        { label: 'Hours', value: '--' },
+        { label: 'Minutes', value: '--' },
+        { label: 'Seconds', value: '--' },
+      ]
 
   return (
     <div

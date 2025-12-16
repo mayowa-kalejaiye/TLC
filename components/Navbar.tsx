@@ -5,22 +5,32 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
+import { useLanguage } from '@/components/providers/LanguageProvider'
+import type { Messages } from '@/lib/i18n'
 
-const navigation = [
-  { name: 'About', href: '/about' },
-  { name: 'Quick-Links', href: '/quick-links' },
-  { name: 'Ministries', href: '/ministries' },
-  { name: 'Events', href: '/events' },
-  { name: 'Sermons', href: '/sermons' },
-  { name: 'Map', href: '/map' },
-  { name: 'Give', href: '/give' },
-]
+type NavKey = Exclude<keyof Messages['nav'], 'language'>
+
+const navRoutes: Record<NavKey, string> = {
+  home: '/',
+  about: '/about',
+  quickLinks: '/quick-links',
+  ministries: '/ministries',
+  events: '/events',
+  sermons: '/sermons',
+  map: '/map',
+  give: '/give',
+}
+
+const desktopNav: NavKey[] = ['about', 'quickLinks', 'ministries', 'events', 'sermons', 'map', 'give']
+const mobileNav: NavKey[] = ['home', 'about', 'quickLinks', 'ministries', 'sermons', 'map', 'give']
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [visible, setVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
+  const { messages } = useLanguage()
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout
@@ -90,25 +100,30 @@ export default function Navbar() {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex items-center space-x-1 absolute left-1/2 -translate-x-1/2">
-            {navigation.map((item) => (
+            {desktopNav.map((key) => (
               <Link
-                key={item.name}
-                href={item.href}
+                key={key}
+                href={navRoutes[key]}
                 className="px-3 py-1 text-tlcc-navy hover:text-tlcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
               >
-                {item.name}
+                {messages.nav[key]}
               </Link>
             ))}
           </div>
 
-          {/* Hamburger menu button - Far Right */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-1 rounded-lg hover:bg-tlcc-cream transition-colors ml-auto"
-            aria-label="Toggle menu"
-          >
-            <Menu className="h-6 w-6 text-tlcc-navy" />
-          </button>
+          {/* Language selector + Hamburger button */}
+          <div className="ml-auto flex items-center gap-3">
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-1 rounded-lg hover:bg-tlcc-cream transition-colors"
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-6 w-6 text-tlcc-navy" />
+            </button>
+          </div>
         </div>
 
       </div>
@@ -143,74 +158,30 @@ export default function Navbar() {
           </div>
 
           <div className="min-h-screen flex flex-col pt-28 md:pt-40 lg:pt-48 pb-16 px-8 md:px-16 lg:px-20">
+            <div className="mb-10 block md:hidden text-white">
+              <LanguageSwitcher variant="dark" className="text-white" showLabelOnMobile />
+            </div>
             {/* Main Content Grid */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-24 lg:gap-40 xl:gap-56">
               {/* Left Column - Main Navigation */}
               <div className="flex flex-col justify-start">
                 <nav className="flex flex-col space-y-1 pl-[10px]">
-                  <Link
-                    href="/"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/about"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/about' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    About
-                  </Link>
-                  <Link
-                    href="/quick-links"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/quick-links' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Quick-Links
-                  </Link>
-                  <Link
-                    href="/ministries"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/ministries' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Ministries
-                  </Link>
-                  <Link
-                    href="/sermons"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/sermons' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Sermons
-                  </Link>
-                  <Link
-                    href="/map"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/map' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Map
-                  </Link>
-                  <Link
-                    href="/give"
-                    onClick={() => setIsOpen(false)}
-                    className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
-                      pathname === '/give' ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
-                    } transition-colors duration-200 leading-none uppercase`}
-                  >
-                    Give
-                  </Link>
+                  {mobileNav.map((key) => {
+                    const href = navRoutes[key]
+                    const isActive = pathname === href
+                    return (
+                      <Link
+                        key={key}
+                        href={href}
+                        onClick={() => setIsOpen(false)}
+                        className={`font-anton text-5xl md:text-6xl lg:text-7xl ${
+                          isActive ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
+                        } transition-colors duration-200 leading-none uppercase`}
+                      >
+                        {messages.nav[key]}
+                      </Link>
+                    )
+                  })}
                 </nav>
               </div>
 

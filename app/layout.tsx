@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import { Analytics } from "@vercel/analytics/next"
 import Footer from '@/components/Footer'
+import { LanguageProvider } from '@/components/providers/LanguageProvider'
 
 
 const montserrat = Montserrat({ 
@@ -203,10 +204,12 @@ export default function RootLayout({
         />
       </head>
       <body className={montserrat.className}>
-        <Navbar />
-        <main>{children}</main>
-        <Analytics />
-        <Footer />
+        <LanguageProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Analytics />
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )

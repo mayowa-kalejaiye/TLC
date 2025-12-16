@@ -7,10 +7,13 @@ import { Circle, Sparkles } from 'lucide-react'
 import CountdownTimer from './events/CountdownTimer'
 import { motion } from 'framer-motion'
 import { getLatestYouTubeVideo } from '@/lib/youtube'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false)
   const [videoId, setVideoId] = useState('3MWdPbaBLxg') // Default fallback video
+  const { messages } = useLanguage()
+  const heroLineOpacities = ['lg:opacity-90', 'lg:opacity-85', 'lg:opacity-90']
 
   useEffect(() => {
     // Fetch latest video ID
@@ -93,21 +96,19 @@ export default function Hero() {
               className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-tlcc-gold/30"
             >
               <Circle className="h-2 w-2 fill-tlcc-gold text-tlcc-gold" />
-              <span className="text-white font-semibold text-sm tracking-wider uppercase">Our Vision</span>
+              <span className="text-white font-semibold text-sm tracking-wider uppercase">{messages.hero.visionBadge}</span>
             </motion.div>
           </div>
 
           {/* Main Heading - Bold Statement with opacity on desktop */}
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase text-center">
-            <span className="block lg:opacity-90">
-              Souls <span className="text-tlcc-orange">saved</span>.
-            </span>
-            <span className="block lg:opacity-85">
-              Men <span className="text-tlcc-orange">Trained</span>.
-            </span>
-            <span className="block lg:opacity-90">
-              Nations <span className="text-tlcc-orange">taken</span>.
-            </span>
+            {messages.hero.lines.map((line, index) => (
+              <span key={`${line.prefix}-${line.highlight}`} className={`block ${heroLineOpacities[index] ?? 'lg:opacity-90'}`}>
+                {line.prefix}
+                <span className="text-tlcc-orange">{line.highlight}</span>
+                {line.suffix ?? ''}
+              </span>
+            ))}
           </h1>
 
           {/* Featured Event Banner */}
@@ -121,15 +122,15 @@ export default function Hero() {
               <div className="flex items-center gap-3 text-sm sm:text-base">
                 <Sparkles className="h-5 w-5 text-tlcc-gold" />
                 <div>
-                  <p className="font-semibold uppercase tracking-wide text-xs">Rooted December · Living in Abundance</p>
-                  <p className="text-white/80">Saturday 20 December · The Light House · Apostle Nelson Isaiah</p>
+                  <p className="font-semibold uppercase tracking-wide text-xs">{messages.hero.featuredTagline}</p>
+                  <p className="text-white/80">{messages.hero.featuredDetails}</p>
                 </div>
               </div>
               <Link
                 href="/events/rooted-december"
                 className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow text-center"
               >
-                Register Free
+                {messages.hero.registerCta}
               </Link>
             </div>
             <CountdownTimer targetDate="2025-12-20T09:30:00+01:00" />
@@ -141,13 +142,13 @@ export default function Hero() {
               href="/sermons"
               className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
             >
-              <span>Watch Live</span>
+              <span>{messages.hero.watchLive}</span>
             </Link>
             <Link
               href="/quick-links"
               className="group w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-2 uppercase tracking-wide text-sm"
             >
-              <span>Quick Links</span>
+              <span>{messages.hero.quickLinks}</span>
             </Link>
           </div>
         </motion.div>
