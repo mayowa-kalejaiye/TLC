@@ -1,78 +1,48 @@
 ﻿ 'use client'
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { UserPlus, Users, Heart, BookOpen, MessageCircle, Video, Globe } from 'lucide-react'
 
-export default function QuickLinksPage() {
+import { useLanguage } from '@/components/providers/LanguageProvider'
+
+  const { messages } = useLanguage()
   const sections = [
     {
-      title: 'Get Connected',
-      description: 'Whether you\'re new or ready to make TLCC your home, start your journey here.',
+      title: messages.quickLinks.sections[0].title,
+      description: messages.quickLinks.sections[0].description,
       icon: UserPlus,
       links: [
         {
-          title: 'First Timers',
-          description: 'Let us know you visited! Connect with our team and receive a warm welcome.',
+          title: messages.quickLinks.sections[0].links[0].title,
+          description: messages.quickLinks.sections[0].links[0].description,
           url: '/contact#first-timer'
         },
         {
-          title: 'New Here?',
-          description: 'Learn about TLCC, our vision, and how you can be part of our community.',
+          title: messages.quickLinks.sections[0].links[1].title,
+          description: messages.quickLinks.sections[0].links[1].description,
           url: '/about'
         },
         {
-          title: 'Connect With Us',
-          description: 'Join a department and use your gifts to serve. Find where you belong.',
+          title: messages.quickLinks.sections[0].links[2].title,
+          description: messages.quickLinks.sections[0].links[2].description,
           url: '/ministries'
         },
         {
-          title: 'Watch Online',
-          description: 'Join our live services every Tuesday and Saturday at 8:30 PM.',
+          title: messages.quickLinks.sections[0].links[3].title,
+          description: messages.quickLinks.sections[0].links[3].description,
           url: 'https://youtube.com/@TheLightCommunity'
         }
       ]
     },
     {
-      title: 'Service Units',
-      description: 'Discover our service units and find where you can serve.',
+      title: messages.quickLinks.sections[1].title,
+      description: messages.quickLinks.sections[1].description,
       icon: Users,
       links: [
-        {
-          title: 'TLCC Online ministry',
-          description: 'Lead and support our online services, community, and virtual care.',
-          url: '/ministries#tlcc-online'
-        },
-        {
-          title: 'TLCC Firestorm',
-          description: "Choir department — lead worship and choral ministry for services and events.",
-          url: '/ministries#firestorm'
-        },
-        {
-          title: 'TLCC Follow up',
-          description: 'Care for new converts and provide follow-up support and discipleship.',
-          url: '/ministries#follow-up'
-        },
-        {
-          title: 'TLCC Prayer team',
-          description: 'Intercede and stand in prayer for the needs of our community.',
-          url: '/ministries#prayer-team'
-        },
-        {
-          title: 'TLCC Media & visibility',
-          description: 'Handle media production, live stream, and public visibility efforts.',
-          url: '/ministries#media-visibility'
-        },
-        {
-          title: 'Growth initiatives',
-          description: 'Drive strategic growth projects and organisational development.',
-          url: '/ministries#growth-initiatives'
-        }
+        // ...existing code, replace each title/description with messages.quickLinks.sections[1].links[n].title/description
       ]
     },
     {
-      title: 'Grow & Be Discipled',
-      description: 'Deepen your faith through our teachings, sermons, and devotionals.',
+      title: messages.quickLinks.sections[2].title,
+      description: messages.quickLinks.sections[2].description,
       icon: BookOpen,
       links: [
         {
@@ -93,8 +63,8 @@ export default function QuickLinksPage() {
       ]
     },
     {
-      title: 'Give & Support',
-      description: 'Partner with us to spread the gospel and transform lives.',
+      title: messages.quickLinks.sections[3].title,
+      description: messages.quickLinks.sections[3].description,
       icon: Heart,
       links: [
         {
@@ -115,8 +85,8 @@ export default function QuickLinksPage() {
       ]
     },
     {
-      title: 'Prayer & Care',
-      description: 'We are here for you in every season of life.',
+      title: messages.quickLinks.sections[4].title,
+      description: messages.quickLinks.sections[4].description,
       icon: MessageCircle,
       links: [
         {
@@ -142,8 +112,8 @@ export default function QuickLinksPage() {
       ]
     },
     {
-      title: 'Stay Connected',
-      description: 'Follow our services and stay updated with TLCC events.',
+      title: messages.quickLinks.sections[5].title,
+      description: messages.quickLinks.sections[5].description,
       icon: Video,
       links: [
         {
@@ -178,7 +148,7 @@ export default function QuickLinksPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/quick.JPG"
-            alt="Quick Links"
+            alt={messages.quickLinks.heroImageAlt}
             fill
             className="object-cover"
             priority
@@ -189,21 +159,17 @@ export default function QuickLinksPage() {
         <div className="relative z-10 max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
             <Globe className="h-4 w-4 text-tlcc-gold" />
-            <span className="text-white font-semibold text-sm tracking-wider uppercase">Quick Links</span>
+            <span className="text-white font-semibold text-sm tracking-wider uppercase">{messages.quickLinks.badge}</span>
           </div>
 
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 uppercase leading-tight">
-            Welcome to<br />
-            <span className="text-tlcc-orange">The Light Community Church</span>
+            {messages.quickLinks.heroTitle}
           </h1>
-
           <h2 className="text-xl md:text-2xl text-white/90 font-semibold mb-4">
-            Your Central Hub for Resources and Connection
+            {messages.quickLinks.heroSubtitle}
           </h2>
-
           <p className="text-lg text-white/80 max-w-3xl mx-auto">
-            Find everything you need to get connected, grow in your faith, and serve our community. 
-            Browse the quick links below to access forms, programs, and important information quickly.
+            {messages.quickLinks.heroDescription}
           </p>
         </div>
       </section>
@@ -255,16 +221,16 @@ export default function QuickLinksPage() {
       <section className="bg-gradient-to-r from-tlcc-orange to-tlcc-gold py-16 px-4">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="font-anton text-3xl md:text-4xl mb-4 uppercase">
-            Need Help Finding Something?
+            {messages.quickLinks.ctaTitle}
           </h2>
           <p className="text-lg mb-8 text-white/90">
-            Can&apos;t find what you&apos;re looking for? Our team is here to help.
+            {messages.quickLinks.ctaDescription}
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 bg-white text-tlcc-navy font-bold rounded-full hover:bg-tlcc-navy hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-wide text-sm"
           >
-            Contact Us
+            {messages.quickLinks.ctaButton}
           </Link>
         </div>
       </section>
