@@ -7,8 +7,6 @@ import RootedRegistrationForm from '@/components/events/RootedRegistrationForm'
 import CountdownTimer from '@/components/events/CountdownTimer'
 import { useLanguage } from '@/components/providers/LanguageProvider'
 
-import type { Metadata } from 'next'
-
 const infoIcons = [Calendar, Sparkles, Heart, Clock, MapPin]
 
 
