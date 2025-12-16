@@ -3,10 +3,23 @@
 import { useState, useEffect } from 'react'
 import { Mail, Send, CheckCircle, Zap } from 'lucide-react'
 import emailjs from '@emailjs/browser'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const { language, messages } = useLanguage()
+  const newsletter = messages.home.newsletter
+  const locale = language === 'fr' ? 'fr-FR' : language === 'es' ? 'es-ES' : 'en-US'
+  const subscriptionDate = () =>
+    new Date().toLocaleDateString(locale, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
 
   // Initialize EmailJS
   useEffect(() => {
@@ -24,14 +37,7 @@ export default function Newsletter() {
         'template_nphq0yh', // Template ID
         {
           user_email: email,
-          subscription_date: new Date().toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          })
+          subscription_date: subscriptionDate(),
         }
       )
       
@@ -60,18 +66,17 @@ export default function Newsletter() {
             <div className="inline-flex items-center gap-2 bg-tlcc-gold/10 px-4 py-2 rounded-full mb-6 border border-tlcc-gold/20">
               <Zap className="h-4 w-4 text-tlcc-gold" />
               <span className="text-tlcc-gold font-bold text-sm tracking-wider uppercase">
-                DAILY INSPIRATION
+                {newsletter.badge}
               </span>
             </div>
             
             <h2 className="text-4xl md:text-6xl font-bold text-tlcc-navy mb-6 leading-tight" style={{ fontFamily: 'var(--font-anton)' }}>
-              <span className="block">Stay</span>
-              <span className="block text-tlcc-orange">Connected</span>
+              <span className="block">{newsletter.headingPrimary}</span>
+              <span className="block text-tlcc-orange">{newsletter.headingAccent}</span>
             </h2>
             
             <p className="text-lg md:text-xl text-tlcc-navy-light leading-relaxed max-w-2xl mx-auto">
-              Get daily devotionals, sermon updates, and ministry news delivered 
-              to your inbox. We promise to bless, not spam.
+              {newsletter.description}
             </p>
           </div>
 
@@ -85,7 +90,7 @@ export default function Newsletter() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
+                    placeholder={newsletter.placeholder}
                     required
                     className="w-full pl-12 pr-4 py-4 border-2 border-tlcc-cream focus:border-tlcc-gold rounded-xl focus:outline-none focus:ring-4 focus:ring-tlcc-gold/20 transition-all text-tlcc-navy font-medium"
                   />
@@ -96,10 +101,10 @@ export default function Newsletter() {
                   className="px-8 py-4 bg-gradient-to-r from-tlcc-gold to-tlcc-orange hover:from-tlcc-orange hover:to-tlcc-gold text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-105"
                 >
                   {status === 'loading' ? (
-                    <span>Subscribing...</span>
+                    <span>{newsletter.submitLoading}</span>
                   ) : (
                     <>
-                      <span>Subscribe</span>
+                      <span>{newsletter.submitIdle}</span>
                       <Send className="h-5 w-5" />
                     </>
                   )}
@@ -109,12 +114,12 @@ export default function Newsletter() {
               {status === 'success' && (
                 <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-center gap-2 text-green-700 font-semibold animate-fade-in">
                   <CheckCircle className="h-5 w-5" />
-                  <span>Thank you! You&apos;ve been subscribed successfully.</span>
+                  <span>{newsletter.successMessage}</span>
                 </div>
               )}
               {status === 'error' && (
                 <p className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 font-semibold text-center animate-fade-in">
-                  ✗ Something went wrong. Please try again.
+                  ✗ {newsletter.errorMessage}
                 </p>
               )}
             </form>
@@ -122,35 +127,23 @@ export default function Newsletter() {
 
           {/* Benefits Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-tlcc-cream/50 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">📖</div>
-              <h3 className="font-bold text-tlcc-navy mb-2">Daily Devotionals</h3>
-              <p className="text-sm text-tlcc-navy-light">
-                Start your day with inspiring biblical insights
-              </p>
-            </div>
-
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-tlcc-cream/50 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">🎤</div>
-              <h3 className="font-bold text-tlcc-navy mb-2">Sermon Updates</h3>
-              <p className="text-sm text-tlcc-navy-light">
-                Never miss a powerful message from leadership
-              </p>
-            </div>
-
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-tlcc-cream/50 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">📅</div>
-              <h3 className="font-bold text-tlcc-navy mb-2">Event Alerts</h3>
-              <p className="text-sm text-tlcc-navy-light">
-                Stay informed about upcoming gatherings
-              </p>
-            </div>
+            {newsletter.benefits.map((benefit) => (
+              <div
+                key={benefit.title}
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-tlcc-cream/50 hover:shadow-lg transition-all"
+              >
+                <div className="text-3xl mb-3">{benefit.emoji}</div>
+                <h3 className="font-bold text-tlcc-navy mb-2">{benefit.title}</h3>
+                <p className="text-sm text-tlcc-navy-light">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
           </div>
 
           {/* Privacy Note */}
           <p className="text-sm text-tlcc-navy-light/70 text-center max-w-2xl mx-auto">
-            By subscribing, you agree to receive emails from The Light Community Church. 
-            You can unsubscribe at any time. We respect your privacy and will never share your information.
+            {newsletter.privacyNote}
           </p>
         </div>
       </div>

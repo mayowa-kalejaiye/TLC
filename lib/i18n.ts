@@ -125,6 +125,142 @@ type AboutMessages = {
   }
 }
 
+type HomeWelcomeCard = {
+  href: string
+  eyebrow: string
+  title: string
+  cta: string
+  imageAlt: string
+}
+
+type HomeFeaturedSermonMessages = {
+  badge: string
+  heading: string
+  fallbackTitle: string
+  fallbackDescription: string
+  fallbackDuration: string
+  fallbackDate: string
+  watchCta: string
+  viewAll: string
+}
+
+type HomeDevotionalsMessages = {
+  badge: string
+  heading: string
+  cardSubtitle: string
+  cardTitle: string
+  verse: string
+  verseRef: string
+  cardBody: string
+  cta: string
+  introTitle: string
+  introBody: string
+  benefits: { emoji: string; title: string; description: string }[]
+  primaryCta: string
+}
+
+type HomeNewsletterMessages = {
+  badge: string
+  headingPrimary: string
+  headingAccent: string
+  description: string
+  placeholder: string
+  submitIdle: string
+  submitLoading: string
+  successMessage: string
+  errorMessage: string
+  benefits: { emoji: string; title: string; description: string }[]
+  privacyNote: string
+}
+
+type HomeGlobalFamilyMessages = {
+  badge: string
+  headline: { line1: string; line2: string; tag: string }
+  stats: { value: string; label: string }[]
+  map: { title: string; imageAlt: string; points: string[] }
+  description: {
+    titleLine1: string
+    titleLine2: string
+    paragraphs: string[]
+    quote: string
+    highlights: { value: string; label: string }[]
+  }
+  journeyHeading: string
+  journeyItems: { title: string; description: string; ctaLabel: string; href: string }[]
+  finalCta: {
+    headingLine1: string
+    headingLine2: string
+    paragraph: string
+    buttons: { label: string; href: string }[]
+    note: string
+  }
+}
+
+type HomeGiveMessages = {
+  badge: string
+  headingLine1: string
+  headingLine2: string
+  description: string
+  options: { title: string; description: string }[]
+  primaryCta: string
+  secondaryCta: string
+  trustTitle: string
+  trustItems: string[]
+}
+
+type HomeRootedMessages = {
+  badge: string
+  title: string
+  description: string
+  experiences: string[]
+  schedule: { label: string; value: string }[]
+  menuTitle: string
+  menuDescription: string
+  menuItems: string[]
+  primaryCta: string
+  secondaryCta: string
+  mainImageAlt: string
+  hangoutImageAlt: string
+  hangoutTitle: string
+  hangoutSubtitle: string
+}
+
+type HomeMinistriesMessages = {
+  badge: string
+  headingLine1: string
+  headingLine2: string
+  description: string
+  ministries: { name: string; description: string }[]
+  ctaCard: {
+    heading: string
+    description: string
+    button: string
+  }
+  bottomCta: {
+    text: string
+    linkLabel: string
+  }
+}
+
+type HomeWelcomeMessages = {
+  badgeText: string
+  subLabel: string
+  heading: string
+  description: string
+  cards: HomeWelcomeCard[]
+}
+
+type HomeMessages = {
+  welcome: HomeWelcomeMessages
+  featuredSermon: HomeFeaturedSermonMessages
+  devotionals: HomeDevotionalsMessages
+  newsletter: HomeNewsletterMessages
+  globalFamily: HomeGlobalFamilyMessages
+  give: HomeGiveMessages
+  rootedSpotlight: HomeRootedMessages
+  ministries: HomeMinistriesMessages
+}
+
 export type Messages = {
   nav: {
     home: string
@@ -146,6 +282,7 @@ export type Messages = {
     watchLive: string
     quickLinks: string
   }
+  home: HomeMessages
   footer: FooterMessages
   about: AboutMessages
   general: {
@@ -177,6 +314,239 @@ const en: Messages = {
     registerCta: 'Register Free',
     watchLive: 'Watch Live',
     quickLinks: 'Quick Links',
+  },
+  home: {
+    welcome: {
+      badgeText: 'Building Project',
+      subLabel: 'Welcome to TLCC',
+      heading: 'Welcome Home!',
+      description: 'Dive into our teachings, events and community. Your journey of faith begins here.',
+      cards: [
+        {
+          href: '/about',
+          eyebrow: 'Who we are',
+          title: 'About us',
+          cta: 'Learn more →',
+          imageAlt: 'About us',
+        },
+        {
+          href: '/contact',
+          eyebrow: 'Join our community',
+          title: 'Connect with us',
+          cta: 'Sign up →',
+          imageAlt: 'Connect with us',
+        },
+        {
+          href: '/events',
+          eyebrow: 'Periodic Events',
+          title: 'Events',
+          cta: 'Learn more →',
+          imageAlt: 'Events',
+        },
+      ],
+    },
+    featuredSermon: {
+      badge: 'Latest Message',
+      heading: "This Week's Word",
+      fallbackTitle: 'Living by Faith in a Broken World',
+      fallbackDescription:
+        'Apostle Nelson teaches on how to maintain unwavering faith even in challenging times, drawing from biblical examples and practical applications for modern believers.',
+      fallbackDuration: '45 minutes',
+      fallbackDate: 'November 4, 2025',
+      watchCta: 'Watch on YouTube',
+      viewAll: 'View All Sermons',
+    },
+    devotionals: {
+      badge: 'Daily Bread',
+      heading: 'Fresh Word Every Day',
+      cardSubtitle: "Today's Devotional",
+      cardTitle: 'Walk in the Light',
+      verse: '“But if we walk in the light, as he is in the light, we have fellowship one with another...”',
+      verseRef: '1 John 1:7',
+      cardBody:
+        'As believers, we are called to walk in the light of Christ daily. This means living transparently before God and others, allowing His truth to illuminate every area of our lives.',
+      cta: 'Read Full Devotional',
+      introTitle: "Start Your Day with God's Word",
+      introBody:
+        "Receive daily inspiration, biblical insights, and practical teachings to strengthen your walk with Christ. Our devotionals are designed to help you grow spiritually and apply God's Word to your everyday life.",
+      benefits: [
+        { emoji: '📖', title: 'Daily Content', description: 'Fresh devotionals published every morning' },
+        { emoji: '✉️', title: 'Email Delivery', description: 'Get devotionals delivered straight to your inbox' },
+        { emoji: '💡', title: 'Practical Insights', description: 'Biblical wisdom for modern life challenges' },
+      ],
+      primaryCta: 'Browse All Devotionals',
+    },
+    newsletter: {
+      badge: 'Daily Inspiration',
+      headingPrimary: 'Stay',
+      headingAccent: 'Connected',
+      description: 'Get daily devotionals, sermon updates, and ministry news delivered to your inbox. We promise to bless, not spam.',
+      placeholder: 'Enter your email',
+      submitIdle: 'Subscribe',
+      submitLoading: 'Subscribing...',
+      successMessage: "Thank you! You've been subscribed successfully.",
+      errorMessage: 'Something went wrong. Please try again.',
+      benefits: [
+        { emoji: '📖', title: 'Daily Devotionals', description: 'Start your day with inspiring biblical insights' },
+        { emoji: '🎤', title: 'Sermon Updates', description: 'Never miss a powerful message from leadership' },
+        { emoji: '📅', title: 'Event Alerts', description: 'Stay informed about upcoming gatherings' },
+      ],
+      privacyNote:
+        'By subscribing, you agree to receive emails from The Light Community Church. You can unsubscribe at any time. We respect your privacy and will never share your information.',
+    },
+    globalFamily: {
+      badge: 'Our Reach',
+      headline: {
+        line1: 'One Church.',
+        line2: 'Many Nations.',
+        tag: 'A local community with a global heart',
+      },
+      stats: [
+        { value: '24/7', label: 'Online Access' },
+        { value: '∞', label: "God's Faithfulness" },
+      ],
+      map: {
+        title: 'Our Global Footprint',
+        imageAlt: 'The Light Community Church Global Reach',
+        points: [
+          'Physical Hub: Lagos, Nigeria',
+          'Digital Reach: The Light Community Church',
+          'Vision: Reaching Nations with the Gospel',
+        ],
+      },
+      description: {
+        titleLine1: 'One Family.',
+        titleLine2: 'Infinite Possibilities.',
+        paragraphs: [
+          'Though we gather in one place, our heart beats for the world. We are a single, vibrant family at The Light Community Church, but our mission extends across the globe.',
+          'Through our online services, partnerships, and a vision to plant life-giving churches, we are part of God’s work right here in Lagos and to the ends of the earth.',
+        ],
+        quote: 'Young people primed to take the nations.',
+        highlights: [
+          { value: 'Tuesday & Saturday', label: 'Live Online Services' },
+          { value: 'First Saturday', label: 'Rooted (Physical)' },
+        ],
+      },
+      journeyHeading: 'How We Connect The World',
+      journeyItems: [
+        {
+          title: 'Online Services',
+          description:
+            'Join our community every Tuesday & Saturday at 9:00 PM. Experience worship, teaching, and fellowship from wherever you are.',
+          ctaLabel: 'Watch Live',
+          href: 'https://youtube.com/@TheLightCommunity',
+        },
+        {
+          title: 'Rooted Gatherings',
+          description:
+            'Experience the warmth of in-person fellowship every first Saturday at The Light House, Mangoro. Where digital meets physical.',
+          ctaLabel: 'Find Us',
+          href: '/map',
+        },
+        {
+          title: 'Discipleship',
+          description:
+            "From seekers to servants, from believers to leaders. We're raising arsenals for Christ who will take nations with the Gospel.",
+          ctaLabel: 'Get Involved',
+          href: '/ministries',
+        },
+      ],
+      finalCta: {
+        headingLine1: 'Your Story',
+        headingLine2: 'Starts Here',
+        paragraph: "Whether you're across the street or across the ocean, you have a place in this family.",
+        buttons: [
+          { label: 'Join Us Online', href: 'https://youtube.com/@TheLightCommunity' },
+          { label: 'Visit In Person', href: '/map' },
+        ],
+        note: 'Building community one soul at a time • Impacting lives with the Gospel',
+      },
+    },
+    give: {
+      badge: 'Partner With Us',
+      headingLine1: 'Give to',
+      headingLine2: 'The Light Community Church',
+      description:
+        'Your generosity helps us reach more souls, train more disciples, and transform more lives. Thank you for partnering with us in the work.',
+      options: [
+        { title: 'Online Giving', description: 'Give securely via Paystack or Flutterwave with instant confirmation' },
+        { title: 'Bank Transfer', description: 'Direct deposit to our church account for larger gifts' },
+        { title: 'Recurring Giving', description: 'Set up automatic monthly donations for consistent partnership' },
+      ],
+      primaryCta: 'Give Now',
+      secondaryCta: 'Bank Transfer Details',
+      trustTitle: 'Secure & Trusted Banking',
+      trustItems: ['Secure Transfer', 'Bank Transfer', 'Moniepoint MFB'],
+    },
+    rootedSpotlight: {
+      badge: 'Featured Gathering',
+      title: 'Rooted December · Living in Abundance',
+      description:
+        'It is the last Rooted of the year and we are going all in. Worship that lingers, prophetic teaching that reorients your heart, impartation that ignites, and then the Light Hangout so we can laugh, eat, play games and build family. Come find your people, your fire, and the community that keeps you rooted.',
+      experiences: [
+        'Prophetic teaching from Apostle Nelson Isaiah',
+        'Extended worship, impartation and prayer circles',
+        'Community panels + real conversations about living in abundance',
+        'The Light Hangout: games, laughter, and family moments',
+      ],
+      schedule: [
+        { label: 'Date', value: 'Saturday · 20 December 2025' },
+        { label: 'Time', value: '9:30 AM – 6:00 PM (Hangout follows Rooted)' },
+        { label: 'Venue', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
+      ],
+      menuTitle: 'The Hangout Menu',
+      menuDescription:
+        'We are ending the year with a table that feels like home—think comfort food, Nigerian classics and big sharable bites.',
+      menuItems: ['Signature jollof rice', 'Small chops & finger foods', 'Pizza slices to share', 'Refreshing drinks'],
+      primaryCta: 'Register Free',
+      secondaryCta: 'See Details',
+      mainImageAlt: 'Rooted December',
+      hangoutImageAlt: 'The Light Hangout',
+      hangoutTitle: 'The Light Hangout',
+      hangoutSubtitle: 'Games · Food · Family',
+    },
+    ministries: {
+      badge: 'Join A Ministry',
+      headingLine1: "There's a Place",
+      headingLine2: 'For Everyone',
+      description:
+        "Discover your calling and use your gifts to serve. Whether you're passionate about events, teaching, caring for others, reaching the lost, or organizing behind the scenes — we have a place for you to thrive.",
+      ministries: [
+        {
+          name: 'TLCC Online ministry',
+          description: 'Connecting people worldwide through live services, digital discipleship and online community.',
+        },
+        {
+          name: 'TLCC Firestorm',
+          description: 'Choir department — leading worship and choral ministry for services and events.',
+        },
+        {
+          name: 'TLCC Follow up',
+          description: 'Leading follow-up processes for new contacts and helping people take next steps in faith.',
+        },
+        {
+          name: 'TLCC Prayer team',
+          description: 'Intercession, watch groups and coordinated prayer support across the church.',
+        },
+        {
+          name: 'TLCC Media & visibility',
+          description: 'Media production, social channels and visibility strategy for the church.',
+        },
+        {
+          name: 'Growth initiatives',
+          description: 'Discipleship programs, leadership development and community growth projects.',
+        },
+      ],
+      ctaCard: {
+        heading: 'Ready to Serve?',
+        description: "Join a ministry and make an eternal impact in God's kingdom",
+        button: 'Get Started',
+      },
+      bottomCta: {
+        text: 'Want to learn more about our ministries and how you can serve?',
+        linkLabel: 'Explore All Ministries',
+      },
+    },
   },
   footer: {
     tagline: 'Souls saved. Men trained. Nations taken.',
@@ -440,6 +810,236 @@ const fr: Messages = {
     watchLive: 'Regarder en direct',
     quickLinks: 'Liens rapides',
   },
+  home: {
+    welcome: {
+      badgeText: 'Projet de construction',
+      subLabel: 'Bienvenue à TLCC',
+      heading: 'Bienvenue chez vous !',
+      description: 'Plongez dans nos enseignements, nos événements et notre communauté. Votre parcours de foi commence ici.',
+      cards: [
+        {
+          href: '/about',
+          eyebrow: 'Qui nous sommes',
+          title: 'À propos',
+          cta: 'En savoir plus →',
+          imageAlt: 'À propos de nous',
+        },
+        {
+          href: '/contact',
+          eyebrow: 'Rejoindre notre communauté',
+          title: 'Entrer en contact',
+          cta: 'S’inscrire →',
+          imageAlt: 'Entrer en contact avec nous',
+        },
+        {
+          href: '/events',
+          eyebrow: 'Événements périodiques',
+          title: 'Événements',
+          cta: 'En savoir plus →',
+          imageAlt: 'Événements',
+        },
+      ],
+    },
+    featuredSermon: {
+      badge: 'Dernier message',
+      heading: 'La Parole de la semaine',
+      fallbackTitle: 'Vivre par la foi dans un monde brisé',
+      fallbackDescription:
+        'L’apôtre Nelson enseigne comment garder une foi inébranlable même dans les moments difficiles, en s’appuyant sur des exemples bibliques et des applications pratiques pour les croyants d’aujourd’hui.',
+      fallbackDuration: '45 minutes',
+      fallbackDate: '4 novembre 2025',
+      watchCta: 'Regarder sur YouTube',
+      viewAll: 'Voir tous les messages',
+    },
+    devotionals: {
+      badge: 'Pain quotidien',
+      heading: 'Une parole fraîche chaque jour',
+      cardSubtitle: 'La dévotion du jour',
+      cardTitle: 'Marche dans la lumière',
+      verse: '« Mais si nous marchons dans la lumière, comme il est lui-même dans la lumière, nous sommes en communion les uns avec les autres… »',
+      verseRef: '1 Jean 1:7',
+      cardBody:
+        'En tant que croyants, nous sommes appelés à marcher chaque jour dans la lumière du Christ. Cela signifie vivre dans la transparence devant Dieu et les autres, laissant Sa vérité illuminer chaque domaine de notre vie.',
+      cta: 'Lire la dévotion complète',
+      introTitle: 'Commence ta journée avec la Parole de Dieu',
+      introBody:
+        'Reçois une inspiration quotidienne, des perspectives bibliques et des enseignements pratiques pour renforcer ta marche avec Christ. Nos dévotions t’aident à grandir spirituellement et à appliquer la Parole de Dieu dans la vie de tous les jours.',
+      benefits: [
+        { emoji: '📖', title: 'Contenu quotidien', description: 'De nouvelles dévotions publiées chaque matin' },
+        { emoji: '✉️', title: 'Envoi par e-mail', description: 'Reçois les dévotions directement dans ta boîte de réception' },
+        { emoji: '💡', title: 'Clés pratiques', description: 'Une sagesse biblique pour les défis modernes' },
+      ],
+      primaryCta: 'Voir toutes les dévotions',
+    },
+    newsletter: {
+      badge: 'Inspiration quotidienne',
+      headingPrimary: 'Reste',
+      headingAccent: 'Connecté(e)',
+      description: 'Reçois des dévotions quotidiennes, des mises à jour de messages et des nouvelles des ministères. Nous promettons de bénir, pas de spammer.',
+      placeholder: 'Entre ton e-mail',
+      submitIdle: 'S’abonner',
+      submitLoading: 'Abonnement...',
+      successMessage: 'Merci ! Tu es bien abonné(e).',
+      errorMessage: 'Un problème est survenu. Réessaie.',
+      benefits: [
+        { emoji: '📖', title: 'Dévotions quotidiennes', description: 'Commence ta journée avec des vérités bibliques inspirantes' },
+        { emoji: '🎤', title: 'Messages', description: 'Ne manque jamais un enseignement puissant de la direction' },
+        { emoji: '📅', title: 'Alertes événements', description: 'Sois informé des prochains rassemblements' },
+      ],
+      privacyNote:
+        'En t’abonnant, tu acceptes de recevoir des e-mails de The Light Community Church. Tu peux te désabonner à tout moment. Nous respectons ta vie privée et ne partagerons jamais tes informations.',
+    },
+    globalFamily: {
+      badge: 'Notre portée',
+      headline: {
+        line1: 'Une Église.',
+        line2: 'Beaucoup de nations.',
+        tag: 'Une communauté locale avec un cœur global',
+      },
+      stats: [
+        { value: '24/7', label: 'Accès en ligne' },
+        { value: '∞', label: 'Fidélité de Dieu' },
+      ],
+      map: {
+        title: 'Notre empreinte globale',
+        imageAlt: 'Rayonnement mondial de The Light Community Church',
+        points: [
+          'Plateforme physique : Lagos, Nigeria',
+          'Portée digitale : The Light Community Church',
+          'Vision : Atteindre les nations avec l’Évangile',
+        ],
+      },
+      description: {
+        titleLine1: 'Une famille.',
+        titleLine2: 'Des possibilités infinies.',
+        paragraphs: [
+          'Même si nous nous rassemblons en un seul lieu, notre cœur bat pour le monde. Nous sommes une famille vibrante à The Light Community Church, mais notre mission s’étend aux nations.',
+          'Par nos cultes en ligne, nos partenariats et notre vision de planter des églises vivantes, nous participons à l’œuvre de Dieu ici à Lagos et jusqu’aux extrémités de la terre.',
+        ],
+        quote: 'Des jeunes prêts à prendre les nations.',
+        highlights: [
+          { value: 'Mardi & samedi', label: 'Culs en ligne en direct' },
+          { value: 'Premier samedi', label: 'Rooted (présentiel)' },
+        ],
+      },
+      journeyHeading: 'Comment nous connectons le monde',
+      journeyItems: [
+        {
+          title: 'Services en ligne',
+          description: 'Rejoins notre communauté chaque mardi et samedi à 21h00. Vis la louange, l’enseignement et la communion où que tu sois.',
+          ctaLabel: 'Regarder en direct',
+          href: 'https://youtube.com/@TheLightCommunity',
+        },
+        {
+          title: 'Rencontres Rooted',
+          description: 'Découvre la chaleur de la communion en présentiel chaque premier samedi à The Light House, Mangoro. Là où le digital rencontre le physique.',
+          ctaLabel: 'Nous trouver',
+          href: '/map',
+        },
+        {
+          title: 'Discipulat',
+          description: 'Des chercheurs aux serviteurs, des croyants aux leaders. Nous élevons des arsenaux pour Christ qui prendront les nations avec l’Évangile.',
+          ctaLabel: 'S’impliquer',
+          href: '/ministries',
+        },
+      ],
+      finalCta: {
+        headingLine1: 'Ton histoire',
+        headingLine2: 'Commence ici',
+        paragraph: 'Que tu sois de l’autre côté de la rue ou à l’autre bout du monde, tu as une place dans cette famille.',
+        buttons: [
+          { label: 'Nous rejoindre en ligne', href: 'https://youtube.com/@TheLightCommunity' },
+          { label: 'Nous visiter', href: '/map' },
+        ],
+        note: 'Bâtir la communauté une âme à la fois • Impacter des vies avec l’Évangile',
+      },
+    },
+    give: {
+      badge: 'Partenaire avec nous',
+      headingLine1: 'Donner à',
+      headingLine2: 'The Light Community Church',
+      description:
+        'Ta générosité nous aide à sauver des âmes, former des disciples et transformer des vies. Merci de collaborer avec nous dans cette mission.',
+      options: [
+        { title: 'Don en ligne', description: 'Donne en toute sécurité via Paystack ou Flutterwave avec confirmation instantanée' },
+        { title: 'Virement bancaire', description: 'Versement direct sur le compte de l’église pour des dons plus importants' },
+        { title: 'Don récurrent', description: 'Configure des dons mensuels automatiques pour un partenariat constant' },
+      ],
+      primaryCta: 'Donner maintenant',
+      secondaryCta: 'Détails bancaires',
+      trustTitle: 'Transfert sécurisé et fiable',
+      trustItems: ['Transfert sécurisé', 'Virement bancaire', 'Moniepoint MFB'],
+    },
+    rootedSpotlight: {
+      badge: 'Rassemblement à la une',
+      title: 'Rooted décembre · Vivre dans l’abondance',
+      description:
+        'C’est le dernier Rooted de l’année et nous allons tout donner. Une adoration qui s’attarde, un enseignement prophétique qui recentre ton cœur, une impartition qui enflamme, puis le Light Hangout pour rire, manger, jouer et bâtir la famille. Viens trouver ta tribu, ton feu et la communauté qui te garde enraciné.',
+      experiences: [
+        'Enseignement prophétique de l’apôtre Nelson Isaiah',
+        'Louange prolongée, impartition et cercles de prière',
+        'Tables rondes et conversations réelles sur la vie en abondance',
+        'The Light Hangout : jeux, rires et moments en famille',
+      ],
+      schedule: [
+        { label: 'Date', value: 'Samedi · 20 décembre 2025' },
+        { label: 'Heure', value: '9h30 – 18h00 (le Hangout suit Rooted)' },
+        { label: 'Lieu', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
+      ],
+      menuTitle: 'Le menu du Hangout',
+      menuDescription:
+        'Nous terminons l’année autour d’une table qui sent la maison : comfort food, classiques nigérians et bouchées à partager.',
+      menuItems: ['Jollof signature', 'Petites bouchées & finger food', 'Parts de pizza à partager', 'Boissons rafraîchissantes'],
+      primaryCta: 'Inscription gratuite',
+      secondaryCta: 'Voir les détails',
+      mainImageAlt: 'Rooted décembre',
+      hangoutImageAlt: 'The Light Hangout',
+      hangoutTitle: 'The Light Hangout',
+      hangoutSubtitle: 'Jeux · Repas · Famille',
+    },
+    ministries: {
+      badge: 'Rejoins un ministère',
+      headingLine1: 'Il y a une place',
+      headingLine2: 'Pour chacun',
+      description:
+        'Découvre ton appel et mets tes dons au service. Que tu aies à cœur les événements, l’enseignement, le soin des autres, l’évangélisation ou l’organisation, nous avons un espace pour te voir t’épanouir.',
+      ministries: [
+        {
+          name: 'Ministère TLCC Online',
+          description: 'Connecter des personnes dans le monde entier via les cultes en direct, le discipulat digital et la communauté en ligne.',
+        },
+        {
+          name: 'TLCC Firestorm',
+          description: 'La chorale — conduire la louange et le ministère musical lors des cultes et événements.',
+        },
+        {
+          name: 'TLCC Follow up',
+          description: 'Piloter le suivi des nouveaux contacts et aider chacun à faire son prochain pas dans la foi.',
+        },
+        {
+          name: 'Équipe de prière TLCC',
+          description: 'Intercession, veilles et soutien de prière coordonné dans toute l’église.',
+        },
+        {
+          name: 'TLCC Média & visibilité',
+          description: 'Production média, réseaux sociaux et stratégie de visibilité pour l’église.',
+        },
+        {
+          name: 'Initiatives de croissance',
+          description: 'Programmes de discipulat, développement du leadership et projets de croissance communautaire.',
+        },
+      ],
+      ctaCard: {
+        heading: 'Prêt à servir ?',
+        description: 'Rejoins un ministère et marque l’éternité dans le Royaume de Dieu',
+        button: 'Commencer',
+      },
+      bottomCta: {
+        text: 'Tu veux en savoir plus sur nos ministères et comment servir ?',
+        linkLabel: 'Explorer tous les ministères',
+      },
+    },
+  },
   footer: {
     tagline: 'Des âmes sauvées. Des hommes formés. Des nations gagnées.',
     sections: {
@@ -701,6 +1301,236 @@ const es: Messages = {
     registerCta: 'Regístrate gratis',
     watchLive: 'Ver en vivo',
     quickLinks: 'Enlaces rápidos',
+  },
+  home: {
+    welcome: {
+      badgeText: 'Proyecto de construcción',
+      subLabel: 'Bienvenido a TLCC',
+      heading: '¡Bienvenido a casa!',
+      description: 'Sumérgete en nuestras enseñanzas, eventos y comunidad. Tu viaje de fe comienza aquí.',
+      cards: [
+        {
+          href: '/about',
+          eyebrow: 'Quiénes somos',
+          title: 'Acerca de nosotros',
+          cta: 'Saber más →',
+          imageAlt: 'Acerca de nosotros',
+        },
+        {
+          href: '/contact',
+          eyebrow: 'Únete a nuestra comunidad',
+          title: 'Conecta con nosotros',
+          cta: 'Inscribirme →',
+          imageAlt: 'Conecta con nosotros',
+        },
+        {
+          href: '/events',
+          eyebrow: 'Eventos periódicos',
+          title: 'Eventos',
+          cta: 'Saber más →',
+          imageAlt: 'Eventos',
+        },
+      ],
+    },
+    featuredSermon: {
+      badge: 'Último mensaje',
+      heading: 'La palabra de la semana',
+      fallbackTitle: 'Vivir por fe en un mundo roto',
+      fallbackDescription:
+        'El apóstol Nelson enseña cómo mantener una fe firme incluso en tiempos difíciles, usando ejemplos bíblicos y aplicaciones prácticas para los creyentes de hoy.',
+      fallbackDuration: '45 minutos',
+      fallbackDate: '4 de noviembre de 2025',
+      watchCta: 'Ver en YouTube',
+      viewAll: 'Ver todos los mensajes',
+    },
+    devotionals: {
+      badge: 'Pan diario',
+      heading: 'Palabra fresca cada día',
+      cardSubtitle: 'Devocional de hoy',
+      cardTitle: 'Camina en la luz',
+      verse: '“Pero si andamos en la luz, como él está en la luz, tenemos comunión unos con otros…”',
+      verseRef: '1 Juan 1:7',
+      cardBody:
+        'Como creyentes, somos llamados a caminar diariamente en la luz de Cristo. Esto significa vivir con transparencia delante de Dios y de los demás, permitiendo que Su verdad ilumine cada área de nuestra vida.',
+      cta: 'Leer devocional completo',
+      introTitle: 'Empieza tu día con la Palabra de Dios',
+      introBody:
+        'Recibe inspiración diaria, ideas bíblicas y enseñanzas prácticas para fortalecer tu caminar con Cristo. Nuestros devocionales te ayudan a crecer espiritualmente y aplicar la Palabra de Dios en lo cotidiano.',
+      benefits: [
+        { emoji: '📖', title: 'Contenido diario', description: 'Nuevos devocionales publicados cada mañana' },
+        { emoji: '✉️', title: 'Entrega por correo', description: 'Recibe los devocionales directamente en tu bandeja de entrada' },
+        { emoji: '💡', title: 'Ideas prácticas', description: 'Sabiduría bíblica para los retos modernos' },
+      ],
+      primaryCta: 'Ver todos los devocionales',
+    },
+    newsletter: {
+      badge: 'Inspiración diaria',
+      headingPrimary: 'Permanece',
+      headingAccent: 'Conectado',
+      description: 'Recibe devocionales diarios, actualizaciones de mensajes y noticias de los ministerios. Prometemos bendecir, no hacer spam.',
+      placeholder: 'Introduce tu correo',
+      submitIdle: 'Suscribirme',
+      submitLoading: 'Suscribiendo...',
+      successMessage: '¡Gracias! Te suscribiste correctamente.',
+      errorMessage: 'Ocurrió un problema. Inténtalo de nuevo.',
+      benefits: [
+        { emoji: '📖', title: 'Devocionales diarios', description: 'Comienza tu día con ideas bíblicas inspiradoras' },
+        { emoji: '🎤', title: 'Actualizaciones de sermones', description: 'No te pierdas ningún mensaje poderoso del liderazgo' },
+        { emoji: '📅', title: 'Alertas de eventos', description: 'Mantente al tanto de los próximos encuentros' },
+      ],
+      privacyNote:
+        'Al suscribirte, aceptas recibir correos de The Light Community Church. Puedes darte de baja en cualquier momento. Respetamos tu privacidad y nunca compartiremos tu información.',
+    },
+    globalFamily: {
+      badge: 'Nuestro alcance',
+      headline: {
+        line1: 'Una iglesia.',
+        line2: 'Muchas naciones.',
+        tag: 'Una comunidad local con un corazón global',
+      },
+      stats: [
+        { value: '24/7', label: 'Acceso en línea' },
+        { value: '∞', label: 'Fidelidad de Dios' },
+      ],
+      map: {
+        title: 'Nuestra huella global',
+        imageAlt: 'Alcance global de The Light Community Church',
+        points: [
+          'Centro físico: Lagos, Nigeria',
+          'Alcance digital: The Light Community Church',
+          'Visión: Alcanzar naciones con el Evangelio',
+        ],
+      },
+      description: {
+        titleLine1: 'Una familia.',
+        titleLine2: 'Posibilidades infinitas.',
+        paragraphs: [
+          'Aunque nos reunimos en un solo lugar, nuestro corazón late por el mundo. Somos una sola familia vibrante en The Light Community Church, pero nuestra misión se extiende por todo el planeta.',
+          'A través de nuestros servicios en línea, asociaciones y la visión de plantar iglesias llenas de vida, participamos en la obra de Dios aquí en Lagos y hasta los confines de la tierra.',
+        ],
+        quote: 'Jóvenes listos para tomar las naciones.',
+        highlights: [
+          { value: 'Martes y sábado', label: 'Servicios en vivo en línea' },
+          { value: 'Primer sábado', label: 'Rooted (presencial)' },
+        ],
+      },
+      journeyHeading: 'Cómo conectamos al mundo',
+      journeyItems: [
+        {
+          title: 'Servicios en línea',
+          description: 'Únete cada martes y sábado a las 9:00 p. m. Vive adoración, enseñanza y comunidad estés donde estés.',
+          ctaLabel: 'Ver en vivo',
+          href: 'https://youtube.com/@TheLightCommunity',
+        },
+        {
+          title: 'Reuniones Rooted',
+          description: 'Vive la calidez del compañerismo presencial cada primer sábado en The Light House, Mangoro. Donde lo digital se encuentra con lo físico.',
+          ctaLabel: 'Encuéntranos',
+          href: '/map',
+        },
+        {
+          title: 'Discipulado',
+          description: 'De buscadores a siervos, de creyentes a líderes. Formamos arsenales para Cristo que tomarán naciones con el Evangelio.',
+          ctaLabel: 'Involucrarme',
+          href: '/ministries',
+        },
+      ],
+      finalCta: {
+        headingLine1: 'Tu historia',
+        headingLine2: 'Empieza aquí',
+        paragraph: 'Estés al cruzar la calle o al otro lado del océano, tienes un lugar en esta familia.',
+        buttons: [
+          { label: 'Únete en línea', href: 'https://youtube.com/@TheLightCommunity' },
+          { label: 'Visítanos', href: '/map' },
+        ],
+        note: 'Construyendo comunidad una alma a la vez • Impactando vidas con el Evangelio',
+      },
+    },
+    give: {
+      badge: 'Asóciate con nosotros',
+      headingLine1: 'Da a',
+      headingLine2: 'The Light Community Church',
+      description:
+        'Tu generosidad nos ayuda a alcanzar más almas, formar más discípulos y transformar más vidas. Gracias por asociarte con nosotros en esta obra.',
+      options: [
+        { title: 'Donación en línea', description: 'Da con seguridad mediante Paystack o Flutterwave con confirmación instantánea' },
+        { title: 'Transferencia bancaria', description: 'Depósito directo a la cuenta de la iglesia para ofrendas mayores' },
+        { title: 'Donación recurrente', description: 'Configura aportes mensuales automáticos para un apoyo constante' },
+      ],
+      primaryCta: 'Dar ahora',
+      secondaryCta: 'Detalles bancarios',
+      trustTitle: 'Transferencia segura y confiable',
+      trustItems: ['Transferencia segura', 'Transferencia bancaria', 'Moniepoint MFB'],
+    },
+    rootedSpotlight: {
+      badge: 'Encuentro destacado',
+      title: 'Rooted diciembre · Viviendo en abundancia',
+      description:
+        'Es el último Rooted del año y vamos con todo. Adoración que permanece, enseñanza profética que reorienta el corazón, impartición que enciende y luego el Light Hangout para reír, comer, jugar y hacer familia. Ven y encuentra a tu gente, tu fuego y la comunidad que te mantiene arraigado.',
+      experiences: [
+        'Enseñanza profética del apóstol Nelson Isaiah',
+        'Adoración extendida, impartición y círculos de oración',
+        'Paneles comunitarios y conversaciones reales sobre vivir en abundancia',
+        'The Light Hangout: juegos, risas y momentos en familia',
+      ],
+      schedule: [
+        { label: 'Fecha', value: 'Sábado · 20 de diciembre de 2025' },
+        { label: 'Hora', value: '9:30 a. m. – 6:00 p. m. (el hangout sigue a Rooted)' },
+        { label: 'Lugar', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
+      ],
+      menuTitle: 'El menú del Hangout',
+      menuDescription:
+        'Cerramos el año con una mesa que sabe a hogar: comida reconfortante, clásicos nigerianos y grandes bocados para compartir.',
+      menuItems: ['Jollof especial', 'Snacks y finger foods', 'Porciones de pizza para compartir', 'Bebidas refrescantes'],
+      primaryCta: 'Regístrate gratis',
+      secondaryCta: 'Ver detalles',
+      mainImageAlt: 'Rooted diciembre',
+      hangoutImageAlt: 'The Light Hangout',
+      hangoutTitle: 'The Light Hangout',
+      hangoutSubtitle: 'Juegos · Comida · Familia',
+    },
+    ministries: {
+      badge: 'Únete a un ministerio',
+      headingLine1: 'Hay un lugar',
+      headingLine2: 'Para todos',
+      description:
+        'Descubre tu llamado y usa tus dones para servir. Si te apasionan los eventos, la enseñanza, el cuidado de otros, alcanzar a los perdidos o la organización tras bambalinas, tenemos un espacio donde puedes florecer.',
+      ministries: [
+        {
+          name: 'Ministerio TLCC Online',
+          description: 'Conectamos personas en todo el mundo mediante servicios en vivo, discipulado digital y comunidad en línea.',
+        },
+        {
+          name: 'TLCC Firestorm',
+          description: 'Ministerio de coro — guiando la adoración y la música en cultos y eventos.',
+        },
+        {
+          name: 'TLCC Follow up',
+          description: 'Lidera los procesos de seguimiento para nuevos contactos y ayuda a cada persona a dar su siguiente paso en la fe.',
+        },
+        {
+          name: 'Equipo de oración TLCC',
+          description: 'Intercesión, grupos de vigilia y apoyo coordinado de oración en toda la iglesia.',
+        },
+        {
+          name: 'TLCC Media & visibility',
+          description: 'Producción de medios, redes sociales y estrategia de visibilidad para la iglesia.',
+        },
+        {
+          name: 'Iniciativas de crecimiento',
+          description: 'Programas de discipulado, desarrollo de liderazgo y proyectos de crecimiento comunitario.',
+        },
+      ],
+      ctaCard: {
+        heading: '¿Listo para servir?',
+        description: 'Únete a un ministerio y deja una huella eterna en el Reino de Dios',
+        button: 'Comenzar',
+      },
+      bottomCta: {
+        text: '¿Quieres saber más sobre nuestros ministerios y cómo servir?',
+        linkLabel: 'Explorar todos los ministerios',
+      },
+    },
   },
   footer: {
     tagline: 'Almas salvadas. Hombres formados. Naciones tomadas.',

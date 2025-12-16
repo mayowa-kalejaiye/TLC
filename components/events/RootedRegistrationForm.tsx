@@ -70,6 +70,8 @@ export default function RootedRegistrationForm() {
             full_name: submission.fullName,
             name: submission.fullName,
             email: submission.email,
+            phone: submission.phone,
+            foodNotes: submission.foodNotes || 'None noted',
             time: new Date().toLocaleString('en-NG', {
               timeZone: 'Africa/Lagos',
               weekday: 'short',
@@ -79,7 +81,6 @@ export default function RootedRegistrationForm() {
               hour: '2-digit',
               minute: '2-digit',
             }),
-            message: `Phone: ${submission.phone}\nEmail: ${submission.email}\nFood notes: ${submission.foodNotes || 'None noted'}`,
           },
           emailPublicKey
         )

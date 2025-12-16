@@ -5,10 +5,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Play, Calendar, Clock, ArrowRight } from 'lucide-react'
 import { getLatestYouTubeVideo, formatDate, type YouTubeVideo } from '@/lib/youtube'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function FeaturedSermon() {
   const [video, setVideo] = useState<YouTubeVideo | null>(null)
   const [loading, setLoading] = useState(true)
+  const { messages } = useLanguage()
+  const sermonMessages = messages.home.featuredSermon
 
   useEffect(() => {
     async function fetchLatestVideo() {
@@ -36,10 +39,10 @@ export default function FeaturedSermon() {
         <div className="container-custom">
           <div className="text-center mb-12">
             <p className="text-tlcc-gold font-bold text-sm tracking-wider uppercase mb-3">
-              LATEST MESSAGE
+              {sermonMessages.badge}
             </p>
             <h2 className="font-anton text-3xl md:text-5xl text-tlcc-navy leading-none uppercase">
-              This Week&apos;s Word
+              {sermonMessages.heading}
             </h2>
           </div>
           <div className="max-w-4xl mx-auto">
@@ -58,10 +61,10 @@ export default function FeaturedSermon() {
       <div className="container-custom relative z-10">
         <div className="text-center mb-12">
           <p className="text-tlcc-gold font-bold text-sm tracking-wider uppercase mb-3">
-            LATEST MESSAGE
+            {sermonMessages.badge}
           </p>
           <h2 className="font-anton text-3xl md:text-5xl text-tlcc-navy leading-none uppercase">
-            This Week&apos;s Word
+            {sermonMessages.heading}
           </h2>
         </div>
 
@@ -93,22 +96,22 @@ export default function FeaturedSermon() {
             {/* Content */}
             <div className="p-6 md:p-8">
               <h3 className="text-2xl md:text-3xl font-bold text-tlcc-navy mb-4">
-                {video?.title || "Living by Faith in a Broken World"}
+                {video?.title || sermonMessages.fallbackTitle}
               </h3>
               
               <div className="flex flex-wrap gap-4 text-tlcc-navy-light mb-4">
                 <div className="flex items-center space-x-2">
                   <Calendar className="h-4 w-4" />
-                  <span className="text-sm">{video ? formatDate(video.publishedAt) : "November 4, 2025"}</span>
+                  <span className="text-sm">{video ? formatDate(video.publishedAt) : sermonMessages.fallbackDate}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Clock className="h-4 w-4" />
-                  <span className="text-sm">{video?.duration || "45 minutes"}</span>
+                  <span className="text-sm">{video?.duration || sermonMessages.fallbackDuration}</span>
                 </div>
               </div>
 
               <p className="text-tlcc-navy-light mb-4 line-clamp-3">
-                {video?.description || "Apostle Nelson teaches on how to maintain unwavering faith even in challenging times, drawing from biblical examples and practical applications for modern believers."}
+                {video?.description || sermonMessages.fallbackDescription}
               </p>
 
               <Link
@@ -118,7 +121,7 @@ export default function FeaturedSermon() {
                 className="inline-flex items-center px-6 py-3 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 <Play className="h-5 w-5 mr-2" />
-                Watch on YouTube
+                {sermonMessages.watchCta}
               </Link>
             </div>
           </div>
@@ -129,7 +132,7 @@ export default function FeaturedSermon() {
               href="/sermons"
               className="inline-flex items-center text-tlcc-gold hover:text-tlcc-gold-dark font-semibold transition-colors"
             >
-              <span>View All Sermons</span>
+              <span>{sermonMessages.viewAll}</span>
               <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

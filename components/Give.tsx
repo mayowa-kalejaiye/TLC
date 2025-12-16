@@ -1,8 +1,15 @@
-﻿import Link from 'next/link'
+﻿'use client'
+
+import Link from 'next/link'
 import Image from 'next/image'
 import { Heart, CreditCard, Building2, Sparkles } from 'lucide-react'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function Give() {
+  const { messages } = useLanguage()
+  const give = messages.home.give
+  const optionIcons = [CreditCard, Building2, Heart]
+
   return (
     <section className="relative py-16 md:py-24 text-white overflow-hidden z-20">
       {/* Background Image with overlay to match the Give page */}
@@ -24,52 +31,38 @@ export default function Give() {
             <div className="inline-flex items-center gap-2 bg-tlcc-gold/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-tlcc-gold/30">
               <Sparkles className="h-4 w-4 text-tlcc-gold" />
               <span className="text-tlcc-gold font-bold text-sm tracking-wider uppercase">
-                PARTNER WITH US
+                {give.badge}
               </span>
             </div>
             
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: 'var(--font-anton)' }}>
-              <span className="block">Give to</span>
-              <span className="block text-tlcc-gold">The Light Community Church</span>
+              <span className="block">{give.headingLine1}</span>
+              <span className="block text-tlcc-gold">{give.headingLine2}</span>
             </h2>
 
             <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
-              Your generosity helps us reach more souls, train more disciples, 
-              and transform more lives. Thank you for partnering with us in the work.
+              {give.description}
             </p>
           </div>
 
           {/* Giving Options */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-tlcc-gold to-tlcc-orange rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform">
-                <CreditCard className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-xl mb-3">Online Giving</h3>
-              <p className="text-gray-200 leading-relaxed">
-                Give securely via Paystack or Flutterwave with instant confirmation
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group" style={{ animationDelay: '0.1s' }}>
-              <div className="w-16 h-16 bg-gradient-to-br from-tlcc-gold to-tlcc-orange rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform">
-                <Building2 className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-xl mb-3">Bank Transfer</h3>
-              <p className="text-gray-200 leading-relaxed">
-                Direct deposit to our church account for larger gifts
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group" style={{ animationDelay: '0.2s' }}>
-              <div className="w-16 h-16 bg-gradient-to-br from-tlcc-gold to-tlcc-orange rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform">
-                <Heart className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-xl mb-3">Recurring Giving</h3>
-              <p className="text-gray-200 leading-relaxed">
-                Set up automatic monthly donations for consistent partnership
-              </p>
-            </div>
+            {give.options.map((option, index) => {
+              const Icon = optionIcons[index % optionIcons.length]
+              return (
+                <div
+                  key={option.title}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-tlcc-gold to-tlcc-orange rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform">
+                    <Icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-3">{option.title}</h3>
+                  <p className="text-gray-200 leading-relaxed">{option.description}</p>
+                </div>
+              )
+            })}
           </div>
 
           {/* CTA Section */}
@@ -79,29 +72,27 @@ export default function Give() {
                 href="/give"
                 className="group w-full sm:w-auto px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
               >
-                <span>Give Now</span>
+                <span>{give.primaryCta}</span>
                 <Heart className="h-5 w-5 group-hover:scale-110 transition-transform" />
               </Link>
               <Link
                 href="/give#bank-details"
                 className="w-full sm:w-auto px-10 py-4 bg-white/10 backdrop-blur-md border-2 border-white hover:bg-white hover:text-tlcc-green font-bold rounded-full transition-all duration-300 hover:scale-105"
               >
-                Bank Transfer Details
+                {give.secondaryCta}
               </Link>
             </div>
 
             {/* Trust Indicators */}
             <div className="inline-block bg-white/5 backdrop-blur-md rounded-2xl px-8 py-6 border border-white/10">
-              <p className="text-sm text-gray-300 mb-3 font-semibold">Secure & Trusted Banking</p>
+              <p className="text-sm text-gray-300 mb-3 font-semibold">{give.trustTitle}</p>
               <div className="flex flex-wrap justify-center items-center gap-6 text-sm">
-                <div className="flex items-center gap-2 text-gray-200">
-                  <span className="text-green-400">🔒</span>
-                  <span className="font-medium">Secure Transfer</span>
-                </div>
-                <div className="w-px h-4 bg-white/20"></div>
-                <span className="font-medium text-gray-200">Bank Transfer</span>
-                <div className="w-px h-4 bg-white/20"></div>
-                <span className="font-medium text-gray-200">Moniepoint MFB</span>
+                {give.trustItems.map((item, index) => (
+                  <div key={`${item}-${index}`} className="flex items-center gap-2 text-gray-200">
+                    {index === 0 ? <span className="text-green-400">🔒</span> : null}
+                    <span className="font-medium">{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
