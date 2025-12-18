@@ -2,7 +2,7 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Clock, MapPin, Sparkles, Utensils, Users, Heart } from 'lucide-react'
+import { Calendar, Clock, MapPin, Sparkles, Users, Heart } from 'lucide-react'
 import RootedRegistrationForm from '@/components/events/RootedRegistrationForm'
 import CountdownTimer from '@/components/events/CountdownTimer'
 import { useLanguage } from '@/components/providers/LanguageProvider'
@@ -21,7 +21,6 @@ export default function RootedDecemberPage() {
     { label: rooted.schedule[2].label, value: rooted.schedule[2].value },
   ]
   const hangoutHighlights = [
-    { title: rooted.menuTitle, description: rooted.menuDescription, icon: Utensils },
     { title: rooted.hangoutTitle, description: rooted.hangoutSubtitle, icon: Users },
   ]
 
@@ -67,8 +66,7 @@ export default function RootedDecemberPage() {
       <section className="py-20 bg-white">
         <div className="container-custom grid lg:grid-cols-[1.2fr_0.8fr] gap-10">
           <div>
-            <h2 className="font-anton text-3xl md:text-4xl text-tlcc-navy mb-6">{messages.home.rootedSpotlight.menuTitle}</h2>
-            <p className="text-lg text-gray-700 mb-8">{messages.home.rootedSpotlight.menuDescription}</p>
+            {/* Hangout menu/title removed per request */}
             <div className="grid sm:grid-cols-2 gap-4">
               {info.map(({ label, value }, idx) => {
                 const Icon = infoIcons[idx % infoIcons.length]

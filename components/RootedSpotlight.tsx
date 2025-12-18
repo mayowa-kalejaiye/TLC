@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Clock, MapPin, Sparkles, Users, Utensils } from 'lucide-react'
+import { Calendar, Clock, MapPin, Sparkles, Users } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function RootedSpotlight() {
@@ -45,20 +45,7 @@ export default function RootedSpotlight() {
               )
             })}
           </div>
-          <div className="bg-white rounded-2xl border border-tlcc-cream/70 p-6 mb-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Utensils className="h-5 w-5 text-tlcc-gold" />
-              <p className="text-sm font-semibold uppercase tracking-wide text-gray-500">{rooted.menuTitle}</p>
-            </div>
-            <p className="text-gray-700 mb-3 text-sm">{rooted.menuDescription}</p>
-            <div className="flex flex-wrap gap-2">
-              {rooted.menuItems.map((item) => (
-                <span key={item} className="px-3 py-1 rounded-full bg-tlcc-cream text-sm text-tlcc-navy font-semibold">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* Hangout menu removed per request - no food names shown */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/events/rooted-december"

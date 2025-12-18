@@ -31,15 +31,15 @@ export default function EventsPage() {
     {
       id: 'light-hangout',
       title: 'The Light Hangout',
-      tagline: 'Food · Games · Family Vibes',
+      tagline: 'Games · Family Vibes',
       description:
-        'Right after Rooted we switch into full-on family mode: games, squad photos, testimonies, jollof, small chops, pizza slices and a long table that proves church is home.',
+        'Right after Rooted we switch into full-on family mode: games, squad photos, testimonies and a long table that proves church is home.',
       date: 'Saturday · 20 December 2025',
       time: '3:00 PM till evening',
       location: 'Courtyard @ The Light House',
       type: 'Community Hangout',
       image: '/images/rooted_hangout.jpg',
-      icon: Utensils,
+      icon: Users,
       color: 'from-tlcc-green to-tlcc-navy',
       featured: true,
       ctaLink: '/events/rooted-december#register',
@@ -111,7 +111,8 @@ export default function EventsPage() {
     'The Light Hangout immediately after service with games, honest conversations and laughter.',
   ]
 
-  const rootedMenu = ['Jollof rice', 'Small chops', 'Pizza slices', 'Refreshing drinks']
+  // rootedMenu removed per request - no food names shown
+  const rootedMenu: string[] = []
 
   const heroRef = useRef<HTMLDivElement | null>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -227,16 +228,7 @@ export default function EventsPage() {
                 </li>
               ))}
             </ul>
-            <div className="bg-white/10 border border-white/20 rounded-3xl p-5 mb-6">
-              <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-3">Hangout Menu</p>
-              <div className="flex flex-wrap gap-2">
-                {rootedMenu.map((item) => (
-                  <span key={item} className="px-3 py-1 rounded-full bg-white/20 text-xs font-semibold">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* Hangout menu removed per request - no food names shown */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/events/rooted-december"
@@ -260,9 +252,9 @@ export default function EventsPage() {
               <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white rotate-3">
                 <Image src="/images/rooted_hangout.jpg" alt="Light Hangout" width={600} height={400} className="object-cover" />
               </div>
-              <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 text-tlcc-navy">
+                <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 text-tlcc-navy">
                 <p className="text-sm font-semibold">Hangout starts 3:00 PM</p>
-                <p className="text-xs text-gray-500">Games · Photos · Real conversations · Food</p>
+                <p className="text-xs text-gray-500">Games · Photos · Real conversations</p>
               </div>
             </div>
           </div>
