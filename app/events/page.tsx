@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, Sparkles, Utensils } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, Sparkles } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -112,7 +112,6 @@ export default function EventsPage() {
   ]
 
   // rootedMenu removed per request - no food names shown
-  const rootedMenu: string[] = []
 
   const heroRef = useRef<HTMLDivElement | null>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
