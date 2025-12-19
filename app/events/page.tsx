@@ -35,7 +35,7 @@ export default function EventsPage() {
       description:
         'Right after Rooted we switch into full-on family mode: games, squad photos, testimonies and a long table that proves church is home.',
       date: 'Saturday · 20 December 2025',
-      time: '3:00 PM till evening',
+      time: '10:00 AM',
       location: 'Courtyard @ The Light House',
       type: 'Community Hangout',
       image: '/images/rooted_hangout.jpg',
@@ -252,9 +252,10 @@ export default function EventsPage() {
                 <Image src="/images/rooted_hangout.jpg" alt="Light Hangout" width={600} height={400} className="object-cover" />
               </div>
                 <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 text-tlcc-navy">
-                <p className="text-sm font-semibold">Hangout starts 3:00 PM</p>
-                <p className="text-xs text-gray-500">Games · Photos · Real conversations</p>
-              </div>
+                    <p className="text-sm font-semibold">Hangout starts 10:00 AM</p>
+                    <p className="text-xs text-gray-500">Games · Photos · Real conversations</p>
+                    <p className="text-xs text-tlcc-orange mt-2">Updated: Correct hangout time is 10 am as per flyer.</p>
+                  </div>
             </div>
           </div>
         </div>
