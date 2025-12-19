@@ -18,7 +18,7 @@ export default function EventsPage() {
       description:
         'Worship, prophetic teaching by Apostle Nelson Isaiah, impartation circles and overflow moments that mark the last Rooted of the year. The Light Hangout closes the day with laughter and real conversations.',
       date: 'Saturday · 20 December 2025',
-      time: '10:00 AM – Hangout Begins 3:00 PM',
+      time: '10:00 AM ',
       location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
       type: 'Featured Gathering',
       image: '/images/rooted_december.jpg',
