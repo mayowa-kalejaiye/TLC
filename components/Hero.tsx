@@ -127,10 +127,10 @@ export default function Hero() {
                 </div>
               </div>
               <Link
-                // ...existing code...
+                href="/events"
                 className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow text-center"
               >
-                {messages.hero.registerCta}
+                See Events
               </Link>
             </div>
             {/* Countdown for Rooted December removed */}
