@@ -1,13 +1,6 @@
 
 "use client"
-import Image from 'next/image'
-import Link from 'next/link'
-import { Calendar, Clock, MapPin, Sparkles, Users, Heart } from 'lucide-react'
-import RootedRegistrationForm from '@/components/events/RootedRegistrationForm'
-import CountdownTimer from '@/components/events/CountdownTimer'
-import { useLanguage } from '@/components/providers/LanguageProvider'
-
-const infoIcons = [Calendar, Sparkles, Heart, Clock, MapPin]
+// ...existing code...
 
 
 export default function RootedDecemberPage() {

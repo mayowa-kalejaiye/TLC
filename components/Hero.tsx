@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Circle, Sparkles } from 'lucide-react'
-import CountdownTimer from './events/CountdownTimer'
+// ...existing code...
 import { motion } from 'framer-motion'
 import { getLatestYouTubeVideo } from '@/lib/youtube'
 import { useLanguage } from '@/components/providers/LanguageProvider'
