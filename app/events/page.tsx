@@ -12,23 +12,6 @@ gsap.registerPlugin(ScrollTrigger)
 export default function EventsPage() {
   const upcomingEvents = [
     {
-      id: 'rooted-december',
-      title: 'Rooted December',
-      tagline: 'Living in Abundance Weekend',
-      description:
-        'Worship, prophetic teaching by Apostle Nelson Isaiah, impartation circles and overflow moments that mark the last Rooted of the year. The Light Hangout closes the day with laughter and real conversations.',
-      date: 'Saturday · 20 December 2025',
-      time: '10:00 AM ',
-      location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
-      type: 'Featured Gathering',
-      image: '/images/rooted_december.jpg',
-      icon: Sparkles,
-      color: 'from-tlcc-orange to-tlcc-gold',
-      featured: true,
-      ctaLink: '/events/rooted-december',
-      ctaLabel: 'Register Free',
-    },
-    {
       id: 'light-hangout',
       title: 'The Light Hangout',
       tagline: 'Games · Family Vibes',
