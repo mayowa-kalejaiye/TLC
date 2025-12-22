@@ -127,13 +127,13 @@ export default function Hero() {
                 </div>
               </div>
               <Link
-                href="/events/rooted-december"
+                // ...existing code...
                 className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow text-center"
               >
                 {messages.hero.registerCta}
               </Link>
             </div>
-            <CountdownTimer targetDate="2025-12-20T09:30:00+01:00" />
+            {/* Countdown for Rooted December removed */}
           </motion.div>
 
           {/* CTA Buttons - Outlined Style */}

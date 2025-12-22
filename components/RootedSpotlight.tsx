@@ -48,13 +48,13 @@ export default function RootedSpotlight() {
           {/* Hangout menu removed per request - no food names shown */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/events/rooted-december"
+              // ...existing code...
               className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-tlcc-orange text-white font-bold uppercase tracking-wide shadow-lg hover:scale-105 transition"
             >
               {rooted.primaryCta}
             </Link>
             <Link
-              href="/events#rooted-december"
+              // ...existing code...
               className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-tlcc-navy text-tlcc-navy font-bold uppercase tracking-wide hover:bg-tlcc-navy hover:text-white transition"
             >
               {rooted.secondaryCta}

@@ -309,9 +309,7 @@ const en: Messages = {
       { prefix: 'Men ', highlight: 'trained', suffix: '.' },
       { prefix: 'Nations ', highlight: 'taken', suffix: '.' },
     ],
-    featuredTagline: 'Rooted December · Living in Abundance',
-    featuredDetails: 'Saturday 20 December · The Light House · Apostle Nelson Isaiah',
-    registerCta: 'Register Free',
+    // Rooted December/Living in Abundance event removed
     watchLive: 'Watch Live',
     quickLinks: 'Quick Links',
   },
