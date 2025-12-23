@@ -480,31 +480,22 @@ const en: Messages = {
       trustItems: ['Secure Transfer', 'Bank Transfer', 'Moniepoint MFB'],
     },
     rootedSpotlight: {
-      badge: 'Featured Gathering',
-      title: 'Rooted December · Living in Abundance',
-      description:
-        'It is the last Rooted of the year and we are going all in. Worship that lingers, prophetic teaching that reorients your heart, impartation that ignites, and then the Light Hangout so we can laugh, eat, play games and build family. Come find your people, your fire, and the community that keeps you rooted.',
-      experiences: [
-        'Prophetic teaching from Apostle Nelson Isaiah',
-        'Extended worship, impartation and prayer circles',
-        'Community panels + real conversations about living in abundance',
-        'The Light Hangout: games, laughter, and family moments',
-      ],
-      schedule: [
-        { label: 'Date', value: 'Saturday · 20 December 2025' },
-        { label: 'Time', value: '9:30 AM – 6:00 PM (Hangout follows Rooted)' },
-        { label: 'Venue', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
-      ],
-      // menu removed per site update - do not list food items
+      // Featured gathering removed from Home — keep minimal placeholders
+      badge: '',
+      title: '',
+      description: '',
+      experiences: [],
+      schedule: [],
+      // menu removed per site update - keep empty
       menuTitle: '',
       menuDescription: '',
       menuItems: [],
-      primaryCta: 'Register Free',
-      secondaryCta: 'See Details',
-      mainImageAlt: 'Rooted December',
-      hangoutImageAlt: 'The Light Hangout',
-      hangoutTitle: 'The Light Hangout',
-      hangoutSubtitle: 'Games · Family',
+      primaryCta: 'See Events',
+      secondaryCta: '',
+      mainImageAlt: '',
+      hangoutImageAlt: '',
+      hangoutTitle: '',
+      hangoutSubtitle: '',
     },
     ministries: {
       badge: 'Join A Ministry',
@@ -973,31 +964,22 @@ const fr: Messages = {
       trustItems: ['Transfert sécurisé', 'Virement bancaire', 'Moniepoint MFB'],
     },
     rootedSpotlight: {
-      badge: 'Rassemblement à la une',
-      title: 'Rooted décembre · Vivre dans l’abondance',
-      description:
-        'C’est le dernier Rooted de l’année et nous allons tout donner. Une adoration qui s’attarde, un enseignement prophétique qui recentre ton cœur, une impartition qui enflamme, puis le Light Hangout pour rire, manger, jouer et bâtir la famille. Viens trouver ta tribu, ton feu et la communauté qui te garde enraciné.',
-      experiences: [
-        'Enseignement prophétique de l’apôtre Nelson Isaiah',
-        'Louange prolongée, impartition et cercles de prière',
-        'Tables rondes et conversations réelles sur la vie en abondance',
-        'The Light Hangout : jeux, rires et moments en famille',
-      ],
-      schedule: [
-        { label: 'Date', value: 'Samedi · 20 décembre 2025' },
-        { label: 'Heure', value: '9h30 – 18h00 (le Hangout suit Rooted)' },
-        { label: 'Lieu', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
-      ],
-      // menu removed per site update - do not list food items
+      // Featured gathering removed from Home — keep minimal placeholders
+      badge: '',
+      title: '',
+      description: '',
+      experiences: [],
+      schedule: [],
+      // menu removed per site update - keep empty
       menuTitle: '',
       menuDescription: '',
       menuItems: [],
-      primaryCta: 'Inscription gratuite',
-      secondaryCta: 'Voir les détails',
-      mainImageAlt: 'Rooted décembre',
-      hangoutImageAlt: 'The Light Hangout',
-      hangoutTitle: 'The Light Hangout',
-      hangoutSubtitle: 'Jeux · Famille',
+      primaryCta: 'Voir les événements',
+      secondaryCta: '',
+      mainImageAlt: '',
+      hangoutImageAlt: '',
+      hangoutTitle: '',
+      hangoutSubtitle: '',
     },
     ministries: {
       badge: 'Rejoins un ministère',
@@ -1466,31 +1448,22 @@ const es: Messages = {
       trustItems: ['Transferencia segura', 'Transferencia bancaria', 'Moniepoint MFB'],
     },
     rootedSpotlight: {
-      badge: 'Encuentro destacado',
-      title: 'Rooted diciembre · Viviendo en abundancia',
-      description:
-        'Es el último Rooted del año y vamos con todo. Adoración que permanece, enseñanza profética que reorienta el corazón, impartición que enciende y luego el Light Hangout para reír, comer, jugar y hacer familia. Ven y encuentra a tu gente, tu fuego y la comunidad que te mantiene arraigado.',
-      experiences: [
-        'Enseñanza profética del apóstol Nelson Isaiah',
-        'Adoración extendida, impartición y círculos de oración',
-        'Paneles comunitarios y conversaciones reales sobre vivir en abundancia',
-        'The Light Hangout: juegos, risas y momentos en familia',
-      ],
-      schedule: [
-        { label: 'Fecha', value: 'Sábado · 20 de diciembre de 2025' },
-        { label: 'Hora', value: '9:30 a. m. – 6:00 p. m. (el hangout sigue a Rooted)' },
-        { label: 'Lugar', value: 'The Light House · 43b Babaponmile Street, Mangoro, Ikeja' },
-      ],
-      // menu removed per site update - do not list food items
+      // Featured gathering removed from Home — keep minimal placeholders
+      badge: '',
+      title: '',
+      description: '',
+      experiences: [],
+      schedule: [],
+      // menu removed per site update - keep empty
       menuTitle: '',
       menuDescription: '',
       menuItems: [],
-      primaryCta: 'Regístrate gratis',
-      secondaryCta: 'Ver detalles',
-      mainImageAlt: 'Rooted diciembre',
-      hangoutImageAlt: 'The Light Hangout',
-      hangoutTitle: 'The Light Hangout',
-      hangoutSubtitle: 'Juegos · Familia',
+      primaryCta: 'Ver eventos',
+      secondaryCta: '',
+      mainImageAlt: '',
+      hangoutImageAlt: '',
+      hangoutTitle: '',
+      hangoutSubtitle: '',
     },
     ministries: {
       badge: 'Únete a un ministerio',
