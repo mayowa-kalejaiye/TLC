@@ -1,4 +1,6 @@
-﻿'use client'
+﻿
+"use client";
+// ...existing code...
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
@@ -11,9 +13,11 @@ import type { Messages } from '@/lib/i18n'
 
 type NavKey = Exclude<keyof Messages['nav'], 'language'>
 
-const navRoutes: Record<NavKey, string> = {
+
+const navRoutes: Record<NavKey | 'devotionals', string> = {
   home: '/',
   about: '/about',
+  devotionals: '/devotionals',
   quickLinks: '/quick-links',
   ministries: '/ministries',
   events: '/events',
@@ -22,8 +26,8 @@ const navRoutes: Record<NavKey, string> = {
   give: '/give',
 }
 
-const desktopNav: NavKey[] = ['about', 'quickLinks', 'ministries', 'events', 'sermons', 'map', 'give']
-const mobileNav: NavKey[] = ['home', 'about', 'quickLinks', 'ministries', 'sermons', 'map', 'give']
+const desktopNav: (NavKey | 'devotionals')[] = ['about', 'devotionals', 'ministries', 'events', 'sermons', 'map', 'give']
+const mobileNav: (NavKey | 'devotionals')[] = ['home', 'about', 'devotionals', 'ministries', 'sermons', 'map', 'give'] // 'quickLinks' removed from here
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -100,15 +104,18 @@ export default function Navbar() {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex items-center space-x-1 absolute left-1/2 -translate-x-1/2">
-            {desktopNav.map((key) => (
-              <Link
-                key={key}
-                href={navRoutes[key]}
-                className="px-3 py-1 text-tlcc-navy hover:text-tlcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
-              >
-                {messages.nav[key]}
-              </Link>
-            ))}
+            {desktopNav.map((key) => {
+              const label = key === 'devotionals' ? 'Devotionals' : messages.nav[key as NavKey];
+              return (
+                <Link
+                  key={key}
+                  href={navRoutes[key]}
+                  className="px-3 py-1 text-tlcc-navy hover:text-tlcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Language selector + Hamburger button */}
@@ -169,6 +176,8 @@ export default function Navbar() {
                   {mobileNav.map((key) => {
                     const href = navRoutes[key]
                     const isActive = pathname === href
+                    // For 'devotionals', use a custom label
+                    const label = key === 'devotionals' ? 'Devotionals' : messages.nav[key as NavKey]
                     return (
                       <Link
                         key={key}
@@ -178,7 +187,7 @@ export default function Navbar() {
                           isActive ? 'text-tlcc-gold' : 'text-white hover:text-tlcc-gold'
                         } transition-colors duration-200 leading-none uppercase`}
                       >
-                        {messages.nav[key]}
+                        {label}
                       </Link>
                     )
                   })}

@@ -112,29 +112,7 @@ export default function Hero() {
           </h1>
 
           {/* Featured Event Banner */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="bg-white/10 border border-white/20 rounded-2xl px-6 py-6 backdrop-blur flex flex-col gap-4 max-w-4xl mx-auto text-white"
-          >
-            <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-              <div className="flex items-center gap-3 text-sm sm:text-base">
-                <Sparkles className="h-5 w-5 text-tlcc-gold" />
-                <div>
-                  <p className="font-semibold uppercase tracking-wide text-xs">{messages.hero.featuredTagline}</p>
-                  <p className="text-white/80">{messages.hero.featuredDetails}</p>
-                </div>
-              </div>
-              <Link
-                href="/events"
-                className="px-5 py-2 rounded-full bg-white text-tlcc-navy font-bold uppercase tracking-wide text-xs shadow text-center"
-              >
-                See Events
-              </Link>
-            </div>
-            {/* Countdown for Rooted December removed */}
-          </motion.div>
+          
 
           {/* CTA Buttons - Outlined Style */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Mail, Send, CheckCircle, Zap } from 'lucide-react'
-import emailjs from '@emailjs/browser'
 import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function Newsletter() {
@@ -21,35 +20,29 @@ export default function Newsletter() {
       minute: '2-digit',
     })
 
-  // Initialize EmailJS
-  useEffect(() => {
-    emailjs.init('yWKH6btB5bEwVcFHU')
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-    
+    e.preventDefault();
+    setStatus('loading');
     try {
-      // Send email using EmailJS
-      await emailjs.send(
-        'service_q9oad7f', // Service ID
-        'template_nphq0yh', // Template ID
-        {
-          user_email: email,
-          subscription_date: subscriptionDate(),
-        }
-      )
-      
-      setStatus('success')
-      setEmail('')
-      setTimeout(() => setStatus('idle'), 5000)
+      const res = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setEmail('');
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
     } catch (error) {
-      console.error('EmailJS Error:', error)
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 5000)
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
     }
-  }
+  };
 
   return (
     <section id="stay-connected" className="py-16 md:py-24 bg-gradient-to-br from-white via-tlcc-cream to-white relative overflow-hidden scroll-mt-24 z-20">

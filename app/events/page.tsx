@@ -188,62 +188,6 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Rooted Feature Section */}
-      <section className="bg-gradient-to-br from-tlcc-navy to-tlcc-green text-white py-20">
-        <div className="container mx-auto px-4 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
-          <div>
-            <p className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-2 rounded-full uppercase text-xs tracking-wide mb-4">
-              <Sparkles className="h-4 w-4 text-tlcc-gold" /> Rooted December Spotlight
-            </p>
-            <h2 className="font-anton text-3xl md:text-4xl mb-6">
-              Living in Abundance · Saturday 20 December
-            </h2>
-            <p className="text-white/80 mb-6 text-lg">
-              The final Rooted of the year is a full-day experience. Morning worship, impartation, prophetic teaching,
-              prayer circles, then a long Light Hangout where we eat, play and enjoy genuine family moments.
-            </p>
-            <ul className="space-y-3 mb-6 text-white/80">
-              {rootedHighlights.map((line) => (
-                <li key={line} className="flex items-start gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-tlcc-gold" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            {/* Hangout menu removed per request - no food names shown */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/events/rooted-december"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-tlcc-navy font-bold rounded-full uppercase tracking-wide shadow-lg"
-              >
-                Register Free
-              </Link>
-              <Link
-                href="/events/rooted-december#register"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white rounded-full uppercase tracking-wide font-bold text-white hover:bg-white hover:text-tlcc-navy transition"
-              >
-                Save a Spot for Friends
-              </Link>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="rounded-[30px] overflow-hidden shadow-2xl border-4 border-white/40">
-              <Image src="/images/rooted_december.jpg" alt="Rooted December" width={900} height={1100} className="object-cover" />
-            </div>
-            <div className="absolute -bottom-8 -left-6 w-64">
-              <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white rotate-3">
-                <Image src="/images/rooted_hangout.jpg" alt="Light Hangout" width={600} height={400} className="object-cover" />
-              </div>
-                <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 text-tlcc-navy">
-                    <p className="text-sm font-semibold">Hangout starts 10:00 AM</p>
-                    <p className="text-xs text-gray-500">Games · Photos · Real conversations</p>
-                    <p className="text-xs text-tlcc-orange mt-2">Updated: Correct hangout time is 10 am as per flyer.</p>
-                  </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Upcoming Events Section */}
       <section id="upcoming-events" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">

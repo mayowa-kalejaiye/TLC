@@ -202,7 +202,7 @@ export default function SermonsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Image Section */}
-      <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden">
+      <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden pb-24 md:pb-32 lg:pb-40">
         <Image
           src="/images/preach.jpg"
           alt="Preaching at The Light Community Church"
@@ -259,6 +259,7 @@ export default function SermonsPage() {
             We are committed to providing biblical teaching that leads to real progress and deep joy in your faith journey. Our library is constantly updated with new sermons.
           </motion.p>
 
+
           {/* CTA Buttons */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -274,6 +275,8 @@ export default function SermonsPage() {
               <span>Watch The Latest Sermon</span>
             </Link>
           </motion.div>
+
+
 
           {/* Secondary Info */}
           <motion.p 
@@ -374,6 +377,22 @@ export default function SermonsPage() {
             )}
           </div>
         
+        {/* Devotionals Prompt Snippet - moved here */}
+        <div className="flex justify-center mb-16">
+          <div className="bg-tlcc-navy/90 border-2 border-tlcc-gold rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-4 shadow-2xl max-w-2xl relative z-10">
+            <div className="flex-1 text-center md:text-left">
+              <div className="text-tlcc-gold font-bold uppercase text-xs mb-1 tracking-wider">Looking for daily inspiration?</div>
+              <div className="text-white text-lg font-semibold mb-2">Try our <span className="text-tlcc-gold">Devotionals</span> for fresh encouragement and faith-building every day.</div>
+            </div>
+            <Link
+              href="/devotionals"
+              className="inline-flex items-center px-6 py-3 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm shadow"
+            >
+              Explore Devotionals
+            </Link>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Loading State */}
           {loading ? (
