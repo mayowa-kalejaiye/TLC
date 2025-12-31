@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
 // Simple in-memory cache (per serverless instance)
-const devotionalCache: Record<string, { data: any; expires: number }> = {};
+type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string }
+const devotionalCache: Record<string, { data: DevotionalItem[]; expires: number }> = {};
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export async function GET(req: Request) {

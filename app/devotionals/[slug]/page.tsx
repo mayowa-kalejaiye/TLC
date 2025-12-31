@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
+type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string }
+
 export default function DevotionalDetailPage() {
   const { slug } = useParams();
-  const [devotional, setDevotional] = useState<any>(null);
+  const [devotional, setDevotional] = useState<DevotionalItem | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

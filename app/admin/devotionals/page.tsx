@@ -17,7 +17,7 @@ function AdminApp() {
   const [localPreview, setLocalPreview] = useState('')
   const [content, setContent] = useState('')
   const [message, setMessage] = useState('')
-  const [uploading, setUploading] = useState(false)
+  // uploading state removed (not used directly)
   const [attempts, setAttempts] = useState(0)
   const [isAuthed, setIsAuthed] = useState(false)
   const [mode, setMode] = useState<'edit' | 'preview'>('edit')
@@ -26,7 +26,8 @@ function AdminApp() {
   const [history, setHistory] = useState([{ title: '', content: '', image: '' }])
   const [historyIndex, setHistoryIndex] = useState(0)
   // List of devotionals for admin
-  const [devotionals, setDevotionals] = useState<any[]>([]);
+  type Devotional = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string }
+  const [devotionals, setDevotionals] = useState<Devotional[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
 
 
@@ -97,7 +98,7 @@ function AdminApp() {
           fetchDevotionals();
         } else setMessage(j.error || 'Save failed');
       }
-    } catch (err) {
+    } catch {
       setMessage('Save failed');
     }
   }
@@ -208,41 +209,16 @@ function AdminApp() {
         if (next >= 6) msg = 'This is a reckoning; return with truth.'
         setMessage(msg)
       }
-    } catch (err) {
+    } catch {
       setMessage('Login failed')
     }
   }
 
-  async function save() {
-    try {
-      // If there's a selected local file, upload it first and set `image` to returned URL
-      if (imageFile) {
-        const url = await uploadFile(imageFile)
-        if (url) {
-          setImage(url)
-          // clear local preview/object URL now that we have a remote URL
-          if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview('') }
-          setImageFile(null)
-        }
-      }
-
-      const res = await fetch('/api/devotionals/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, image, content }),
-      })
-      const j = await res.json()
-      if (res.ok) setMessage('Saved')
-      else setMessage(j.error || 'Save failed')
-    } catch (err) {
-      setMessage('Save failed')
-    }
-  }
-
+  // Note: `save` and `uploadFile` are implemented earlier in the file (single definitions).
+  // The legacy duplicate definitions were removed to avoid redeclaration and lint errors.
   async function uploadFile(file?: File) {
     // legacy immediate upload helper (returns url or empty string)
     if (!file) return ''
-    setUploading(true)
     try {
       const fd = new FormData()
       fd.append('file', file)
@@ -259,8 +235,6 @@ function AdminApp() {
       const msg = error instanceof Error ? error.message : String(error)
       setMessage(msg || 'Upload error')
       return ''
-    } finally {
-      setUploading(false)
     }
   }
 
@@ -270,7 +244,7 @@ function AdminApp() {
     try {
       const url = URL.createObjectURL(file)
       setLocalPreview(url)
-    } catch (err) {
+    } catch {
       setLocalPreview('')
     }
     setMessage('Cover selected — will upload on publish')

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, Sparkles } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -88,11 +88,7 @@ export default function EventsPage() {
     }
   ]
 
-  const rootedHighlights = [
-    'Prophetic teaching + Living in Abundance impartation with Apostle Nelson Isaiah.',
-    'Prayer rooms, creative panels, testimonies and family moments that keep you anchored.',
-    'The Light Hangout immediately after service with games, honest conversations and laughter.',
-  ]
+  // rootedHighlights removed (unused)
 
   // rootedMenu removed per request - no food names shown
 

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 
 const PAGE_SIZE = 10;
 
+type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string }
+
 export default function PublicDevotionalsPage() {
-  const [devotionals, setDevotionals] = useState<any[]>([]);
+  const [devotionals, setDevotionals] = useState<DevotionalItem[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -95,7 +97,7 @@ export default function PublicDevotionalsPage() {
                         <h2 className="font-anton text-2xl md:text-3xl text-tlcc-navy uppercase mb-1 group-hover:text-tlcc-gold transition">{d.title}</h2>
                         <div className="text-xs text-tlcc-gold font-semibold mb-2 uppercase tracking-wider">{d.created_at ? new Date(d.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ""}</div>
                       </div>
-                      <p className="text-gray-700 text-base mb-6 leading-relaxed line-clamp-3">{d.content?.slice(0, 180)}{d.content?.length > 180 ? "..." : ""}</p>
+                      <p className="text-gray-700 text-base mb-6 leading-relaxed line-clamp-3">{d.content ? d.content.slice(0, 180) : ''}{(d.content?.length ?? 0) > 180 ? "..." : ""}</p>
                     {/* Read More Link */}
                     <div className="mt-4">
                       <a

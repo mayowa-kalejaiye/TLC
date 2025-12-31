@@ -1,24 +1,14 @@
 ﻿'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Mail, Send, CheckCircle, Zap } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const { language, messages } = useLanguage()
+  const { messages } = useLanguage()
   const newsletter = messages.home.newsletter
-  const locale = language === 'fr' ? 'fr-FR' : language === 'es' ? 'es-ES' : 'en-US'
-  const subscriptionDate = () =>
-    new Date().toLocaleDateString(locale, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +28,7 @@ export default function Newsletter() {
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
