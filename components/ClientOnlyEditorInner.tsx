@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react'
 interface Props {
   content: string
   setContent: (val: string) => void
+  onImageUpload?: (url: string) => void
 }
 
 // markdown rendering moved to shared util `lib/markdown.ts`
@@ -82,6 +83,7 @@ export default function ClientOnlyEditorInner({ content, setContent }: Props) {
       if (r.ok && j.url) {
         // insert markdown image syntax
         insertAtCursor(`![](${j.url})`)
+        if (typeof onImageUpload === 'function') onImageUpload(j.url)
       } else {
         alert(j.error || 'Upload failed')
       }

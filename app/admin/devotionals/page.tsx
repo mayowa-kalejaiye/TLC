@@ -158,6 +158,7 @@ function AdminApp() {
         if (d.title) setTitle(d.title)
         if (d.content) setContent(d.content)
         if (d.image) setImage(d.image)
+        if (d.scheduledDate) setScheduledDate(d.scheduledDate)
       } catch {}
     }
   }, [])
@@ -165,7 +166,7 @@ function AdminApp() {
   // Autosave to localStorage
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const data = { title, content, image }
+    const data = { title, content, image, scheduledDate }
     localStorage.setItem('devotional_draft', JSON.stringify(data))
   }, [title, content, image])
   useEffect(() => {
@@ -353,7 +354,7 @@ function AdminApp() {
         {/* toolbar area */}
         <div className="bg-black bg-opacity-5 rounded-md p-3">
             {mode === 'edit' ? (
-              <ClientOnlyEditor content={content} setContent={setContent} />
+              <ClientOnlyEditor content={content} setContent={setContent} onImageUpload={(url) => { setImage(url); setMessage('Image set as cover from editor') }} />
             ) : (
               <div className="bg-white text-tlcc-navy rounded-md p-8 min-h-[70vh] editor-preview">
                 {/* Light preview: large title, spacious layout, dark text */}
