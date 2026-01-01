@@ -306,7 +306,7 @@ function AdminApp() {
 
           <div className="px-6 pb-6">
             {(localPreview || image) ? (
-              <div className="w-full flex justify-center mb-4 relative">
+              <div className="relative w-full h-[50vh] mb-4 rounded overflow-hidden">
                 {/* remove button */}
                 <button
                   type="button"
@@ -318,7 +318,7 @@ function AdminApp() {
                 </button>
                 {/* full image, not cropped */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={localPreview || image} alt="Cover" className="w-full h-auto max-h-[60vh] object-contain rounded" />
+                <img src={localPreview || image} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
               </div>
             ) : (
               <div className="w-full flex items-center justify-center py-12 text-gray-400">No cover image — use Upload cover</div>
@@ -357,7 +357,9 @@ function AdminApp() {
                 {/* Light preview: large title, spacious layout, dark text */}
                 {(localPreview || image) && (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={localPreview || image} alt="Cover" className="w-full h-auto max-h-[50vh] object-contain rounded mb-6" />
+                  <div className="relative w-full h-[50vh] mb-6 rounded overflow-hidden">
+                    <img src={localPreview || image} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
+                  </div>
                 )}
                 {title.trim() !== '' && (
                   <h1 className="mb-6 text-6xl md:text-7xl leading-tight font-anton">{title}</h1>
