@@ -19,16 +19,21 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, stored: true })
     }
 
-    const url = `https://emailoctopus.com/api/1.6/lists/${listId}/contacts`
-    const r = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-Api-Key': apiKey,
-      },
-      body: JSON.stringify({ email_address: email, status: 'SUBSCRIBED' }),
-    })
+    const url = `https://emailoctopus.com/api/1.6/lists/${listId}/contacts?api_key=${encodeURIComponent(apiKey)}`
+    let r: Response
+    try {
+      r = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ email_address: email, status: 'SUBSCRIBED' }),
+      })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      return NextResponse.json({ error: 'Upstream request failed', details: msg }, { status: 502 })
+    }
 
     const contentType = r.headers.get('content-type') || ''
     let body: unknown
