@@ -11,7 +11,7 @@ interface Props {
 // markdown rendering moved to shared util `lib/markdown.ts`
 
 
-export default function ClientOnlyEditorInner({ content, setContent }: Props) {
+export default function ClientOnlyEditorInner({ content, setContent, onImageUpload }: Props) {
     // Keyboard shortcuts
     function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
       if (e.ctrlKey && e.key === 'b') {
