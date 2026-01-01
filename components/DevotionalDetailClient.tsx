@@ -1,92 +1,14 @@
-import React from 'react'
-import { supabase } from '@/lib/supabase'
-import DevotionalDetailClient from '@/components/DevotionalDetailClient'
-
-type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; scheduled_date?: string }
-
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const id = params.slug
-  try {
-    const { data, error } = await supabase.from('devotionals').select('*').eq('id', id).limit(1).single()
-    if (error || !data) {
-      return { title: 'Devotional' }
-    }
-    const devotional = data as DevotionalItem
-    // Build a short plain-text excerpt from the markdown content
-    const raw = devotional.content || ''
-    const stripped = raw.replace(/```[\s\S]*?```/g, '').replace(/[`*_>#\[\]\(\)~]/g, '').replace(/\s+/g, ' ').trim()
-    const excerpt = stripped.length > 140 ? stripped.slice(0, 140).trim() + '…' : stripped
-    const description = devotional.title ? `${devotional.title} — ${excerpt}` : excerpt
-    return {
-      title: devotional.title || 'Devotional',
-      description: description || undefined,
-      openGraph: {
-        images: devotional.image ? [devotional.image] : undefined,
-      },
-      twitter: {
-        card: devotional.image ? 'summary_large_image' : 'summary',
-        images: devotional.image ? [devotional.image] : undefined,
-      },
-    }
-  } catch {
-    return { title: 'Devotional' }
-  }
-}
-
-export default async function Page({ params }: { params: { slug: string } }) {
-  const id = params.slug
-  const { data } = await supabase.from('devotionals').select('*').eq('id', id).limit(1).single()
-  const devotional = (data || null) as DevotionalItem | null
-
-  if (!devotional) {
-    return <div className="min-h-screen flex items-center justify-center text-lg text-gray-400">Devotional not found.</div>
-  }
-
-  return <DevotionalDetailClient devotional={devotional} />
-}
-"use client";
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+"use client"
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import simpleMarkdownToHtml from '@/lib/markdown'
 
 type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; scheduled_date?: string }
 
-export default function DevotionalDetailPage() {
-  const { slug } = useParams();
-  const router = useRouter();
-  const [devotional, setDevotional] = useState<DevotionalItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [renderedHtml, setRenderedHtml] = useState('')
+export default function DevotionalDetailClient({ devotional }: { devotional: DevotionalItem }) {
+  const router = useRouter()
   const [shareStatus, setShareStatus] = useState('')
-
-  useEffect(() => {
-    if (!slug) return;
-    setLoading(true);
-    fetch(`/api/devotionals/list?id=${slug}`)
-      .then((r) => r.json())
-      .then((data) => {
-        const item = data.items?.[0] || null;
-        setDevotional(item);
-        setRenderedHtml(item?.content ? simpleMarkdownToHtml(item.content) : '');
-        setLoading(false);
-      });
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-xl text-tlcc-navy font-bold animate-pulse">
-        Loading devotional...
-      </div>
-    );
-  }
-
-  if (!devotional) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg text-gray-400">
-        Devotional not found.
-      </div>
-    );
-  }
+  const renderedHtml = devotional?.content ? simpleMarkdownToHtml(devotional.content) : ''
 
   return (
     <main className="min-h-screen bg-white pb-24">
@@ -148,5 +70,5 @@ export default function DevotionalDetailPage() {
         </div>
       </section>
     </main>
-  );
+  )
 }
