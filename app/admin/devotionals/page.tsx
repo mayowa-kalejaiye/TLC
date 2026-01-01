@@ -63,21 +63,23 @@ function AdminApp() {
   // Save: create or update
   async function save() {
     try {
+      let uploadedUrl = '';
       if (imageFile) {
-        const url = await uploadFile(imageFile);
-        if (url) {
-          setImage(url);
+        uploadedUrl = await uploadFile(imageFile);
+        if (uploadedUrl) {
+          setImage(uploadedUrl);
           if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview(''); }
           setImageFile(null);
         }
       }
+      const finalImage = uploadedUrl || image || '';
       const scheduled = scheduledDate ? new Date(scheduledDate).toISOString() : new Date().toISOString();
       let res, j;
       if (editingId) {
         res = await fetch('/api/devotionals/update', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: editingId, title, image, content, scheduled_date: scheduled }),
+          body: JSON.stringify({ id: editingId, title, image: finalImage, content, scheduled_date: scheduled }),
         });
         j = await res.json();
         if (res.ok) setMessage('Updated');
@@ -86,7 +88,7 @@ function AdminApp() {
         res = await fetch('/api/devotionals/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, image, content, scheduled_date: scheduled }),
+          body: JSON.stringify({ title, image: finalImage, content, scheduled_date: scheduled }),
         });
         j = await res.json();
         if (res.ok) {
