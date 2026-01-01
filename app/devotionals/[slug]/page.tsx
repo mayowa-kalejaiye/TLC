@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import simpleMarkdownToHtml from '@/lib/markdown'
 
-type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string }
+type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; scheduled_date?: string }
 
 export default function DevotionalDetailPage() {
   const { slug } = useParams();
   const [devotional, setDevotional] = useState<DevotionalItem | null>(null);
   const [loading, setLoading] = useState(true);
+  const [renderedHtml, setRenderedHtml] = useState('')
 
   useEffect(() => {
     if (!slug) return;
@@ -15,7 +17,9 @@ export default function DevotionalDetailPage() {
     fetch(`/api/devotionals/list?id=${slug}`)
       .then((r) => r.json())
       .then((data) => {
-        setDevotional(data.items?.[0] || null);
+        const item = data.items?.[0] || null;
+        setDevotional(item);
+        setRenderedHtml(item?.content ? simpleMarkdownToHtml(item.content) : '');
         setLoading(false);
       });
   }, [slug]);
@@ -52,14 +56,12 @@ export default function DevotionalDetailPage() {
             {devotional.title}
           </h1>
           <div className="text-tlcc-gold font-semibold mb-2 uppercase tracking-wider">
-            {devotional.created_at ? new Date(devotional.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ""}
+            {devotional.scheduled_date ? new Date(devotional.scheduled_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : (devotional.created_at ? new Date(devotional.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "")}
           </div>
         </div>
       </section>
       <section className="container mx-auto px-4 max-w-3xl mt-12">
-        <article className="prose prose-lg prose-tlcc max-w-none text-gray-800">
-          {devotional.content}
-        </article>
+        <article className="prose prose-lg prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
       </section>
     </main>
   );
