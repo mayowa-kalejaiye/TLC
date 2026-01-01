@@ -359,7 +359,6 @@ function AdminApp() {
               <div className="bg-white text-tlcc-navy rounded-md p-8 min-h-[70vh] editor-preview">
                 {/* Light preview: large title, spacious layout, dark text */}
                 {(localPreview || image) && (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <div className="relative w-full h-[50vh] mb-6 rounded overflow-hidden">
                     <img src={localPreview || image} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
                   </div>
@@ -368,7 +367,7 @@ function AdminApp() {
                   <h1 className="mb-6 text-6xl md:text-7xl leading-tight font-anton">{title}</h1>
                 )}
                 <div className="text-lg text-gray-800 max-w-none">
-                  <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(content || '') }} />
+                  <div className="prose prose-xl prose-tlcc max-w-none" dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(content || '') }} />
                 </div>
               </div>
             )}

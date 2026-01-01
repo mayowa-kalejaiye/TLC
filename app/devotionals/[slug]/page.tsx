@@ -61,7 +61,7 @@ export default function DevotionalDetailPage() {
         </div>
       </section>
       <section className="container mx-auto px-4 max-w-3xl mt-12">
-        <div className="prose prose-lg prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+        <div className="prose prose-xl prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
       </section>
     </main>
   );
