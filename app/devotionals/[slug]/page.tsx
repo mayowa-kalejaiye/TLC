@@ -17,15 +17,26 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     const stripped = raw.replace(/```[\s\S]*?```/g, '').replace(/[`*_>#\[\]\(\)~]/g, '').replace(/\s+/g, ' ').trim()
     const excerpt = stripped.length > 140 ? stripped.slice(0, 140).trim() + '…' : stripped
     const description = devotional.title ? `${devotional.title} — ${excerpt}` : excerpt
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || ''
-    const fallback = siteUrl ? `${siteUrl.replace(/\/$/, '')}/images/tlcc-logo.png` : '/images/tlcc-logo.png'
-    const ogImage = devotional.image || fallback
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '')
+    const fallbackRel = '/images/tlcc-logo.png'
+    const fallback = siteUrl ? `${siteUrl}${fallbackRel}` : fallbackRel
+
+    const makeAbsolute = (u?: string | null) => {
+      if (!u) return ''
+      if (/^https?:\/\//i.test(u)) return u
+      if (siteUrl) return `${siteUrl}/${u.replace(/^\//, '')}`
+      return u
+    }
+
+    const ogImage = makeAbsolute(devotional.image || fallback)
+    const pageUrl = siteUrl ? `${siteUrl}/devotionals/${id}` : undefined
+
     return {
       title: devotional.title || 'Devotional',
       description: description || undefined,
       openGraph: {
         images: [ogImage],
-        url: siteUrl ? `${siteUrl.replace(/\/$/, '')}/devotionals/${id}` : undefined,
+        url: pageUrl,
       },
       twitter: {
         card: 'summary_large_image',
