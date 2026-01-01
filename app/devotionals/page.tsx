@@ -11,6 +11,7 @@ export default function PublicDevotionalsPage() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [shareStatusMap, setShareStatusMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
     setLoading(true);
@@ -79,13 +80,41 @@ export default function PublicDevotionalsPage() {
                   >
                     {/* Devotional Image */}
                     {d.image ? (
-                      <div className="md:w-1/2 relative h-64 md:h-auto min-h-[260px]">
+                      <div className="md:w-1/2 relative h-64 md:h-auto min-h-[260px] group">
                         <img
                           src={d.image}
                           alt={d.title}
                           className="object-cover w-full h-full absolute inset-0"
                         />
                         <div className="absolute inset-0 bg-gradient-to-br from-tlcc-gold/10 to-tlcc-navy/10 opacity-30" />
+                        <button
+                          type="button"
+                          aria-label={`Share ${d.title}`}
+                          onClick={async (e) => {
+                            e.stopPropagation()
+                            const url = typeof window !== 'undefined' ? `${window.location.origin}/devotionals/${d.id}` : `/devotionals/${d.id}`
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({ title: d.title || 'Devotional', url })
+                                setShareStatusMap((p) => ({ ...p, [d.id]: 'Shared' }))
+                              } else if (navigator.clipboard) {
+                                await navigator.clipboard.writeText(url)
+                                setShareStatusMap((p) => ({ ...p, [d.id]: 'Link copied' }))
+                              } else {
+                                setShareStatusMap((p) => ({ ...p, [d.id]: 'Unable to share' }))
+                              }
+                            } catch (err) {
+                              setShareStatusMap((p) => ({ ...p, [d.id]: 'Share cancelled' }))
+                            }
+                            setTimeout(() => setShareStatusMap((p) => { const copy = { ...p }; delete copy[d.id]; return copy }), 2000)
+                          }}
+                          className="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 px-3 py-1 rounded bg-white/90 border border-gray-200 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-tlcc-gold text-sm font-medium"
+                        >
+                          Share
+                        </button>
+                        {shareStatusMap[d.id] && (
+                          <span className="absolute top-3 left-14 z-10 text-sm text-gray-800 bg-white/90 px-2 py-1 rounded shadow-sm">{shareStatusMap[d.id]}</span>
+                        )}
                       </div>
                     ) : (
                       <div className="md:w-1/2 bg-gradient-to-br from-tlcc-gold/10 to-tlcc-navy/10 flex items-center justify-center h-64 md:h-auto min-h-[260px]">

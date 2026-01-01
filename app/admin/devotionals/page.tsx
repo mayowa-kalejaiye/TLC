@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 
 import simpleMarkdownToHtml from '@/lib/markdown'
+import PublishToast from '@/components/PublishToast'
 const ClientOnlyEditor = dynamic(() => import('@/components/ClientOnlyEditor'), { ssr: false })
 
 
@@ -20,6 +21,8 @@ function AdminApp() {
   const [scheduledDate, setScheduledDate] = useState('')
   // uploading state removed (not used directly)
   const [attempts, setAttempts] = useState(0)
+  const [showPublishToast, setShowPublishToast] = useState(false)
+  const [toastText, setToastText] = useState('')
   const [isAuthed, setIsAuthed] = useState(false)
   const [mode, setMode] = useState<'edit' | 'preview'>('edit')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -82,8 +85,13 @@ function AdminApp() {
           body: JSON.stringify({ id: editingId, title, image: finalImage, content, scheduled_date: scheduled }),
         });
         j = await res.json();
-        if (res.ok) setMessage('Updated');
-        else setMessage(j.error || 'Update failed');
+        if (res.ok) {
+          setMessage('Updated');
+          return true
+        } else {
+          setMessage(j.error || 'Update failed');
+          return false
+        }
       } else {
         res = await fetch('/api/devotionals/create', {
           method: 'POST',
@@ -102,10 +110,15 @@ function AdminApp() {
           setEditingId(null);
           // Refresh devotionals list from Supabase
           fetchDevotionals();
-        } else setMessage(j.error || 'Save failed');
+          return true
+        } else {
+          setMessage(j.error || 'Save failed');
+          return false
+        }
       }
     } catch {
       setMessage('Save failed');
+      return false
     }
   }
 
@@ -374,7 +387,14 @@ function AdminApp() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button onClick={async () => { await save(); setMessage('Published') }} className="bg-tlcc-gold text-tlcc-navy font-bold px-4 py-2 rounded shadow hover:bg-yellow-400 transition">Publish</button>
+          <button onClick={async () => {
+            const ok = await save()
+            if (ok) {
+              setToastText('Devotional published')
+              setShowPublishToast(true)
+              setTimeout(() => setShowPublishToast(false), 2300)
+            }
+          }} className="bg-tlcc-gold text-tlcc-navy font-bold px-4 py-2 rounded shadow hover:bg-yellow-400 transition">Publish</button>
           <button onClick={() => {
             localStorage.setItem('devotional_draft', JSON.stringify({ title, content, image }))
             setMessage('Draft saved!')
@@ -388,6 +408,8 @@ function AdminApp() {
         </div>
         {message && <p className="text-sm text-green-600">{message}</p>}
       </div>
+
+      <PublishToast show={showPublishToast} message={toastText} />
 
       {/* Past Devotionals section is always below the writing/editor area */}
       <div className="mt-12">

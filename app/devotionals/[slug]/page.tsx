@@ -11,6 +11,7 @@ export default function DevotionalDetailPage() {
   const [devotional, setDevotional] = useState<DevotionalItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [renderedHtml, setRenderedHtml] = useState('')
+  const [shareStatus, setShareStatus] = useState('')
 
   useEffect(() => {
     if (!slug) return;
@@ -72,6 +73,33 @@ export default function DevotionalDetailPage() {
       </section>
       <section className="container mx-auto px-4 max-w-3xl mt-12">
         <div className="prose prose-xl prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+        <div className="mt-8 flex items-center gap-3">
+          <button
+            type="button"
+            aria-label="Share devotional"
+            onClick={async () => {
+              const url = typeof window !== 'undefined' ? window.location.href : ''
+              try {
+                if (navigator.share) {
+                  await navigator.share({ title: devotional?.title || 'Devotional', url })
+                  setShareStatus('Shared')
+                } else if (navigator.clipboard) {
+                  await navigator.clipboard.writeText(url)
+                  setShareStatus('Link copied')
+                } else {
+                  setShareStatus('Unable to share')
+                }
+              } catch (err) {
+                setShareStatus('Share cancelled')
+              }
+              setTimeout(() => setShareStatus(''), 2000)
+            }}
+            className="inline-flex items-center justify-center px-3 py-1 rounded-md border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm transition text-sm font-medium"
+          >
+            Share
+          </button>
+          {shareStatus && <span className="text-sm text-gray-600">{shareStatus}</span>}
+        </div>
       </section>
     </main>
   );
