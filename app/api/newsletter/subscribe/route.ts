@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     })
 
     const contentType = r.headers.get('content-type') || ''
-    let body: any
+    let body: unknown
     if (contentType.includes('application/json')) {
       body = await r.json()
     } else {
@@ -39,7 +39,10 @@ export async function POST(req: Request) {
     }
 
     if (!r.ok) {
-      return NextResponse.json({ error: typeof body === 'string' ? body : body?.error || 'Subscription failed', upstreamStatus: r.status, upstreamBody: body }, { status: 502 })
+      const errMsg = typeof body === 'string'
+        ? body
+        : (body && typeof body === 'object' && 'error' in body ? (body as any).error || 'Subscription failed' : 'Subscription failed')
+      return NextResponse.json({ error: errMsg, upstreamStatus: r.status, upstreamBody: body }, { status: 502 })
     }
 
     return NextResponse.json({ ok: true, upstreamBody: body })
