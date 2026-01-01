@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import simpleMarkdownToHtml from '@/lib/markdown'
 
 const PAGE_SIZE = 10;
 
@@ -97,7 +98,9 @@ export default function PublicDevotionalsPage() {
                         <h2 className="font-anton text-2xl md:text-3xl text-tlcc-navy uppercase mb-1 group-hover:text-tlcc-gold transition">{d.title}</h2>
                         <div className="text-xs text-tlcc-gold font-semibold mb-2 uppercase tracking-wider">{d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : (d.created_at ? new Date(d.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "")}</div>
                       </div>
-                      <p className="text-gray-700 text-base mb-6 leading-relaxed line-clamp-3">{d.content ? d.content.slice(0, 180) : ''}{(d.content?.length ?? 0) > 180 ? "..." : ""}</p>
+                      <div className="text-gray-700 text-base mb-6 leading-relaxed line-clamp-3">
+                        <div className="prose prose-xl prose-tlcc max-w-none" dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(d.content || '') }} />
+                      </div>
                     {/* Read More Link */}
                     <div className="mt-4">
                       <a

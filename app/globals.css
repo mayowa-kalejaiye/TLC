@@ -71,6 +71,46 @@
   .editor-preview {
     @apply w-full max-w-full;
   }
+  /* Ensure prose classes behave even without the typography plugin */
+  .prose {
+    @apply text-lg leading-relaxed;
+    /* Preserve whitespace and tabs inside rendered markdown so editor spacing is respected */
+    white-space: pre-wrap;
+    white-space: break-spaces;
+  }
+
+  /* Smaller preview typography for list excerpts */
+  .prose-preview {
+    @apply text-sm leading-relaxed;
+  }
+  .prose-preview p {
+    @apply text-sm leading-relaxed;
+  }
+  .prose-preview h1 {
+    @apply text-2xl md:text-3xl font-extrabold leading-tight;
+  }
+  .prose-preview h2 {
+    @apply text-lg md:text-xl font-bold leading-snug;
+  }
+  .prose-preview h3 {
+    @apply text-base md:text-lg font-semibold leading-snug;
+  }
+  .prose p {
+    @apply text-lg leading-relaxed;
+  }
+  .prose h1 {
+    @apply text-5xl md:text-6xl font-extrabold leading-tight;
+  }
+  .prose h2 {
+    @apply text-3xl md:text-4xl font-bold leading-snug;
+  }
+  .prose h3 {
+    @apply text-2xl md:text-3xl font-semibold leading-snug;
+  }
+  /* Larger variant */
+  .prose-xl {
+    @apply text-xl;
+  }
   /* Component styles can be added here */
 }
 

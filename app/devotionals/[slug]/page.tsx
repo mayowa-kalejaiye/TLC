@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import simpleMarkdownToHtml from '@/lib/markdown'
 
 type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; scheduled_date?: string }
 
 export default function DevotionalDetailPage() {
   const { slug } = useParams();
+  const router = useRouter();
   const [devotional, setDevotional] = useState<DevotionalItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [renderedHtml, setRenderedHtml] = useState('')
@@ -43,6 +44,15 @@ export default function DevotionalDetailPage() {
   return (
     <main className="min-h-screen bg-white pb-24">
       <section className="relative h-[40vh] min-h-[320px] flex items-center justify-center overflow-hidden">
+        <button
+          type="button"
+          onClick={() => router.back()}
+          aria-label="Back"
+          className="fixed left-6 top-24 md:top-28 lg:top-32 z-[9999] bg-black/75 text-white rounded-full w-14 h-14 flex items-center justify-center hover:bg-black/90 shadow-2xl ring-2 ring-white/30"
+        >
+          <span className="sr-only">Back</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2}><path d="M12 6L8 10l4 4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </button>
         {devotional.image && (
           <img
             src={devotional.image}
