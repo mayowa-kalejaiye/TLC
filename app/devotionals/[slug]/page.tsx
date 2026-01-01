@@ -35,8 +35,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: devotional.title || 'Devotional',
       description: description || undefined,
       openGraph: {
-        images: [ogImage],
+        title: devotional.title || undefined,
+        description: description || undefined,
         url: pageUrl,
+        images: [
+          {
+            url: ogImage,
+            alt: devotional.title || undefined,
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
