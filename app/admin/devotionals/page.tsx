@@ -1,5 +1,6 @@
 ﻿"use client"
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
+import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 import simpleMarkdownToHtml from '@/lib/markdown'
@@ -129,9 +130,9 @@ function AdminApp() {
     const newHistory = history.slice(0, historyIndex + 1).concat([newEntry])
     setHistory(newHistory)
     setHistoryIndex(newHistory.length - 1)
-  }, [title, content, image])
+  }, [title, content, image, history, historyIndex])
 
-    function undo() {
+    const undo = useCallback(() => {
       if (historyIndex > 0) {
         const prev = history[historyIndex - 1]
         setTitle(prev.title)
@@ -139,8 +140,9 @@ function AdminApp() {
         setImage(prev.image)
         setHistoryIndex(historyIndex - 1)
       }
-    }
-    function redo() {
+    }, [historyIndex, history])
+
+    const redo = useCallback(() => {
       if (historyIndex < history.length - 1) {
         const next = history[historyIndex + 1]
         setTitle(next.title)
@@ -148,7 +150,7 @@ function AdminApp() {
         setImage(next.image)
         setHistoryIndex(historyIndex + 1)
       }
-    }
+    }, [historyIndex, history])
 
     // Keyboard shortcuts for undo/redo
     useEffect(() => {
@@ -158,7 +160,7 @@ function AdminApp() {
       }
       window.addEventListener('keydown', handler)
       return () => window.removeEventListener('keydown', handler)
-    }, [historyIndex, history])
+    }, [undo, redo])
   // ...existing code...
 
   // Restore from localStorage on mount
@@ -181,7 +183,7 @@ function AdminApp() {
     if (typeof window === 'undefined') return
     const data = { title, content, image, scheduledDate }
     localStorage.setItem('devotional_draft', JSON.stringify(data))
-  }, [title, content, image])
+  }, [title, content, image, scheduledDate])
   useEffect(() => {
     if (mode === 'preview') {
       try {
@@ -333,8 +335,7 @@ function AdminApp() {
                   ×
                 </button>
                 {/* full image, not cropped */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={localPreview || image} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
+                <Image src={localPreview || image} alt="Cover" fill className="absolute inset-0 w-full h-full object-cover" unoptimized />
               </div>
             ) : (
               <div className="w-full flex items-center justify-center py-12 text-gray-400">No cover image — use Upload cover</div>
@@ -373,7 +374,7 @@ function AdminApp() {
                 {/* Light preview: large title, spacious layout, dark text */}
                 {(localPreview || image) && (
                   <div className="relative w-full h-[50vh] mb-6 rounded overflow-hidden">
-                    <img src={localPreview || image} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
+                    <Image src={localPreview || image} alt="Cover" fill className="absolute inset-0 w-full h-full object-cover" unoptimized />
                   </div>
                 )}
                 {title.trim() !== '' && (

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from 'next/image'
 import simpleMarkdownToHtml from '@/lib/markdown'
 
 function estimateReadingTime(text: string) {
@@ -38,11 +39,13 @@ export default function PublicDevotionalsPage() {
       {/* Hero Section - replica of events page, but for devotionals */}
       <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/reach.jpg"
             alt="Devotionals Hero"
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
             draggable={false}
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50" />
         </div>
@@ -88,10 +91,12 @@ export default function PublicDevotionalsPage() {
                     {/* Devotional Image */}
                     {d.image ? (
                       <div className="md:w-1/2 relative h-64 md:h-auto min-h-[260px] group">
-                        <img
-                          src={d.image}
-                          alt={d.title}
-                          className="object-cover w-full h-full absolute inset-0"
+                        <Image
+                          src={d.image as string}
+                          alt={d.title ?? ''}
+                          fill
+                          className="object-cover"
+                          unoptimized
                         />
                         <div className="absolute inset-0 bg-gradient-to-br from-tlcc-gold/10 to-tlcc-navy/10 opacity-30" />
                         <button

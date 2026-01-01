@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import simpleMarkdownToHtml from '@/lib/markdown'
 
@@ -23,10 +24,12 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2}><path d="M12 6L8 10l4 4" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
         {devotional.image && (
-          <img
-            src={devotional.image}
-            alt={devotional.title}
-            className="object-cover w-full h-full absolute inset-0"
+          <Image
+            src={devotional.image as string}
+            alt={devotional.title ?? ''}
+            fill
+            className="object-cover"
+            unoptimized
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50" />
