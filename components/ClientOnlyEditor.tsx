@@ -4,6 +4,7 @@ import React from 'react'
 interface Props {
   content: string
   setContent: (val: string) => void
+  onImageUpload?: (url: string) => void
 }
 
 const ClientOnlyEditorInner = dynamic(() => import('./ClientOnlyEditorInner'), { ssr: false })

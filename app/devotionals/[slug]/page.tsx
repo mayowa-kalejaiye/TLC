@@ -52,7 +52,7 @@ export default function DevotionalDetailPage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50" />
         <div className="relative z-10 container mx-auto px-4 text-center pt-8">
-          <h1 className="font-anton text-4xl md:text-5xl text-white mb-4 leading-tight uppercase drop-shadow">
+          <h1 className="font-anton text-6xl md:text-7xl text-white mb-4 leading-tight uppercase drop-shadow">
             {devotional.title}
           </h1>
           <div className="text-tlcc-gold font-semibold mb-2 uppercase tracking-wider">
@@ -61,7 +61,7 @@ export default function DevotionalDetailPage() {
         </div>
       </section>
       <section className="container mx-auto px-4 max-w-3xl mt-12">
-        <div className="prose max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+        <div className="prose prose-lg prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
       </section>
     </main>
   );
