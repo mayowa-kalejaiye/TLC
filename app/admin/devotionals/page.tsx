@@ -17,6 +17,7 @@ function AdminApp() {
   const [localPreview, setLocalPreview] = useState('')
   const [content, setContent] = useState('')
   const [message, setMessage] = useState('')
+  const [scheduledDate, setScheduledDate] = useState('')
   // uploading state removed (not used directly)
   const [attempts, setAttempts] = useState(0)
   const [isAuthed, setIsAuthed] = useState(false)
@@ -26,18 +27,18 @@ function AdminApp() {
   const [history, setHistory] = useState([{ title: '', content: '', image: '' }])
   const [historyIndex, setHistoryIndex] = useState(0)
   // List of devotionals for admin
-  type Devotional = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string }
+  type Devotional = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string; scheduled_date?: string }
   const [devotionals, setDevotionals] = useState<Devotional[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
 
 
   // Helper to fetch devotionals from Supabase
   const fetchDevotionals = () => {
-    fetch('/api/devotionals/list')
+    fetch('/api/devotionals/list?includeScheduled=true')
       .then(r => r.json())
       .then(data => {
         console.log('Fetched devotionals:', data);
-        setDevotionals(Array.isArray(data) ? data : []);
+        setDevotionals(Array.isArray(data.items) ? data.items : []);
       });
   };
 
@@ -54,6 +55,7 @@ function AdminApp() {
     setTitle(d.title || '');
     setImage(d.image || '');
     setContent(d.content || '');
+    setScheduledDate(d.scheduled_date ? new Date(d.scheduled_date).toISOString().slice(0, 16) : '');
     setEditingId(id);
     setMode('edit');
   }
@@ -69,12 +71,13 @@ function AdminApp() {
           setImageFile(null);
         }
       }
+      const scheduled = scheduledDate ? new Date(scheduledDate).toISOString() : new Date().toISOString();
       let res, j;
       if (editingId) {
         res = await fetch('/api/devotionals/update', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: editingId, title, image, content }),
+          body: JSON.stringify({ id: editingId, title, image, content, scheduled_date: scheduled }),
         });
         j = await res.json();
         if (res.ok) setMessage('Updated');
@@ -83,7 +86,7 @@ function AdminApp() {
         res = await fetch('/api/devotionals/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, image, content }),
+          body: JSON.stringify({ title, image, content, scheduled_date: scheduled }),
         });
         j = await res.json();
         if (res.ok) {
@@ -91,6 +94,7 @@ function AdminApp() {
           setTitle('');
           setImage('');
           setContent('');
+          setScheduledDate('');
           setImageFile(null);
           setLocalPreview('');
           setEditingId(null);
@@ -329,6 +333,17 @@ function AdminApp() {
               />
             </div>
             <div className="mt-2 text-sm text-gray-300">Written on {new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+            <div className="mt-4">
+              <label htmlFor="scheduled-date" className="block text-sm font-medium text-gray-300 mb-2">Schedule Publication</label>
+              <input
+                id="scheduled-date"
+                type="datetime-local"
+                value={scheduledDate}
+                onChange={(e) => setScheduledDate(e.target.value)}
+                className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 w-full md:w-auto"
+              />
+              <p className="text-xs text-gray-400 mt-1">Leave empty to publish immediately</p>
+            </div>
           </div>
           </div>
         )}
@@ -381,35 +396,55 @@ function AdminApp() {
             <thead>
               <tr className="bg-tlcc-navy text-white sticky top-0 z-10">
                 <th className="px-4 py-2 text-left font-bold">Title</th>
-                <th className="px-4 py-2 text-left font-bold">Created</th>
+                <th className="px-4 py-2 text-left font-bold">Scheduled</th>
+                <th className="px-4 py-2 text-left font-bold">Status</th>
                 <th className="px-4 py-2 text-left font-bold">Edit</th>
               </tr>
             </thead>
             <tbody>
               {devotionals.length === 0 && (
                 <tr>
-                  <td colSpan={3} className="text-center py-8 text-gray-400">No devotionals found.</td>
+                  <td colSpan={4} className="text-center py-8 text-gray-400">No devotionals found.</td>
                 </tr>
               )}
-              {devotionals.map((d, i) => (
-                <tr
-                  key={d.id}
-                  className={
-                    `transition-colors ${editingId === d.id ? 'bg-tlcc-gold/20' : i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-tlcc-gold/10`
-                  }
-                >
-                  <td className="px-4 py-2 font-semibold text-tlcc-navy">{d.title}</td>
-                  <td className="px-4 py-2 text-gray-600">{d.created_at ? new Date(d.created_at).toLocaleDateString() : ''}</td>
-                  <td className="px-4 py-2">
-                    <button
-                      onClick={() => loadDevotional(d.id)}
-                      className="text-tlcc-navy underline text-xs font-bold hover:text-tlcc-gold transition"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {devotionals.map((d, i) => {
+                const scheduledDate = d.scheduled_date ? new Date(d.scheduled_date) : null;
+                const isPublished = scheduledDate ? scheduledDate <= new Date() : true;
+                return (
+                  <tr
+                    key={d.id}
+                    className={
+                      `transition-colors ${editingId === d.id ? 'bg-tlcc-gold/20' : i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-tlcc-gold/10`
+                    }
+                  >
+                    <td className="px-4 py-2 font-semibold text-tlcc-navy">{d.title}</td>
+                    <td className="px-4 py-2 text-gray-600">
+                      {scheduledDate ? scheduledDate.toLocaleString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      }) : 'Not scheduled'}
+                    </td>
+                    <td className="px-4 py-2">
+                      {isPublished ? (
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Published</span>
+                      ) : (
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Scheduled</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-2">
+                      <button
+                        onClick={() => loadDevotional(d.id)}
+                        className="text-tlcc-navy underline text-xs font-bold hover:text-tlcc-gold transition"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

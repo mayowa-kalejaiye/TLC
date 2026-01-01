@@ -4,11 +4,20 @@ import { supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
   try {
-    const { id, title, image, content } = await req.json();
+    const { id, title, image, content, scheduled_date } = await req.json();
     if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
+    const updateData: { title: string; image: string; content: string; updated_at: string; scheduled_date?: string } = {
+      title,
+      image,
+      content,
+      updated_at: new Date().toISOString()
+    };
+    if (scheduled_date) {
+      updateData.scheduled_date = scheduled_date;
+    }
     const { data, error } = await supabase
       .from('devotionals')
-      .update({ title, image, content, updated_at: new Date().toISOString() })
+      .update(updateData)
       .eq('id', id)
       .select();
     if (error) {

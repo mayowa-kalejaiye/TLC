@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
 // Simple in-memory cache (per serverless instance)
-type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string }
+type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; updated_at?: string; scheduled_date?: string }
 const devotionalCache: Record<string, { data: DevotionalItem[]; expires: number }> = {};
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     // Fetch a single devotional by id
     const { data: items, error } = await supabase
       .from('devotionals')
-      .select('id, title, image, content, created_at, updated_at')
+      .select('id, title, image, content, created_at, updated_at, scheduled_date')
       .eq('id', id)
       .limit(1);
     if (!error) {
@@ -37,16 +37,30 @@ export async function GET(req: Request) {
   const limit = parseInt(searchParams.get('limit') || '10', 10);
   const from = (page - 1) * limit;
   const to = from + limit - 1;
+  const includeScheduled = searchParams.get('includeScheduled') === 'true';
 
-  const { data: items, error } = await supabase
+  const now = new Date().toISOString();
+  let query = supabase
     .from('devotionals')
-    .select('id, title, image, content, created_at, updated_at')
-    .order('created_at', { ascending: false })
-    .range(from, to);
+    .select('id, title, image, content, created_at, updated_at, scheduled_date')
+    .order('scheduled_date', { ascending: false });
 
-  const { count } = await supabase
+  // For public list, only show devotionals that are scheduled for now or past
+  if (!includeScheduled) {
+    query = query.lte('scheduled_date', now);
+  }
+
+  const { data: items, error } = await query.range(from, to);
+
+  let countQuery = supabase
     .from('devotionals')
     .select('*', { count: 'exact', head: true });
+
+  if (!includeScheduled) {
+    countQuery = countQuery.lte('scheduled_date', now);
+  }
+
+  const { count } = await countQuery;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

@@ -12,11 +12,12 @@ export async function POST(req: Request) {
     const title = body.title || 'Untitled'
     const content = body.content || ''
     const image = body.image || ''
+    const scheduled_date = body.scheduled_date || new Date().toISOString()
 
     // Insert into Supabase (no slug)
     const { data, error } = await supabase
       .from('devotionals')
-      .insert([{ title, image, content }])
+      .insert([{ title, image, content, scheduled_date }])
       .select();
     if (error) {
       // Log error to server console for debugging
