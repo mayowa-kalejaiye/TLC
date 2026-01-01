@@ -64,5 +64,34 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return <div className="min-h-screen flex items-center justify-center text-lg text-gray-400">Devotional not found.</div>
   }
 
-  return <DevotionalDetailClient devotional={devotional} />
+  // Provide explicit meta tags in the document body as a last-resort fallback
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '')
+  const makeAbsolute = (u?: string | null) => {
+    if (!u) return ''
+    if (/^https?:\/\//i.test(u)) return u
+    if (siteUrl) return `${siteUrl}/${u.replace(/^\//, '')}`
+    return u
+  }
+  const fallbackRel = '/images/tlcc-logo.png'
+  const fallback = siteUrl ? `${siteUrl}${fallbackRel}` : fallbackRel
+  const ogImage = makeAbsolute(devotional.image || fallback)
+  const pageUrl = siteUrl ? `${siteUrl}/devotionals/${id}` : `${'/devotionals/' + id}`
+  const raw = devotional.content || ''
+  const stripped = raw.replace(/```[\s\S]*?```/g, '').replace(/[`*_>#\[\]\(\)~]/g, '').replace(/\s+/g, ' ').trim()
+  const excerpt = stripped.length > 140 ? stripped.slice(0, 140).trim() + '…' : stripped
+  const description = devotional.title ? `${devotional.title} — ${excerpt}` : excerpt
+
+  return (
+    <>
+      <meta property="og:title" content={devotional.title || 'Devotional'} />
+      <meta property="og:description" content={description || ''} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:url" content={pageUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={devotional.title || 'Devotional'} />
+      <meta name="twitter:description" content={description || ''} />
+      <meta name="twitter:image" content={ogImage} />
+      <DevotionalDetailClient devotional={devotional} />
+    </>
+  )
 }
