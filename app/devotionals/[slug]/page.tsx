@@ -89,7 +89,7 @@ export default function DevotionalDetailPage() {
                 } else {
                   setShareStatus('Unable to share')
                 }
-              } catch (err) {
+              } catch {
                 setShareStatus('Share cancelled')
               }
               setTimeout(() => setShareStatus(''), 2000)

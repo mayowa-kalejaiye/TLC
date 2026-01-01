@@ -2,6 +2,13 @@
 import React, { useEffect, useState } from "react";
 import simpleMarkdownToHtml from '@/lib/markdown'
 
+function estimateReadingTime(text: string) {
+  if (!text) return '1 min'
+  const words = text.replace(/<[^>]+>/g, '').trim().split(/\s+/).filter(Boolean).length
+  const minutes = Math.max(1, Math.round(words / 200))
+  return `${minutes} min read`
+}
+
 const PAGE_SIZE = 10;
 
 type DevotionalItem = { id: string; title?: string; image?: string; content?: string; created_at?: string; scheduled_date?: string }
@@ -103,7 +110,7 @@ export default function PublicDevotionalsPage() {
                               } else {
                                 setShareStatusMap((p) => ({ ...p, [d.id]: 'Unable to share' }))
                               }
-                            } catch (err) {
+                            } catch {
                               setShareStatusMap((p) => ({ ...p, [d.id]: 'Share cancelled' }))
                             }
                             setTimeout(() => setShareStatusMap((p) => { const copy = { ...p }; delete copy[d.id]; return copy }), 2000)
@@ -125,7 +132,16 @@ export default function PublicDevotionalsPage() {
                     <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                       <div className="mb-4">
                         <h2 className="font-anton text-2xl md:text-3xl text-tlcc-navy uppercase mb-1 group-hover:text-tlcc-gold transition">{d.title}</h2>
-                        <div className="text-xs text-tlcc-gold font-semibold mb-2 uppercase tracking-wider">{d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : (d.created_at ? new Date(d.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "")}</div>
+                        <div className="flex items-center gap-3">
+                          <div className="text-xs text-tlcc-gold font-semibold uppercase tracking-wider">{d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : (d.created_at ? new Date(d.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "")}</div>
+                          <div className="flex items-center gap-1 text-xs text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                              <circle cx="12" cy="12" r="9" />
+                              <path d="M12 7v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            <span>{estimateReadingTime(d.content || '')}</span>
+                          </div>
+                        </div>
                       </div>
                       <div className="text-gray-700 text-base mb-6 leading-relaxed line-clamp-3">
                         <div className="prose prose-xl prose-tlcc max-w-none" dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(d.content || '') }} />
