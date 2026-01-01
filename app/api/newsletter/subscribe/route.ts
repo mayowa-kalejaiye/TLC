@@ -39,9 +39,18 @@ export async function POST(req: Request) {
     }
 
     if (!r.ok) {
-      const errMsg = typeof body === 'string'
-        ? body
-        : (body && typeof body === 'object' && 'error' in body ? (body as any).error || 'Subscription failed' : 'Subscription failed')
+      let errMsg = 'Subscription failed'
+      if (typeof body === 'string') {
+        errMsg = body
+      } else if (body && typeof body === 'object') {
+        const b = body as Record<string, unknown>
+        const e = b['error']
+        if (typeof e === 'string') errMsg = e
+        else if (e && typeof e === 'object') {
+          const m = (e as Record<string, unknown>)['message']
+          if (typeof m === 'string') errMsg = m
+        }
+      }
       return NextResponse.json({ error: errMsg, upstreamStatus: r.status, upstreamBody: body }, { status: 502 })
     }
 
