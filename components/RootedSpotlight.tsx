@@ -3,14 +3,33 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, Sparkles, Users } from 'lucide-react'
-import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function RootedSpotlight() {
-  const { messages } = useLanguage()
-  const rooted = messages.home.rootedSpotlight
+  const rooted = {
+    badge: 'Announcement',
+    title: 'HEART ROOM',
+    description:
+      'A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. You do not want to miss this.',
+    experiences: [
+      'Prayer and pastoral counseling',
+      'Space for healing and encouragement',
+      'Community support and restoration',
+    ],
+    schedule: [
+      { label: 'Date', value: 'Saturday, 31 January 2026' },
+      { label: 'Time', value: '10:00 AM' },
+      { label: 'Venue', value: 'The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja' },
+    ],
+    mainImageAlt: 'Heart Room event',
+    hangoutImageAlt: 'Heart Room',
+    hangoutTitle: 'All are welcome',
+    hangoutSubtitle: 'Come with an expectant heart',
+    primaryCta: 'Register',
+    secondaryCta: 'See Events',
+  }
   const scheduleIcons = [Calendar, Clock, MapPin]
-  const mainImage = '/images/rooted_december.jpg'
-  const hangoutImage = '/images/rooted_hangout.jpg'
+  const mainImage = '/images/tlcevent.png'
+  const hangoutImage = '/images/tlcevent.png'
   return (
     <section className="relative bg-gradient-to-b from-white via-tlcc-cream to-white py-20">
       <div className="container-custom grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">

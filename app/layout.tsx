@@ -206,7 +206,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <LanguageProvider>
           <Navbar />
-          <main>{children}</main>
+          <main className="pt-20 md:pt-24 lg:pt-28">{children}</main>
           <Analytics />
           <Footer />
         </LanguageProvider>

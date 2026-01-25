@@ -44,7 +44,7 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
       </section>
       <section className="container mx-auto px-4 max-w-3xl mt-12">
         <div className="prose prose-xl prose-tlcc max-w-none text-gray-800" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
-        <div className="mt-8 flex items-center gap-3">
+        <div className="mt-8">
           <button
             type="button"
             aria-label="Share devotional"
@@ -65,11 +65,11 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
               }
               setTimeout(() => setShareStatus(''), 2000)
             }}
-            className="inline-flex items-center justify-center px-3 py-1 rounded-md border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm transition text-sm font-medium"
+            className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-tlcc-gold text-tlcc-navy font-bold hover:brightness-95 transition text-base"
           >
             Share
           </button>
-          {shareStatus && <span className="text-sm text-gray-600">{shareStatus}</span>}
+          {shareStatus && <div className="mt-2 text-sm text-gray-600 text-center">{shareStatus}</div>}
         </div>
       </section>
     </main>

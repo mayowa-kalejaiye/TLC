@@ -12,21 +12,21 @@ gsap.registerPlugin(ScrollTrigger)
 export default function EventsPage() {
   const upcomingEvents = [
     {
-      id: 'light-hangout',
-      title: 'The Light Hangout',
-      tagline: 'Games · Family Vibes',
+      id: 'heart-room',
+      title: 'Heart Room',
+      tagline: 'Prayer & Counseling · Healing',
       description:
-        'Right after Rooted we switch into full-on family mode: games, squad photos, testimonies and a long table that proves church is home.',
-      date: 'Saturday · 20 December 2025',
+        'A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. You do not want to miss this.',
+      date: 'Saturday, 31 January 2026',
       time: '10:00 AM',
-      location: 'Courtyard @ The Light House',
-      type: 'Community Hangout',
-      image: '/images/rooted_hangout.jpg',
+      location: 'The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja',
+      type: 'Prayer & Counseling',
+      image: '/images/tlcevent.png',
       icon: Users,
-      color: 'from-tlcc-green to-tlcc-navy',
+      color: 'from-tlcc-orange to-tlcc-navy',
       featured: true,
       ctaLink: '/events/rooted-december#register',
-      ctaLabel: 'Save a Seat',
+      ctaLabel: 'Register',
     },
     {
       id: 'watch-hour',

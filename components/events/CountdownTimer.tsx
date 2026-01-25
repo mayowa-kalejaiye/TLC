@@ -64,7 +64,12 @@ const getVariantClasses = (variant: CountdownVariant) => {
 }
 
 export default function CountdownTimer({ targetDate, className, variant = 'dark' }: CountdownTimerProps) {
-  const target = useMemo(() => new Date(targetDate), [targetDate])
+  const FALLBACK_TARGET = '2026-01-31T10:00:00+01:00'
+  const target = useMemo(() => {
+    const parsed = new Date(targetDate)
+    if (Number.isNaN(parsed.getTime())) return new Date(FALLBACK_TARGET)
+    return parsed
+  }, [targetDate])
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
   const styles = getVariantClasses(variant)
 
@@ -92,30 +97,30 @@ export default function CountdownTimer({ targetDate, className, variant = 'dark'
         className={`inline-flex flex-col gap-2 rounded-3xl px-6 py-4 backdrop-blur border ${styles.container} ${className ?? ''}`}
       >
         <p className={`text-xs uppercase tracking-wide ${styles.label}`}>Countdown</p>
-        <p className="font-semibold">It&apos;s Rooted day — doors are open.</p>
+        <p className="font-semibold">It&apos;s Heart Room day — doors are open.</p>
       </div>
     )
   }
 
   const segments = timeLeft
     ? [
-        { label: 'Days', value: pad(timeLeft.days) },
-        { label: 'Hours', value: pad(timeLeft.hours) },
-        { label: 'Minutes', value: pad(timeLeft.minutes) },
-        { label: 'Seconds', value: pad(timeLeft.seconds) },
+        { label: 'D', value: pad(timeLeft.days) },
+        { label: 'H', value: pad(timeLeft.hours) },
+        { label: 'M', value: pad(timeLeft.minutes) },
+        { label: 'S', value: pad(timeLeft.seconds) },
       ]
     : [
-        { label: 'Days', value: '--' },
-        { label: 'Hours', value: '--' },
-        { label: 'Minutes', value: '--' },
-        { label: 'Seconds', value: '--' },
+        { label: 'D', value: '--' },
+        { label: 'H', value: '--' },
+        { label: 'M', value: '--' },
+        { label: 'S', value: '--' },
       ]
 
   return (
     <div
       className={`rounded-3xl px-6 py-4 backdrop-blur flex flex-col gap-3 border ${styles.container} ${className ?? ''}`}
     >
-      <div className={`text-xs uppercase tracking-[0.3em] ${styles.label}`}>Countdown to Rooted</div>
+      <div className={`text-xs uppercase tracking-[0.3em] ${styles.label}`}>Countdown to Heart Room</div>
       <div className="grid grid-cols-4 gap-3 sm:gap-4">
         {segments.map(({ label, value }) => (
           <div key={label} className="text-center">

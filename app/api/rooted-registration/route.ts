@@ -4,11 +4,7 @@ interface RegistrationPayload {
   fullName: string
   email: string
   phone: string
-  attendingRooted: boolean
-  attendingHangout: boolean
-  guests: number
-  expectations: string
-  foodNotes: string
+  event?: string
 }
 
 export async function POST(request: Request) {
@@ -23,24 +19,20 @@ export async function POST(request: Request) {
       fullName: data.fullName.trim(),
       email: data.email.trim(),
       phone: data.phone.trim(),
-      attendingRooted: data.attendingRooted ?? true,
-      attendingHangout: data.attendingHangout ?? true,
-      guests: Number.isFinite(data.guests) ? Math.max(1, Number(data.guests)) : 1,
-      expectations: data.expectations?.trim() ?? '',
-      foodNotes: data.foodNotes?.trim() ?? '',
+      event: data.event?.trim() || 'Heart Room',
       submittedAt: new Date().toISOString(),
     }
 
-    const webhookUrl = process.env.ROOTED_REG_SHEET_WEBHOOK
+    const webhookUrl = process.env.HEART_ROOM_REG_SHEET_WEBHOOK || process.env.ROOTED_REG_SHEET_WEBHOOK
 
     if (!webhookUrl) {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('ROOTED_REG_SHEET_WEBHOOK is not configured. Payload:', payload)
+        console.warn('HEART_ROOM_REG_SHEET_WEBHOOK is not configured. Payload:', payload)
         return NextResponse.json({ success: true, message: 'Registration captured locally (dev mode).' })
       }
 
       return NextResponse.json(
-        { error: 'Registration storage is not configured. Please set ROOTED_REG_SHEET_WEBHOOK in your environment.' },
+        { error: 'Registration storage is not configured. Please set HEART_ROOM_REG_SHEET_WEBHOOK in your environment.' },
         { status: 500 }
       )
     }
@@ -61,7 +53,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Rooted registration webhook error:', error)
+    console.error('Heart Room registration webhook error:', error)
     return NextResponse.json(
       { error: 'Unable to save your registration right now. Please try again shortly.' },
       { status: 500 }

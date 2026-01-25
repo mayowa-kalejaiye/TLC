@@ -20,6 +20,7 @@ function AdminApp() {
   const [content, setContent] = useState('')
   const [message, setMessage] = useState('')
   const [scheduledDate, setScheduledDate] = useState('')
+  const [timezone, setTimezone] = useState('')
   // uploading state removed (not used directly)
   const [attempts, setAttempts] = useState(0)
   const [showPublishToast, setShowPublishToast] = useState(false)
@@ -59,7 +60,8 @@ function AdminApp() {
     setTitle(d.title || '');
     setImage(d.image || '');
     setContent(d.content || '');
-    setScheduledDate(d.scheduled_date ? new Date(d.scheduled_date).toISOString().slice(0, 16) : '');
+    // Show raw UTC datetime from DB (strip timezone, keep UTC values)
+    setScheduledDate(d.scheduled_date ? d.scheduled_date.slice(0, 16) : '');
     setEditingId(id);
     setMode('edit');
   }
@@ -77,8 +79,19 @@ function AdminApp() {
         }
       }
       const finalImage = uploadedUrl || image || '';
-      const scheduled = scheduledDate ? new Date(scheduledDate).toISOString() : new Date().toISOString();
+      // Treat datetime-local value as UTC by appending 'Z'
+      const scheduled = scheduledDate ? (scheduledDate.includes('T') ? scheduledDate + ':00Z' : new Date().toISOString()) : new Date().toISOString();
       let res, j;
+      async function fetchScheduledInfo(id: string) {
+        try {
+          const r = await fetch(`/api/admin/devotional-scheduled?id=${encodeURIComponent(id)}`)
+          if (!r.ok) return null
+          return await r.json()
+        } catch {
+          return null
+        }
+      }
+
       if (editingId) {
         res = await fetch('/api/devotionals/update', {
           method: 'POST',
@@ -87,7 +100,14 @@ function AdminApp() {
         });
         j = await res.json();
         if (res.ok) {
-          setMessage('Updated');
+          // fetch scheduled info and show to admin
+          const info = await fetchScheduledInfo(editingId)
+          if (info && info.scheduled) {
+            const localShown = info.utc && timezone ? new Date(info.utc).toLocaleString(undefined, { timeZone: timezone }) : info.serverLocal
+            setMessage(`Updated — scheduled: ${localShown} (${timezone || 'server local'}) / UTC ${info.utc}`)
+          } else {
+            setMessage('Updated')
+          }
           return true
         } else {
           setMessage(j.error || 'Update failed');
@@ -101,7 +121,20 @@ function AdminApp() {
         });
         j = await res.json();
         if (res.ok) {
-          setMessage('Saved');
+          // after create, fetch scheduled info for the new id
+          const newId = j.id || null
+          if (newId) {
+            const info = await fetchScheduledInfo(newId)
+            if (info && info.scheduled) {
+              // show saved time in admin-preferred timezone when available
+              const localShown = info.utc && timezone ? new Date(info.utc).toLocaleString(undefined, { timeZone: timezone }) : info.serverLocal
+              setMessage(`Saved — scheduled: ${localShown} (${timezone || 'server local'}) / UTC ${info.utc}`)
+            } else {
+              setMessage('Saved')
+            }
+          } else {
+            setMessage('Saved')
+          }
           setTitle('');
           setImage('');
           setContent('');
@@ -174,16 +207,30 @@ function AdminApp() {
         if (d.content) setContent(d.content)
         if (d.image) setImage(d.image)
         if (d.scheduledDate) setScheduledDate(d.scheduledDate)
+        if (d.timezone) setTimezone(d.timezone)
       } catch {}
+    }
+    // if no saved timezone, try to detect
+    if (!localStorage.getItem('devotional_timezone')) {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+        if (tz) {
+          setTimezone(tz)
+          localStorage.setItem('devotional_timezone', tz)
+        }
+      } catch {}
+    } else {
+      const tz = localStorage.getItem('devotional_timezone') || ''
+      setTimezone(tz)
     }
   }, [])
 
   // Autosave to localStorage
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const data = { title, content, image, scheduledDate }
+    const data = { title, content, image, scheduledDate, timezone }
     localStorage.setItem('devotional_draft', JSON.stringify(data))
-  }, [title, content, image, scheduledDate])
+  }, [title, content, image, scheduledDate, timezone])
   useEffect(() => {
     if (mode === 'preview') {
       try {
@@ -351,7 +398,7 @@ function AdminApp() {
             </div>
             <div className="mt-2 text-sm text-gray-300">Written on {new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div>
             <div className="mt-4">
-              <label htmlFor="scheduled-date" className="block text-sm font-medium text-gray-300 mb-2">Schedule Publication</label>
+              <label htmlFor="scheduled-date" className="block text-sm font-medium text-gray-300 mb-2">Schedule Publication (UTC)</label>
               <input
                 id="scheduled-date"
                 type="datetime-local"
@@ -359,7 +406,17 @@ function AdminApp() {
                 onChange={(e) => setScheduledDate(e.target.value)}
                 className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 w-full md:w-auto"
               />
+                <div className="mt-2 mb-2">
+                  <label htmlFor="timezone" className="block text-sm font-medium text-gray-300 mb-1">Timezone (IANA)</label>
+                  <input id="timezone" value={timezone} onChange={(e) => { setTimezone(e.target.value); localStorage.setItem('devotional_timezone', e.target.value) }} placeholder="e.g. America/New_York" className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 w-full md:w-64" />
+                </div>
               <p className="text-xs text-gray-400 mt-1">Leave empty to publish immediately</p>
+              {scheduledDate && (
+                <div className="mt-2 text-xs text-gray-300">
+                    <div>Will publish at ({timezone || 'local'}): <span className="font-medium">{timezone ? new Date(scheduledDate).toLocaleString(undefined, { timeZone: timezone }) : new Date(scheduledDate).toLocaleString()}</span></div>
+                    <div>UTC: <span className="font-medium">{new Date(scheduledDate).toISOString()}</span></div>
+                </div>
+              )}
             </div>
           </div>
           </div>
@@ -389,11 +446,25 @@ function AdminApp() {
 
         <div className="flex items-center gap-3">
           <button onClick={async () => {
+            const scheduled = scheduledDate ? new Date(scheduledDate) : null
+            const now = new Date()
+            let confirmMsg = ''
+            if (scheduled && scheduled > now) {
+              confirmMsg = `This will schedule the devotional for ${scheduled.toLocaleString()} (UTC ${scheduled.toISOString()}).\nProceed?`
+            } else {
+              confirmMsg = 'This will publish the devotional immediately. Proceed?'
+            }
+            if (!confirm(confirmMsg)) return
+
             const ok = await save()
             if (ok) {
-              setToastText('Devotional published')
+              if (scheduled && scheduled > now) {
+                setToastText(`Scheduled: ${scheduled.toLocaleString()} (UTC ${scheduled.toISOString()})`)
+              } else {
+                setToastText('Devotional published')
+              }
               setShowPublishToast(true)
-              setTimeout(() => setShowPublishToast(false), 2300)
+              setTimeout(() => setShowPublishToast(false), 4000)
             }
           }} className="bg-tlcc-gold text-tlcc-navy font-bold px-4 py-2 rounded shadow hover:bg-yellow-400 transition">Publish</button>
           <button onClick={() => {
