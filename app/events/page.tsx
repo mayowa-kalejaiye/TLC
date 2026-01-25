@@ -25,7 +25,7 @@ export default function EventsPage() {
       icon: Users,
       color: 'from-tlcc-orange to-tlcc-navy',
       featured: true,
-      ctaLink: '/events/rooted-december#register',
+      ctaLink: '/events/heart-room#register',
       ctaLabel: 'Register',
     },
     {

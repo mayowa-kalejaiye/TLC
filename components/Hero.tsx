@@ -114,7 +114,7 @@ export default function Hero() {
 
           {/* Featured Event Banner (Heart Room) */}
           <div className="flex justify-center">
-            <Link href="/events/rooted-december#register" className="w-full max-w-5xl">
+            <Link href="/events/heart-room#register" className="w-full max-w-5xl">
               <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 bg-white/6 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:scale-[1.01] transition">
                 <div className="overflow-hidden rounded-2xl w-full h-48 md:h-40 lg:h-56">
                   <Image
@@ -132,7 +132,7 @@ export default function Hero() {
                   <p className="text-white/90">A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. Saturday, 31st January · 10:00 AM</p>
                   <div className="flex items-center gap-4 mt-2">
                     <CountdownTimer targetDate="2026-01-31T10:00:00+01:00" variant="light" />
-                    <Link href="/events/rooted-december#register" className="ml-auto inline-flex items-center px-6 py-3 bg-tlcc-orange text-white rounded-full font-bold">Register</Link>
+                    <Link href="/events/heart-room#register" className="ml-auto inline-flex items-center px-6 py-3 bg-tlcc-orange text-white rounded-full font-bold">Register</Link>
                   </div>
                 </div>
               </div>
