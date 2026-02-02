@@ -28,7 +28,7 @@ export default function NationTakersWebinarPage() {
             <div className="flex flex-wrap justify-center gap-6 text-gray-300">
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-blue-400" />
-                <span className="font-medium">Friday, February 7, 2026</span>
+                <span className="font-medium">Saturday, February 7, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-blue-400" />
