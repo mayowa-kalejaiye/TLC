@@ -12,12 +12,29 @@ gsap.registerPlugin(ScrollTrigger)
 export default function EventsPage() {
   const upcomingEvents = [
     {
+      id: 'nation-takers-webinar',
+      title: 'Nation Takers Career Webinar 1.0',
+      tagline: 'Building Career Greatness',
+      description:
+        'A mindset-shifting career intervention focused on moving from competence to significance. Develop leadership capacity, intentional thinking, and strategic clarity for long-term relevance across industries.',
+      date: 'Friday, 7 February 2026',
+      time: '10:00 AM',
+      location: 'Online (Google Meet)',
+      type: 'Career Webinar',
+      image: '/images/career-webinar.jpg',
+      icon: Users,
+      color: 'from-blue-600 to-tlcc-navy',
+      featured: true,
+      ctaLink: '/events/nation-takers-webinar#register',
+      ctaLabel: 'Register Now',
+    },
+    {
       id: 'heart-room',
       title: 'Heart Room',
       tagline: 'Prayer & Counseling · Healing',
       description:
         'A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. You do not want to miss this.',
-      date: 'Saturday, 31 January 2026',
+      date: 'Friday, 14 February 2026',
       time: '10:00 AM',
       location: 'The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja',
       type: 'Prayer & Counseling',

@@ -64,7 +64,7 @@ const getVariantClasses = (variant: CountdownVariant) => {
 }
 
 export default function CountdownTimer({ targetDate, className, variant = 'dark' }: CountdownTimerProps) {
-  const FALLBACK_TARGET = '2026-01-31T10:00:00+01:00'
+  const FALLBACK_TARGET = '2026-02-14T10:00:00+01:00'
   const target = useMemo(() => {
     const parsed = new Date(targetDate)
     if (Number.isNaN(parsed.getTime())) return new Date(FALLBACK_TARGET)

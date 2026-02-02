@@ -112,31 +112,55 @@ export default function Hero() {
             ))}
           </h1>
 
-          {/* Featured Event Banner (Heart Room) */}
+          {/* Featured Event Banner (Conditional: NTCW before Feb 7, Heart Room after) */}
           <div className="flex justify-center">
-            <Link href="/events/heart-room#register" className="w-full max-w-5xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 bg-white/6 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:scale-[1.01] transition">
-                <div className="overflow-hidden rounded-2xl w-full h-48 md:h-40 lg:h-56">
-                  <Image
-                    src="/images/tlcevent.png"
-                    alt="Heart Room flyer"
-                    width={1600}
-                    height={900}
-                    className="object-cover w-full h-full"
-                    priority
-                  />
-                </div>
+            {new Date() < new Date('2026-02-07T10:00:00+01:00') ? (
+              // NTCW Webinar Banner (Before Feb 7)
+              <Link href="/events/nation-takers-webinar#register" className="w-full max-w-5xl">
+                <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 bg-white/6 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:scale-[1.01] transition">
+                  <div className="overflow-hidden rounded-2xl w-full h-48 md:h-40 lg:h-56 bg-gradient-to-br from-blue-600 to-tlcc-navy flex items-center justify-center p-6">
+                    <div className="text-center">
+                      <h4 className="font-anton text-xl text-white mb-2">NATION TAKERS</h4>
+                      <p className="text-white/90 text-sm">Career Webinar 1.0</p>
+                    </div>
+                  </div>
 
-                <div className="md:col-span-2 flex flex-col justify-center gap-3">
-                  <h3 className="font-anton text-2xl text-white">HEART ROOM</h3>
-                  <p className="text-white/90">A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. Saturday, 31st January · 10:00 AM</p>
-                  <div className="flex items-center gap-4 mt-2">
-                    <CountdownTimer targetDate="2026-01-31T10:00:00+01:00" variant="light" />
-                    <Link href="/events/heart-room#register" className="ml-auto inline-flex items-center px-6 py-3 bg-tlcc-orange text-white rounded-full font-bold">Register</Link>
+                  <div className="md:col-span-2 flex flex-col justify-center gap-3">
+                    <h3 className="font-anton text-2xl text-white">NATION TAKERS CAREER WEBINAR 1.0</h3>
+                    <p className="text-white/90">Building Career Greatness: Scaling Impact, Leadership & Vision. Friday, 7th February · 10:00 AM · Online</p>
+                    <div className="flex items-center gap-4 mt-2">
+                      <CountdownTimer targetDate="2026-02-07T10:00:00+01:00" variant="light" />
+                      <Link href="/events/nation-takers-webinar#register" className="ml-auto inline-flex items-center px-6 py-3 bg-tlcc-orange text-white rounded-full font-bold">Register</Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            ) : (
+              // Heart Room Banner (After Feb 7)
+              <Link href="/events/heart-room#register" className="w-full max-w-5xl">
+                <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 bg-white/6 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:scale-[1.01] transition">
+                  <div className="overflow-hidden rounded-2xl w-full h-48 md:h-40 lg:h-56">
+                    <Image
+                      src="/images/tlcevent.png"
+                      alt="Heart Room flyer"
+                      width={1600}
+                      height={900}
+                      className="object-cover w-full h-full"
+                      priority
+                    />
+                  </div>
+
+                  <div className="md:col-span-2 flex flex-col justify-center gap-3">
+                    <h3 className="font-anton text-2xl text-white">HEART ROOM</h3>
+                    <p className="text-white/90">A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. Friday, 14th February · 10:00 AM</p>
+                    <div className="flex items-center gap-4 mt-2">
+                      <CountdownTimer targetDate="2026-02-14T10:00:00+01:00" variant="light" />
+                      <Link href="/events/heart-room#register" className="ml-auto inline-flex items-center px-6 py-3 bg-tlcc-orange text-white rounded-full font-bold">Register</Link>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
           
 

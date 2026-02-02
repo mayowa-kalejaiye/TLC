@@ -14,13 +14,13 @@ export default function HeartRoomPage() {
           <p className="text-lg text-gray-700 mb-6">A prayer & counseling meeting designed to create space for healing, encouragement, and restoration. You do not want to miss this.</p>
 
           <div className="space-y-3 mb-6">
-            <p className="font-semibold">Date: <span className="font-normal">Saturday, 31st January 2026</span></p>
+            <p className="font-semibold">Date: <span className="font-normal">Friday, 14th February 2026</span></p>
             <p className="font-semibold">Time: <span className="font-normal">10:00 AM</span></p>
             <p className="font-semibold">Venue: <span className="font-normal">The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja</span></p>
           </div>
 
           <div className="mb-6">
-            <CountdownTimer targetDate="2026-01-31T10:00:00+01:00" variant="light" />
+            <CountdownTimer targetDate="2026-02-14T10:00:00+01:00" variant="light" />
           </div>
 
           <p className="text-sm text-gray-600">All are welcome. Bring a friend and come expectant to receive prayer, counsel, and restoration.</p>
