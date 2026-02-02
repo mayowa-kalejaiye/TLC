@@ -53,7 +53,7 @@ export default function WebinarRegistrationForm() {
             to_email: formData.email,
             to_name: formData.fullName,
             event_name: 'Nation Takers Career Webinar 1.0',
-            event_date: 'Friday, February 7th, 2026',
+            event_date: 'Saturday, February 7th, 2026',
             event_time: '10:00 AM WAT',
             meet_link: 'https://meet.google.com/nex-hpqd-wbi',
             from_name: 'The Light City Church'
