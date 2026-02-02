@@ -34,12 +34,18 @@ export default function WebinarRegistrationForm() {
       })
 
       if (!apiResponse.ok) {
-        throw new Error('Registration failed. Please try again.')
+        const errorData = await apiResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || 'Registration failed. Please try again.')
       }
 
       // Send confirmation email with Google Meet link via EmailJS
       const emailJsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_NTCW_PUBLIC_KEY
-      if (emailJsPublicKey) {
+      if (!emailJsPublicKey) {
+        console.error('EmailJS public key not found')
+        throw new Error('Email configuration error. Please contact support.')
+      }
+
+      try {
         await emailjs.send(
           'service_janbhlb', 
           'template_2r34yat',
@@ -49,11 +55,14 @@ export default function WebinarRegistrationForm() {
             event_name: 'Nation Takers Career Webinar 1.0',
             event_date: 'Friday, February 7th, 2026',
             event_time: '10:00 AM WAT',
-            meet_link: 'Link: https://meet.google.com/nex-hpqd-wbi',
-            from_name: 'The Light Community Church'
+            meet_link: 'https://meet.google.com/nex-hpqd-wbi',
+            from_name: 'The Light City Church'
           },
           emailJsPublicKey
         )
+      } catch (emailError) {
+        console.error('EmailJS error:', emailError)
+        throw new Error('Failed to send confirmation email. Please contact us at admin@tlcc.ng')
       }
 
       setStatus('success')
