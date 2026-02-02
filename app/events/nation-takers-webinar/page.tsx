@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Clock, MapPin, Users, Video } from 'lucide-react'
+import { Calendar, Clock, Users, Video } from 'lucide-react'
 import WebinarRegistrationForm from '@/components/events/WebinarRegistrationForm'
 
 export default function NationTakersWebinarPage() {
@@ -63,7 +62,7 @@ export default function NationTakersWebinarPage() {
 
               {/* What You'll Learn */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-4">What You'll Gain</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">What You&apos;ll Gain</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start gap-3">
                     <span className="text-blue-400 mt-1">▸</span>
@@ -164,7 +163,7 @@ export default function NationTakersWebinarPage() {
             href="#register"
             className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition"
           >
-            Register Now - It's Free
+            Register Now - It&apos;s Free
           </Link>
         </div>
       </section>
