@@ -100,7 +100,7 @@ export default function NationTakersWebinarPage() {
                   </div>
                   <div className="border-t border-white/10 pt-4">
                     <p className="text-white font-semibold mb-1">Hosted by:</p>
-                    <p className="text-gray-300">Apostle Nelson</p>
+                    <p className="text-gray-300">Peter Nelson-Isaiah, Leader of The Light City Church</p>
                   </div>
                 </div>
               </div>

@@ -56,7 +56,8 @@ export default function WebinarRegistrationForm() {
             event_date: 'Saturday, February 7th, 2026',
             event_time: '10:00 AM WAT',
             meet_link: 'https://meet.google.com/nex-hpqd-wbi',
-            from_name: 'The Light City Church'
+            from_name: 'The Light City Church',
+            host_name: 'Peter Nelson-Isaiah, Leader of The Light City Church'
           },
           emailJsPublicKey
         )
