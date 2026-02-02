@@ -63,7 +63,7 @@ export default function WebinarRegistrationForm() {
         )
       } catch (emailError) {
         console.error('EmailJS error:', emailError)
-        throw new Error('Failed to send confirmation email. Please contact us at admin@tlcc.ng')
+        throw new Error('Failed to send confirmation email. Please contact us at inthelightcommunity@gmail.com')
       }
 
       setStatus('success')
