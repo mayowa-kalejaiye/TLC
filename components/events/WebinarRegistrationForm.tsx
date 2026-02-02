@@ -46,6 +46,7 @@ export default function WebinarRegistrationForm() {
       }
 
       try {
+        // Send confirmation email to user
         await emailjs.send(
           'service_janbhlb', 
           'template_2r34yat',
@@ -58,6 +59,25 @@ export default function WebinarRegistrationForm() {
             meet_link: 'https://meet.google.com/nex-hpqd-wbi',
             from_name: 'The Light City Church',
             host_name: 'Peter Nelson-Isaiah, Leader of The Light City Church'
+          },
+          emailJsPublicKey
+        )
+
+        // Send admin notification with registration details
+        await emailjs.send(
+          'service_janbhlb',
+          'template_16gwt8g',
+          {
+            to_email: 'inthelightcommunity@gmail.com',
+            to_name: 'Admin',
+            registrant_name: formData.fullName,
+            registrant_email: formData.email,
+            registrant_phone: formData.phone,
+            registrant_occupation: formData.occupation,
+            registrant_organization: formData.organization || 'N/A',
+            event_name: 'Nation Takers Career Webinar 1.0',
+            event_date: 'Saturday, February 7th, 2026',
+            from_name: 'NTCW Registration System'
           },
           emailJsPublicKey
         )
