@@ -281,8 +281,8 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
           </div>
         </div>
 
-        {/* Hidden YouTube Player */}
-        <div id="youtube-player" className="hidden"></div>
+        {/* Hidden YouTube Player (keep in DOM so playback isn't suspended) */}
+        <div id="youtube-player" className="sr-only" aria-hidden="true"></div>
       </motion.div>
     </AnimatePresence>
   )
