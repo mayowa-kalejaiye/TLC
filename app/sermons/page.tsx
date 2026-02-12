@@ -27,6 +27,11 @@ export default function SermonsPage() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [currentAudio, setCurrentAudio] = useState<YouTubeVideo | null>(null)
 
+  const getVideoId = (url: string) => {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?]+)/)
+    return match ? match[1] : null
+  }
+
   useEffect(() => {
     async function fetchSermons() {
       const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
@@ -555,15 +560,13 @@ export default function SermonsPage() {
 
                         {/* Action Buttons */}
                         <div className="flex gap-2">
-                          <Link
-                            href={sermon.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button
+                            onClick={() => setCurrentAudio(sermon)}
                             className="px-4 py-2 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1"
                           >
                             <Play className="h-3 w-3" />
                             WATCH
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     ))}
@@ -611,39 +614,49 @@ export default function SermonsPage() {
             <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
               <h3 className="font-bold text-lg text-tlcc-navy mb-4">Watch the Sermon</h3>
               
-              {/* Video Thumbnail with Play Button */}
-              <Link
-                href={featuredSermon.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative rounded-lg overflow-hidden mb-4 group"
-              >
-                <div className="relative aspect-video">
-                  <Image
-                    src={featuredSermon.thumbnail}
-                    alt={featuredSermon.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                    <div className="w-20 h-20 bg-tlcc-gold hover:bg-tlcc-gold-dark rounded-full flex items-center justify-center transition-all transform group-hover:scale-110">
-                      <Play className="h-10 w-10 text-white ml-1" fill="white" />
-                    </div>
+              {/* Video Thumbnail with Play Button or Embedded Player */}
+              <div className="mb-4">
+                {currentAudio?.id === featuredSermon.id ? (
+                  <div className="relative aspect-video rounded-lg overflow-hidden">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getVideoId(featuredSermon.url)}?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1`}
+                      title={featuredSermon.title}
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
                   </div>
-                </div>
-              </Link>
+                ) : (
+                  <button
+                    onClick={() => setCurrentAudio(featuredSermon)}
+                    className="block relative rounded-lg overflow-hidden group text-left w-full"
+                  >
+                    <div className="relative aspect-video">
+                      <Image
+                        src={featuredSermon.thumbnail}
+                        alt={featuredSermon.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                        <div className="w-20 h-20 bg-tlcc-gold hover:bg-tlcc-gold-dark rounded-full flex items-center justify-center transition-all transform group-hover:scale-110">
+                          <Play className="h-10 w-10 text-white ml-1" fill="white" />
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                )}
+              </div>
 
               {/* Action Buttons */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <Link
-                  href={featuredSermon.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => setCurrentAudio(featuredSermon)}
                   className="px-4 py-3 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Play className="h-4 w-4" />
-                  Watch on YouTube
-                </Link>
+                  Watch Now
+                </button>
                 <button 
                   onClick={() => {
                     navigator.clipboard.writeText(featuredSermon.url)
@@ -678,8 +691,8 @@ export default function SermonsPage() {
         </section>
       )}
 
-      {/* Audio Player */}
-      {currentAudio && (
+      {/* Audio Player (hidden when featured sermon is playing inline) */}
+      {currentAudio && currentAudio.id !== featuredSermon?.id && (
         <AudioPlayer
           videoUrl={currentAudio.url}
           title={currentAudio.title}
