@@ -69,15 +69,29 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
       intervalRef.current = null
     }
   }, [])
-
   const startTimeTracking = useCallback(() => {
     stopTimeTracking()
     intervalRef.current = setInterval(() => {
       if (playerRef.current?.getCurrentTime) {
-        setCurrentTime(playerRef.current.getCurrentTime())
+        const current = playerRef.current.getCurrentTime()
+        setCurrentTime(current)
+
+        // Update Media Session position state if available
+        try {
+          const ms = (navigator as any).mediaSession
+          if (ms && typeof ms.setPositionState === 'function') {
+            ms.setPositionState({
+              duration: duration || 0,
+              playbackRate: 1,
+              position: current,
+            })
+          }
+        } catch (e) {
+          // ignore
+        }
       }
     }, 100)
-  }, [stopTimeTracking])
+  }, [stopTimeTracking, duration])
 
   // Extract video ID from YouTube URL
   const getVideoId = (url: string) => {
@@ -160,6 +174,47 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
     }
   }, [videoId, startTimeTracking, stopTimeTracking])
 
+  const skipTime = (seconds: number) => {
+    if (!playerRef.current) return
+    const newTime = Math.max(0, Math.min(currentTime + seconds, duration))
+    playerRef.current.seekTo(newTime, true)
+  }
+
+  // Register Media Session metadata and action handlers
+  useEffect(() => {
+    try {
+      const ms = (navigator as any).mediaSession
+      if (!ms) return
+
+      ms.metadata = new (window as any).MediaMetadata({
+        title: title || 'Sermon',
+        artist: 'The Light Community Church',
+      })
+
+      ms.setActionHandler('play', () => {
+        if (playerRef.current) playerRef.current.playVideo()
+      })
+      ms.setActionHandler('pause', () => {
+        if (playerRef.current) playerRef.current.pauseVideo()
+      })
+      ms.setActionHandler('seekbackward', (details: any) => {
+        const skip = (details && details.seekOffset) || 10
+        skipTime(-skip)
+      })
+      ms.setActionHandler('seekforward', (details: any) => {
+        const skip = (details && details.seekOffset) || 10
+        skipTime(skip)
+      })
+      ms.setActionHandler('seekto', (details: any) => {
+        if (details && typeof details.seekTime === 'number') {
+          playerRef.current?.seekTo(details.seekTime, true)
+        }
+      })
+    } catch (e) {
+      // ignore
+    }
+  }, [title, skipTime])
+
   const togglePlay = () => {
     if (!playerRef.current) return
 
@@ -168,12 +223,6 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
     } else {
       playerRef.current.playVideo()
     }
-  }
-
-  const skipTime = (seconds: number) => {
-    if (!playerRef.current) return
-    const newTime = Math.max(0, Math.min(currentTime + seconds, duration))
-    playerRef.current.seekTo(newTime, true)
   }
 
   const formatTime = (time: number) => {
