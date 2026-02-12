@@ -76,19 +76,21 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
         const current = playerRef.current.getCurrentTime()
         setCurrentTime(current)
 
-        // Update Media Session position state if available
-        try {
-          const ms = (navigator as any).mediaSession
-          if (ms && typeof ms.setPositionState === 'function') {
-            ms.setPositionState({
-              duration: duration || 0,
-              playbackRate: 1,
-              position: current,
-            })
-          }
-        } catch (e) {
-          // ignore
-        }
+            // Update Media Session position state if available
+            try {
+              const ms = (navigator as unknown as { mediaSession?: MediaSession }).mediaSession
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              if (ms && typeof (ms as any).setPositionState === 'function') {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                ;(ms as any).setPositionState({
+                  duration: duration || 0,
+                  playbackRate: 1,
+                  position: current,
+                } as any)
+              }
+            } catch {
+              // ignore
+            }
       }
     }, 100)
   }, [stopTimeTracking, duration])
@@ -174,19 +176,22 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
     }
   }, [videoId, startTimeTracking, stopTimeTracking])
 
-  const skipTime = (seconds: number) => {
+  const skipTime = useCallback((seconds: number) => {
     if (!playerRef.current) return
     const newTime = Math.max(0, Math.min(currentTime + seconds, duration))
     playerRef.current.seekTo(newTime, true)
-  }
+  }, [currentTime, duration])
 
   // Register Media Session metadata and action handlers
   useEffect(() => {
     try {
-      const ms = (navigator as any).mediaSession
+      const ms = (navigator as unknown as { mediaSession?: MediaSession }).mediaSession
       if (!ms) return
 
-      ms.metadata = new (window as any).MediaMetadata({
+      // Some TypeScript environments don't expose MediaMetadata/setPositionState typing fully,
+      // disable the explicit-any rule locally for these operations.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(ms as any).metadata = new (window as any).MediaMetadata({
         title: title || 'Sermon',
         artist: 'The Light Community Church',
       })
@@ -197,20 +202,20 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
       ms.setActionHandler('pause', () => {
         if (playerRef.current) playerRef.current.pauseVideo()
       })
-      ms.setActionHandler('seekbackward', (details: any) => {
+      ms.setActionHandler('seekbackward', (details?: MediaSessionActionDetails & { seekOffset?: number }) => {
         const skip = (details && details.seekOffset) || 10
         skipTime(-skip)
       })
-      ms.setActionHandler('seekforward', (details: any) => {
+      ms.setActionHandler('seekforward', (details?: MediaSessionActionDetails & { seekOffset?: number }) => {
         const skip = (details && details.seekOffset) || 10
         skipTime(skip)
       })
-      ms.setActionHandler('seekto', (details: any) => {
+      ms.setActionHandler('seekto', (details?: MediaSessionActionDetails & { seekTime?: number }) => {
         if (details && typeof details.seekTime === 'number') {
           playerRef.current?.seekTo(details.seekTime, true)
         }
       })
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, [title, skipTime])
