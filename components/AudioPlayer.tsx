@@ -79,14 +79,13 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
             // Update Media Session position state if available
             try {
               const ms = (navigator as unknown as { mediaSession?: MediaSession }).mediaSession
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              if (ms && typeof (ms as any).setPositionState === 'function') {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                ;(ms as any).setPositionState({
+              if (ms && typeof (ms as unknown as { setPositionState?: Function }).setPositionState === 'function') {
+                const pos: MediaPositionState = {
                   duration: duration || 0,
                   playbackRate: 1,
                   position: current,
-                } as any)
+                }
+                ;(ms as unknown as { setPositionState?: (s: MediaPositionState) => void }).setPositionState?.(pos)
               }
             } catch {
               // ignore
