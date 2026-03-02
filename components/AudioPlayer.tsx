@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { Play, Pause, X, SkipBack, SkipForward } from 'lucide-react'
+import { Play, Pause, X, SkipBack } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 type YouTubePlayer = {
@@ -79,7 +79,7 @@ export default function AudioPlayer({ videoUrl, title, thumbnail, date, onClose 
             // Update Media Session position state if available
             try {
               const ms = (navigator as unknown as { mediaSession?: MediaSession }).mediaSession
-              if (ms && typeof (ms as unknown as { setPositionState?: Function }).setPositionState === 'function') {
+              if (ms && typeof (ms as unknown as { setPositionState?: (...args: unknown[]) => void }).setPositionState === 'function') {
                 const pos: MediaPositionState = {
                   duration: duration || 0,
                   playbackRate: 1,
