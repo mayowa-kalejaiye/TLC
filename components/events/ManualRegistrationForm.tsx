@@ -109,8 +109,11 @@ export default function ManualRegistrationForm() {
       <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
         <div className="text-green-600 text-5xl mb-4">✓</div>
         <h3 className="text-2xl font-bold text-tlcc-navy mb-2">Registration Successful!</h3>
-        <p className="text-gray-600">
+        <p className="text-gray-600 mb-3">
           Check your email for event details. See you at The Manual!
+        </p>
+        <p className="text-sm text-gray-500 bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-3">
+          📩 <strong>Don&apos;t see the email?</strong> Check your <strong>Spam</strong> or <strong>Junk</strong> folder and mark it as &quot;Not Spam&quot; so you don&apos;t miss future updates.
         </p>
       </div>
     )
