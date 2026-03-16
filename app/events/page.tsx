@@ -3,14 +3,32 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, type LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+type EventItem = {
+  id: string
+  title: string
+  tagline: string
+  description: string
+  date: string
+  time: string
+  location: string
+  type: string
+  image: string
+  icon: LucideIcon
+  color: string
+  featured: boolean
+  ctaLink?: string
+  ctaLabel?: string
+  whatsappLink?: string
+}
+
 export default function EventsPage() {
-  const upcomingEvents = [
+  const upcomingEvents: EventItem[] = [
     {
       id: 'watch-hour',
       title: 'Watch Hour Prayers',
