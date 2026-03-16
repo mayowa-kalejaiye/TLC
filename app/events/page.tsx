@@ -12,23 +12,6 @@ gsap.registerPlugin(ScrollTrigger)
 export default function EventsPage() {
   const upcomingEvents = [
     {
-      id: 'manual',
-      title: 'The Manual',
-      tagline: 'Man Understanding His Purpose',
-      description:
-        'Man understanding why he was created. Learn about the plans God has for man — that man was not meant to just do life on their own and guess how things work. There is an original plan for man. Come discover it.',
-      date: 'Saturday, 7 March 2026',
-      time: '10:00 AM',
-      location: 'The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja',
-      type: 'Special Meeting',
-      image: '/images/manual.jpg',
-      icon: Users,
-      color: 'from-tlcc-navy to-tlcc-gold',
-      featured: true,
-      ctaLink: '/events/manual#register',
-      ctaLabel: 'Register Now',
-    },
-    {
       id: 'watch-hour',
       title: 'Watch Hour Prayers',
       tagline: 'Friday Night Intercession',
