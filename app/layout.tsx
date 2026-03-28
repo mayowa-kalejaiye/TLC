@@ -2,9 +2,11 @@
 import { Montserrat, Anton } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import AudioPlayerRoot from '@/components/AudioPlayerRoot'
 import { Analytics } from "@vercel/analytics/next"
 import Footer from '@/components/Footer'
 import { LanguageProvider } from '@/components/providers/LanguageProvider'
+import { AudioPlayerProvider } from '@/components/providers/AudioPlayerProvider'
 
 
 const montserrat = Montserrat({ 
@@ -205,10 +207,13 @@ export default function RootLayout({
       </head>
       <body className={montserrat.className}>
         <LanguageProvider>
-          <Navbar />
-          <main className="pt-20 md:pt-24 lg:pt-28">{children}</main>
-          <Analytics />
-          <Footer />
+          <AudioPlayerProvider>
+            <Navbar />
+            <main className="pt-20 md:pt-24 lg:pt-28">{children}</main>
+            <AudioPlayerRoot />
+            <Analytics />
+            <Footer />
+          </AudioPlayerProvider>
         </LanguageProvider>
       </body>
     </html>

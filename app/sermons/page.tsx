@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useAudioPlayer } from '@/components/providers/AudioPlayerProvider'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Play, Download, Search, Share2, Clock } from 'lucide-react'
@@ -12,7 +13,6 @@ import {
   formatDate,
   type YouTubeVideo 
 } from '@/lib/youtube'
-import AudioPlayer from '@/components/AudioPlayer'
 
 export default function SermonsPage() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
@@ -25,7 +25,7 @@ export default function SermonsPage() {
   const [extractedTopics, setExtractedTopics] = useState<string[]>([])
   const [videosToShow, setVideosToShow] = useState<number>(12)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [currentAudio, setCurrentAudio] = useState<YouTubeVideo | null>(null)
+  const { currentAudio, setCurrentAudio } = useAudioPlayer()
 
   const getVideoId = (url: string) => {
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?]+)/)
@@ -691,16 +691,6 @@ export default function SermonsPage() {
         </section>
       )}
 
-      {/* Audio Player (hidden when featured sermon is playing inline) */}
-      {currentAudio && currentAudio.id !== featuredSermon?.id && (
-        <AudioPlayer
-          videoUrl={currentAudio.url}
-          title={currentAudio.title}
-          thumbnail={currentAudio.thumbnail}
-          date={currentAudio.publishedAt}
-          onClose={() => setCurrentAudio(null)}
-        />
-      )}
     </div>
   )
 }
