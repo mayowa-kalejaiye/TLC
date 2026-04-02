@@ -30,6 +30,23 @@ type EventItem = {
 export default function EventsPage() {
   const upcomingEvents: EventItem[] = [
     {
+      id: 'understanding-salvation',
+      title: '4 Days of Understanding Salvation',
+      tagline: 'Intensive Discipleship Training',
+      description:
+        'A 4-day intensive discipleship training designed to ground participants in the foundational truth of the Gospel and nurture committed, knowledgeable, and Spirit-led disciples of Christ. Registration closes once all 6 slots are filled.',
+      date: 'April 13, 14, 16, 17, 2026 (Mon, Tue, Thu, Fri)',
+      time: '7:00 PM',
+      location: 'The Light House',
+      type: 'Discipleship Training',
+      image: '/images/event-hero.jpg',
+      icon: Users,
+      color: 'from-tlcc-orange to-tlcc-gold',
+      featured: true,
+      ctaLink: '/events/understanding-salvation#register',
+      ctaLabel: 'Register Now (6 Slots)',
+    },
+    {
       id: 'watch-hour',
       title: 'Watch Hour Prayers',
       tagline: 'Friday Night Intercession',
@@ -200,6 +217,8 @@ export default function EventsPage() {
           <div className="space-y-12 max-w-6xl mx-auto">
             {upcomingEvents.map((event, index) => {
               const IconComponent = event.icon
+              const ctaHref = event.ctaLink ?? '/contact#event-inquiry'
+              const isExternalCta = ctaHref.startsWith('http')
               return (
                 <div
                   key={event.id}
@@ -265,13 +284,25 @@ export default function EventsPage() {
 
                     {/* CTA Button */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Link
-                        href={event.ctaLink ?? '/contact#event-inquiry'}
-                        className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
-                      >
-                        <span>{event.ctaLabel ?? 'Learn More'}</span>
-                        <ArrowRight className="h-5 w-5" />
-                      </Link>
+                      {isExternalCta ? (
+                        <a
+                          href={ctaHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
+                        >
+                          <span>{event.ctaLabel ?? 'Learn More'}</span>
+                          <ArrowRight className="h-5 w-5" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={ctaHref}
+                          className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
+                        >
+                          <span>{event.ctaLabel ?? 'Learn More'}</span>
+                          <ArrowRight className="h-5 w-5" />
+                        </Link>
+                      )}
                       {/* {event.whatsappLink && (
                         <a
                           href={event.whatsappLink}

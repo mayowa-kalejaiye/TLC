@@ -1,0 +1,75 @@
+<div style="background-color: #f0f4f8; padding: 50px 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(26, 54, 93, 0.1); border: 1px solid #e2e8f0;">
+    
+    <!-- Header -->
+    <div style="background-color: #1a365d; padding: 35px 40px; border-bottom: 4px solid #d69e2e;">
+      <table width="100%">
+        <tr>
+          <td>
+            <img src="https://www.tlcc.ng/_next/image?url=%2Fimages%2Ftlcc-logo.png&w=640&q=75" style="width:100px; filter: brightness(0) invert(1);"/>
+          </td>
+          <td style="text-align: right;">
+            <div style="display: inline-block; background: rgba(214, 158, 46, 0.15); border: 1px solid rgba(214, 158, 46, 0.3); padding: 5px 12px; border-radius: 100px;">
+              <span style="color: #f6ad55; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;">New Alert</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <h2 style="color: #ffffff; margin: 20px 0 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">New Cohort Enrollment</h2>
+      <p style="color: #a0aec0; margin: 5px 0 0; font-size: 14px;">4 Days of Understanding Salvation</p>
+    </div>
+
+    <!-- Body -->
+    <div style="padding: 40px;">
+      <p style="color: #718096; font-size: 15px; margin: 0 0 25px;">Hi Admin, a new participant has submitted their registration for the intensive discipleship training.</p>
+      
+      <!-- Registrant Data Table -->
+      <div style="background-color: #f8fafc; border-radius: 16px; padding: 30px; border: 1px solid #edf2f7; margin-bottom: 30px;">
+        <h3 style="color: #1a365d; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">Registrant Profile</h3>
+        
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 12px 0; color: #718096; font-size: 13px; width: 40%;">FULL NAME</td>
+            <td style="padding: 12px 0; color: #1a365d; font-size: 15px; font-weight: 700;">{{registrant_name}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 0; color: #718096; font-size: 13px; border-top: 1px solid #edf2f7;">EMAIL</td>
+            <td style="padding: 12px 0; color: #d69e2e; font-size: 15px; font-weight: 700; border-top: 1px solid #edf2f7;">
+              <a href="mailto:{{registrant_email}}" style="color: #d69e2e; text-decoration: none;">{{registrant_email}}</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 0; color: #718096; font-size: 13px; border-top: 1px solid #edf2f7;">PHONE</td>
+            <td style="padding: 12px 0; color: #1a365d; font-size: 15px; font-weight: 700; border-top: 1px solid #edf2f7;">{{registrant_phone}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 0; color: #718096; font-size: 13px; border-top: 1px solid #edf2f7;">COMMITMENT</td>
+            <td style="padding: 12px 0; color: #1a365d; font-size: 15px; font-weight: 700; border-top: 1px solid #edf2f7;">{{registrant_commitment}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Expectations Box -->
+      <div style="background-color: #fffaf0; border-radius: 12px; padding: 20px; border-left: 4px solid #f6ad55; margin-bottom: 30px;">
+        <p style="margin: 0 0 8px; color: #744210; font-size: 12px; font-weight: 800; text-transform: uppercase;">Goal / Expectation:</p>
+        <p style="margin: 0; color: #4a5568; font-size: 14px; line-height: 1.6; font-style: italic;">"{{registrant_expectations}}"</p>
+      </div>
+
+      <!-- Logistics Summary -->
+      <div style="background-color: #f0fff4; border-radius: 12px; padding: 20px; border: 1px solid #c6f6d5;">
+        <p style="margin: 0 0 10px; color: #22543d; font-size: 12px; font-weight: 800; text-transform: uppercase;">Event Reference:</p>
+        <p style="margin: 0; color: #2d3748; font-size: 14px; font-weight: 600;">
+          📅 {{event_date}} • ⏰ 7:00 PM <br>
+          📍 Online (Google Meet)
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background-color: #f8fafc; padding: 25px; text-align: center; border-top: 1px solid #e2e8f0;">
+      <p style="margin: 0; font-size: 11px; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px;">
+        Automated Notification • TLCC Registration System
+      </p>
+    </div>
+  </div>
+</div>
