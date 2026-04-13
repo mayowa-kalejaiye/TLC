@@ -121,8 +121,8 @@ export default function EventsPage() {
   ];
 
   const heroRef = useRef<HTMLDivElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero Animation
       if (heroRef.current) {
@@ -136,8 +136,8 @@ export default function EventsPage() {
       }
 
       // Cards Scroll Animation
-      gsap.utils.toArray('.event-card').forEach((card: any) => {
-        gsap.from(card, <HTMLElement>('.event-card').forEach((card
+      (gsap.utils.toArray('.event-card') as HTMLElement[]).forEach((card) => {
+        gsap.from(card, {
           opacity: 0,
           y: 100,
           duration: 1,
@@ -148,6 +148,10 @@ export default function EventsPage() {
             toggleActions: 'play none none reverse',
           },
         });
+      });
+    });
+    return () => ctx.revert();
+  }, []);
       });
     });
     return () => ctx.revert();
