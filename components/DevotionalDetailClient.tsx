@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import simpleMarkdownToHtml from '@/lib/markdown'
 import { ArrowLeft, Share2, Clock, Calendar, Check } from 'lucide-react'
 
@@ -16,7 +15,6 @@ type DevotionalItem = {
 }
 
 export default function DevotionalDetailClient({ devotional }: { devotional: DevotionalItem }) {
-  const router = useRouter()
   const [shareStatus, setShareStatus] = useState('')
   const [readingProgress, setReadingProgress] = useState(0)
   
