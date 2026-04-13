@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import simpleMarkdownToHtml from '@/lib/markdown'
 import { ArrowLeft, Share2, Clock, Calendar, Check } from 'lucide-react'
@@ -65,16 +66,15 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
       />
 
       {/* Floating Back Button */}
-      <button
-        type="button"
-        onClick={() => router.back()}
+      <Link
+        href="/devotionals"
         className="fixed left-6 top-24 z-50 group flex items-center gap-2 bg-white/90 backdrop-blur-md border border-black/5 p-2 pr-4 rounded-full shadow-xl hover:bg-tlcc-navy hover:text-white transition-all duration-300"
       >
         <div className="w-8 h-8 rounded-full bg-tlcc-gold flex items-center justify-center text-white group-hover:rotate-[-45deg] transition-transform">
           <ArrowLeft size={18} />
         </div>
         <span className="text-xs font-black uppercase tracking-widest leading-none">Back</span>
-      </button>
+      </Link>
 
       {/* Hero Header */}
       <header className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-tlcc-navy">
@@ -148,12 +148,12 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
 
       {/* Bottom Navigation / CTA */}
       <footer className="container mx-auto px-4 max-w-2xl mt-12 text-center">
-        <button 
-          onClick={() => router.push('/devotionals')}
+        <Link 
+          href="/devotionals"
           className="text-gray-400 hover:text-tlcc-gold text-xs font-bold uppercase tracking-[0.2em] transition-colors"
         >
           Explore more devotionals
-        </button>
+        </Link>
       </footer>
     </main>
   )
