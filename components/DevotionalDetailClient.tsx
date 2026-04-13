@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import simpleMarkdownToHtml from '@/lib/markdown'
-import { ArrowLeft, Share2, Clock, Calendar, Check, Copy } from 'lucide-react'
+import { ArrowLeft, Share2, Clock, Calendar, Check } from 'lucide-react'
 
 type DevotionalItem = { 
   id: string; 

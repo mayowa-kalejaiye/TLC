@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Image from 'next/image'
 import Link from 'next/link'
-import simpleMarkdownToHtml from '@/lib/markdown'
 import { Calendar, Clock, Share2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
 function estimateReadingTime(text: string) {
@@ -115,7 +114,7 @@ export default function PublicDevotionalsPage() {
               )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                {devotionals.map((d, index) => {
+                {devotionals.map((d) => {
                   const dateStr = d.scheduled_date || d.created_at;
                   const formattedDate = dateStr ? new Date(dateStr).toLocaleDateString(undefined, { 
                     month: 'short', 

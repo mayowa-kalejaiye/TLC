@@ -1,30 +1,40 @@
-﻿'use client'
+﻿"use client";
 
-import { useEffect, useRef } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, Flame, Heart, ArrowRight, type LucideIcon } from 'lucide-react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { 
+  Calendar, 
+  Clock, 
+  MapPin, 
+  Users, 
+  Flame, 
+  Heart, 
+  ArrowRight, 
+  Sparkles,
+  ChevronRight,
+  type LucideIcon 
+} from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 type EventItem = {
-  id: string
-  title: string
-  tagline: string
-  description: string
-  date: string
-  time: string
-  location: string
-  type: string
-  image: string
-  icon: LucideIcon
-  color: string
-  featured: boolean
-  ctaLink?: string
-  ctaLabel?: string
-  whatsappLink?: string
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  type: string;
+  image: string;
+  icon: LucideIcon;
+  color: string;
+  featured: boolean;
+  ctaLink?: string;
+  ctaLabel?: string;
 }
 
 export default function EventsPage() {
@@ -34,379 +44,226 @@ export default function EventsPage() {
       title: '4 Days of Understanding Salvation',
       tagline: 'Intensive Discipleship Training',
       description:
-        'A 4-day intensive discipleship training designed to ground participants in the foundational truth of the Gospel and nurture committed, knowledgeable, and Spirit-led disciples of Christ. Registration closes once all 6 slots are filled.',
-      date: 'April 13, 14, 16, 17, 2026 (Mon, Tue, Thu, Fri)',
-      time: '7:00 PM',
-      location: 'The Light House',
-      type: 'Discipleship Training',
+        'A 4-day intensive discipleship training designed to ground participants in the foundational truth of the Gospel. Registration closes once all 6 slots are filled.',
+      date: 'April 13, 14, 16, 17, 2026',
+      time: '7:00 PM Nightly',
+      location: 'Online (Google Meet)',
+      type: 'Intensive',
       image: '/images/event-hero.jpg',
-      icon: Users,
-      color: 'from-tlcc-orange to-tlcc-gold',
+      icon: Sparkles,
+      color: 'from-[#1a365d] to-[#2a4365]',
       featured: true,
-      ctaLink: '/events/understanding-salvation#register',
-      ctaLabel: 'Register Now (6 Slots)',
+      ctaLink: '/events/understanding-salvation',
+      ctaLabel: 'Secure Your Slot',
     },
     {
       id: 'watch-hour',
       title: 'Watch Hour Prayers',
       tagline: 'Friday Night Intercession',
       description:
-        'Watch Hour Prayers is this Friday! Join us at 9:00 PM as we stand in the gap, pray for the Body of Christ, strengthen one another, and lift the church of Christ in passionate intercession.',
+        'Join us as we stand in the gap, pray for the Body of Christ, and strengthen one another in passionate intercession.',
       date: 'Bi-weekly Fridays',
-      time: '9:00 PM · 1 Hour of Prayer',
+      time: '9:00 PM',
       location: 'The Light House & Online',
       type: 'Prayer Watch',
       image: '/images/watch_hour.jpg',
       icon: Clock,
-      color: 'from-tlcc-navy to-green-700',
+      color: 'from-[#d69e2e] to-[#b88627]',
       featured: true,
+      ctaLabel: 'Learn More',
     },
     {
       id: 'rooted',
-      title: 'Rooted (Monthly)',
+      title: 'Rooted (Monthly Gathering)',
       tagline: 'Great Sermons, Deep Connections',
       description:
-        'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons, stay for fellowship and meaningful relationships with fellow believers.',
-      date: 'First Saturday of Every Month',
+        'Our monthly in-person gathering for powerful preaching and community connection. Come for life-changing sermons and stay for fellowship.',
+      date: 'First Saturday Monthly',
       time: '10:00 AM',
-      location: 'The Light House, 43b Babaponmile Street, Mangoro, Ikeja',
-      type: 'Monthly Gathering',
+      location: 'The Light House, Mangoro',
+      type: 'Gathering',
       image: '/images/rooted2.JPG',
       icon: Users,
-      color: 'from-tlcc-green to-tlcc-navy',
+      color: 'from-[#064e3b] to-[#065f46]',
       featured: true,
+      ctaLabel: 'Details',
     },
-    {
-      id: 'fire-conference',
-      title: 'Fire Conference',
-      tagline: 'An Encounter with the Holy Spirit',
-      description: 'Our annual youth and teenage conference designed to ignite your passion for God. Experience days of powerful worship, life-changing messages, and supernatural encounters that will transform your walk with Christ.',
-      date: 'Annually in August',
-      time: 'One-Day Conference',
-      location: 'The Light House',
-      type: 'Youth Conference',
-      image: '/images/fire-conference.jpg',
-      icon: Flame,
-      color: 'from-orange-500 to-red-600',
-      featured: true
-    },
-    {
-      id: 'tarry',
-      title: 'Tarry',
-      tagline: 'Extended Hours of Prayer & Worship',
-      description: 'A small, intimate gathering where young and old come together to PRAY! We tarry in God\'s presence, intercede for the church, nations, and revival. Expect extended hours of fervent prayer and worship.',
-      date: 'Regular Meetings',
-      time: 'Check Schedule',
-      location: 'The Light House & Online',
-      type: 'Prayer Meeting',
-      image: '/images/tarry.jpg',
-      icon: Heart,
-      color: 'from-tlcc-gold to-tlcc-orange',
-      featured: true
-    }
-  ]
+  ];
 
-  // rootedHighlights removed (unused)
-
-  // rootedMenu removed per request - no food names shown
-
-  const heroRef = useRef<HTMLDivElement | null>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Hero Animation
       if (heroRef.current) {
-        const heroElements = heroRef.current.querySelectorAll('[data-hero-animate]')
-        gsap.from(heroElements, {
+        gsap.from(heroRef.current.querySelectorAll('[data-animate]'), {
           opacity: 0,
-          y: 120,
-          scale: 0.92,
-          duration: 1.1,
-          ease: 'expo.out',
-          stagger: 0.15,
-        })
+          y: 60,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power4.out',
+        });
       }
 
-      cardsRef.current.forEach((card, idx) => {
-        if (!card) return
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 140, scale: 0.94, rotateX: -8 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotateX: 0,
-            duration: 1.2,
-            ease: 'expo.out',
-            delay: idx * 0.05,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              end: 'bottom 60%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        )
-      })
-    })
-
-    return () => ctx.revert()
-  }, [])
+      // Cards Scroll Animation
+      gsap.utils.toArray('.event-card').forEach((card: any) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 100,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+    });
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+    <main className="min-h-screen bg-[#fafafa]">
+      {/* Premium Dark Hero */}
+      <section ref={heroRef} className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-tlcc-navy">
+        <div className="absolute inset-0 z-0 opacity-40">
           <Image
             src="/images/event-hero.jpg"
-            alt="Events"
+            alt="Events Background"
             fill
-            className="object-cover"
+            className="object-cover scale-110 blur-[2px]"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50" />
         </div>
-
-        <div ref={heroRef} className="relative z-10 container mx-auto px-4 text-center">
-          <div data-hero-animate className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
-            <Calendar className="h-4 w-4 text-tlcc-gold" />
-            <span className="text-white font-semibold text-sm tracking-wider uppercase">Events</span>
+        <div className="absolute inset-0 bg-gradient-to-b from-tlcc-navy/80 via-tlcc-navy/90 to-[#fafafa]" />
+        
+        <div className="relative z-10 container mx-auto px-4 text-center mt-20">
+          <div data-animate className="inline-flex items-center gap-2 bg-tlcc-gold/10 backdrop-blur-xl px-4 py-2 rounded-full mb-8 border border-tlcc-gold/20">
+            <Sparkles className="h-4 w-4 text-tlcc-gold" />
+            <span className="text-tlcc-gold font-bold text-[10px] tracking-[0.3em] uppercase">Calendar of Light</span>
           </div>
 
-          <h1 data-hero-animate className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight uppercase">
-            Experience
-            <br />
-            <span className="text-tlcc-orange">God Together</span>
+          <h1 data-animate className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-6 uppercase tracking-tighter leading-[0.85]">
+            Experience <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-tlcc-gold to-tlcc-gold/40">The Encounter</span>
           </h1>
 
-          <p data-hero-animate className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
-            From powerful conferences to intimate prayer meetings, join us for life-changing encounters with God
+          <p data-animate className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
+            Join our vibrant community for life-transforming gatherings, 
+            conferences, and intimate moments in the presence of God.
           </p>
 
-          <div data-hero-animate className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="#upcoming-events"
-              className="px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-            >
-              View Events
-            </Link>
-            <Link
-              href="/contact#event-inquiry"
-              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-            >
-              Get Information
-            </Link>
-          </div>
+          <Link
+            data-animate
+            href="#upcoming"
+            className="group relative inline-flex items-center gap-4 bg-tlcc-gold hover:bg-white text-white hover:text-tlcc-navy px-10 py-5 rounded-full font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl overflow-hidden active:scale-95"
+          >
+            <span className="relative z-10">Discover Events</span>
+            <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
-      <section id="upcoming-events" className="py-20 bg-gray-50">
+      {/* Modern Event Cards Collection */}
+      <section id="upcoming" className="pb-32 -mt-24 relative z-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-4 uppercase">
-              Upcoming Events
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mark your calendars! Here&apos;s what&apos;s happening at The Light Community Church
-            </p>
-          </div>
-
-          <div className="space-y-12 max-w-6xl mx-auto">
-            {upcomingEvents.map((event, index) => {
-              const IconComponent = event.icon
-              const ctaHref = event.ctaLink ?? '/contact#event-inquiry'
-              const isExternalCta = ctaHref.startsWith('http')
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {upcomingEvents.map((event) => {
+              const Icon = event.icon;
               return (
-                <div
+                <Link 
+                  href={event.id === 'understanding-salvation' ? '/events/understanding-salvation' : '#'} 
                   key={event.id}
-                  id={event.id}
-                  ref={(el) => {
-                    cardsRef.current[index] = el
-                  }}
-                  className={`bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } flex flex-col md:flex`}
+                  className="event-card group block relative bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.03] shadow-[0_15px_45px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_45px_90px_-20px_rgba(214,158,46,0.2)] transition-all duration-700"
                 >
-                  {/* Event Image */}
-                  <div className="md:w-1/2 relative h-64 md:h-auto min-h-[400px]">
+                  {/* Visual Header */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={event.image}
                       alt={event.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110 blur-0 group-hover:blur-[2px]"
+                      unoptimized
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${event.color} opacity-30`} />
+                    <div className="absolute inset-0 bg-tlcc-navy/40 group-hover:bg-tlcc-navy/60 transition-colors duration-500" />
+                    
+                    {/* Badge */}
                     <div className="absolute top-6 left-6">
-                      <div className={`bg-gradient-to-r ${event.color} text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide`}>
+                      <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl text-[10px] font-black text-tlcc-navy uppercase tracking-widest flex items-center gap-2 shadow-2xl">
+                        <Icon className="h-3 w-3 text-tlcc-gold" />
                         {event.type}
                       </div>
                     </div>
-                  </div>
 
-                  {/* Event Details */}
-                  <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${event.color} rounded-xl flex items-center justify-center`}>
-                        <IconComponent className="h-6 w-6 text-white" />
+                    {/* Quick View Stats Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100">
+                      <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl text-white text-center">
+                         <ChevronRight className="h-10 w-10 mx-auto animate-pulse" />
                       </div>
-                      <div>
-                        <h3 className="font-anton text-3xl text-tlcc-navy uppercase">
-                          {event.title}
-                        </h3>
-                        <p className="text-tlcc-orange font-semibold">
-                          {event.tagline}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                      {event.description}
-                    </p>
-
-                    {/* Event Info */}
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-3 text-gray-600">
-                        <Calendar className="h-5 w-5 text-tlcc-gold" />
-                        <span className="font-semibold">{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-gray-600">
-                        <Clock className="h-5 w-5 text-tlcc-gold" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-gray-600">
-                        <MapPin className="h-5 w-5 text-tlcc-gold" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      {isExternalCta ? (
-                        <a
-                          href={ctaHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
-                        >
-                          <span>{event.ctaLabel ?? 'Learn More'}</span>
-                          <ArrowRight className="h-5 w-5" />
-                        </a>
-                      ) : (
-                        <Link
-                          href={ctaHref}
-                          className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${event.color} text-white font-bold rounded-full hover:scale-105 transition-all duration-300 shadow-lg`}
-                        >
-                          <span>{event.ctaLabel ?? 'Learn More'}</span>
-                          <ArrowRight className="h-5 w-5" />
-                        </Link>
-                      )}
-                      {/* {event.whatsappLink && (
-                        <a
-                          href={event.whatsappLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-tlcc-navy font-bold rounded-full border-2 border-tlcc-navy hover:bg-tlcc-navy hover:text-white transition-all duration-300 shadow-lg"
-                        >
-                          <span>Join WhatsApp Group</span>
-                          <ArrowRight className="h-5 w-5" />
-                        </a>
-                      )} */}
                     </div>
                   </div>
-                </div>
-              )
+
+                  {/* Body Content */}
+                  <div className="p-10 flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="h-[2px] w-6 bg-tlcc-gold group-hover:w-12 transition-all duration-500" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-tlcc-navy/30">{event.tagline}</span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-tlcc-navy mb-6 group-hover:text-tlcc-gold transition-colors duration-300 leading-tight">
+                      {event.title}
+                    </h3>
+
+                    <div className="space-y-3 mb-10">
+                      <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <Calendar size={16} className="text-tlcc-gold" />
+                        <span className="font-medium">{event.date}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <Clock size={16} className="text-tlcc-gold" />
+                        <span className="font-medium">{event.time}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <MapPin size={16} className="text-tlcc-gold" />
+                        <span className="font-medium">{event.location}</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-auto pt-8 border-t border-black/[0.03] flex items-center justify-between">
+                      <span className="text-[11px] font-black uppercase tracking-[0.3em] text-tlcc-navy group-hover:text-tlcc-gold transition-colors">
+                        {event.ctaLabel}
+                      </span>
+                      <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-tlcc-gold transition-all duration-500">
+                        <ArrowRight size={20} className="text-tlcc-navy group-hover:text-white transition-transform -rotate-45 group-hover:rotate-0" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* Why Attend Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase">
-              Why Attend Our Events?
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Every event is designed to bring you closer to God and connect you with a family that cares
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Flame className="h-8 w-8 text-tlcc-gold" />
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
-                  Encounter God
-                </h3>
-                <p className="text-gray-600">
-                  Experience the manifest presence of God in worship, prayer, and powerful teaching
-                </p>
-              </div>
-
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-tlcc-orange" />
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
-                  Build Community
-                </h3>
-                <p className="text-gray-600">
-                  Connect with believers who are passionate about growing in faith together
-                </p>
-              </div>
-
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-tlcc-green" />
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
-                  Grow Deeper
-                </h3>
-                <p className="text-gray-600">
-                  Receive practical teaching and spiritual nourishment for your journey
-                </p>
-              </div>
+          {/* Contact Inquiry Block */}
+          <div className="mt-32 max-w-4xl mx-auto bg-tlcc-navy rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-tlcc-gold/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+            <div className="relative z-10">
+              <h2 className="font-anton text-4xl md:text-5xl text-white uppercase mb-6">Want to host an event?</h2>
+              <p className="text-white/60 mb-10 max-w-xl mx-auto leading-relaxed">
+                We believe in the power of community gatherings. Reach out to collaborate or inquire about using our facilities.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 text-tlcc-gold font-bold uppercase tracking-[0.2em] text-sm hover:gap-6 transition-all"
+              >
+                Get in touch <ArrowRight size={18} />
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-tlcc-navy to-tlcc-green text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-anton text-4xl md:text-5xl mb-6 uppercase">
-            Don&apos;t Miss Out!
-          </h2>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Get updates on upcoming events and be the first to know when registration opens
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/#stay-connected"
-              className="px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-            >
-              Subscribe for Updates
-            </Link>
-            <Link
-              href="/contact#event-inquiry"
-              className="px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-navy text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
     </main>
-  )
+  );
 }
-
-// Page-level metadata removed: this page is a client component ('use client')
-// Exporting `metadata` from a client component is invalid in Next.js App Router.
-// Keep site-wide metadata in `app/layout.tsx` or convert this page to a server
-// component if page-specific metadata is required.
 
