@@ -102,7 +102,7 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
             </div>
           </div>
 
-          <h1 className="font-anton text-5xl md:text-7xl lg:text-8xl text-tlcc-navy mb-8 leading-[0.9] uppercase tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000">
+          <h1 className="font-anton text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-[0.9] uppercase tracking-normal animate-in fade-in slide-in-from-bottom-6 duration-1000 drop-shadow-2xl">
             {devotional.title}
           </h1>
         </div>
@@ -115,7 +115,7 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
           {/* Main Body */}
           <div 
             className="prose prose-xl prose-tlcc mx-auto 
-              prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-tight 
+              prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-wide 
               prose-p:text-gray-600 prose-p:leading-relaxed prose-p:font-light 
               prose-strong:text-tlcc-navy prose-strong:font-bold
               prose-blockquote:border-l-tlcc-gold prose-blockquote:bg-tlcc-gold/5 prose-blockquote:py-2 prose-blockquote:rounded-r-xl prose-blockquote:font-serif prose-blockquote:italic prose-blockquote:text-tlcc-navy"

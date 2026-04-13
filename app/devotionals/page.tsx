@@ -85,7 +85,7 @@ export default function PublicDevotionalsPage() {
             <span className="text-tlcc-gold font-bold text-[10px] tracking-[0.2em] uppercase">The Word Daily</span>
           </div>
           
-          <h1 className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-6 leading-[0.9] uppercase tracking-tighter">
+          <h1 className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-6 leading-[0.9] uppercase tracking-normal">
             Daily <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-tlcc-gold via-white/80 to-tlcc-gold/40">Inspiration</span>
           </h1>
@@ -178,7 +178,7 @@ export default function PublicDevotionalsPage() {
                           </div>
                         </div>
 
-                        <h3 className="text-2xl font-bold text-tlcc-navy mb-4 group-hover:text-tlcc-gold transition-colors duration-300 leading-[1.2]">
+                        <h3 className="text-2xl font-bold text-tlcc-navy mb-4 group-hover:text-tlcc-gold transition-colors duration-300 leading-[1.2] tracking-normal">
                           {d.title}
                         </h3>
 
@@ -214,9 +214,9 @@ export default function PublicDevotionalsPage() {
                   </button>
                   
                   <div className="flex items-center gap-1">
-                    <span className="text-tlcc-navy font-black text-2xl">{page.toString().padStart(2, '0')}</span>
+                    <span className="text-tlcc-navy font-black text-2xl tracking-widest">{page.toString().padStart(2, '0')}</span>
                     <span className="text-gray-300 text-xl font-light mx-2">/</span>
-                    <span className="text-gray-400 font-bold">{totalPages.toString().padStart(2, '0')}</span>
+                    <span className="text-gray-400 font-bold tracking-widest">{totalPages.toString().padStart(2, '0')}</span>
                   </div>
 
                   <button
