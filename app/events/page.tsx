@@ -152,10 +152,6 @@ export default function EventsPage() {
     });
     return () => ctx.revert();
   }, []);
-      });
-    });
-    return () => ctx.revert();
-  }, []);
 
   return (
     <main className="min-h-screen bg-[#fafafa]">
