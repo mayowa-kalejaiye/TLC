@@ -8,11 +8,11 @@ import {
   Clock, 
   MapPin, 
   Users, 
-  Flame, 
-  Heart, 
   ArrowRight, 
   Sparkles,
   ChevronRight,
+  Flame,
+  Heart,
   type LucideIcon 
 } from 'lucide-react';
 import gsap from 'gsap';
@@ -88,12 +88,41 @@ export default function EventsPage() {
       featured: true,
       ctaLabel: 'Details',
     },
+    {
+      id: 'fire-conference',
+      title: 'Fire Conference',
+      tagline: 'An Encounter with the Holy Spirit',
+      description: 'Our annual youth and teenage conference designed to ignite your passion for God. Experience days of powerful worship and supernatural encounters.',
+      date: 'Annually in August',
+      time: 'One-Day Conference',
+      location: 'The Light House',
+      type: 'Youth Conference',
+      image: '/images/fire-conference.jpg',
+      icon: Flame,
+      color: 'from-[#f97316] to-[#dc2626]',
+      featured: true,
+      ctaLabel: 'More Info'
+    },
+    {
+      id: 'tarry',
+      title: 'Tarry',
+      tagline: 'Extended Hours of Prayer & Worship',
+      description: 'A small, intimate gathering where we tarry in God\'s presence, interceding for the church, nations, and revival.',
+      date: 'Regular Meetings',
+      time: 'Check Schedule',
+      location: 'The Light House & Online',
+      type: 'Prayer Meeting',
+      image: '/images/tarry.jpg',
+      icon: Heart,
+      color: 'from-[#fbbf24] to-[#f59e0b]',
+      featured: true,
+      ctaLabel: 'Join Us'
+    }
   ];
 
   const heroRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero Animation
       if (heroRef.current) {
@@ -108,7 +137,7 @@ export default function EventsPage() {
 
       // Cards Scroll Animation
       gsap.utils.toArray('.event-card').forEach((card: any) => {
-        gsap.from(card, {
+        gsap.from(card, <HTMLElement>('.event-card').forEach((card
           opacity: 0,
           y: 100,
           duration: 1,
@@ -259,6 +288,50 @@ export default function EventsPage() {
               >
                 Get in touch <ArrowRight size={18} />
               </Link>
+            </div>
+          </div>
+
+          {/* Why Attend Section - Restored with Premium Styling */}
+          <div className="mt-32">
+            <div className="text-center mb-16">
+              <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-4 uppercase">
+                Why Attend?
+              </h2>
+              <p className="text-gray-500 max-w-xl mx-auto">
+                Every gathering is an opportunity to grow, connect, and experience the manifest presence of God.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+              <div className="text-center group p-8 rounded-[2rem] hover:bg-white hover:shadow-xl transition-all duration-500">
+                <div className="w-20 h-20 bg-tlcc-gold/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-tlcc-gold group-hover:rotate-[15deg] transition-all duration-500">
+                  <Flame className="h-10 w-10 text-tlcc-gold group-hover:text-white" />
+                </div>
+                <h3 className="font-anton text-2xl text-tlcc-navy mb-4 uppercase">Encounter God</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Experience the manifest presence of God in worship, prayer, and powerful teaching that transforms lives.
+                </p>
+              </div>
+
+              <div className="text-center group p-8 rounded-[2rem] hover:bg-white hover:shadow-xl transition-all duration-500">
+                <div className="w-20 h-20 bg-tlcc-gold/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-tlcc-gold group-hover:rotate-[-15deg] transition-all duration-500">
+                  <Users className="h-10 w-10 text-tlcc-gold group-hover:text-white" />
+                </div>
+                <h3 className="font-anton text-2xl text-tlcc-navy mb-4 uppercase">Build Community</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Connect with a family of believers who are passionate about growing in faith and supporting each other.
+                </p>
+              </div>
+
+              <div className="text-center group p-8 rounded-[2rem] hover:bg-white hover:shadow-xl transition-all duration-500">
+                <div className="w-20 h-20 bg-tlcc-gold/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-tlcc-gold group-hover:rotate-[15deg] transition-all duration-500">
+                  <Heart className="h-10 w-10 text-tlcc-gold group-hover:text-white" />
+                </div>
+                <h3 className="font-anton text-2xl text-tlcc-navy mb-4 uppercase">Grow Deeper</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Receive sound spiritual nourishment and practical wisdom to navigate your walk with Christ.
+                </p>
+              </div>
             </div>
           </div>
         </div>
