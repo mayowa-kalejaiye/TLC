@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Flame,
   Heart,
-  type LucideIcon 
+  RefreshCw,
+  type LucideIcon
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -39,6 +40,23 @@ type EventItem = {
 
 export default function EventsPage() {
   const upcomingEvents: EventItem[] = [
+    {
+      id: 'unlearning-conference',
+      title: 'The Unlearning Conference',
+      tagline: '10-Day Online Conference',
+      description:
+        'Ten days to lay down everything religion taught us to carry, and pick up what God actually said. Daily sermons at 10AM and live reviews at 8:30PM.',
+      date: 'June 29 to July 10, 2026',
+      time: 'Weekdays • 10AM & 8:30PM',
+      location: 'Online (WhatsApp Community)',
+      type: 'Conference',
+      image: '/images/tlc-unlearn.jpg',
+      icon: RefreshCw,
+      color: 'from-[#1a365d] to-[#2a4365]',
+      featured: true,
+      ctaLink: '/events/unlearning-conference',
+      ctaLabel: 'Register Now',
+    },
     {
       id: 'understanding-salvation',
       title: '4 Days of Understanding Salvation',
@@ -202,8 +220,8 @@ export default function EventsPage() {
             {upcomingEvents.map((event) => {
               const Icon = event.icon;
               return (
-                <Link 
-                  href={event.id === 'understanding-salvation' ? '/events/understanding-salvation' : '#'} 
+                <Link
+                  href={event.ctaLink ?? '#'}
                   key={event.id}
                   className="event-card group block relative bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.03] shadow-[0_15px_45px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_45px_90px_-20px_rgba(214,158,46,0.2)] transition-all duration-700"
                 >
