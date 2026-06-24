@@ -421,10 +421,10 @@ function AdminApp() {
           </div>
         )}
 
-        <div className="grid lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start w-full">
           
           {/* Main Editing Area */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-8 min-w-0 w-full">
             
             {mode === 'edit' && (
               <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden animate-in fade-in">
@@ -518,7 +518,7 @@ function AdminApp() {
           </div>
 
           {/* Sidebar / Past Devotionals */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24">
+          <div className="lg:col-span-4 lg:sticky lg:top-24 min-w-0 w-full">
             <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">Library</h2>
