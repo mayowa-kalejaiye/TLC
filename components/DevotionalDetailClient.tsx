@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import simpleMarkdownToHtml from '@/lib/markdown'
-import { ArrowLeft, ArrowRight, Share2, Clock, Calendar, Check } from 'lucide-react'
+import { ArrowLeft, Share2, Clock, Check } from 'lucide-react'
 import { gsap } from 'gsap'
 
 type DevotionalItem = { 

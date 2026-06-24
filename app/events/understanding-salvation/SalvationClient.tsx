@@ -3,7 +3,7 @@
 import React, { useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Calendar, Clock, MapPin, Users, ArrowUpRight } from 'lucide-react'
+import { ArrowRight, Calendar, MapPin, Users } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import UnderstandingSalvationRegistrationForm from '@/components/events/UnderstandingSalvationRegistrationForm'
@@ -41,7 +41,7 @@ export default function SalvationClient() {
       })
 
       // Section Fade Ups
-      gsap.utils.toArray('.gsap-fade-up').forEach((el: any) => {
+      ;(gsap.utils.toArray('.gsap-fade-up') as HTMLElement[]).forEach((el) => {
         gsap.from(el, {
           scrollTrigger: {
             trigger: el,

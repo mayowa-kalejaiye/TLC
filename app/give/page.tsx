@@ -39,7 +39,7 @@ export default function GivePage() {
       })
 
       // Silky fade up for sections
-      gsap.utils.toArray('.give-section').forEach((section: any) => {
+      ;(gsap.utils.toArray('.give-section') as HTMLElement[]).forEach((section) => {
         gsap.from(section, {
           scrollTrigger: {
             trigger: section,

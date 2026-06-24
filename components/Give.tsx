@@ -83,7 +83,7 @@ export default function Give() {
 
           {/* Minimalist giving options (text driven, elegant layout) */}
           <div className="give-elegant-el grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 border-t border-white/20 pt-12">
-            {give.options.map((option, index) => (
+            {give.options.map((option) => (
               <div key={option.title} className="group">
                 <h3 className="text-xl font-medium mb-3 text-white tracking-wide">{option.title}</h3>
                 <p className="text-gray-400 font-light leading-relaxed text-sm">{option.description}</p>

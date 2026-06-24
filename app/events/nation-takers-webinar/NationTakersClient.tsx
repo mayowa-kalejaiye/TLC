@@ -45,7 +45,7 @@ export default function NationTakersClient() {
       }
 
       // Scroll Fade Ups
-      gsap.utils.toArray('.gsap-up').forEach((el: any) => {
+      ;(gsap.utils.toArray('.gsap-up') as HTMLElement[]).forEach((el) => {
         gsap.from(el, {
           scrollTrigger: {
             trigger: el,

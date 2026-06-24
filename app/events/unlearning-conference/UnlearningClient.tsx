@@ -3,7 +3,7 @@
 import React, { useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Calendar, Sunrise, Moon, Sparkles, BookOpen, ArrowUpRight } from 'lucide-react'
+import { Calendar, Sunrise, Moon, Sparkles, ArrowUpRight } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import UnlearningRegistrationForm from '@/components/events/UnlearningRegistrationForm'
@@ -41,7 +41,7 @@ export default function UnlearningClient() {
       })
 
       // Section Fade Ups
-      gsap.utils.toArray('.gsap-fade-up').forEach((el: any) => {
+      ;(gsap.utils.toArray('.gsap-fade-up') as HTMLElement[]).forEach((el) => {
         gsap.from(el, {
           scrollTrigger: {
             trigger: el,
