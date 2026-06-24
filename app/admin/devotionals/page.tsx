@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
@@ -321,232 +321,255 @@ function AdminApp() {
 
   if (!isAuthed) {
     return (
-      <div className="max-w-md mx-auto p-6 mt-24">
-        <h1 className="text-3xl font-anton text-tlcc-navy mb-6 uppercase">Admin sign in</h1>
-        <form onSubmit={login} className="space-y-6 bg-white rounded-xl shadow p-8">
-          <div>
-            <label htmlFor="admin-password" className="block text-sm font-medium text-gray-700 mb-2">Admin Password</label>
-            <input
-              id="admin-password"
-              type="password"
-              placeholder="Admin password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="block w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+      <div className="min-h-screen flex items-center justify-center bg-[#fafafa] selection:bg-tlcc-navy selection:text-white px-4">
+        <div className="max-w-md w-full">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-anton text-tlcc-navy uppercase tracking-tight mb-2">TLC Editor</h1>
+            <p className="text-gray-500 font-medium">Secure Access Required</p>
           </div>
-          <div className="flex gap-2">
-            <button type="submit" className="flex-1 bg-tlcc-navy text-white py-3 rounded-lg font-bold text-lg uppercase tracking-wider hover:bg-tlcc-gold transition-all duration-300">Sign in</button>
-          </div>
-          {message && <p className="text-sm text-red-600">{message}</p>}
-        </form>
+          <form onSubmit={login} className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 space-y-6">
+            <div>
+              <label htmlFor="admin-password" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Authorization Key</label>
+              <input
+                id="admin-password"
+                type="password"
+                placeholder="Enter password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="block w-full rounded-xl border border-gray-200 px-4 py-3 placeholder-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-tlcc-navy focus:border-transparent transition-all"
+                required
+              />
+            </div>
+            <button type="submit" className="w-full bg-tlcc-navy text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-tlcc-gold hover:text-tlcc-navy hover:shadow-lg transition-all duration-300">
+              Unlock Workspace
+            </button>
+            {message && (
+              <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600 font-medium text-center">
+                {message}
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     )
   }
 
+  const isReadyToPublish = title.trim().length > 0 && content.trim().length > 0;
+
   return (
-    <div className="max-w-7xl mx-auto p-6 mt-24">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-medium text-gray-700">Create/Edit Devotional</h1>
-        <div className="flex items-center gap-3">
-          <button onClick={() => setMode('edit')} className={`px-3 py-1 rounded text-sm ${mode === 'edit' ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800'}`}>Edit</button>
-          <button onClick={() => setMode('preview')} className={`px-3 py-1 rounded text-sm ${mode === 'preview' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'}`}>Preview</button>
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#fafafa] text-gray-900 pb-20 selection:bg-tlcc-navy selection:text-white">
+      
+      {/* SaaS Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-anton uppercase text-tlcc-navy tracking-wide">TLC Editor</h1>
+            <span className="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-semibold uppercase tracking-widest hidden sm:inline-block">Devotionals</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <button onClick={async () => { await fetch('/api/admin/logout', { method: 'POST' }); setIsAuthed(false); setPassword('') }} className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest">Sign Out</button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Writing/editor area comes first */}
-      <div className="space-y-6">
-        {/* Cover area: shown only in edit mode (hidden in preview) */}
-        {mode === 'edit' && (
-          <div className="bg-gray-900 text-gray-100 rounded-lg overflow-hidden min-h-[18rem]">
-          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" title="Upload cover image" onChange={(e) => {
-            const f = e.target.files?.[0]
-            if (f) handleSelectFile(f)
-          }} />
-
-          <div className="p-4 flex justify-end">
-            <button type="button" onClick={() => fileInputRef.current?.click()} className="bg-gray-700 text-white px-3 py-1 rounded">Upload cover</button>
+      <main className="max-w-7xl mx-auto px-6 mt-10">
+        
+        {/* Editor vs Preview Segmented Control & Global Actions */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div className="bg-gray-100 p-1 rounded-xl inline-flex shadow-inner w-full sm:w-auto">
+            <button onClick={() => setMode('edit')} className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all ${mode === 'edit' ? 'bg-white text-tlcc-navy shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}>Edit Mode</button>
+            <button onClick={() => setMode('preview')} className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all ${mode === 'preview' ? 'bg-tlcc-navy text-white shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}>Live Preview</button>
           </div>
 
-          <div className="px-6 pb-6">
-            {(localPreview || image) ? (
-              <div className="relative w-full h-[50vh] mb-4 rounded overflow-hidden">
-                {/* remove button */}
-                <button
-                  type="button"
-                  onClick={() => { setImage(''); setImageFile(null); if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview('') } }}
-                  className="absolute right-4 top-4 z-20 bg-black bg-opacity-60 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-80"
-                  aria-label="Remove cover"
-                >
-                  ×
-                </button>
-                {/* full image, not cropped */}
-                <Image src={localPreview || image} alt="Cover" fill className="absolute inset-0 w-full h-full object-cover" unoptimized />
-              </div>
-            ) : (
-              <div className="w-full flex items-center justify-center py-12 text-gray-400">No cover image — use Upload cover</div>
-            )}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto pb-2 sm:pb-0">
+            <button type="button" onClick={undo} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-gray-400 hover:text-gray-900 hover:border-gray-300 transition-colors" title="Undo"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg></button>
+            <button type="button" onClick={redo} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-gray-400 hover:text-gray-900 hover:border-gray-300 transition-colors" title="Redo"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 10h-10a8 8 0 00-8 8v2M21 10l-6 6m6-6l-6-6" /></svg></button>
+            <button onClick={() => {
+              localStorage.setItem('devotional_draft', JSON.stringify({ title, content, image }))
+              setMessage('Draft saved locally')
+            }} className="flex-1 sm:flex-none px-4 sm:px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-all uppercase tracking-widest text-center">Save Draft</button>
+            
+            <button disabled={!isReadyToPublish} onClick={async () => {
+              const scheduled = scheduledDate ? new Date(scheduledDate) : null
+              const now = new Date()
+              let confirmMsg = ''
+              if (scheduled && scheduled > now) {
+                confirmMsg = `This will schedule the devotional for ${scheduled.toLocaleString()} (UTC ${scheduled.toISOString()}).\nProceed?`
+              } else {
+                confirmMsg = 'This will publish the devotional immediately. Proceed?'
+              }
+              if (!confirm(confirmMsg)) return
 
-            <div>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="New post title here..."
-                className="w-full bg-transparent text-4xl md:text-5xl font-extrabold placeholder-gray-400 outline-none text-white"
-              />
-            </div>
-            <div className="mt-2 text-sm text-gray-300">Written on {new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-            <div className="mt-4">
-              <label htmlFor="scheduled-date" className="block text-sm font-medium text-gray-300 mb-2">Schedule Publication (UTC)</label>
-              <input
-                id="scheduled-date"
-                type="datetime-local"
-                value={scheduledDate}
-                onChange={(e) => setScheduledDate(e.target.value)}
-                className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 w-full md:w-auto"
-              />
-                <div className="mt-2 mb-2">
-                  <label htmlFor="timezone" className="block text-sm font-medium text-gray-300 mb-1">Timezone (IANA)</label>
-                  <input id="timezone" value={timezone} onChange={(e) => { setTimezone(e.target.value); localStorage.setItem('devotional_timezone', e.target.value) }} placeholder="e.g. America/New_York" className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 w-full md:w-64" />
-                </div>
-              <p className="text-xs text-gray-400 mt-1">Leave empty to publish immediately</p>
-              {scheduledDate && (
-                <div className="mt-2 text-xs text-gray-300">
-                    <div>Will publish at ({timezone || 'local'}): <span className="font-medium">{timezone ? new Date(scheduledDate).toLocaleString(undefined, { timeZone: timezone }) : new Date(scheduledDate).toLocaleString()}</span></div>
-                    <div>UTC: <span className="font-medium">{new Date(scheduledDate).toISOString()}</span></div>
-                </div>
-              )}
-            </div>
+              const ok = await save()
+              if (ok) {
+                if (scheduled && scheduled > now) {
+                  setToastText(`Scheduled for ${scheduled.toLocaleString()}`)
+                } else {
+                  setToastText('Published successfully')
+                }
+                setShowPublishToast(true)
+                setTimeout(() => setShowPublishToast(false), 4000)
+              }
+            }} className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all text-center ${isReadyToPublish ? 'bg-tlcc-navy text-white hover:bg-tlcc-gold hover:text-tlcc-navy shadow-md hover:shadow-lg' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>Publish</button>
           </div>
+        </div>
+
+        {message && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-green-700 font-medium flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            {message}
           </div>
         )}
 
-        {/* toolbar area */}
-        <div className="bg-black bg-opacity-5 rounded-md p-3">
-            {mode === 'edit' ? (
-              <ClientOnlyEditor content={content} setContent={setContent} onImageUpload={(url) => { setImage(url); setMessage('Image set as cover from editor') }} />
-            ) : (
-              <div className="bg-white text-tlcc-navy rounded-md p-8 min-h-[70vh] editor-preview">
-                {/* Light preview: large title, spacious layout, dark text */}
-                {(localPreview || image) && (
-                  <div className="relative w-full h-[50vh] mb-6 rounded overflow-hidden">
-                    <Image src={localPreview || image} alt="Cover" fill className="absolute inset-0 w-full h-full object-cover" unoptimized />
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Main Editing Area */}
+          <div className="lg:col-span-8 space-y-8">
+            
+            {mode === 'edit' && (
+              <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden animate-in fade-in">
+                
+                {/* Cover Image Dropzone */}
+                <div className="relative group">
+                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => {
+                    const f = e.target.files?.[0]
+                    if (f) handleSelectFile(f)
+                  }} />
+                  
+                  {(localPreview || image) ? (
+                    <div className="relative w-full h-[400px] bg-gray-100">
+                      <Image src={localPreview || image} alt="Cover" fill className="object-cover" unoptimized />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                        <button type="button" onClick={() => fileInputRef.current?.click()} className="px-6 py-3 bg-white text-gray-900 rounded-xl font-bold text-sm shadow-xl hover:scale-105 transition-transform">Change Cover</button>
+                        <button type="button" onClick={() => { setImage(''); setImageFile(null); if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview('') } }} className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm shadow-xl hover:scale-105 transition-transform">Remove</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div onClick={() => fileInputRef.current?.click()} className="w-full h-[300px] bg-gray-50 border-b border-gray-100 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
+                      <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mb-4 text-gray-400">
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                      </div>
+                      <p className="font-bold text-gray-700">Add a cover image</p>
+                      <p className="text-sm text-gray-400 mt-1">High quality, wide aspect ratio recommended</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Title & Metadata Input */}
+                <div className="p-5 sm:p-8 md:p-12">
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Enter Devotional Title..."
+                    className="w-full bg-transparent text-3xl sm:text-4xl md:text-5xl font-anton uppercase text-tlcc-navy placeholder-gray-200 outline-none mb-6 sm:mb-8 tracking-wide leading-[1.1]"
+                  />
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 bg-gray-50 p-4 sm:p-6 rounded-2xl border border-gray-100">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Publish Date (UTC)</label>
+                      <input
+                        type="datetime-local"
+                        value={scheduledDate}
+                        onChange={(e) => setScheduledDate(e.target.value)}
+                        className="w-full bg-white border border-gray-200 text-gray-700 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-tlcc-navy focus:border-transparent outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Editor Timezone</label>
+                      <input 
+                        value={timezone} 
+                        onChange={(e) => { setTimezone(e.target.value); localStorage.setItem('devotional_timezone', e.target.value) }} 
+                        placeholder="e.g. Africa/Lagos" 
+                        className="w-full bg-white border border-gray-200 text-gray-700 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-tlcc-navy focus:border-transparent outline-none transition-all" 
+                      />
+                    </div>
                   </div>
-                )}
-                {title.trim() !== '' && (
-                  <h1 className="mb-6 text-6xl md:text-7xl leading-tight font-anton">{title}</h1>
-                )}
-                <div className="text-lg text-gray-800 max-w-none">
-                  <div className="prose prose-xl prose-tlcc max-w-none" dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(content || '') }} />
                 </div>
               </div>
             )}
-        </div>
 
-        <div className="flex items-center gap-3">
-          <button onClick={async () => {
-            const scheduled = scheduledDate ? new Date(scheduledDate) : null
-            const now = new Date()
-            let confirmMsg = ''
-            if (scheduled && scheduled > now) {
-              confirmMsg = `This will schedule the devotional for ${scheduled.toLocaleString()} (UTC ${scheduled.toISOString()}).\nProceed?`
-            } else {
-              confirmMsg = 'This will publish the devotional immediately. Proceed?'
-            }
-            if (!confirm(confirmMsg)) return
+            {/* Markdown Editor / Preview Area */}
+            <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-4 sm:p-8 md:p-12 animate-in fade-in">
+              {mode === 'edit' ? (
+                <div className="min-h-[500px]">
+                  <ClientOnlyEditor content={content} setContent={setContent} onImageUpload={(url) => { setImage(url); setMessage('Image set as cover from editor') }} />
+                </div>
+              ) : (
+                <div className="min-h-[500px] max-w-3xl mx-auto editor-preview">
+                  {(localPreview || image) && (
+                    <div className="relative w-full h-[50vh] mb-12 rounded-2xl overflow-hidden shadow-lg">
+                      <Image src={localPreview || image} alt="Cover" fill className="absolute inset-0 w-full h-full object-cover" unoptimized />
+                    </div>
+                  )}
+                  {title.trim() !== '' && (
+                    <h1 className="mb-12 text-5xl md:text-7xl font-anton uppercase text-tlcc-navy tracking-normal leading-[1.1]">{title}</h1>
+                  )}
+                  <div className="prose prose-lg md:prose-2xl prose-tlcc mx-auto max-w-none
+                    prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-wide prose-headings:text-tlcc-navy prose-headings:mt-16 prose-headings:mb-0
+                    prose-p:text-[#111] prose-p:leading-relaxed prose-p:font-medium prose-p:mt-0 prose-p:mb-3
+                    prose-ul:mt-0 prose-ol:mt-0 prose-li:my-1
+                    prose-strong:bg-tlcc-gold/20 prose-strong:text-tlcc-navy prose-strong:px-1
+                    prose-blockquote:border-l-[12px] prose-blockquote:border-tlcc-navy prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:my-12 prose-blockquote:font-anton prose-blockquote:text-3xl prose-blockquote:uppercase prose-blockquote:text-tlcc-navy prose-blockquote:not-italic"
+                    dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(content || '') }} 
+                  />
+                </div>
+              )}
+            </div>
+          </div>
 
-            const ok = await save()
-            if (ok) {
-              if (scheduled && scheduled > now) {
-                setToastText(`Scheduled: ${scheduled.toLocaleString()} (UTC ${scheduled.toISOString()})`)
-              } else {
-                setToastText('Devotional published')
-              }
-              setShowPublishToast(true)
-              setTimeout(() => setShowPublishToast(false), 4000)
-            }
-          }} className="bg-tlcc-gold text-tlcc-navy font-bold px-4 py-2 rounded shadow hover:bg-yellow-400 transition">Publish</button>
-          <button onClick={() => {
-            localStorage.setItem('devotional_draft', JSON.stringify({ title, content, image }))
-            setMessage('Draft saved!')
-          }} className="px-4 py-2 rounded border">Save draft</button>
-          <button onClick={async () => { await fetch('/api/admin/logout', { method: 'POST' }); setIsAuthed(false); setPassword('') }} className="ml-auto px-3 py-2 rounded bg-gray-200">Sign out</button>
-        </div>
+          {/* Sidebar / Past Devotionals */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24">
+            <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+              <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">Library</h2>
+                <button onClick={fetchDevotionals} className="text-xs font-bold text-tlcc-navy hover:text-tlcc-gold transition-colors">Refresh</button>
+              </div>
+              
+              <div className="max-h-[70vh] overflow-y-auto">
+                {devotionals.length === 0 && (
+                  <div className="p-8 text-center text-gray-400 text-sm">No devotionals found.</div>
+                )}
+                <div className="divide-y divide-gray-100">
+                  {devotionals.map((d) => {
+                    const scheduledDate = d.scheduled_date ? new Date(d.scheduled_date) : null;
+                    const isPublished = scheduledDate ? scheduledDate <= new Date() : true;
+                    const isEditing = editingId === d.id;
 
-        <div className="flex gap-2 mt-2">
-          <button type="button" onClick={undo} className="px-2 py-1 rounded bg-gray-200 text-xs">Undo</button>
-          <button type="button" onClick={redo} className="px-2 py-1 rounded bg-gray-200 text-xs">Redo</button>
+                    return (
+                      <div key={d.id} className={`p-5 transition-colors group ${isEditing ? 'bg-tlcc-navy/5' : 'hover:bg-gray-50'}`}>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <h3 className={`font-bold truncate mb-1 ${isEditing ? 'text-tlcc-navy' : 'text-gray-900'}`}>{d.title}</h3>
+                            <p className="text-xs text-gray-500 truncate mb-3">
+                              {scheduledDate ? scheduledDate.toLocaleString(undefined, {
+                                month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                              }) : 'Not scheduled'}
+                            </p>
+                            {isPublished ? (
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-200">Published</span>
+                            ) : (
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200">Scheduled</span>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => loadDevotional(d.id)}
+                            className={`shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition-all ${isEditing ? 'bg-tlcc-navy text-white shadow-md' : 'bg-white border border-gray-200 text-gray-600 group-hover:border-gray-300 group-hover:text-gray-900'}`}
+                          >
+                            {isEditing ? 'Editing' : 'Edit'}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        {message && <p className="text-sm text-green-600">{message}</p>}
-      </div>
+      </main>
 
       <PublishToast show={showPublishToast} message={toastText} />
-
-      {/* Past Devotionals section is always below the writing/editor area */}
-      <div className="mt-12">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-tlcc-navy">Past Devotionals</h2>
-          <button onClick={fetchDevotionals} className="text-xs px-3 py-1 rounded bg-tlcc-gold text-tlcc-navy font-semibold shadow hover:bg-yellow-400 transition">Refresh</button>
-        </div>
-        <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
-          <table className="min-w-full text-sm rounded-xl overflow-hidden">
-            <thead>
-              <tr className="bg-tlcc-navy text-white sticky top-0 z-10">
-                <th className="px-4 py-2 text-left font-bold">Title</th>
-                <th className="px-4 py-2 text-left font-bold">Scheduled</th>
-                <th className="px-4 py-2 text-left font-bold">Status</th>
-                <th className="px-4 py-2 text-left font-bold">Edit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {devotionals.length === 0 && (
-                <tr>
-                  <td colSpan={4} className="text-center py-8 text-gray-400">No devotionals found.</td>
-                </tr>
-              )}
-              {devotionals.map((d, i) => {
-                const scheduledDate = d.scheduled_date ? new Date(d.scheduled_date) : null;
-                const isPublished = scheduledDate ? scheduledDate <= new Date() : true;
-                return (
-                  <tr
-                    key={d.id}
-                    className={
-                      `transition-colors ${editingId === d.id ? 'bg-tlcc-gold/20' : i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-tlcc-gold/10`
-                    }
-                  >
-                    <td className="px-4 py-2 font-semibold text-tlcc-navy">{d.title}</td>
-                    <td className="px-4 py-2 text-gray-600">
-                      {scheduledDate ? scheduledDate.toLocaleString(undefined, {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      }) : 'Not scheduled'}
-                    </td>
-                    <td className="px-4 py-2">
-                      {isPublished ? (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Published</span>
-                      ) : (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Scheduled</span>
-                      )}
-                    </td>
-                    <td className="px-4 py-2">
-                      <button
-                        onClick={() => loadDevotional(d.id)}
-                        className="text-tlcc-navy underline text-xs font-bold hover:text-tlcc-gold transition"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   )
 }
