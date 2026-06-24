@@ -143,7 +143,7 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
           </div>
 
           <div className="overflow-hidden mb-6">
-            <h1 className="devo-title font-anton text-5xl md:text-7xl lg:text-9xl text-white leading-[0.85] uppercase tracking-tighter">
+            <h1 className="devo-title font-anton text-5xl md:text-7xl lg:text-9xl text-white leading-[1.1] uppercase tracking-normal">
               {devotional.title}
             </h1>
           </div>
@@ -156,8 +156,9 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
         {/* The Body */}
         <div 
           className="devo-content prose prose-lg md:prose-2xl prose-tlcc mx-auto max-w-none
-            prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-tlcc-navy prose-headings:mt-16
-            prose-p:text-[#111] prose-p:leading-relaxed prose-p:font-medium prose-p:mb-8
+            prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-wide prose-headings:text-tlcc-navy prose-headings:mt-16 prose-headings:mb-0
+            prose-p:text-[#111] prose-p:leading-relaxed prose-p:font-medium prose-p:mt-0 prose-p:mb-3
+            prose-ul:mt-0 prose-ol:mt-0 prose-li:my-1
             prose-strong:bg-tlcc-gold/20 prose-strong:text-tlcc-navy prose-strong:px-1
             prose-blockquote:border-l-[12px] prose-blockquote:border-tlcc-navy prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:my-12 prose-blockquote:font-anton prose-blockquote:text-3xl prose-blockquote:uppercase prose-blockquote:text-tlcc-navy prose-blockquote:not-italic
             first-letter:font-anton first-letter:text-8xl first-letter:float-left first-letter:mr-4 first-letter:text-tlcc-navy first-letter:leading-none first-letter:mt-2"
