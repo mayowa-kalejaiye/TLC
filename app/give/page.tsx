@@ -223,7 +223,7 @@ export default function GivePage() {
           {/* Half Image */}
           <div className="relative h-[50vh] md:h-auto">
             <Image
-              src="/images/worship.JPG"
+              src="/images/reach.jpg"
               alt="Worship"
               fill
               className="object-cover opacity-80"

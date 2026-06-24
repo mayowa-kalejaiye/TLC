@@ -130,11 +130,17 @@ export default function Hero() {
           {/* Main Heading - Bold Statement with opacity on desktop */}
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-none uppercase text-center">
             {messages.hero.lines.map((line, index) => (
-              <span key={`${line.prefix}-${line.highlight}`} className={`block ${heroLineOpacities[index] ?? 'lg:opacity-90'}`}>
+              <motion.span 
+                key={`${line.prefix}-${line.highlight}`} 
+                className={`block ${heroLineOpacities[index] ?? 'lg:opacity-90'}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 + index * 0.3 }}
+              >
                 {line.prefix}
                 <span className="text-tlcc-orange">{line.highlight}</span>
                 {line.suffix ?? ''}
-              </span>
+              </motion.span>
             ))}
           </h1>
 
