@@ -285,7 +285,7 @@ export default function EventsPage() {
                
                <div className="absolute -bottom-10 -left-10 z-30 w-40 h-40 bg-white rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite] border-4 border-tlcc-navy">
                  <span className="font-anton text-2xl text-tlcc-navy uppercase text-center leading-none">
-                   Don't <br/> Miss <br/> This
+                   Don&apos;t <br/> Miss <br/> This
                  </span>
                </div>
             </div>
@@ -383,7 +383,7 @@ export default function EventsPage() {
                   </div>
                   <h3 className="font-anton text-4xl uppercase mb-4">Pure Encounter</h3>
                   <p className="text-lg text-tlcc-navy/60 font-medium max-w-md">
-                    Strip away the performance. We gather solely to experience the raw, transformative power of God's presence.
+                    Strip away the performance. We gather solely to experience the raw, transformative power of God&apos;s presence.
                   </p>
                 </div>
                 
