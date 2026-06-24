@@ -1,173 +1,202 @@
-﻿'use client'
+'use client'
 
+import React, { useRef, useLayoutEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Globe, Video, Users, BookOpen, ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function GlobalFamily() {
   const { messages } = useLanguage()
   const global = messages.home.globalFamily
+  const containerRef = useRef<HTMLDivElement>(null)
+  
   const journeyIcons = [Video, Users, BookOpen]
   const journeyStyles = [
     {
-      container:
-        'bg-gradient-to-br from-tlcc-gold/20 to-transparent backdrop-blur-sm rounded-2xl p-8 border-2 border-tlcc-gold/40 hover:border-tlcc-gold transition-all h-full',
-      iconBg: 'bg-tlcc-gold',
-      link: 'text-tlcc-gold hover:text-tlcc-gold-light',
+      container: 'bg-tlcc-navy border-4 border-white p-8 shadow-[12px_12px_0_white] hover:shadow-[0_0_0_white] hover:translate-x-2 hover:translate-y-2 transition-all group flex flex-col h-full',
+      iconBg: 'bg-white text-tlcc-navy',
+      link: 'text-white border-2 border-white px-6 py-3 mt-auto inline-flex items-center justify-between group-hover:bg-white group-hover:text-tlcc-navy transition-colors font-black uppercase tracking-widest text-sm',
     },
     {
-      container:
-        'bg-gradient-to-br from-tlcc-orange/20 to-transparent backdrop-blur-sm rounded-2xl p-8 border-2 border-tlcc-orange/40 hover:border-tlcc-orange transition-all h-full',
-      iconBg: 'bg-tlcc-orange',
-      link: 'text-tlcc-orange hover:text-tlcc-orange-light',
+      container: 'bg-white border-4 border-tlcc-navy p-8 shadow-[12px_12px_0_#1a365d] hover:shadow-[0_0_0_#1a365d] hover:translate-x-2 hover:translate-y-2 transition-all group flex flex-col h-full',
+      iconBg: 'bg-tlcc-navy text-white',
+      link: 'text-tlcc-navy border-2 border-tlcc-navy px-6 py-3 mt-auto inline-flex items-center justify-between group-hover:bg-tlcc-navy group-hover:text-white transition-colors font-black uppercase tracking-widest text-sm',
     },
     {
-      container:
-        'bg-gradient-to-br from-tlcc-gold/20 to-transparent backdrop-blur-sm rounded-2xl p-8 border-2 border-tlcc-gold/40 hover:border-tlcc-gold transition-all h-full',
-      iconBg: 'bg-tlcc-gold',
-      link: 'text-tlcc-gold hover:text-tlcc-gold-light',
+      container: 'bg-tlcc-gold border-4 border-tlcc-navy p-8 shadow-[12px_12px_0_#1a365d] hover:shadow-[0_0_0_#1a365d] hover:translate-x-2 hover:translate-y-2 transition-all group flex flex-col h-full',
+      iconBg: 'bg-tlcc-navy text-tlcc-gold',
+      link: 'text-tlcc-navy border-2 border-tlcc-navy px-6 py-3 mt-auto inline-flex items-center justify-between group-hover:bg-tlcc-navy group-hover:text-tlcc-gold transition-colors font-black uppercase tracking-widest text-sm',
     },
   ]
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Continuous Marquee
+      gsap.to('.marquee-global', {
+        xPercent: -50,
+        ease: 'none',
+        duration: 25,
+        repeat: -1,
+      })
+
+      // Section Entrance
+      gsap.from('.gf-headline', {
+        scrollTrigger: {
+          trigger: '.gf-headline',
+          start: 'top 85%',
+        },
+        y: 100,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power4.out'
+      })
+
+
+      
+      // Journey Flashcards
+      gsap.from('.gf-journey', {
+        scrollTrigger: {
+          trigger: '.gf-journey-grid',
+          start: 'top 80%',
+        },
+        y: 80,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out'
+      })
+
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="relative py-20 px-4 bg-transparent text-white overflow-hidden z-10">
-      {/* Semi-transparent overlay for readability */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-tlcc-gold rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-tlcc-orange rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-      {/* Floating Dots Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-tlcc-gold rounded-full animate-ping"></div>
-        <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-tlcc-orange rounded-full animate-ping delay-500"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-2 h-2 bg-tlcc-gold rounded-full animate-ping delay-1000"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-tlcc-orange rounded-full animate-ping delay-1500"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Part 1: The Headline */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
-            <Globe className="h-5 w-5 text-tlcc-gold animate-spin-slow" />
-            <span className="text-tlcc-gold font-bold text-sm tracking-widest uppercase">{global.badge}</span>
-          </div>
-          
-          <h2 className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 uppercase leading-none">
-            <span className="text-white">{global.headline.line1}</span><br />
-            <span className="text-tlcc-orange">{global.headline.line2}</span>
-          </h2>
-          
-          <p className="text-tlcc-gold text-xl md:text-2xl font-semibold tracking-wide">
-            {global.headline.tag}
-          </p>
-        </div>        
-
-        {/* Stats Grid - Visual Impact */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 max-w-2xl mx-auto">
-          {global.stats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20 hover:bg-white/20 transition-all"
-            >
-              <div className={`text-4xl md:text-5xl font-anton ${index % 2 === 0 ? 'text-tlcc-gold' : 'text-tlcc-orange'} mb-2`}>
-                {stat.value}
-              </div>
-              <p className="text-sm text-white/80 uppercase tracking-wider">{stat.label}</p>
-            </div>
+    <section ref={containerRef} className="relative py-24 md:py-40 bg-tlcc-navy text-white overflow-hidden border-t-8 border-tlcc-gold">
+      
+      {/* MASSIVE HEADLINE MARQUEE */}
+      <div className="absolute top-10 left-0 w-full overflow-hidden whitespace-nowrap opacity-10 pointer-events-none select-none z-0 flex">
+        <div className="marquee-global flex font-anton text-[25vw] leading-none uppercase text-transparent" style={{ WebkitTextStroke: '2px white' }}>
+          {Array(4).fill(`${global.headline.line1} ${global.headline.line2} - `).map((text, i) => (
+            <span key={i} className="mx-8">{text}</span>
           ))}
         </div>
+      </div>
 
-        {/* Part 3: The Descriptive Section with Visual Map */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left: Map Visualization */}
-          <div className="relative">
-            <div className="bg-gradient-to-br from-tlcc-gold/20 to-tlcc-orange/20 backdrop-blur-md rounded-3xl overflow-hidden border-2 border-tlcc-gold/30">
-              <div className="p-8 pb-0">
-                <h3 className="font-anton text-2xl md:text-3xl text-tlcc-gold mb-6 uppercase">{global.map.title}</h3>
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
+        
+        {/* THE HEADLINE */}
+        <div className="text-center mb-20 md:mb-32">
+          <div className="overflow-hidden mb-8">
+            <div className="gf-headline inline-flex items-center space-x-3 bg-white text-tlcc-navy px-8 py-3 border-4 border-tlcc-gold font-black uppercase tracking-widest shadow-[8px_8px_0_#EAB308] transform -rotate-2">
+              <Globe className="h-6 w-6 animate-spin-slow" />
+              <span>{global.badge}</span>
+            </div>
+          </div>
+          
+          <div className="overflow-hidden">
+            <h2 className="gf-headline font-anton text-[15vw] md:text-[10rem] leading-[0.8] uppercase tracking-tighter mb-6">
+              <span className="block text-white">{global.headline.line1}</span>
+              <span className="block text-tlcc-gold">{global.headline.line2}</span>
+            </h2>
+          </div>
+          
+        {/* BRUTALIST STATS REMOVED */}
+        </div>
+
+        {/* RAW MAP & DESCRIPTIVE SECTION */}
+        <div className="grid md:grid-cols-12 gap-12 lg:gap-20 items-center mb-32">
+          {/* Descriptive Text (Left) */}
+          <div className="md:col-span-5 space-y-8 order-2 md:order-1">
+            <h3 className="font-anton text-4xl md:text-6xl uppercase leading-none">
+              <span className="block text-white">{global.description.titleLine1}</span>
+              <span className="block text-tlcc-gold">{global.description.titleLine2}</span>
+            </h3>
+            
+            <div className="prose prose-xl prose-invert max-w-none font-medium leading-relaxed">
+              {global.description.paragraphs.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="bg-white text-tlcc-navy border-4 border-tlcc-gold p-8 shadow-[10px_10px_0_#EAB308]">
+              <p className="font-anton text-2xl uppercase tracking-wide leading-relaxed">
+                &quot;{global.description.quote}&quot;
+              </p>
+            </div>
+
+            {/* Impact Highlights */}
+            <div className="grid grid-cols-2 gap-6 pt-8 border-t-8 border-white/20">
+              {global.description.highlights.map((highlight, index) => (
+                <div key={highlight.label} className="bg-black/30 border-2 border-white/20 p-6 text-center">
+                  <p className={`text-4xl font-anton ${index % 2 === 0 ? 'text-tlcc-gold' : 'text-white'} mb-2`}>
+                    {highlight.value}
+                  </p>
+                  <p className="text-sm text-white/70 font-bold uppercase tracking-widest">{highlight.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stark Map Visualization (Right) */}
+          <div className="md:col-span-7 relative order-1 md:order-2">
+            <div className="bg-white border-8 border-tlcc-gold p-4 shadow-[20px_20px_0_#EAB308] transform rotate-1">
+              <div className="bg-tlcc-navy p-6 mb-4 flex justify-between items-center">
+                <h3 className="font-anton text-3xl text-tlcc-gold uppercase m-0 leading-none">{global.map.title}</h3>
+                <Globe className="text-white w-8 h-8" />
               </div>
               
-              {/* Image Placeholder - Replace with your actual image */}
-              <div className="relative w-full h-64 md:h-80 mb-6">
-                <Image src="/images/reachh.jpg" alt={global.map.imageAlt} fill className="object-cover" />
+              <div className="relative w-full aspect-video border-4 border-tlcc-navy filter grayscale contrast-125">
+                <Image src="/images/reachh.jpg" alt={global.map.imageAlt} fill className="object-cover" unoptimized />
+                <div className="absolute inset-0 bg-tlcc-navy/30 mix-blend-multiply" />
               </div>
 
-              {/* Connection Points */}
-              <div className="space-y-3 p-8 pt-0">
+              {/* Hard Connection Points */}
+              <div className="grid grid-cols-2 gap-4 mt-4 bg-gray-100 p-4 border-4 border-tlcc-navy">
                 {global.map.points.map((point, index) => (
-                  <div key={point} className="flex items-center space-x-3 bg-black/30 rounded-lg p-3">
-                    <div
-                      className={`w-3 h-3 rounded-full animate-pulse ${index % 2 === 0 ? 'bg-tlcc-gold' : 'bg-tlcc-orange'}`}
-                    ></div>
-                    <span className="text-sm text-white">{point}</span>
+                  <div key={point} className="flex items-center space-x-4">
+                    <div className={`w-4 h-4 border-2 border-black ${index % 2 === 0 ? 'bg-tlcc-gold' : 'bg-tlcc-navy'}`} />
+                    <span className="font-black text-tlcc-navy uppercase tracking-widest text-sm">{point}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
-          {/* Right: Descriptive Text */}
-          <div className="space-y-6">
-            <h3 className="font-anton text-3xl md:text-4xl text-white uppercase">
-              {global.description.titleLine1}<br />
-              <span className="text-tlcc-gold">{global.description.titleLine2}</span>
-            </h3>
-            
-            {global.description.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-lg text-white/90 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-
-            <div className="bg-tlcc-gold/10 backdrop-blur-sm border-l-4 border-tlcc-gold rounded-r-xl p-6">
-              <p className="text-white italic text-lg">{global.description.quote}</p>
-            </div>
-
-            {/* Impact Highlights */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {global.description.highlights.map((highlight, index) => (
-                <div key={highlight.label} className="text-center p-4 bg-white/5 rounded-xl">
-                  <p className={`text-2xl font-anton ${index % 2 === 0 ? 'text-tlcc-gold' : 'text-tlcc-orange'} mb-1`}>
-                    {highlight.value}
-                  </p>
-                  <p className="text-xs text-white/70 uppercase tracking-wider">{highlight.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* The Experience Journey */}
-        <div className="mb-16">
-          <h3 className="font-anton text-3xl md:text-4xl text-center text-white mb-12 uppercase">
-            {global.journeyHeading}
-          </h3>
+        {/* THE JOURNEY FLASHCARDS */}
+        <div className="mb-32">
+          <div className="overflow-hidden mb-16 text-center">
+            <h3 className="gf-headline font-anton text-5xl md:text-7xl text-white uppercase tracking-tighter">
+              {global.journeyHeading}
+            </h3>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="gf-journey-grid grid lg:grid-cols-3 gap-8">
             {global.journeyItems.map((item, index) => {
               const Icon = journeyIcons[index % journeyIcons.length]
               const style = journeyStyles[index % journeyStyles.length]
               return (
-                <div key={item.title} className="relative group">
+                <div key={item.title} className="gf-journey">
                   <div className={style.container}>
-                    <div
-                      className={`w-16 h-16 ${style.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                    >
-                      <Icon className="h-8 w-8 text-white" />
+                    <div className={`w-20 h-20 border-4 border-current ${style.iconBg} flex items-center justify-center mb-8`}>
+                      <Icon className="h-10 w-10" />
                     </div>
-                    <h4 className="font-anton text-2xl text-white mb-4 uppercase">{item.title}</h4>
-                    <p className="text-white/80 leading-relaxed mb-4">{item.description}</p>
+                    <h4 className="font-anton text-4xl mb-6 uppercase leading-none">{item.title}</h4>
+                    <p className="text-lg font-medium leading-relaxed mb-8 opacity-90">{item.description}</p>
                     <Link
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className={`${style.link} font-semibold inline-flex items-center`}
+                      className={style.link}
                     >
-                      {item.ctaLabel} <ArrowRight className="h-4 w-4 ml-2" />
+                      <span>{item.ctaLabel}</span>
+                      <ArrowRight className="h-6 w-6" />
                     </Link>
                   </div>
                 </div>
@@ -176,41 +205,8 @@ export default function GlobalFamily() {
           </div>
         </div>
 
-        {/* Part 4: Call to Action - The Grand Finale */}
-        <div className="relative">
-          <div className="bg-gradient-to-r from-tlcc-gold via-tlcc-orange to-tlcc-gold bg-[length:200%_100%] animate-gradient rounded-3xl p-12 md:p-16 text-center border-4 border-white/20 shadow-2xl">
-            <h3 className="font-anton text-4xl md:text-5xl lg:text-6xl text-white mb-6 uppercase leading-tight">
-              {global.finalCta.headingLine1}<br />
-              <span className="text-tlcc-navy">{global.finalCta.headingLine2}</span>
-            </h3>
-            
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-              {global.finalCta.paragraph}
-            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {global.finalCta.buttons.map((button, index) => (
-                <Link
-                  key={button.label}
-                  href={button.href}
-                  target={button.href.startsWith('http') ? '_blank' : undefined}
-                  rel={button.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={
-                    index === 0
-                      ? 'px-12 py-5 bg-white text-tlcc-navy font-anton text-xl uppercase rounded-full hover:bg-tlcc-navy hover:text-white transition-all duration-300 transform hover:scale-105 shadow-xl'
-                      : 'px-12 py-5 bg-tlcc-navy text-white font-anton text-xl uppercase rounded-full hover:bg-white hover:text-tlcc-navy transition-all duration-300 transform hover:scale-105 border-4 border-white shadow-xl'
-                  }
-                >
-                  {button.label}
-                </Link>
-              ))}
-            </div>
-
-            <p className="mt-8 text-white/70 text-sm">{global.finalCta.note}</p>
-          </div>
-        </div>
       </div>
     </section>
   )
 }
-

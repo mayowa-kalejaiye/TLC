@@ -1,73 +1,108 @@
-﻿'use client'
+'use client'
 
+import React, { useRef, useLayoutEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { Heart, BookOpen, Users, Globe, Lightbulb, TrendingUp } from 'lucide-react'
+import { Heart, BookOpen, Users, Globe, Lightbulb, TrendingUp, ArrowRight, Star } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const coreValueIcons = [BookOpen, Users, Heart, Lightbulb, TrendingUp, Globe]
 
 export default function AboutPage() {
   const { messages } = useLanguage()
   const about = messages.about
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Brutalist Hero Entrance
+      gsap.from('.hero-chunk', {
+        y: 200,
+        opacity: 0,
+        rotation: 10,
+        duration: 1.2,
+        stagger: 0.1,
+        ease: 'power4.out',
+      })
+
+      // Marquee animation
+      gsap.to('.marquee-track', {
+        xPercent: -50,
+        ease: 'none',
+        duration: 20,
+        repeat: -1,
+      })
+
+
+
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative text-white py-20 md:py-32 px-4 overflow-hidden">
-        {/* Background Image with Overlay */}
+    <main ref={containerRef} className="min-h-screen bg-white selection:bg-tlcc-navy selection:text-white overflow-hidden pb-32">
+      
+      {/* MASSIVE BRUTALIST HERO */}
+      <section className="relative min-h-[90vh] flex flex-col justify-end bg-tlcc-navy border-b-8 border-tlcc-gold px-4 md:px-8 pb-16 pt-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/about.JPG"
             alt="About Us"
             fill
-            className="object-cover object-top"
+            className="object-cover object-top opacity-30 grayscale scale-105"
             priority
+            unoptimized
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-tlcc-navy via-tlcc-navy/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 uppercase leading-tight"
-          >
-            {about.hero.headingLead}<br />
-            <span className="text-tlcc-orange">{about.hero.headingHighlight}</span>
-          </motion.h1>
+        <div className="relative z-10 container mx-auto max-w-7xl">
+          <div className="mb-6 overflow-hidden">
+            <div className="hero-chunk inline-flex bg-white text-tlcc-navy px-6 py-2 border-4 border-tlcc-navy font-black uppercase tracking-widest text-sm shadow-[6px_6px_0_#EAB308] transform -rotate-2">
+              {about.hero.subtitle}
+            </div>
+          </div>
 
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-2xl md:text-3xl text-tlcc-gold font-semibold mb-8"
-          >
-            {about.hero.subtitle}
-          </motion.h2>
+          <h1 className="font-anton text-[15vw] md:text-[11rem] leading-[0.8] uppercase tracking-tighter text-white mb-8 flex flex-col">
+            <div className="overflow-hidden pb-2"><span className="hero-chunk block text-tlcc-gold">{about.hero.headingLead}</span></div>
+            <div className="overflow-hidden pb-4"><span className="hero-chunk block text-transparent" style={{ WebkitTextStroke: '3px white' }}>{about.hero.headingHighlight}</span></div>
+          </h1>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed"
-          >
-            {about.hero.description}
-          </motion.p>
+          <div className="overflow-hidden max-w-3xl">
+            <p className="hero-chunk text-xl md:text-3xl text-white font-medium border-l-[12px] border-tlcc-gold pl-6 leading-relaxed bg-black/20 p-4 backdrop-blur-sm">
+              {about.hero.description}
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      {/* CONTINUOUS MARQUEE */}
+      <div className="bg-tlcc-gold text-tlcc-navy py-6 overflow-hidden border-b-8 border-tlcc-navy flex">
+        <div className="marquee-track flex whitespace-nowrap items-center font-anton text-4xl md:text-6xl uppercase tracking-widest">
+          {Array(8).fill(`${about.missionVision.missionLabel} • ${about.missionVision.visionLabel} • `).map((text, i) => (
+            <span key={i} className="mx-6">{text}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* OUR STORY - EDITORIAL SPREAD */}
+      <section className="py-24 md:py-40 px-4 bg-white relative z-20">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-8 text-center uppercase">
-            {about.story.heading}
-          </h2>
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-            {about.story.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-lg md:text-xl mb-6 last:mb-0">
+          <div className="overflow-hidden mb-16">
+            <h2 className="section-heading font-anton text-[12vw] md:text-8xl text-tlcc-navy uppercase leading-none tracking-tighter">
+              {about.story.heading}
+            </h2>
+          </div>
+          
+          <div className="prose prose-xl md:prose-2xl prose-tlcc max-w-none text-gray-800 font-medium
+            first-letter:font-anton first-letter:text-9xl first-letter:float-left first-letter:mr-6 first-letter:text-tlcc-navy first-letter:leading-[0.8] first-letter:mt-2
+            prose-p:mb-12 prose-p:leading-relaxed">
+            {about.story.paragraphs.map((paragraph, idx) => (
+              <p key={idx} className="grid-item">
                 {paragraph}
               </p>
             ))}
@@ -75,26 +110,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What We Believe Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
-            {about.beliefs.heading}
-          </h2>
+      {/* WHAT WE BELIEVE - BRUTALIST GRID */}
+      <section className="py-24 md:py-40 px-4 bg-tlcc-navy border-y-8 border-tlcc-gold text-white relative">
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-tlcc-gold/10 blur-[150px] rounded-full pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="overflow-hidden mb-20">
+            <h2 className="section-heading font-anton text-[12vw] md:text-8xl text-white uppercase leading-none tracking-tighter">
+              {about.beliefs.heading}
+            </h2>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid-container grid md:grid-cols-2 gap-8 md:gap-12">
             {about.beliefs.items.map((belief) => (
-              <div key={belief.title} className="bg-gray-50 rounded-2xl p-8 border-2 border-gray-100 hover:border-tlcc-gold transition-colors">
-                <h3 className="font-bold text-2xl text-tlcc-navy mb-4">
+              <div key={belief.title} className="grid-item bg-white border-4 border-tlcc-gold text-tlcc-navy p-8 md:p-12 shadow-[15px_15px_0_#EAB308] hover:shadow-[0_0_0_#EAB308] hover:translate-x-3 hover:translate-y-3 transition-all duration-300">
+                <h3 className="font-anton text-4xl mb-6 uppercase tracking-wide">
                   {belief.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-xl font-medium leading-relaxed mb-6">
                   {belief.content}
                 </p>
                 {belief.verse && (
-                  <p className="text-tlcc-orange font-semibold text-sm italic">
+                  <div className="inline-block bg-tlcc-navy text-tlcc-gold px-4 py-2 font-black uppercase tracking-widest text-sm">
                     {belief.verse}
-                  </p>
+                  </div>
                 )}
               </div>
             ))}
@@ -102,76 +141,78 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission & Vision Section */}
-          <section className="relative py-20 px-4 text-white">
-            {/* Background image for 'What We Do' (hero-fallback) */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                  src="/images/hero-fallback.jpg"
-                  alt="What we do background"
-                  fill
-                  className="object-cover object-center md:object-top"
-                  priority
-                />
-              <div className="absolute inset-0 bg-black/55" />
-            </div>
-
-            <div className="relative z-10 max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12">
+      {/* MISSION & VISION */}
+      <section className="py-24 md:py-40 px-4 relative border-y-8 border-tlcc-gold overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-fallback.jpg"
+            alt="Mission and Vision"
+            fill
+            className="object-cover opacity-60 grayscale scale-105"
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-tlcc-navy/60" />
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid-container grid md:grid-cols-2 gap-16 md:gap-24">
+            
             {/* Mission */}
-            <div className="text-center md:text-left">
-              <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                <span className="font-semibold uppercase text-sm tracking-wider">{about.missionVision.missionLabel}</span>
+            <div className="grid-item flex flex-col items-start bg-white p-12 border-4 border-black shadow-[15px_15px_0_black]">
+              <div className="bg-tlcc-navy text-white px-6 py-2 border-4 border-tlcc-gold font-black uppercase tracking-widest shadow-[8px_8px_0_#EAB308] mb-8 transform -rotate-2">
+                {about.missionVision.missionLabel}
               </div>
-              <h3 className="font-anton text-3xl md:text-4xl mb-6 uppercase">
+              <h3 className="font-anton text-5xl md:text-7xl mb-8 uppercase text-tlcc-navy leading-none">
                 {about.missionVision.missionHeading}
               </h3>
-              <p className="text-xl font-semibold mb-4">
+              <p className="text-2xl font-black text-tlcc-gold mb-6 uppercase border-l-8 border-tlcc-navy pl-6">
                 {about.missionVision.missionStatement}
               </p>
-              <p className="text-white/90 text-lg">
+              <p className="text-xl text-gray-700 font-medium leading-relaxed">
                 {about.missionVision.missionDescription}
               </p>
             </div>
 
             {/* Vision */}
-            <div className="text-center md:text-left">
-              <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                <span className="font-semibold uppercase text-sm tracking-wider">{about.missionVision.visionLabel}</span>
+            <div className="grid-item flex flex-col items-start bg-white p-12 border-4 border-black shadow-[15px_15px_0_black]">
+              <div className="bg-tlcc-gold text-tlcc-navy px-6 py-2 border-4 border-tlcc-navy font-black uppercase tracking-widest shadow-[8px_8px_0_#1a365d] mb-8 transform rotate-2">
+                {about.missionVision.visionLabel}
               </div>
-              <h3 className="font-anton text-3xl md:text-4xl mb-6 uppercase">
+              <h3 className="font-anton text-5xl md:text-7xl mb-8 uppercase text-tlcc-navy leading-none">
                 {about.missionVision.visionHeading}
               </h3>
-              <p className="text-xl font-semibold mb-4">
+              <p className="text-2xl font-black text-tlcc-navy mb-6 uppercase border-l-8 border-tlcc-gold pl-6">
                 {about.missionVision.visionStatement}
               </p>
-              <p className="text-white/90 text-lg">
+              <p className="text-xl text-gray-700 font-medium leading-relaxed">
                 {about.missionVision.visionDescription}
               </p>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Core Values Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
-            {about.coreValues.heading}
-          </h2>
+      {/* CORE VALUES */}
+      <section className="py-24 md:py-40 px-4 bg-[#fafafa] border-t-8 border-black">
+        <div className="max-w-7xl mx-auto">
+          <div className="overflow-hidden mb-20 text-center">
+            <h2 className="section-heading font-anton text-[12vw] md:text-8xl text-tlcc-navy uppercase leading-none tracking-tighter">
+              {about.coreValues.heading}
+            </h2>
+          </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid-container grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {about.coreValues.items.map((value, index) => {
               const IconComponent = coreValueIcons[index % coreValueIcons.length]
               return (
-                <div key={value.title} className="text-center p-6">
-                  <div className="w-16 h-16 bg-tlcc-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="h-8 w-8 text-white" />
+                <div key={value.title} className="grid-item bg-white border-4 border-tlcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:-translate-y-2 transition-transform group">
+                  <div className="w-20 h-20 bg-tlcc-navy rounded-none flex items-center justify-center mb-8 group-hover:bg-tlcc-gold transition-colors duration-300">
+                    <IconComponent className="h-10 w-10 text-white" />
                   </div>
-                  <h3 className="font-bold text-xl text-tlcc-navy mb-3">
+                  <h3 className="font-anton text-3xl text-tlcc-navy mb-4 uppercase">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-700 font-medium leading-relaxed text-lg">
                     {value.description}
                   </p>
                 </div>
@@ -181,180 +222,165 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-12 text-center uppercase">
-            {about.leadership.heading}
-          </h2>
+      {/* LEADERSHIP - MAGAZINE CUTOUT */}
+      <section className="py-24 md:py-40 px-4 bg-tlcc-navy text-white overflow-hidden relative border-y-8 border-tlcc-gold">
+        <div className="max-w-7xl mx-auto">
+          <div className="overflow-hidden mb-16 relative z-20">
+            <h2 className="section-heading font-anton text-[12vw] md:text-9xl text-white uppercase leading-none tracking-tighter opacity-20 absolute -top-10 left-0 pointer-events-none">
+              {about.leadership.heading}
+            </h2>
+            <h2 className="section-heading font-anton text-6xl md:text-8xl text-tlcc-gold uppercase leading-none tracking-tighter relative">
+              {about.leadership.heading}
+            </h2>
+          </div>
 
-          <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Pastor Photo */}
-              <div className="relative h-80 md:h-auto min-h-[400px]">
-                <Image
-                  src="/images/pastor.JPG"
-                  alt="Apostle Nelson Isaiah"
-                  fill
-                  className="object-cover"
-                />
+          <div className="grid-container grid md:grid-cols-12 gap-8 items-center relative z-10">
+            
+            {/* Bio */}
+            <div className="grid-item md:col-span-7 bg-white text-tlcc-navy p-8 md:p-16 border-4 border-tlcc-gold shadow-[20px_20px_0_#EAB308] relative z-20">
+              <h3 className="font-anton text-5xl md:text-7xl mb-4 uppercase leading-none">
+                {about.leadership.name}
+              </h3>
+              <div className="inline-block bg-black text-white px-4 py-2 font-black uppercase tracking-widest text-sm mb-10">
+                {about.leadership.role}
               </div>
-
-              {/* Bio */}
-              <div className="p-8 md:p-12 flex flex-col justify-center">
-                <h3 className="font-anton text-3xl text-tlcc-navy mb-2 uppercase">
-                  {about.leadership.name}
-                </h3>
-                <p className="text-tlcc-orange font-semibold mb-6 text-lg">
-                  {about.leadership.role}
-                </p>
+              
+              <div className="prose prose-xl prose-tlcc max-w-none text-gray-800 font-medium">
                 {about.leadership.paragraphs.map((paragraph, index) => (
-                  <p key={paragraph} className={`text-gray-700 leading-relaxed ${index === 0 ? 'mb-4' : ''}`}>
+                  <p key={index} className="mb-6 leading-relaxed">
                     {paragraph}
                   </p>
                 ))}
               </div>
             </div>
+
+            {/* Pastor Photo */}
+            <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 filter grayscale contrast-125 border-8 border-white">
+              <Image
+                src="/images/pastor.JPG"
+                alt="Apostle Nelson Isaiah"
+                fill
+                className="object-cover object-top"
+                unoptimized
+              />
+              {/* Aggressive overlay block */}
+              <div className="absolute bottom-0 left-0 bg-tlcc-gold w-full p-6 border-t-8 border-white">
+                <p className="font-anton text-4xl text-tlcc-navy uppercase text-center">Visionary</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Testimonies Section */}
-      <section id="testimonies" className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 text-center uppercase">
-            {about.testimonies.heading}
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-            {about.testimonies.intro}
-          </p>
+      {/* TESTIMONIES */}
+      <section id="testimonies" className="py-24 md:py-40 px-4 bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto">
+          <div className="overflow-hidden mb-20 text-center">
+            <h2 className="section-heading font-anton text-[10vw] md:text-8xl text-tlcc-navy uppercase leading-none tracking-tighter mb-6">
+              {about.testimonies.heading}
+            </h2>
+            <p className="text-xl font-bold uppercase tracking-widest text-gray-500 max-w-3xl mx-auto">
+              {about.testimonies.intro}
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid-container grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-20">
             {about.testimonies.cards.map((card) => (
               <div
                 key={`${card.author}-${card.meta}`}
-                className={`bg-tlcc-cream rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow ${
+                className={`grid-item bg-white border-4 border-black p-8 md:p-12 shadow-[12px_12px_0_#1a365d] hover:-translate-y-2 transition-transform ${
                   card.fullWidth ? 'md:col-span-2 lg:col-span-3' : ''
                 }`}
               >
-                <div className="text-tlcc-gold text-4xl mb-4">&quot;</div>
-                {card.title && <h4 className="text-lg font-bold text-tlcc-navy mb-4">{card.title}</h4>}
+                <div className="text-tlcc-gold mb-6"><Star size={48} fill="#EAB308" /></div>
+                
+                {card.title && <h4 className="font-anton text-3xl text-tlcc-navy mb-6 uppercase">{card.title}</h4>}
+                
                 {card.quote && (
-                  <p className="text-gray-700 leading-relaxed mb-6 italic max-w-4xl mx-auto">
-                    {card.quote}
+                  <p className="text-2xl font-medium leading-relaxed mb-8 border-l-8 border-tlcc-gold pl-6">
+                    &quot;{card.quote}&quot;
                   </p>
                 )}
+                
                 {card.paragraphs && (
-                  <div className="text-gray-700 leading-relaxed mb-6 italic space-y-3 max-w-4xl mx-auto">
+                  <div className="text-xl font-medium leading-relaxed mb-8 space-y-4">
                     {card.paragraphs.map((paragraph, index) => (
                       <p key={`${card.author}-${index}`}>{paragraph}</p>
                     ))}
                   </div>
                 )}
-                <div className={`border-t-2 border-tlcc-gold pt-4 ${card.fullWidth ? 'max-w-4xl mx-auto' : ''}`}>
-                  <p className="font-bold text-tlcc-navy">{card.author}</p>
-                  <p className="text-sm text-gray-600">{card.meta}</p>
+                
+                <div className="bg-tlcc-navy text-white p-4 inline-block">
+                  <p className="font-black uppercase tracking-widest">{card.author}</p>
+                  <p className="text-sm text-tlcc-gold font-bold">{card.meta}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Share Your Testimony CTA */}
-          <div className="bg-gradient-to-r from-tlcc-navy to-tlcc-gold text-white rounded-2xl p-8 md:p-12 text-center">
-            <h3 className="font-anton text-3xl md:text-4xl mb-4 uppercase">{about.testimonies.share.heading}</h3>
-            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          {/* BRUTALIST CTA */}
+          <div className="bg-tlcc-gold border-8 border-tlcc-navy p-12 md:p-20 text-center shadow-[20px_20px_0_#1a365d]">
+            <h3 className="font-anton text-5xl md:text-7xl mb-6 uppercase text-tlcc-navy tracking-tighter">
+              {about.testimonies.share.heading}
+            </h3>
+            <p className="text-2xl font-medium mb-12 max-w-3xl mx-auto text-tlcc-navy/80">
               {about.testimonies.share.description}
             </p>
             <Link
               href="/contact#testimony"
-              className="inline-block px-10 py-4 bg-white text-tlcc-navy hover:bg-tlcc-cream font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-tlcc-navy text-white font-black text-2xl uppercase tracking-[0.2em] border-4 border-white hover:bg-white hover:text-tlcc-navy hover:border-tlcc-navy transition-colors duration-300 group"
             >
               {about.testimonies.share.cta}
+              <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Join Us Section */}
-      <section id="services" className="relative py-20 px-4 text-white overflow-hidden">
-        {/* Background Image with Overlay */}
+      {/* FINAL JOIN US */}
+      <section id="services" className="py-32 px-4 bg-tlcc-navy border-t-8 border-tlcc-gold text-center relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/join.JPG"
             alt="Join Us"
             fill
-            className="object-cover object-top"
+            className="object-cover opacity-30 grayscale mix-blend-luminosity scale-105"
+            unoptimized
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-tlcc-navy/80" />
         </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="font-anton text-4xl md:text-5xl mb-6 uppercase">
-            {about.join.heading}
-          </h2>
-          <p className="text-lg md:text-xl text-white/90 mb-8">
-            {about.join.description}
-          </p>
-
-          <div className="space-y-4">
-            {about.join.cards.map((card) => (
-              <div key={card.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <p className="text-tlcc-gold font-semibold mb-2">{card.title}</p>
-                {card.details.map((detail) => (
-                  <p key={detail} className="text-lg">
-                    {detail}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          <Link
-            href="https://youtube.com/@TheLightCommunity"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-8 px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-          >
-            {about.join.watchCta}
-          </Link>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase">
+        
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <h2 className="font-anton text-[12vw] md:text-9xl text-white mb-8 uppercase leading-[0.85] tracking-tighter">
             {about.finalCta.heading}
           </h2>
-          <p className="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed">
+          <p className="text-2xl md:text-4xl font-medium text-tlcc-gold mb-16 uppercase tracking-wide">
             {about.finalCta.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             {about.finalCta.buttons.map((button, index) => {
               const isPrimary = index === 0
               return (
-              <Link
-                key={button.href}
-                href={button.href}
-                  className={`px-10 py-4 font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm ${
+                <Link
+                  key={button.href}
+                  href={button.href}
+                  className={`inline-flex items-center justify-center gap-4 px-12 py-6 font-black text-2xl uppercase tracking-[0.2em] border-4 transition-all duration-300 hover:-translate-y-2 group ${
                     isPrimary
-                      ? 'bg-tlcc-navy hover:bg-tlcc-orange text-white'
-                      : 'bg-transparent border-2 border-tlcc-navy hover:bg-tlcc-navy hover:text-white text-tlcc-navy'
+                      ? 'bg-tlcc-gold border-tlcc-gold text-tlcc-navy shadow-[10px_10px_0_white] hover:shadow-[15px_15px_0_white]'
+                      : 'bg-transparent border-white text-white shadow-[10px_10px_0_#EAB308] hover:shadow-[15px_15px_0_#EAB308]'
                   }`}
-              >
-                {button.label}
-              </Link>
+                >
+                  {button.label}
+                  {isPrimary && <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />}
+                </Link>
               )
             })}
           </div>
         </div>
       </section>
+
     </main>
   )
 }
-
-// Page-level metadata removed: this page is a client component ('use client')
-// and exporting `metadata` is not allowed. Server-level or layout metadata
-// in `app/layout.tsx` will provide site-wide defaults.
-

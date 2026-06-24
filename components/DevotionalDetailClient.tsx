@@ -1,9 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import simpleMarkdownToHtml from '@/lib/markdown'
-import { ArrowLeft, Share2, Clock, Calendar, Check } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Share2, Clock, Calendar, Check } from 'lucide-react'
+import { gsap } from 'gsap'
 
 type DevotionalItem = { 
   id: string; 
@@ -18,17 +19,48 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
   const [shareStatus, setShareStatus] = useState('')
   const [readingProgress, setReadingProgress] = useState(0)
   
+  const containerRef = useRef<HTMLDivElement>(null)
+
   const renderedHtml = devotional?.content ? simpleMarkdownToHtml(devotional.content) : ''
+
+  // GSAP Animations
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.devo-title', {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+      })
+      gsap.from('.devo-meta', {
+        x: -50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'back.out(1.5)',
+        delay: 0.4
+      })
+      gsap.from('.devo-content', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.6
+      })
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   // Reading Progress Logic
   useEffect(() => {
     const updateProgress = () => {
       const scrolled = window.scrollY;
       const height = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrolled / height) * 100;
-      setReadingProgress(progress);
+      const progress = height > 0 ? (scrolled / height) * 100 : 0;
+      setReadingProgress(Math.min(100, Math.max(0, progress)));
     };
     window.addEventListener('scroll', updateProgress);
+    updateProgress();
     return () => window.removeEventListener('scroll', updateProgress);
   }, []);
 
@@ -51,108 +83,125 @@ export default function DevotionalDetailClient({ devotional }: { devotional: Dev
   const dateStr = devotional.scheduled_date || devotional.created_at;
   const formattedDate = dateStr ? new Date(dateStr).toLocaleDateString(undefined, { 
     year: 'numeric', 
-    month: 'long', 
+    month: 'short', 
     day: 'numeric' 
-  }) : "";
+  }).toUpperCase() : "";
 
   return (
-    <main className="min-h-screen bg-white pb-32">
-      {/* Reading Progress Bar */}
+    <main ref={containerRef} className="min-h-screen bg-white pb-32 relative selection:bg-tlcc-orange selection:text-white">
+      
+      {/* MASSIVE FIXED PROGRESS INDICATOR */}
+      <div className="fixed top-1/2 right-4 md:right-10 -translate-y-1/2 z-[100] mix-blend-difference pointer-events-none hidden md:block opacity-30">
+        <span className="font-anton text-[8vw] text-white leading-none">
+          {Math.round(readingProgress)}%
+        </span>
+      </div>
+
+      {/* MOBILE PROGRESS BAR */}
       <div 
-        className="fixed top-0 left-0 h-1 bg-tlcc-gold z-[10001] transition-all duration-150"
+        className="fixed top-0 left-0 h-2 bg-tlcc-orange z-[10001] md:hidden"
         style={{ width: `${readingProgress}%` }}
       />
 
-      {/* Floating Back Button */}
+      {/* BRUTALIST FLOATING BACK BUTTON */}
       <Link
         href="/devotionals"
-        className="fixed left-6 top-24 z-50 group flex items-center gap-2 bg-white/90 backdrop-blur-md border border-black/5 p-2 pr-4 rounded-full shadow-xl hover:bg-tlcc-navy hover:text-white transition-all duration-300"
+        className="fixed left-4 md:left-8 top-8 z-50 group flex items-center gap-0 bg-white border-4 border-tlcc-navy p-1 pr-4 shadow-[6px_6px_0_#1a365d] hover:shadow-[0px_0px_0_#1a365d] hover:translate-x-1 hover:translate-y-1 transition-all duration-300"
       >
-        <div className="w-8 h-8 rounded-full bg-tlcc-gold flex items-center justify-center text-white group-hover:rotate-[-45deg] transition-transform">
-          <ArrowLeft size={18} />
+        <div className="w-10 h-10 bg-tlcc-navy flex items-center justify-center text-white mr-3">
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
         </div>
-        <span className="text-xs font-black uppercase tracking-widest leading-none">Back</span>
+        <span className="text-sm font-black uppercase tracking-widest text-tlcc-navy">Back</span>
       </Link>
 
-      {/* Hero Header */}
-      <header className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-tlcc-navy">
-        {devotional.image && (
-          <Image
-            src={devotional.image}
-            alt={devotional.title ?? ''}
-            fill
-            className="object-cover opacity-60 scale-105"
-            priority
-            unoptimized
-          />
+      {/* MASSIVE EDITORIAL HERO */}
+      <header className="relative min-h-[70vh] flex flex-col justify-end bg-tlcc-navy pt-32 pb-20 px-4 md:px-8 overflow-hidden border-b-8 border-tlcc-gold">
+        {devotional.image ? (
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={devotional.image}
+              alt={devotional.title ?? ''}
+              fill
+              className="object-cover object-top opacity-50 scale-105"
+              priority
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-tlcc-navy via-tlcc-navy/40 to-transparent" />
+          </div>
+        ) : (
+          <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-20 mix-blend-overlay z-0" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/20" />
         
-        <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
-          <div className="inline-flex items-center gap-3 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="flex items-center gap-1.5 bg-tlcc-gold px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-tighter">
-              <Calendar size={12} />
+        <div className="relative z-10 container mx-auto max-w-5xl">
+          <div className="flex flex-wrap items-center gap-4 mb-10">
+            <div className="devo-meta bg-tlcc-gold text-tlcc-navy font-black uppercase tracking-widest text-xs px-4 py-2 border-2 border-tlcc-gold">
               {formattedDate}
             </div>
-            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-tighter">
-              <Clock size={12} />
-              Quick Read
+            <div className="devo-meta bg-white text-tlcc-navy font-black uppercase tracking-widest text-xs px-4 py-2 border-2 border-white flex items-center gap-2">
+              <Clock size={14} /> Daily Reading
             </div>
           </div>
 
-          <h1 className="font-anton text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-[0.9] uppercase tracking-normal animate-in fade-in slide-in-from-bottom-6 duration-1000 drop-shadow-2xl">
-            {devotional.title}
-          </h1>
+          <div className="overflow-hidden mb-6">
+            <h1 className="devo-title font-anton text-5xl md:text-7xl lg:text-9xl text-white leading-[0.85] uppercase tracking-tighter">
+              {devotional.title}
+            </h1>
+          </div>
         </div>
       </header>
 
-      {/* Content Section */}
-      <article className="container mx-auto px-4 max-w-2xl -mt-16 relative z-20">
-        <div className="bg-white rounded-[2.5rem] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border border-black/[0.02]">
-          
-          {/* Main Body */}
-          <div 
-            className="prose prose-xl prose-tlcc mx-auto 
-              prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-wide 
-              prose-p:text-gray-600 prose-p:leading-relaxed prose-p:font-light 
-              prose-strong:text-tlcc-navy prose-strong:font-bold
-              prose-blockquote:border-l-tlcc-gold prose-blockquote:bg-tlcc-gold/5 prose-blockquote:py-2 prose-blockquote:rounded-r-xl prose-blockquote:font-serif prose-blockquote:italic prose-blockquote:text-tlcc-navy"
-            dangerouslySetInnerHTML={{ __html: renderedHtml }} 
-          />
+      {/* EDITORIAL CONTENT */}
+      <article className="container mx-auto px-4 max-w-4xl relative z-20 mt-16 md:mt-24">
+        
+        {/* The Body */}
+        <div 
+          className="devo-content prose prose-lg md:prose-2xl prose-tlcc mx-auto max-w-none
+            prose-headings:font-anton prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-tlcc-navy prose-headings:mt-16
+            prose-p:text-[#111] prose-p:leading-relaxed prose-p:font-medium prose-p:mb-8
+            prose-strong:bg-tlcc-gold/20 prose-strong:text-tlcc-navy prose-strong:px-1
+            prose-blockquote:border-l-[12px] prose-blockquote:border-tlcc-navy prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:my-12 prose-blockquote:font-anton prose-blockquote:text-3xl prose-blockquote:uppercase prose-blockquote:text-tlcc-navy prose-blockquote:not-italic
+            first-letter:font-anton first-letter:text-8xl first-letter:float-left first-letter:mr-4 first-letter:text-tlcc-navy first-letter:leading-none first-letter:mt-2"
+          dangerouslySetInnerHTML={{ __html: renderedHtml }} 
+        />
 
-          {/* Share Action */}
-          <div className="mt-20 pt-10 border-t border-black/[0.05] flex flex-col items-center">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">Spread the Light</p>
-            <button
-              type="button"
-              onClick={handleShare}
-              className="group flex items-center gap-4 px-10 py-5 rounded-full bg-tlcc-navy text-white font-bold hover:bg-tlcc-gold transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95"
-            >
-              {shareStatus ? (
-                <>
-                  <Check size={20} className="animate-in zoom-in" />
-                  <span className="uppercase tracking-widest text-sm">{shareStatus}</span>
-                </>
-              ) : (
-                <>
-                  <Share2 size={20} />
-                  <span className="uppercase tracking-widest text-sm">Share this Word</span>
-                </>
-              )}
-            </button>
+        {/* BRUTALIST SHARE BLOCK */}
+        <div className="mt-32 pt-16 border-t-8 border-black flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <h3 className="font-anton text-4xl uppercase text-tlcc-navy mb-2">Spread The Word</h3>
+            <p className="text-gray-500 font-medium uppercase tracking-widest text-sm">Don&apos;t keep this to yourself</p>
           </div>
+          
+          <button
+            type="button"
+            onClick={handleShare}
+            className="group w-full md:w-auto flex items-center justify-center gap-4 px-12 py-6 bg-tlcc-gold border-4 border-tlcc-navy text-tlcc-navy font-black text-lg uppercase tracking-widest shadow-[8px_8px_0_#1a365d] hover:translate-x-1 hover:translate-y-1 hover:shadow-[0_0_0_#1a365d] transition-all duration-300"
+          >
+            {shareStatus ? (
+              <>
+                <Check size={24} className="animate-pulse" />
+                <span>{shareStatus}</span>
+              </>
+            ) : (
+              <>
+                <Share2 size={24} />
+                <span>Share Story</span>
+              </>
+            )}
+          </button>
         </div>
-      </article>
+        
+        {/* Next/Prev Placeholder for Footer */}
+        <div className="mt-16 text-center">
+          <Link 
+            href="/devotionals"
+            className="inline-flex items-center gap-4 font-black uppercase tracking-[0.2em] text-tlcc-navy hover:text-tlcc-orange transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Library
+          </Link>
+        </div>
 
-      {/* Bottom Navigation / CTA */}
-      <footer className="container mx-auto px-4 max-w-2xl mt-12 text-center">
-        <Link 
-          href="/devotionals"
-          className="text-gray-400 hover:text-tlcc-gold text-xs font-bold uppercase tracking-[0.2em] transition-colors"
-        >
-          Explore more devotionals
-        </Link>
-      </footer>
+      </article>
     </main>
   )
 }

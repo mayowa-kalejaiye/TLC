@@ -48,17 +48,18 @@ const upcomingEvents: EventItem[] = [
     ctaLink: '/events/understanding-salvation'
   },
   {
-    id: 'watch-hour',
-    title: 'Watch Hour Prayers',
-    tagline: 'Friday Night Intercession',
-    description: 'Join us as we stand in the gap, pray for the Body of Christ, and strengthen one another in passionate intercession.',
-    date: 'Bi-weekly Fridays',
-    time: '9:00 PM',
-    location: 'The Light House & Online',
-    type: 'Prayer Watch',
-    image: '/images/watch_hour.jpg',
+    id: 'nation-takers-webinar',
+    title: 'Nation Takers Career Webinar 1.0',
+    tagline: 'Building Career Greatness',
+    description: 'A mindset-shifting career intervention focusing on how professionals can move from competence to significance by developing leadership capacity.',
+    date: 'February 7, 2026',
+    time: '10:00 AM WAT',
+    location: 'Online (Google Meet)',
+    type: 'Webinar',
+    image: '/images/celebration.jpg',
     featured: false,
-    ctaLabel: 'Details',
+    ctaLabel: 'Register',
+    ctaLink: '/events/nation-takers-webinar'
   },
   {
     id: 'rooted',
@@ -72,6 +73,49 @@ const upcomingEvents: EventItem[] = [
     image: '/images/rooted2.JPG',
     featured: false,
     ctaLabel: 'Details',
+    ctaLink: '/events/rooted'
+  },
+  {
+    id: 'heart-room',
+    title: 'The Heart Room',
+    tagline: 'Transmission Concluded',
+    description: 'This experience has officially ended. The archives are currently sealed. Thank you to everyone who participated.',
+    date: 'Ended',
+    time: 'Archived',
+    location: 'Archived',
+    type: 'Closed Event',
+    image: '/images/event-hero.jpg',
+    featured: false,
+    ctaLabel: 'View Archive',
+    ctaLink: '/events/heart-room'
+  },
+  {
+    id: 'manual',
+    title: 'The Manual',
+    tagline: 'Event Concluded',
+    description: 'Thank you for your interest. The Manual event has ended, but there are still plenty of opportunities to connect with us.',
+    date: 'Ended',
+    time: 'Archived',
+    location: 'Archived',
+    type: 'Closed Event',
+    image: '/images/manual.jpg',
+    featured: false,
+    ctaLabel: 'View Archive',
+    ctaLink: '/events/manual'
+  },
+  {
+    id: 'watch-hour',
+    title: 'Watch Hour Prayers',
+    tagline: 'Friday Night Intercession',
+    description: 'Join us as we stand in the gap, pray for the Body of Christ, and strengthen one another in passionate intercession.',
+    date: 'Bi-weekly Fridays',
+    time: '9:00 PM',
+    location: 'The Light House & Online',
+    type: 'Prayer Watch',
+    image: '/images/watch_hour.jpg',
+    featured: false,
+    ctaLabel: 'Details',
+    ctaLink: '/events'
   },
   {
     id: 'fire-conference',
@@ -84,7 +128,8 @@ const upcomingEvents: EventItem[] = [
     type: 'Youth Conference',
     image: '/images/fire-conference.jpg',
     featured: false,
-    ctaLabel: 'Info'
+    ctaLabel: 'Info',
+    ctaLink: '/events'
   },
   {
     id: 'tarry',
@@ -97,7 +142,8 @@ const upcomingEvents: EventItem[] = [
     type: 'Prayer Meeting',
     image: '/images/tarry.jpg',
     featured: false,
-    ctaLabel: 'Join'
+    ctaLabel: 'Join',
+    ctaLink: '/events'
   }
 ];
 
@@ -209,8 +255,8 @@ export default function EventsPage() {
           {/* Marquee Line 1 - Solid */}
           <div ref={marquee1Ref} className="flex gap-8 items-center">
             {[...Array(4)].map((_, i) => (
-              <h1 key={i} className="font-anton text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8">
-                The Gatherings <Sparkles className="w-[8vw] h-[8vw] text-tlcc-gold" />
+              <h1 key={i} className="font-anton text-[25vw] md:text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8">
+                The Gatherings <Sparkles className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-tlcc-gold" />
               </h1>
             ))}
           </div>
@@ -220,10 +266,10 @@ export default function EventsPage() {
             {[...Array(4)].map((_, i) => (
               <h1 
                 key={i} 
-                className="font-anton text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8 text-transparent"
+                className="font-anton text-[25vw] md:text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8 text-transparent"
                 style={{ WebkitTextStroke: '2px #1a365d' }}
               >
-                Experience God <Flame className="w-[8vw] h-[8vw] text-transparent stroke-tlcc-navy stroke-[2px]" />
+                Experience God <Flame className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-transparent stroke-tlcc-navy stroke-[2px]" />
               </h1>
             ))}
           </div>

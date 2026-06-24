@@ -1,4 +1,4 @@
-﻿import { Metadata } from 'next'
+import { Metadata } from 'next'
 import { MapPin, Clock, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ export default function MapPage() {
               <div>
                 <h3 className="text-lg font-bold text-tlcc-navy mb-2">Location</h3>
                 <p className="text-gray-700">
-                  43b Babaponmile Street<br />
+                  Opp 43b Babaponmile Street<br />
                   After Winners Chapel<br />
                   Mangoro, Ikeja<br />
                   Lagos, Nigeria
@@ -129,7 +129,7 @@ export default function MapPage() {
             Can&apos;t find us? Don&apos;t hesitate to call Isaac for assistance.
           </p>
           <a 
-            href="https://www.google.com/maps/search/?api=1&query=43b+Babaponmile+Street,+Mangoro,+Ikeja,+Lagos"
+            href="https://maps.app.goo.gl/wP2aAjw47wV4nTbZ6"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-tlcc-navy text-white px-8 py-3 rounded-lg hover:bg-tlcc-gold transition-colors duration-200 font-semibold"

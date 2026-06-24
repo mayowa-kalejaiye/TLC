@@ -1,15 +1,49 @@
-﻿'use client'
+'use client'
 
-import { useState } from 'react'
-import { Mail, Send, CheckCircle, Zap } from 'lucide-react'
+import { useState, useRef, useLayoutEffect } from 'react'
+import { Mail, Send, CheckCircle, Zap, Star, Shield, ArrowUpRight } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const { messages } = useLanguage()
   const newsletter = messages.home.newsletter
+  const containerRef = useRef<HTMLDivElement>(null)
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Smooth slide up for the main container
+      gsap.from('.newsletter-box', {
+        scrollTrigger: {
+          trigger: '.newsletter-box',
+          start: 'top 85%',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      })
+
+      // Staggered slide up for the benefit cards
+      gsap.from('.newsletter-benefit', {
+        scrollTrigger: {
+          trigger: '.newsletter-benefits-grid',
+          start: 'top 90%',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out'
+      })
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,103 +68,118 @@ export default function Newsletter() {
     }
   };
 
+  // Replaced Emojis with clean Lucide icons
+  const benefitIcons = [Star, Shield, ArrowUpRight]
+
   return (
-    <section id="stay-connected" className="py-16 md:py-24 bg-gradient-to-br from-white via-tlcc-cream to-white relative overflow-hidden scroll-mt-24 z-20">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-10 right-20 w-72 h-72 bg-tlcc-gold/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 left-20 w-96 h-96 bg-tlcc-orange/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-      </div>
-
-      <div className="container-custom relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 bg-tlcc-gold/10 px-4 py-2 rounded-full mb-6 border border-tlcc-gold/20">
-              <Zap className="h-4 w-4 text-tlcc-gold" />
-              <span className="text-tlcc-gold font-bold text-sm tracking-wider uppercase">
-                {newsletter.badge}
-              </span>
-            </div>
+    <section ref={containerRef} id="stay-connected" className="py-24 md:py-32 bg-white relative z-20">
+      <div className="container mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="max-w-5xl mx-auto">
+          
+          {/* Main Newsletter Box */}
+          <div className="newsletter-box bg-tlcc-navy text-white rounded-[2rem] p-8 md:p-16 mb-16 relative overflow-hidden">
             
-            <h2 className="text-4xl md:text-6xl font-bold text-tlcc-navy mb-6 leading-tight" style={{ fontFamily: 'var(--font-anton)' }}>
-              <span className="block">{newsletter.headingPrimary}</span>
-              <span className="block text-tlcc-orange">{newsletter.headingAccent}</span>
-            </h2>
+            {/* Subtle internal background pattern/shape */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
             
-            <p className="text-lg md:text-xl text-tlcc-navy-light leading-relaxed max-w-2xl mx-auto">
-              {newsletter.description}
-            </p>
-          </div>
-
-          {/* Form Section */}
-          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-tlcc-cream mb-8">
-            <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-tlcc-navy-light" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={newsletter.placeholder}
-                    required
-                    className="w-full pl-12 pr-4 py-4 border-2 border-tlcc-cream focus:border-tlcc-gold rounded-xl focus:outline-none focus:ring-4 focus:ring-tlcc-gold/20 transition-all text-tlcc-navy font-medium"
-                  />
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Text Side */}
+              <div>
+                <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20">
+                  <Zap className="h-4 w-4 text-tlcc-gold" />
+                  <span className="text-tlcc-gold font-bold text-xs tracking-widest uppercase">
+                    {newsletter.badge}
+                  </span>
                 </div>
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="px-8 py-4 bg-gradient-to-r from-tlcc-gold to-tlcc-orange hover:from-tlcc-orange hover:to-tlcc-gold text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-105"
-                >
-                  {status === 'loading' ? (
-                    <span>{newsletter.submitLoading}</span>
-                  ) : (
-                    <>
-                      <span>{newsletter.submitIdle}</span>
-                      <Send className="h-5 w-5" />
-                    </>
-                  )}
-                </button>
+                
+                <h2 className="text-4xl md:text-5xl font-anton uppercase tracking-wide mb-6">
+                  {newsletter.headingPrimary} <br />
+                  <span className="text-tlcc-gold">{newsletter.headingAccent}</span>
+                </h2>
+                
+                <p className="text-lg text-gray-300 leading-relaxed font-light">
+                  {newsletter.description}
+                </p>
               </div>
 
-              {status === 'success' && (
-                <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-center gap-2 text-green-700 font-semibold animate-fade-in">
-                  <CheckCircle className="h-5 w-5" />
-                  <span>{newsletter.successMessage}</span>
-                </div>
-              )}
-              {status === 'error' && (
-                <p className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 font-semibold text-center animate-fade-in">
-                  ✗ {newsletter.errorMessage}
+              {/* Form Side */}
+              <div className="flex flex-col justify-center">
+                <form onSubmit={handleSubmit} className="relative">
+                  {/* Inline Sleek Form */}
+                  <div className="flex bg-white rounded-full p-2 shadow-lg focus-within:ring-4 focus-within:ring-tlcc-gold/30 transition-shadow">
+                    <div className="flex-1 flex items-center pl-4">
+                      <Mail className="h-5 w-5 text-gray-400 flex-shrink-0" />
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder={newsletter.placeholder}
+                        required
+                        className="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-tlcc-navy font-medium px-4"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={status === 'loading'}
+                      className="bg-tlcc-gold hover:bg-tlcc-orange text-tlcc-navy font-bold rounded-full px-8 py-4 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    >
+                      {status === 'loading' ? (
+                        <span>{newsletter.submitLoading}</span>
+                      ) : (
+                        <>
+                          <span className="hidden sm:inline">{newsletter.submitIdle}</span>
+                          <Send className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Status Messages */}
+                  {status === 'success' && (
+                    <div className="absolute -bottom-16 left-0 w-full p-3 bg-green-500/20 border border-green-500/30 rounded-xl flex items-center justify-center gap-2 text-green-400 font-medium text-sm">
+                      <CheckCircle className="h-4 w-4" />
+                      <span>{newsletter.successMessage}</span>
+                    </div>
+                  )}
+                  {status === 'error' && (
+                    <div className="absolute -bottom-16 left-0 w-full p-3 bg-red-500/20 border border-red-500/30 rounded-xl flex items-center justify-center gap-2 text-red-400 font-medium text-sm">
+                      <span>✗ {newsletter.errorMessage}</span>
+                    </div>
+                  )}
+                </form>
+
+                <p className="text-xs text-gray-400 text-center mt-6">
+                  {newsletter.privacyNote}
                 </p>
-              )}
-            </form>
+              </div>
+
+            </div>
           </div>
 
           {/* Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {newsletter.benefits.map((benefit) => (
-              <div
-                key={benefit.title}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-tlcc-cream/50 hover:shadow-lg transition-all"
-              >
-                <div className="text-3xl mb-3">{benefit.emoji}</div>
-                <h3 className="font-bold text-tlcc-navy mb-2">{benefit.title}</h3>
-                <p className="text-sm text-tlcc-navy-light">
-                  {benefit.description}
-                </p>
-              </div>
-            ))}
+          <div className="newsletter-benefits-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+            {newsletter.benefits.map((benefit, index) => {
+              const Icon = benefitIcons[index % benefitIcons.length]
+              return (
+                <div
+                  key={benefit.title}
+                  className="newsletter-benefit bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-gray-300 transition-colors"
+                >
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6">
+                    <Icon className="h-6 w-6 text-tlcc-gold" />
+                  </div>
+                  <h3 className="font-bold text-tlcc-navy mb-3">{benefit.title}</h3>
+                  <p className="text-gray-500 font-light leading-relaxed text-sm">
+                    {benefit.description}
+                  </p>
+                </div>
+              )
+            })}
           </div>
 
-          {/* Privacy Note */}
-          <p className="text-sm text-tlcc-navy-light/70 text-center max-w-2xl mx-auto">
-            {newsletter.privacyNote}
-          </p>
         </div>
       </div>
     </section>
   )
 }
-

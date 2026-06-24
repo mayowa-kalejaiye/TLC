@@ -1,13 +1,59 @@
-﻿ 'use client'
+'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useLayoutEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Heart, Copy, Check, CreditCard, Building2, Smartphone } from 'lucide-react'
+import { Copy, Check, ArrowRight } from 'lucide-react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function GivePage() {
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'naira' | 'domiciliary'>('naira')
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Luxurious Parallax on Hero Image
+      gsap.to('.give-parallax-bg', {
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+        y: 150,
+        ease: 'none'
+      })
+
+      // Silky fade up for hero elements
+      gsap.from('.give-hero-el', {
+        y: 40,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: 'power2.out',
+        delay: 0.2
+      })
+
+      // Silky fade up for sections
+      gsap.utils.toArray('.give-section').forEach((section: any) => {
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          ease: 'power2.out'
+        })
+      })
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   const copyToClipboard = (text: string, accountType: string) => {
     navigator.clipboard.writeText(text)
@@ -16,268 +62,230 @@ export default function GivePage() {
   }
 
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
+    <main ref={containerRef} className="min-h-screen bg-black text-white selection:bg-tlcc-gold selection:text-black">
+      
+      {/* HERO SECTION - MASSIVE IMAGE & CLEAN TYPOGRAPHY */}
+      <section className="hero-section relative h-screen min-h-[700px] flex items-end pb-32 overflow-hidden">
+        
+        {/* Full Bleed Parallax Background */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/give.jpg"
             alt="Give"
             fill
-            className="object-cover"
+            className="give-parallax-bg object-cover opacity-60 scale-110"
             priority
+            unoptimized
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
-            <Heart className="h-4 w-4 text-tlcc-gold fill-tlcc-gold" />
-            <span className="text-white font-semibold text-sm tracking-wider uppercase">Give</span>
-          </div>
-
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight uppercase">
-            Your <span className="text-white">Generosity</span><br />
-            Our <span className="text-tlcc-orange">Mission</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Give towards our mission to reach a billion souls in ten thousand cities with the message of the gospel
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#give-now"
-              className="w-full sm:w-auto px-10 py-4 bg-white text-tlcc-green font-bold rounded-full transition-all duration-300 hover:bg-tlcc-gold hover:text-white uppercase tracking-wide text-sm"
-            >
-              Give Now
-            </a>
-            <a
-              href="#other-ways"
-              className="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-tlcc-green text-white font-bold rounded-full transition-all duration-300 uppercase tracking-wide text-sm"
-            >
-              Other Ways to Give
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Ways to Give Section */}
-      <section id="give-now" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center space-x-2 bg-tlcc-green/10 px-6 py-2 rounded-full mb-4">
-                <CreditCard className="h-4 w-4 text-tlcc-green" />
-                <span className="text-tlcc-green font-semibold text-sm tracking-wider uppercase">Give to TLCC</span>
-              </div>
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlcc-navy mb-4 uppercase">
-                Ways to Give
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Join us as we put out our money rights where our faith is, partnering with God for the spread of the gospel in our day.
-              </p>
-            </div>
-
-            {/* Account Tabs */}
-            <div className="flex gap-4 mb-8 justify-center">
-              <button
-                onClick={() => setActiveTab('naira')}
-                className={`px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 ${
-                  activeTab === 'naira'
-                    ? 'bg-tlcc-orange text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                Naira Account
-              </button>
-              <button
-                onClick={() => setActiveTab('domiciliary')}
-                className={`px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 ${
-                  activeTab === 'domiciliary'
-                    ? 'bg-tlcc-orange text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                Domiciliary Account
-              </button>
-            </div>
-
-            {/* Bank Accounts */}
-            {activeTab === 'naira' && (
-              <div className="space-y-6">
-                {/* Moniepoint Bank */}
-                <div className="bg-gradient-to-br from-tlcc-cream to-white border-2 border-tlcc-gold/20 rounded-2xl p-8 shadow-lg">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-tlcc-gold rounded-full flex items-center justify-center">
-                        <Building2 className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-xl text-tlcc-navy">Moniepoint MFB</h3>
-                        <p className="text-gray-600 text-sm">Nigeria</p>
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-                      🇳🇬 NGN
-                    </span>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-8 border border-gray-200">
-                    <p className="text-sm text-gray-500 font-semibold mb-2 uppercase tracking-wider">Account Name</p>
-                    <p className="text-lg font-medium text-tlcc-navy mb-4">Nelson Concept Studios - The Light Community Church Projects</p>
-                    
-                    <p className="text-sm text-gray-500 font-semibold mb-2 uppercase tracking-wider">Account Number</p>
-                    <div className="flex items-center justify-between">
-                      <p className="text-3xl font-bold text-tlcc-navy">4583629271</p>
-                      <button
-                        onClick={() => copyToClipboard('4583629271', 'moniepoint')}
-                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                        title="Copy account number"
-                      >
-                        {copiedAccount === 'moniepoint' ? (
-                          <Check className="h-5 w-5 text-green-600" />
-                        ) : (
-                          <Copy className="h-5 w-5 text-gray-400" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Domiciliary Tab Content */}
-            {activeTab === 'domiciliary' && (
-              <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-2xl p-8 text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="font-bold text-2xl text-tlcc-navy mb-4">Domiciliary Account Details</h3>
-                <p className="text-gray-600 mb-6">
-                  For international donations and foreign currency transfers
-                </p>
-                <p className="text-sm text-gray-500 italic">
-                  Contact our finance team for domiciliary account information
-                </p>
-                <div className="mt-6">
-                  <Link
-                    href="/contact#partnership"
-                    className="inline-block px-8 py-3 bg-tlcc-green text-white font-bold rounded-full hover:bg-tlcc-green-dark transition-all duration-300"
-                  >
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Online Giving Section */}
-      <section id="other-ways" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-tlcc-navy mb-4 uppercase">
-                Other Ways to Give
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Simple and convenient ways to support our mission
-              </p>
-            </div>
-
-            {/* Mobile Transfer */}
-            <div className="bg-gradient-to-br from-tlcc-gold/10 to-tlcc-orange/10 rounded-2xl p-8 border-2 border-tlcc-gold/20">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-tlcc-gold rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Smartphone className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-xl text-tlcc-navy mb-2">Give via Mobile Transfer</h3>
-                  <p className="text-gray-700 mb-4">
-                    Use your mobile banking app to transfer to the account number above. Quick, easy, and secure.
-                  </p>
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlcc-gold" />
-                      <span>Instant transfer from your mobile app</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlcc-gold" />
-                      <span>No additional fees</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <Check className="h-5 w-5 text-tlcc-gold" />
-                      <span>Available 24/7</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Give Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-tlcc-navy mb-6">
-              Why Your Giving Matters
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Every gift makes an eternal impact as we spread the gospel and transform lives
+        <div className="relative z-10 container mx-auto px-4 sm:px-8 lg:px-12">
+          <div className="max-w-4xl">
+            <p className="give-hero-el text-tlcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
+              Give
             </p>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-tlcc-green" />
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Souls Saved</h3>
-                <p className="text-gray-600">
-                  Supporting evangelism and outreach to unreached communities
-                </p>
-              </div>
+            <h1 className="give-hero-el text-5xl sm:text-7xl lg:text-8xl font-light mb-8 leading-tight tracking-tight">
+              Your Generosity <br />
+              <span className="font-semibold text-tlcc-gold">Our Mission</span>
+            </h1>
 
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="h-8 w-8 text-tlcc-orange" />
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Men Trained</h3>
-                <p className="text-gray-600">
-                  Equipping leaders and ministers for kingdom work
-                </p>
-              </div>
+            <p className="give-hero-el text-lg md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mb-12">
+              Give towards our mission to reach a billion souls in ten thousand cities with the message of the gospel.
+            </p>
 
-              <div className="p-6">
-                <div className="w-16 h-16 bg-tlcc-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl">🌍</span>
-                </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">Nations Taken</h3>
-                <p className="text-gray-600">
-                  Planting churches and transforming cities globally
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-12 p-8 bg-gradient-to-br from-tlcc-green to-tlcc-green-dark rounded-2xl text-white">
-              <p className="text-lg md:text-xl mb-4">
-                &quot;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&quot;
-              </p>
-              <p className="font-bold">— 2 Corinthians 9:7</p>
+            <div className="give-hero-el flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+              <a
+                href="#give-now"
+                className="group inline-flex items-center text-tlcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-tlcc-gold/50 hover:border-white"
+              >
+                <span className="text-sm tracking-[0.2em] uppercase font-medium">Give Now</span>
+                <ArrowRight className="h-4 w-4 ml-4 group-hover:translate-x-2 transition-transform duration-500" />
+              </a>
+              <a
+                href="#other-ways"
+                className="group inline-flex items-center text-gray-400 hover:text-white transition-colors duration-500 pb-2 border-b border-transparent hover:border-white/50"
+              >
+                <span className="text-sm tracking-[0.2em] uppercase font-light">Other Ways</span>
+              </a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* LUXURY BANK DETAILS SECTION */}
+      <section id="give-now" className="give-section py-32 md:py-48 bg-white text-black">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-12">
+          
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            {/* Sticky Header Column */}
+            <div className="lg:col-span-5 lg:sticky lg:top-32">
+              <h2 className="text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tight">
+                Ways to Give
+              </h2>
+              <p className="text-xl text-gray-500 font-light leading-relaxed max-w-md">
+                Join us as we put our money right where our faith is, partnering with God for the spread of the gospel.
+              </p>
+            </div>
+
+            {/* Account Details Column */}
+            <div className="lg:col-span-7">
+              
+              {/* Ultra-Minimal Tab Switcher */}
+              <div className="flex gap-12 mb-16 border-b border-gray-200">
+                <button
+                  onClick={() => setActiveTab('naira')}
+                  className={`pb-4 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 relative ${
+                    activeTab === 'naira' ? 'text-black' : 'text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  Naira Account
+                  {activeTab === 'naira' && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black" />
+                  )}
+                </button>
+                <button
+                  onClick={() => setActiveTab('domiciliary')}
+                  className={`pb-4 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 relative ${
+                    activeTab === 'domiciliary' ? 'text-black' : 'text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  Domiciliary Account
+                  {activeTab === 'domiciliary' && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black" />
+                  )}
+                </button>
+              </div>
+
+              {/* Account Views */}
+              <div className="min-h-[400px]">
+                {activeTab === 'naira' && (
+                  <div className="animate-in fade-in duration-700">
+                    <div className="mb-12">
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">Bank</p>
+                      <p className="text-3xl font-light">Moniepoint MFB</p>
+                    </div>
+
+                    <div className="mb-12">
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">Account Name</p>
+                      <p className="text-xl font-light text-gray-800">Nelson Concept Studios - The Light Community Church Projects</p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">Account Number</p>
+                      <div className="flex items-center justify-between border-b border-gray-200 pb-6 group cursor-pointer" onClick={() => copyToClipboard('4583629271', 'moniepoint')}>
+                        <p className="text-4xl md:text-5xl font-light tracking-widest text-black">4583629271</p>
+                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-gray-100 transition-colors">
+                          {copiedAccount === 'moniepoint' ? (
+                            <Check className="h-5 w-5 text-green-500" />
+                          ) : (
+                            <Copy className="h-5 w-5 text-gray-400 group-hover:text-black transition-colors" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'domiciliary' && (
+                  <div className="animate-in fade-in duration-700">
+                    <div className="mb-12">
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">International</p>
+                      <p className="text-3xl font-light mb-6">Domiciliary Account</p>
+                      <p className="text-xl font-light text-gray-500 leading-relaxed max-w-md">
+                        For international donations and foreign currency transfers, please reach out to our finance team directly.
+                      </p>
+                    </div>
+                    
+                    <Link
+                      href="/contact#partnership"
+                      className="group inline-flex items-center text-black hover:text-gray-500 transition-colors duration-500 pb-2 border-b border-black hover:border-gray-500"
+                    >
+                      <span className="text-sm tracking-[0.2em] uppercase font-medium">Contact Finance</span>
+                      <ArrowRight className="h-4 w-4 ml-4 group-hover:translate-x-2 transition-transform duration-500" />
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SPLIT IMAGE/TEXT SECTION (WHY GIVE / OTHER WAYS) */}
+      <section id="other-ways" className="give-section bg-[#111] text-white">
+        <div className="grid md:grid-cols-2 min-h-[80vh]">
+          
+          {/* Half Image */}
+          <div className="relative h-[50vh] md:h-auto">
+            <Image
+              src="/images/worship.JPG"
+              alt="Worship"
+              fill
+              className="object-cover opacity-80"
+              unoptimized
+            />
+          </div>
+
+          {/* Half Content */}
+          <div className="p-12 md:p-24 flex flex-col justify-center">
+            
+            <div className="mb-24">
+              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-tlcc-gold mb-6">Mobile Transfer</h3>
+              <p className="text-3xl font-light leading-tight mb-8">
+                Quick, secure giving directly from your mobile banking app.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-center space-x-4 text-gray-400 font-light">
+                  <span className="w-1.5 h-1.5 bg-tlcc-gold rounded-full" />
+                  <span>Instant transfer</span>
+                </li>
+                <li className="flex items-center space-x-4 text-gray-400 font-light">
+                  <span className="w-1.5 h-1.5 bg-tlcc-gold rounded-full" />
+                  <span>No additional fees</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-tlcc-gold mb-6">The Impact</h3>
+              <div className="space-y-12">
+                <div>
+                  <h4 className="text-xl font-medium mb-2">Souls Saved</h4>
+                  <p className="text-gray-400 font-light">Supporting evangelism and outreach to unreached communities globally.</p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-medium mb-2">Men Trained</h4>
+                  <p className="text-gray-400 font-light">Equipping and raising the next generation of leaders and ministers.</p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-medium mb-2">Nations Taken</h4>
+                  <p className="text-gray-400 font-light">Planting churches and transforming cities with the power of the Gospel.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL QUOTE (Minimal) */}
+      <section className="give-section py-32 bg-black text-center px-4">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500 mb-12">
+            2 Corinthians 9:7
+          </p>
+          <p className="text-3xl md:text-5xl font-light leading-tight text-white mb-12 italic">
+            &quot;Each of you should give what you have decided in your heart to give... for God loves a cheerful giver.&quot;
+          </p>
+          <div className="w-px h-24 bg-tlcc-gold mx-auto" />
+        </div>
+      </section>
+      
     </main>
   )
 }
-
-// Page-level metadata removed: this is a client component and cannot export `metadata`.
-// Use the shared `app/layout.tsx` metadata for site-wide values.
-

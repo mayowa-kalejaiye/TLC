@@ -1,104 +1,116 @@
-﻿'use client'
+'use client'
 
+import { useRef, useLayoutEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Heart, CreditCard, Building2, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/components/providers/LanguageProvider'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Give() {
   const { messages } = useLanguage()
   const give = messages.home.give
-  const optionIcons = [CreditCard, Building2, Heart]
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Luxurious Parallax on the background image
+      gsap.to('.give-parallax-bg', {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+        y: 100,
+        ease: 'none'
+      })
+
+      // Silky smooth fade-up for content
+      gsap.from('.give-elegant-el', {
+        scrollTrigger: {
+          trigger: '.give-content-area',
+          start: 'top 75%',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: 'power2.out'
+      })
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section className="relative py-16 md:py-24 text-white overflow-hidden z-20">
-      {/* Background Image with overlay to match the Give page */}
-      <div className="absolute inset-0 z-0">
-        <Image src="/images/give.jpg" alt="Give" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-black/60" />
+    <section ref={containerRef} className="relative py-32 md:py-48 bg-black text-white overflow-hidden z-20">
+      
+      {/* MASSIVE FULL-BLEED IMAGE */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Image 
+          src="/images/give.jpg" 
+          alt="Give Background" 
+          fill 
+          className="give-parallax-bg object-cover opacity-60 scale-110" 
+          priority
+        />
+        {/* Very elegant, subtle gradient overlay to ensure text readability without ruining the photo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
       </div>
 
-      {/* Decorative animated elements (subtle, above the image) */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-tlcc-gold rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
-      <div className="container-custom relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-tlcc-gold/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-tlcc-gold/30">
-              <Sparkles className="h-4 w-4 text-tlcc-gold" />
-              <span className="text-tlcc-gold font-bold text-sm tracking-wider uppercase">
-                {give.badge}
-              </span>
-            </div>
+      <div className="container-custom relative z-10 give-content-area h-full flex flex-col justify-end">
+        <div className="max-w-4xl">
+          
+          {/* Minimalist Header */}
+          <div className="mb-16">
+            <p className="give-elegant-el text-tlcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
+              {give.badge}
+            </p>
             
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: 'var(--font-anton)' }}>
-              <span className="block">{give.headingLine1}</span>
-              <span className="block text-tlcc-gold">{give.headingLine2}</span>
+            {/* Elegant Serif-like or highly tracked Sans display */}
+            <h2 className="give-elegant-el text-5xl md:text-7xl lg:text-8xl font-light mb-8 leading-tight tracking-tight">
+              {give.headingLine1} <br />
+              <span className="font-semibold text-tlcc-gold">{give.headingLine2}</span>
             </h2>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
+            <p className="give-elegant-el text-lg md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl">
               {give.description}
             </p>
           </div>
 
-          {/* Giving Options */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {give.options.map((option, index) => {
-              const Icon = optionIcons[index % optionIcons.length]
-              return (
-                <div
-                  key={option.title}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="w-16 h-16 bg-gradient-to-br from-tlcc-gold to-tlcc-orange rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform">
-                    <Icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-3">{option.title}</h3>
-                  <p className="text-gray-200 leading-relaxed">{option.description}</p>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Link
-                href="/give"
-                className="group w-full sm:w-auto px-10 py-4 bg-tlcc-gold hover:bg-tlcc-orange text-white font-bold rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
-              >
-                <span>{give.primaryCta}</span>
-                <Heart className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </Link>
-              <Link
-                href="/give#bank-details"
-                className="w-full sm:w-auto px-10 py-4 bg-white/10 backdrop-blur-md border-2 border-white hover:bg-white hover:text-tlcc-green font-bold rounded-full transition-all duration-300 hover:scale-105"
-              >
-                {give.secondaryCta}
-              </Link>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="inline-block bg-white/5 backdrop-blur-md rounded-2xl px-8 py-6 border border-white/10">
-              <p className="text-sm text-gray-300 mb-3 font-semibold">{give.trustTitle}</p>
-              <div className="flex flex-wrap justify-center items-center gap-6 text-sm">
-                {give.trustItems.map((item, index) => (
-                  <div key={`${item}-${index}`} className="flex items-center gap-2 text-gray-200">
-                    {index === 0 ? <span className="text-green-400">🔒</span> : null}
-                    <span className="font-medium">{item}</span>
-                  </div>
-                ))}
+          {/* Minimalist giving options (text driven, elegant layout) */}
+          <div className="give-elegant-el grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 border-t border-white/20 pt-12">
+            {give.options.map((option, index) => (
+              <div key={option.title} className="group">
+                <h3 className="text-xl font-medium mb-3 text-white tracking-wide">{option.title}</h3>
+                <p className="text-gray-400 font-light leading-relaxed text-sm">{option.description}</p>
               </div>
-            </div>
+            ))}
           </div>
+
+          {/* Ultra-Clean CTAs */}
+          <div className="give-elegant-el flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+            <Link
+              href="/give"
+              className="group inline-flex items-center text-tlcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-tlcc-gold/50 hover:border-white"
+            >
+              <span className="text-lg tracking-widest uppercase font-medium">{give.primaryCta}</span>
+              <ArrowRight className="h-5 w-5 ml-4 group-hover:translate-x-2 transition-transform duration-500" />
+            </Link>
+
+            <Link
+              href="/give#bank-details"
+              className="group inline-flex items-center text-gray-400 hover:text-white transition-colors duration-500 pb-2 border-b border-transparent hover:border-white/50"
+            >
+              <span className="text-sm tracking-widest uppercase font-light">{give.secondaryCta}</span>
+            </Link>
+          </div>
+          
         </div>
       </div>
     </section>
   )
 }
-

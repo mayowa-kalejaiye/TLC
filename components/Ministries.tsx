@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Link from 'next/link'
 import { Users, Heart, Music, Briefcase, Camera, BookHeart, ArrowRight } from 'lucide-react'
@@ -94,4 +94,3 @@ export default function Ministries() {
     </section>
   )
 }
-
