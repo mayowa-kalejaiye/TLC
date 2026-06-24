@@ -229,6 +229,14 @@ export default function UnlearningClient() {
             </div>
 
           </div>
+
+          {/* Mini Link to Other Events */}
+          <div className="mt-24 text-center gsap-fade-up">
+            <Link href="/events" className="inline-flex items-center text-slate-500 hover:text-tlcc-orange font-bold text-xs md:text-sm uppercase tracking-widest transition-colors group">
+              Explore All Events
+              <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 

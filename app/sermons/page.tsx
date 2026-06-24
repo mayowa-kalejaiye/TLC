@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useAudioPlayer } from '@/components/providers/AudioPlayerProvider'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Play, Download, Search, Share2, Clock, CheckCircle2 } from 'lucide-react'
+import { Play, Search, Share2, Clock, CheckCircle2 } from 'lucide-react'
 import { 
   getChannelVideos, 
   getChannelStats, 

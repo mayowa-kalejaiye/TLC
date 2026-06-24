@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 // ...existing code...
 
@@ -27,7 +27,7 @@ const navRoutes: Record<NavKey | 'devotionals', string> = {
 }
 
 const desktopNav: (NavKey | 'devotionals')[] = ['about', 'devotionals', 'ministries', 'events', 'sermons', 'map', 'give']
-const mobileNav: (NavKey | 'devotionals')[] = ['home', 'about', 'devotionals', 'ministries', 'sermons', 'map', 'give'] // 'quickLinks' removed from here
+const mobileNav: (NavKey | 'devotionals')[] = ['home', 'about', 'devotionals', 'ministries', 'events', 'sermons', 'map', 'give']
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
