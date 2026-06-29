@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Circle, ArrowRight, Play } from 'lucide-react'
+import { Circle, Play } from 'lucide-react'
 // ...existing code...
 import { motion } from 'framer-motion'
 import { getLatestYouTubeVideo } from '@/lib/youtube'
