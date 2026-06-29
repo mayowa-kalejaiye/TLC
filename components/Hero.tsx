@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Circle, ArrowRight } from 'lucide-react'
+import { Circle, ArrowRight, Play } from 'lucide-react'
 // ...existing code...
 import { motion } from 'framer-motion'
 import { getLatestYouTubeVideo } from '@/lib/youtube'
@@ -15,32 +15,7 @@ export default function Hero() {
   const { messages } = useLanguage()
   const heroLineOpacities = ['lg:opacity-90', 'lg:opacity-85', 'lg:opacity-90']
 
-  // Countdown State
-  const [mounted, setMounted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
 
-  useEffect(() => {
-    setMounted(true)
-    const targetDate = new Date('2026-06-29T10:00:00').getTime()
-
-    const interval = setInterval(() => {
-      const now = new Date().getTime()
-      const difference = targetDate - now
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        })
-      } else {
-        clearInterval(interval)
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [])
 
   useEffect(() => {
     // Fetch latest video ID
@@ -167,7 +142,7 @@ export default function Hero() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="mt-16 sm:mt-24 max-w-3xl mx-auto w-full"
           >
-            <Link href="/events/unlearning-conference" className="block relative group overflow-hidden rounded-[2rem] bg-black/40 backdrop-blur-lg border border-white/10 hover:border-tlcc-gold/50 transition-all duration-500 shadow-2xl">
+            <Link href="/sermons" className="block relative group overflow-hidden rounded-[2rem] bg-black/40 backdrop-blur-lg border border-tlcc-gold/30 hover:border-tlcc-gold/80 transition-all duration-500 shadow-[0_0_40px_rgba(200,160,50,0.15)]">
               <div className="absolute inset-0 bg-gradient-to-r from-tlcc-navy/90 to-transparent z-0 pointer-events-none opacity-80" />
               <div className="relative z-10 flex flex-col md:flex-row items-center p-6 sm:p-8 gap-6 sm:gap-8">
                 
@@ -176,43 +151,20 @@ export default function Hero() {
                   <Image src="/images/tlc-unlearn.jpg" alt="Unlearning Conference" fill className="object-cover group-hover:scale-110 transition-transform duration-700" unoptimized />
                 </div>
 
-                {/* Text & Countdown */}
+                {/* Text & Live Badge */}
                 <div className="flex-1 text-center md:text-left">
                   <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-tlcc-gold animate-pulse" />
-                    <span className="text-tlcc-gold text-xs font-bold uppercase tracking-[0.2em]">Featured Event</span>
+                    <span className="flex h-2.5 w-2.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-red-500 text-xs font-bold uppercase tracking-[0.2em]">Live Now</span>
                   </div>
-                  <h3 className="text-white font-anton text-3xl md:text-4xl uppercase tracking-wide mb-5">The Unlearning Conference</h3>
-                  
-                  {mounted && (
-                    <div className="flex justify-center md:justify-start gap-4 md:gap-6 text-white">
-                      <div className="flex flex-col items-center">
-                        <span className="text-2xl md:text-3xl font-bold font-mono tracking-tighter">{String(timeLeft.days).padStart(2, '0')}</span>
-                        <span className="text-[10px] text-white/50 uppercase tracking-widest mt-1">Days</span>
-                      </div>
-                      <span className="text-2xl font-bold text-white/20 -mt-1">:</span>
-                      <div className="flex flex-col items-center">
-                        <span className="text-2xl md:text-3xl font-bold font-mono tracking-tighter">{String(timeLeft.hours).padStart(2, '0')}</span>
-                        <span className="text-[10px] text-white/50 uppercase tracking-widest mt-1">Hrs</span>
-                      </div>
-                      <span className="text-2xl font-bold text-white/20 -mt-1">:</span>
-                      <div className="flex flex-col items-center">
-                        <span className="text-2xl md:text-3xl font-bold font-mono tracking-tighter">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                        <span className="text-[10px] text-white/50 uppercase tracking-widest mt-1">Min</span>
-                      </div>
-                      <span className="text-2xl font-bold text-white/20 -mt-1">:</span>
-                      <div className="flex flex-col items-center text-tlcc-gold">
-                        <span className="text-2xl md:text-3xl font-bold font-mono tracking-tighter">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                        <span className="text-[10px] text-tlcc-gold/60 uppercase tracking-widest mt-1">Sec</span>
-                      </div>
-                    </div>
-                  )}
+                  <h3 className="text-white font-anton text-3xl md:text-4xl uppercase tracking-wide mb-3">The Unlearning Conference</h3>
+                  <p className="text-gray-300 font-light text-sm tracking-wide">Join us live as we unlearn religion and relearn relationship.</p>
                 </div>
 
                 {/* Action */}
                 <div className="shrink-0 mt-6 md:mt-0 w-full md:w-auto">
-                  <div className="bg-white text-tlcc-navy w-full md:w-auto px-8 py-4 rounded-full font-black uppercase text-sm tracking-[0.2em] group-hover:bg-tlcc-gold transition-colors flex items-center justify-center gap-3 shadow-xl">
-                    Register <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <div className="bg-tlcc-gold text-tlcc-navy w-full md:w-auto px-8 py-4 rounded-full font-black uppercase text-sm tracking-[0.2em] group-hover:bg-yellow-400 transition-colors flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(200,160,50,0.3)]">
+                    Watch Live <Play className="w-5 h-5 fill-tlcc-navy" />
                   </div>
                 </div>
 
